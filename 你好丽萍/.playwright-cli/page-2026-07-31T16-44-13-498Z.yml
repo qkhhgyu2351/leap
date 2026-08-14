@@ -1,0 +1,39 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]: Hello, Liping
+      - navigation [ref=e5]:
+        - link "Home" [ref=e6] [cursor=pointer]:
+          - /url: index.html
+        - link "Timeline" [ref=e7] [cursor=pointer]:
+          - /url: timeline.html
+        - link "Guestbook" [ref=e8] [cursor=pointer]:
+          - /url: guestbook.html
+  - generic [ref=e10]:
+    - generic [ref=e11]:
+      - generic [ref=e12]: LETTERS
+      - heading "Letters" [level=2] [ref=e13]
+      - paragraph [ref=e14]: A few words that were never sent.
+    - 'button "2026 · Spring One · The Wind That Day Sample: You turned and walked into the crowd, the wind lifting the hem of your coat… (click to read) Read this letter →" [ref=e15] [cursor=pointer]':
+      - generic [ref=e16]: 2026 · Spring
+      - heading "One · The Wind That Day" [level=3] [ref=e17]
+      - paragraph [ref=e18]: "Sample: You turned and walked into the crowd, the wind lifting the hem of your coat… (click to read)"
+      - generic [ref=e19]: Read this letter →
+    - 'button "2026 · Summer Two · Habits Sample: I still glance right at that one crossing… (click to read) Read this letter →" [ref=e20] [cursor=pointer]':
+      - generic [ref=e21]: 2026 · Summer
+      - heading "Two · Habits" [level=3] [ref=e22]
+      - paragraph [ref=e23]: "Sample: I still glance right at that one crossing… (click to read)"
+      - generic [ref=e24]: Read this letter →
+    - link "Leave what's on your mind" [ref=e26] [cursor=pointer]:
+      - /url: guestbook.html
+  - contentinfo [ref=e27]:
+    - generic [ref=e28]:
+      - generic [ref=e29]: Unsent letters still find their way somewhere.
+      - generic [ref=e30]:
+        - link "Home" [ref=e31] [cursor=pointer]:
+          - /url: index.html
+        - link "Timeline" [ref=e32] [cursor=pointer]:
+          - /url: timeline.html
+        - link "Guestbook" [ref=e33] [cursor=pointer]:
+          - /url: guestbook.html
+  - button "播放背景音乐" [ref=e34] [cursor=pointer]

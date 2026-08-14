@@ -1,0 +1,93 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]: Hello, Liping
+      - navigation [ref=e5]:
+        - link "Letters" [ref=e6] [cursor=pointer]:
+          - /url: letters.html
+        - link "Timeline" [ref=e7] [cursor=pointer]:
+          - /url: timeline.html
+        - link "Guestbook" [ref=e8] [cursor=pointer]:
+          - /url: guestbook.html
+  - generic [ref=e9]:
+    - generic [ref=e10]: A QUIET CORNER FOR MISSING
+    - heading "你好，丽萍" [level=1] [ref=e11]:
+      - img "你好，丽萍" [ref=e12]
+    - paragraph [ref=e21]:
+      - text: Some things were never said out loud.
+      - text: They can stay here.
+    - generic [ref=e22]: ↓ scroll slowly
+  - generic [ref=e25]:
+    - generic: “
+    - paragraph [ref=e26]:
+      - text: Missing someone isn't weakness.
+      - text: It's the part of you that still keeps them alive.
+  - generic [ref=e28]:
+    - generic [ref=e29]:
+      - generic [ref=e30]: LETTERS
+      - heading "Letters" [level=2] [ref=e31]
+      - paragraph [ref=e32]: A few letters never sent, still waiting to be said.
+    - generic [ref=e33]:
+      - 'link "2026 · Spring One · The Wind That Day Sample: You turned and walked into the crowd, the wind lifting the hem of your coat, and I stood there and forgot to say goodbye… (replace with your own words) Read this letter →" [ref=e34] [cursor=pointer]':
+        - /url: letters.html
+        - generic [ref=e35]: 2026 · Spring
+        - heading "One · The Wind That Day" [level=3] [ref=e36]
+        - paragraph [ref=e37]: "Sample: You turned and walked into the crowd, the wind lifting the hem of your coat, and I stood there and forgot to say goodbye… (replace with your own words)"
+        - generic [ref=e38]: Read this letter →
+      - 'link "2026 · Summer Two · Habits Sample: I still glance right at that one crossing, as if you were still waiting outside that shop… (replace with your own words) Read this letter →" [ref=e39] [cursor=pointer]':
+        - /url: letters.html
+        - generic [ref=e40]: 2026 · Summer
+        - heading "Two · Habits" [level=3] [ref=e41]
+        - paragraph [ref=e42]: "Sample: I still glance right at that one crossing, as if you were still waiting outside that shop… (replace with your own words)"
+        - generic [ref=e43]: Read this letter →
+  - generic [ref=e45]:
+    - generic [ref=e46]:
+      - generic [ref=e47]: MEMORY
+      - heading "Timeline" [level=2] [ref=e48]
+      - paragraph [ref=e49]: Those days, laid out in order, like beads on a string that never broke.
+    - generic [ref=e50]:
+      - 'link "First met How it started Sample: That March, by the window of a coffee shop, your eyes went into crescents when you laughed… (replace with your own words) See the timeline →" [ref=e51] [cursor=pointer]':
+        - /url: timeline.html
+        - generic [ref=e52]: First met
+        - heading "How it started" [level=3] [ref=e53]
+        - paragraph [ref=e54]: "Sample: That March, by the window of a coffee shop, your eyes went into crescents when you laughed… (replace with your own words)"
+        - generic [ref=e55]: See the timeline →
+      - 'link "Later The roads we walked Sample: Evenings by the sea, phone calls that ran past midnight, the pothos we kept alive together… (replace with your own words) See the timeline →" [ref=e56] [cursor=pointer]':
+        - /url: timeline.html
+        - generic [ref=e57]: Later
+        - heading "The roads we walked" [level=3] [ref=e58]
+        - paragraph [ref=e59]: "Sample: Evenings by the sea, phone calls that ran past midnight, the pothos we kept alive together… (replace with your own words)"
+        - generic [ref=e60]: See the timeline →
+  - generic [ref=e62]:
+    - generic [ref=e63]:
+      - generic [ref=e64]: GUESTBOOK
+      - heading "Guestbook" [level=2] [ref=e65]
+      - paragraph [ref=e66]: Turns out I'm not the only one still missing someone.
+    - generic [ref=e67]:
+      - 'link "Anonymous “I still think about him too” Sample: Two years since we ended it. I walked past the place we first met today, and my eyes still went red… (replace with a real note, or keep as an example) Read the guestbook →" [ref=e68] [cursor=pointer]':
+        - /url: guestbook.html
+        - generic [ref=e69]: Anonymous
+        - heading "“I still think about him too”" [level=3] [ref=e70]
+        - paragraph [ref=e71]: "Sample: Two years since we ended it. I walked past the place we first met today, and my eyes still went red… (replace with a real note, or keep as an example)"
+        - generic [ref=e72]: Read the guestbook →
+      - link "Say something Leave what you're carrying This is a quiet corner. Whatever you never got to say, you can leave it here. Write a note →" [ref=e73] [cursor=pointer]:
+        - /url: guestbook.html
+        - generic [ref=e74]: Say something
+        - heading "Leave what you're carrying" [level=3] [ref=e75]
+        - paragraph [ref=e76]: This is a quiet corner. Whatever you never got to say, you can leave it here.
+        - generic [ref=e77]: Write a note →
+  - contentinfo [ref=e78]:
+    - generic [ref=e79]:
+      - generic [ref=e80]:
+        - text: Some places scatter with the wind.
+        - text: Some words, left here, simply stay.
+      - generic [ref=e81]:
+        - link "Home" [ref=e82] [cursor=pointer]:
+          - /url: index.html
+        - link "Letters" [ref=e83] [cursor=pointer]:
+          - /url: letters.html
+        - link "Timeline" [ref=e84] [cursor=pointer]:
+          - /url: timeline.html
+        - link "Guestbook" [ref=e85] [cursor=pointer]:
+          - /url: guestbook.html
+  - button "播放背景音乐" [ref=e86] [cursor=pointer]
