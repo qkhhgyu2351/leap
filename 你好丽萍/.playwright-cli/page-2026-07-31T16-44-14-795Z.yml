@@ -1,0 +1,45 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]: Hello, Liping
+      - navigation [ref=e5]:
+        - link "Home" [ref=e6] [cursor=pointer]:
+          - /url: index.html
+        - link "Letters" [ref=e7] [cursor=pointer]:
+          - /url: letters.html
+        - link "Guestbook" [ref=e8] [cursor=pointer]:
+          - /url: guestbook.html
+  - generic [ref=e10]:
+    - generic [ref=e11]:
+      - generic [ref=e12]: MEMORY
+      - heading "Timeline" [level=2] [ref=e13]
+      - paragraph [ref=e14]: Those days, laid out in order — like beads on a string that never broke.
+    - generic [ref=e16] [cursor=pointer]:
+      - generic [ref=e17]: First met
+      - heading "How it started" [level=3] [ref=e18]
+      - paragraph [ref=e19]: Sample text — replace with your own memory. That March, by the window of a coffee shop, your eyes went into crescents when you laughed…
+    - generic [ref=e21] [cursor=pointer]:
+      - generic [ref=e22]: Later
+      - heading "The roads we walked" [level=3] [ref=e23]
+      - paragraph [ref=e24]: Sample text — replace with your own memory. Evenings by the sea, phone calls that ran past midnight, the pothos we kept alive together…
+    - generic [ref=e26] [cursor=pointer]:
+      - generic [ref=e27]: A turning point
+      - heading "When things changed" [level=3] [ref=e28]
+      - paragraph [ref=e29]: Sample text — replace with your own memory. The day the silence started to feel different from before.
+    - generic [ref=e31] [cursor=pointer]:
+      - generic [ref=e32]: Now
+      - heading "What remains" [level=3] [ref=e33]
+      - paragraph [ref=e34]: Sample text — replace with your own memory. The things I still carry. The words I never found the right moment for.
+    - link "Leave what's on your mind" [ref=e36] [cursor=pointer]:
+      - /url: guestbook.html
+  - contentinfo [ref=e37]:
+    - generic [ref=e38]:
+      - generic [ref=e39]: Time moves on. Some memories stay put.
+      - generic [ref=e40]:
+        - link "Home" [ref=e41] [cursor=pointer]:
+          - /url: index.html
+        - link "Letters" [ref=e42] [cursor=pointer]:
+          - /url: letters.html
+        - link "Guestbook" [ref=e43] [cursor=pointer]:
+          - /url: guestbook.html
+  - button "播放背景音乐" [ref=e44] [cursor=pointer]

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 420" width="680" height="420" text-rendering="geometricPrecision" role="img">
+  <title>萍 · 你好丽萍 品牌标志</title>
+  <desc>萍字解构：艹化为浮萍叶，氵化为涟漪水纹，平字身保留，配印章圆框与品牌标语。</desc>
+  <defs>
+    <clipPath id="seal"><circle cx="172" cy="210" r="130"/></clipPath>
+    <style>.s{font-family:"Songti SC","STSong","Noto Serif SC","Source Han Serif SC","SimSun",serif}.c{font-family:"Helvetica Neue",Arial,sans-serif}</style>
+  </defs>
+
+  <rect width="680" height="420" fill="#faf6ee"/>
+
+  <g>
+    <circle cx="172" cy="210" r="132" fill="#fffdf7"/>
+    <g clip-path="url(#seal)" fill="none" stroke="#b8860b" stroke-linecap="round">
+      <circle cx="172" cy="252" r="70" stroke-width="1.1" opacity="0.5"/>
+      <circle cx="172" cy="252" r="92" stroke-width="0.9" opacity="0.3"/>
+      <circle cx="172" cy="252" r="114" stroke-width="0.7" opacity="0.16"/>
+    </g>
+    <circle cx="172" cy="210" r="132" fill="none" stroke="#b8860b" stroke-width="1.6"/>
+    <circle cx="172" cy="210" r="125" fill="none" stroke="#b8860b" stroke-width="0.5" opacity="0.55"/>
+    <g fill="#b8860b" opacity="0.9">
+      <path d="M0,-22 C8.5,-18 8.5,-6 0,0 C-8.5,-6 -8.5,-18 0,-22 Z" transform="translate(146,110) rotate(-22)"/>
+      <path d="M0,-19 C7,-16 7,-5 0,0 C-7,-5 -7,-16 0,-19 Z" transform="translate(198,108) rotate(24)"/>
+    </g>
+    <text x="172" y="216" class="s" font-size="138" fill="#2c2620" text-anchor="middle" dominant-baseline="middle">萍</text>
+  </g>
+
+  <g transform="translate(350,168)">
+    <text x="0" y="0" class="s" font-size="52" fill="#2c2620" letter-spacing="8">你好丽萍</text>
+    <line x1="2" y1="24" x2="300" y2="24" stroke="#b8860b" stroke-width="0.5" opacity="0.45"/>
+    <text x="3" y="46" class="c" font-size="12" fill="#b8860b" letter-spacing="8">P · I · N · G</text>
+    <text x="2" y="74" class="s" font-size="14" font-style="italic" fill="#9a8d7c">a quiet corner for missing</text>
+  </g>
+</svg>
