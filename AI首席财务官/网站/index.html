@@ -28,6 +28,8 @@
     .canvas{padding-top:clamp(26px,2.6vw,38px)}
     @media(max-width:880px){.canvas{padding-top:30px}}
     @media(max-width:560px){.canvas{padding-top:26px}}
+    @media(max-width:560px){.principal-link{font-size:10px;border-bottom:1px solid var(--navy);white-space:nowrap}.principal-link:after{content:none}}
+    @media(max-width:560px){.content-header h1{font-size:35px;line-height:1.24}.directory nav{scrollbar-width:none}.directory nav::-webkit-scrollbar{display:none}}
 
     /* 页眉保留图形符号与中文全称两层；AiCfo 横向组合标作为辅助资源归档，不在此处并列。 */
     .brand img{width:52px;height:52px;margin:-7px -6px -7px -8px;transform:scale(1.18);object-fit:contain}
@@ -44,11 +46,42 @@
       .directory a:before{display:none}.directory a:hover{border-color:var(--green);background:rgba(255,255,255,.48);color:var(--navy)}
       .directory-foot{margin-top:26px;padding:16px 7px 0;border-color:rgba(17,44,79,.18);color:#54716f;font-size:11px}
     }
+
+    /* 顶部品牌栏：中文名称是身份，第二行是可读的品牌承诺，而不是微小说明。 */
+    @media(min-width:561px){
+      .top{height:98px}.shell{min-height:calc(100vh - 98px)}.directory{top:98px;height:calc(100vh - 98px)}
+      .brand{gap:16px}.brand img{width:60px;height:60px;margin:-8px -7px -8px -9px;transform:scale(1.14)}
+      .brand-copy{gap:7px}.brand-copy strong{font-size:22px;line-height:1}.brand-copy span{color:var(--green);font-size:14px;line-height:1.35;font-weight:500;letter-spacing:.01em}
+      .principal-link{padding:11px 0;font-size:13px;border-bottom-width:2px}
+    }
+    @media(max-width:560px){
+      .top{height:84px}.shell{min-height:calc(100vh - 84px)}.brand{gap:10px}.brand img{width:46px;height:46px;margin:-5px -5px -5px -7px;transform:scale(1.1)}
+      .brand-copy{gap:4px}.brand-copy strong{font-size:16px}.brand-copy span{max-width:208px;white-space:normal;overflow:visible;text-overflow:clip;color:var(--green);font-size:11px;line-height:1.28;font-weight:500}
+      .principal-link{font-size:10px}
+    }
+
+    /* 手机端章节采用完整单栏：标题在上、说明在下、图片和工具卡顺序展开。 */
+    @media(max-width:560px){
+      .section-top{display:block;margin-bottom:22px}.section-top h2{max-width:100%;font-size:32px;line-height:1.3;word-break:normal;overflow-wrap:normal}
+      .section-top p{max-width:none;margin:14px 0 0;font-size:14px;line-height:1.85}.case-card{grid-template-columns:1fr}.case-copy{padding:24px 20px}
+      .tools{grid-template-columns:1fr;gap:16px}.tool{min-height:0;padding:24px 20px}.tool h3{font-size:26px;line-height:1.35}.tool a{margin-top:20px}
+    }
+
+    /* 顶部主张：桌面端成为身份与主理人之间的核心承诺；手机端独占第二行。 */
+    .brand-promise{position:relative;justify-self:center;margin:0;padding:0 30px;color:var(--navy);font:600 clamp(16px,1.25vw,19px)/1.25 "Noto Serif SC","Songti SC",serif;letter-spacing:.055em;white-space:nowrap;text-shadow:0 1px 0 rgba(255,255,255,.72)}
+    .brand-promise:before,.brand-promise:after{content:"";position:absolute;top:50%;width:18px;height:1px;background:var(--green);opacity:.68}.brand-promise:before{left:0}.brand-promise:after{right:0}.brand-promise::first-letter{color:var(--green)}
+    @media(max-width:560px){
+      .top{height:auto;min-height:106px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:0 14px;align-items:center;padding:10px 18px 9px}
+      .brand{grid-column:1;grid-row:1}.principal-link{grid-column:2;grid-row:1}.brand-promise{grid-column:1/-1;grid-row:2;justify-self:start;margin:6px 0 0 49px;font-size:13px;white-space:normal}
+      .brand-copy span{display:none}.shell{min-height:calc(100vh - 106px)}
+    }
+    @media(max-width:560px){.brand-promise{padding:0 0 0 16px;font:600 13px/1.4 "Noto Serif SC","Songti SC",serif;letter-spacing:.035em;color:var(--green)}.brand-promise:before{left:0;width:9px}.brand-promise:after{display:none}}
   </style>
 </head>
 <body>
   <header class="top">
-    <a class="brand" href="index.html"><img src="assets/brand/aicfo-symbol.png" alt="AI 首席财务官图形标志"><span class="brand-copy"><strong>AI 首席财务官</strong><span>AI 首席财务官：把我的判断力变成你能用的东西。</span></span></a>
+    <a class="brand" href="index.html"><img src="assets/brand/aicfo-symbol.png" alt="AI 首席财务官图形标志"><span class="brand-copy"><strong>AI 首席财务官</strong></span></a>
+    <p class="brand-promise">把我的判断力变成你能用的东西。</p>
     <a class="principal-link" href="#principal">主理人：何斌 ↗</a>
   </header>
   <div class="shell">
@@ -61,12 +94,12 @@
       <p class="directory-foot">用 CFO 和资本的眼睛，看清公司、产业与企业核心问题。</p>
     </aside>
     <main class="canvas"><div class="content">
-      <section class="content-header"><h1>从真实案例里，<br>看清企业现在<br><em>要什么。先做什么。</em></h1><p>有二财经持续拆解公司、产业与资本事件；这里把其中可迁移的企业问题、判断框架、核对项与工具整理出来，帮助你找到现在真正该先理清的一件事。</p></section>
+      <section class="content-header"><h1>从真实案例里，<br>看清企业现在<br><em>要什么，先做什么。</em></h1><p>有二财经持续拆解公司、产业与资本事件；这里把其中可迁移的企业问题、判断框架、核对项与工具整理出来，帮助你找到现在真正该先理清的一件事。</p></section>
       <section class="intro-grid"><article class="intro-card"><p class="mini">HOW TO READ</p><h2>不是研究别人本身</h2><p>每一个公开案例，都是一类企业问题与关键判断的可见样本。看完案例，关键是知道自己能带走什么。</p></article><article class="intro-card problem"><p class="mini">FIRST PRINCIPLE</p><h2>公司是案例，问题与判断才是产品。</h2><p>内容先提供判断价值；只有当问题被识别，工具和协作才成为自然的下一步。</p></article></section>
       <section class="section" id="growth"><div class="section-top"><h2>从你的处境进入<br><em>问题与判断地图。</em></h2><p>融资、资本、财税、经营与 AI 不是知识栏目，而是企业在不同阶段会反复遇到的判断入口。</p></div><div class="topic-list"><article class="topic"><b>01 / GROWTH</b><h3>增长、利润与现金</h3><p>增长有了，利润和现金为什么没有同步变好？</p><a href="#cases">看案例 ↘</a></article><article class="topic" id="capital"><b>02 / CAPITAL</b><h3>融资、资本与股权</h3><p>融资、上市或股权安排时，到底该先看什么？</p><a href="#tools">看准备度 ↘</a></article><article class="topic" id="governance"><b>03 / TRUST</b><h3>财税、治理与信任</h3><p>数据、流程和责任边界，有没有留下隐患？</p><a href="#cases">看判断框架 ↘</a></article><article class="topic" id="operations"><b>04 / OPERATIONS</b><h3>经营分析与财务协同</h3><p>为什么管理层总看不清经营，汇报总是慢、乱、说不清？</p><a href="#tools">看工作流 ↘</a></article><article class="topic" id="ai"><b>05 / AI WORKFLOW</b><h3>AI 与专业交付</h3><p>AI 应先帮财务团队完成哪一项真实工作？</p><a href="企业财务AI体检（定版）.html">做体检 ↗</a></article></div></section>
       <section class="section" id="cases"><div class="section-top"><h2>公司案例，<br><em>不是结论，是判断的证据。</em></h2><p>未来这里持续沉淀有二财经的公司研究。每一篇都要说明事实、判断、风险、可迁移的问题和核对项。</p></div><article class="case-card"><img src="assets/ai-cfo-case-evidence.jpg" alt="企业案例研究资料"><div class="case-copy"><p class="mini">CASE / 014 · 增长、利润与现金</p><h2>销量增长了，为什么利润和现金没有同步变好？</h2><p>当一家公司用价格、投入和渠道换取增长时，真正要看的不是单一销量，而是增长能否穿过毛利、营运资本和资本开支，最终留下可持续的现金。</p><div class="takeaway"><b>WHAT TO TAKE AWAY</b><span>用收入质量、毛利来源、营运资本与资本开支四点，回看自己的增长结构。</span></div><a href="#tools">查看下一步工具 ↗</a></div></article></section>
       <section class="section" id="tools"><div class="section-top"><h2>看懂之后，<br><em>再确认自己缺什么。</em></h2><p>工具不替代正式意见；它帮助团队把事实、差距、责任人与下一步说清楚。</p></div><div class="tools"><article class="tool ai"><p class="mini">经营交付与财务 AI 协作</p><h3>企业财务 AI 体检</h3><p>从一个真实工作流开始，识别数据、流程、协作与审核边界。</p><a href="企业财务AI体检（定版）.html">开始梳理 ↗</a></article><article class="tool capital"><p class="mini">融资、上市与资本事项</p><h3>资本事项准备度自测</h3><p>在外部机构要材料前，先让资料、股权、治理与责任人形成一张图。</p><a href="上市自测问卷_交互版.html">开始核对 ↗</a></article></div></section>
-      <section class="principal" id="principal"><p class="eyebrow">PRINCIPAL / 主理人</p><h2>有二 / 何斌</h2><p>以 CFO 与资本判断为专业内核，持续研究公司、产业、经营、资本与 AI 协作问题。先帮助企业建立共同语言与共同事实，再讨论方案、项目或长期协作。</p><p class="boundary">不做交易建议；不把 AI 包装成替代判断的工具；用事实、边界与可验证的下一步完成专业交付。</p></section>
+      <section class="principal" id="principal"><p class="eyebrow">PRINCIPAL / 主理人</p><h2>有二财经 / 何斌</h2><p>以 CFO 与资本判断为专业内核，持续研究公司、产业、经营、资本与 AI 协作问题。先帮助企业建立共同语言与共同事实，再讨论方案、项目或长期协作。</p><p class="boundary">不做交易建议；不把 AI 包装成替代判断的工具；用事实、边界与可验证的下一步完成专业交付。</p></section>
     </div></main>
   </div>
   <script>
