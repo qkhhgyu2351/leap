@@ -31,6 +31,10 @@
 
     /* 左侧目录改为雾蓝铜绿的纸感底色：保留深度，但不再像沉重的后台侧栏。 */
     .side{background:linear-gradient(155deg,#315c61 0%,#294f58 54%,#224753 100%);box-shadow:inset -1px 0 rgba(255,255,255,.14)}.side:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.16;background:radial-gradient(circle at 10% 8%,rgba(224,210,174,.42),transparent 34%),linear-gradient(120deg,transparent 25%,rgba(255,255,255,.08),transparent 62%)}.side>*{position:relative;z-index:1}.side-index{border-color:rgba(239,236,224,.28)}.side-index span{color:#d2ddd3}.side-index h2{color:#fffdf7}.side-index p{color:#d1dedb}.side-nav a{color:#e0e8e4}.side-nav a:hover{background:rgba(255,255,255,.11);color:#fffdf7}.side-bottom{border-color:rgba(239,236,224,.28);color:#d0ddd8}
+    /* 共用首屏节奏：页眉下直接进入关系总览，保留阅读呼吸但不留海报式空白。 */
+    .atlas{padding-top:clamp(38px,3.2vw,48px)}
+    @media(max-width:900px){.atlas{padding-top:34px}}
+    @media(max-width:620px){.atlas{padding-top:30px}}
   </style>
 </head>
 <body>
