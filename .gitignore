@@ -38,3 +38,7 @@ _test_*
 *.pem
 *.p12
 key/
+
+# 编辑器/工具备份文件
+*.pre-*
+*.baiduyun.uploading.cfg
