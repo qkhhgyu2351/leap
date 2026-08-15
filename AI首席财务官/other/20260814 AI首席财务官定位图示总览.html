@@ -35,6 +35,51 @@
     .atlas{padding-top:clamp(38px,3.2vw,48px)}
     @media(max-width:900px){.atlas{padding-top:34px}}
     @media(max-width:620px){.atlas{padding-top:30px}}
+
+    /* 目录统一：延续正式 index 的雾蓝纸感，让左栏服务阅读而非压过正文。 */
+    .side{background:linear-gradient(155deg,#dce8e5 0%,#d1dfdc 56%,#c9d9dc 100%);color:var(--ink);box-shadow:inset -1px 0 rgba(17,43,62,.12)}
+    .side:before{opacity:.08;background:radial-gradient(circle at 10% 8%,rgba(255,255,255,.9),transparent 35%),linear-gradient(120deg,transparent 25%,rgba(17,43,62,.05),transparent 62%)}
+    .side-index{border-color:rgba(17,43,62,.22)}.side-index span{color:#527a76}.side-index h2{color:var(--ink)}.side-index p{color:#54716f}
+    .side-nav a{padding:8px 8px;border-left:2px solid transparent;color:#31535e;font-size:12px}.side-nav a:hover{border-color:var(--teal);background:rgba(255,255,255,.48);color:var(--ink)}
+    .side-bottom{border-color:rgba(17,43,62,.18);color:#54716f}
+    @media(max-width:900px){.side{background:linear-gradient(155deg,#dce8e5 0%,#d1dfdc 56%,#c9d9dc 100%)}.side-nav a{color:#31535e}.side-nav a:hover{background:rgba(255,255,255,.48);color:var(--ink)}}
+
+    /* 目录一次可见：正文单独滚动，桌面端侧栏不再承担第二个滚动容器。 */
+    @media(min-width:901px){
+      .side{display:flex;flex-direction:column;overflow:hidden;padding:22px 17px 14px}
+      .side-index{margin:0 0 12px;padding:0 6px 11px}.side-index h2{margin:7px 0 4px;font-size:18px}.side-index p{font-size:9px;line-height:1.45}
+      .side-nav{gap:0}.side-nav a{padding:4px 7px;font-size:clamp(9px,.7vw,11px);line-height:1.3}
+      .side-bottom{margin-top:auto;padding:10px 6px 0;font-size:8px;line-height:1.42}
+    }
+    @media(min-width:901px) and (max-height:760px){
+      .side{padding:15px 13px 10px}.side-index{margin-bottom:8px;padding-bottom:8px}.side-index h2{font-size:16px}.side-index p{font-size:8px}
+      .side-nav a{padding:3px 6px;font-size:9px;line-height:1.22}.side-bottom{padding-top:7px;font-size:7px}
+    }
+
+    /* 商业化不是竖排清单，而是从公开价值到协作交付的阶段路径。 */
+    .revenue-flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:13px;align-items:stretch;margin-top:34px}.revenue-flow i{display:none}.revenue-flow span{position:relative;display:flex;align-items:center;justify-content:center;min-height:112px;padding:16px 12px;background:#e4eeec;color:var(--ink);border-top:3px solid var(--teal);font:600 15px/1.45 "Noto Serif SC",serif;text-align:center}.revenue-flow span:nth-of-type(2){background:#f2ebdc;border-color:var(--brass)}.revenue-flow span:nth-of-type(3){background:#e7ecec;border-color:#52707a}.revenue-flow span:nth-of-type(4){background:#edf0ec;border-color:#80938f}.revenue-flow span:last-of-type{background:var(--ink);border-color:var(--ink);color:#fff}.revenue-flow span:not(:last-of-type):after{content:"→";position:absolute;right:-22px;top:50%;z-index:2;transform:translateY(-50%);color:var(--brass);font:500 20px/1 "IBM Plex Mono",monospace}
+
+    /* 阅读目录只显示章节索引；完整标题仍保留在链接和正文中。 */
+    @media(min-width:901px){
+      .side-nav a{display:block;min-width:0;overflow:hidden;font-size:0;line-height:1;white-space:nowrap}.side-nav a:before{display:inline-block;width:20px;border:0;color:#527a76;font:500 9px/1 "IBM Plex Mono",monospace;letter-spacing:.04em;vertical-align:middle}.side-nav a:after{display:inline;color:#31535e;font:500 11px/1.3 "Noto Sans SC",sans-serif;white-space:nowrap;vertical-align:middle}.side-nav a:hover:after{color:var(--ink)}
+      .side-nav a:nth-child(1):before{content:"↗"}.side-nav a:nth-child(1):after{content:"总览图"}.side-nav a:nth-child(2):before{content:"0"}.side-nav a:nth-child(2):after{content:"事业本质"}.side-nav a:nth-child(3):before{content:"1"}.side-nav a:nth-child(3):after{content:"总定位"}.side-nav a:nth-child(4):before{content:"2"}.side-nav a:nth-child(4):after{content:"对外公共价值"}.side-nav a:nth-child(5):before{content:"3"}.side-nav a:nth-child(5):after{content:"人群与企业问题"}.side-nav a:nth-child(6):before{content:"4"}.side-nav a:nth-child(6):after{content:"核心能力与资产"}.side-nav a:nth-child(7):before{content:"5"}.side-nav a:nth-child(7):after{content:"内容生产"}.side-nav a:nth-child(8):before{content:"6"}.side-nav a:nth-child(8):after{content:"平台承接"}.side-nav a:nth-child(9):before{content:"7"}.side-nav a:nth-child(9):after{content:"商业化与 MVP"}.side-nav a:nth-child(10):before{content:"8"}.side-nav a:nth-child(10):after{content:"对外表达纪律"}.side-nav a:nth-child(11):before{content:"R"}.side-nav a:nth-child(11):after{content:"参考资料"}
+    }
+    /* 目录排版重构：沿用正式 index 的阅读密度，编号只做定位，不压缩中文标题。 */
+    @media(min-width:901px){
+      .layout{grid-template-columns:278px minmax(0,1fr)}
+      .side{display:flex;flex-direction:column;overflow:hidden;padding:30px 20px}
+      .side-index{margin:0 0 20px;padding:0 8px 17px}.side-index span{font-size:10px}.side-index h2{margin:11px 0 8px;font-size:24px;line-height:1.3}.side-index p{font-size:12px;line-height:1.65}
+      .side-nav{gap:3px}.side-nav a{display:flex;align-items:center;gap:11px;padding:8px 11px;font-size:0;line-height:1.45}
+      .side-nav a:before{display:block;flex:0 0 22px;width:22px;font-size:10px;line-height:1}.side-nav a:after{display:block;min-width:0;font-size:17px;line-height:1.45}
+      .side-bottom{margin-top:auto;padding:17px 8px 0;font-size:11px;line-height:1.65}
+    }
+    @media(min-width:901px) and (max-height:760px){
+      .side{padding:21px 16px 15px}.side-index{margin-bottom:13px;padding-bottom:11px}.side-index h2{margin:8px 0 5px;font-size:19px}.side-index p{font-size:10px;line-height:1.45}
+      .side-nav a{gap:8px;padding:5px 8px}.side-nav a:before{flex-basis:18px;width:18px;font-size:9px}.side-nav a:after{font-size:13px;line-height:1.42}
+      .side-bottom{padding-top:10px;font-size:8px;line-height:1.45}
+    }
+
+    @media(max-width:620px){.revenue-flow{grid-template-columns:1fr;gap:8px}.revenue-flow span{justify-content:flex-start;min-height:0;padding:13px 14px;text-align:left}.revenue-flow span:not(:last-of-type):after{content:"↓";right:auto;left:50%;top:auto;bottom:-16px;transform:translateX(-50%)}}
   </style>
 </head>
 <body>

@@ -76,6 +76,12 @@
       .brand-copy span{display:none}.shell{min-height:calc(100vh - 106px)}
     }
     @media(max-width:560px){.brand-promise{padding:0 0 0 16px;font:600 13px/1.4 "Noto Serif SC","Songti SC",serif;letter-spacing:.035em;color:var(--green)}.brand-promise:before{left:0;width:9px}.brand-promise:after{display:none}}
+
+    /* 低干扰的页面返回入口：延续铜绿、深海军蓝与纸张工作台语言，不与正文争夺注意力。 */
+    .back-top{position:fixed;right:22px;bottom:max(24px,env(safe-area-inset-bottom));z-index:25;width:42px;height:42px;display:grid;place-items:center;border:1px solid rgba(17,44,79,.16);background:rgba(47,127,105,.94);box-shadow:3px 3px 0 var(--navy);color:#fffdf7;font:500 23px/1 "IBM Plex Mono",monospace;opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .18s var(--ease),transform .18s var(--ease),background .18s var(--ease)}
+    .back-top.is-visible{opacity:1;pointer-events:auto;transform:translateY(0)}.back-top:hover{background:var(--navy);transform:translateY(-2px)}.back-top:focus-visible{outline:3px solid #e0c58d;outline-offset:3px}.back-top:active{transform:translateY(0) scale(.96)}
+    @media(max-width:560px){.back-top{right:16px;bottom:max(18px,env(safe-area-inset-bottom));width:40px;height:40px;font-size:21px;box-shadow:2px 2px 0 var(--navy)}}
+    @media(prefers-reduced-motion:reduce){.back-top{transition:none}}
   </style>
 </head>
 <body>
@@ -102,11 +108,13 @@
       <section class="principal" id="principal"><p class="eyebrow">PRINCIPAL / 主理人</p><h2>有二财经 / 何斌</h2><p>以 CFO 与资本判断为专业内核，持续研究公司、产业、经营、资本与 AI 协作问题。先帮助企业建立共同语言与共同事实，再讨论方案、项目或长期协作。</p><p class="boundary">不做交易建议；不把 AI 包装成替代判断的工具；用事实、边界与可验证的下一步完成专业交付。</p></section>
     </div></main>
   </div>
+  <button class="back-top" type="button" aria-label="回到页面顶部" title="回到顶部">↑</button>
   <script>
     /* 目录跳转按可阅读标题落点定位，而不是机械对齐章节容器顶端。 */
     (() => {
       const header = document.querySelector('.top');
       const directory = document.querySelector('.directory');
+      const backTop = document.querySelector('.back-top');
 
       function placeTarget(hash, behavior = 'smooth') {
         const target = document.querySelector(hash);
@@ -129,6 +137,16 @@
         placeTarget(hash, 'smooth');
       });
 
+      function updateBackTopVisibility() {
+        backTop?.classList.toggle('is-visible', window.scrollY > 360);
+      }
+
+      backTop?.addEventListener('click', () => {
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+      });
+      window.addEventListener('scroll', updateBackTopVisibility, { passive: true });
+
       function resetInitialPosition() {
         if (window.location.hash) window.history.replaceState(null, '', window.location.pathname);
         window.requestAnimationFrame(() => {
@@ -139,6 +157,7 @@
       if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual';
       window.addEventListener('load', () => window.setTimeout(resetInitialPosition, 0));
       window.addEventListener('pageshow', resetInitialPosition);
+      updateBackTopVisibility();
     })();
   </script>
 </body>
