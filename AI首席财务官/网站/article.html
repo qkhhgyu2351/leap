@@ -1,80 +1,57 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>阅读 · AI 首席财务官</title>
-<meta name="description" content="AI 首席财务官 · 用资本视角看公司">
+<meta name="description" content="AI 首席财务官 · 用 CFO 与资本的眼睛看清公司、产业与企业关键问题。">
+<link rel="icon" type="image/png" href="assets/brand/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --brand:#1B3A6B; --brand2:#185FA5; --ink:#1f2733; --muted:#6b7785;
-    --line:#e6eaf0; --bg:#f5f7fa; --card:#ffffff;
-  }
+  :root{--paper:#f7f7f4;--navy:#112c4f;--blue:#3a6e99;--green:#2f7f69;--ink:#182631;--muted:#687784;--line:#ced8df;--ease:cubic-bezier(.23,1,.32,1)}
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
-    color:var(--ink);background:var(--bg);line-height:1.8;-webkit-font-smoothing:antialiased}
+  body{font:15px/1.82 "Noto Sans SC","PingFang SC",sans-serif;color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased}
   a{color:inherit;text-decoration:none}
-
-  .topbar{background:var(--brand);color:#fff;position:sticky;top:0;z-index:10}
-  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:56px;
-    max-width:760px;margin:0 auto;padding:0 20px}
-  .logo{font-size:16px;font-weight:700}
-  .back{font-size:14px;opacity:.9;border:1px solid rgba(255,255,255,.4);
-    padding:6px 14px;border-radius:8px}
-  .back:active{transform:translateY(1px)}
-
-  .article{max-width:760px;margin:0 auto;padding:40px 20px 64px}
-  .cat{display:inline-block;background:#eef3fb;color:var(--brand2);font-size:12px;font-weight:600;
-    padding:4px 12px;border-radius:20px}
-  h1{font-size:28px;line-height:1.4;margin:16px 0 12px}
-  .meta{color:var(--muted);font-size:13px;margin-bottom:28px;
-    border-bottom:1px solid var(--line);padding-bottom:18px}
-  .body p{margin-bottom:20px;font-size:16px;color:#2c3642}
-  .body p:first-child::first-letter{}
-  .note{margin-top:32px;background:#fff8e6;border:1px solid #f3e2b3;color:#7a5b12;
-    font-size:13px;padding:12px 16px;border-radius:10px;line-height:1.7}
-
-  .foot{background:var(--brand);color:#dfe7f3;text-align:center;padding:32px 20px}
-  .foot .big{font-size:18px;color:#fff;font-weight:600}
-  .foot .back-foot{display:inline-block;margin:14px 0 0;background:rgba(255,255,255,.14);
-    color:#fff;padding:8px 18px;border-radius:8px;font-size:14px;font-weight:600}
-  .foot .back-foot:active{transform:translateY(1px)}
-  .foot .fine{font-size:12px;opacity:.7;margin-top:14px}
-
-  @media(max-width:760px){ h1{font-size:23px} }
+  .topbar{position:sticky;top:0;z-index:20;height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 clamp(22px,5vw,74px);background:rgba(247,247,244,.93);border-bottom:1px solid var(--line);backdrop-filter:blur(18px)}
+  .brand{display:flex;align-items:center;gap:12px}.brand img{width:44px;height:44px;object-fit:contain}.brand strong{font:600 17px/1 "Noto Serif SC",serif;color:var(--navy);letter-spacing:.01em}
+  .back{display:inline-flex;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid var(--navy);color:var(--navy);font-size:12px;transition:.18s var(--ease)}.back:hover{color:var(--green);border-color:var(--green)}
+  .article{max-width:760px;margin:0 auto;padding:clamp(40px,6vw,72px) 22px 96px}
+  .cat{display:inline-block;margin-bottom:16px;color:var(--green);font:500 11px/1 "IBM Plex Mono",monospace;letter-spacing:.1em;text-transform:uppercase}
+  h1{margin:0 0 16px;color:var(--navy);font:600 clamp(28px,4vw,38px)/1.35 "Noto Serif SC","Songti SC",serif;letter-spacing:-.02em}
+  .meta{color:var(--muted);font:500 12px/1.6 "IBM Plex Mono",monospace;letter-spacing:.03em;margin-bottom:28px;padding-bottom:22px;border-bottom:1px solid var(--line)}
+  .body p{margin-bottom:22px;font-size:16px;color:#2c3642}
+  .note{margin-top:34px;padding:16px 18px;background:#e4efeb;border-left:3px solid var(--green);color:#3d5f59;font-size:13px;line-height:1.75}
+  .foot{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+  .foot a{color:var(--green);border-bottom:1px solid var(--green)}
+  @media(max-width:560px){.topbar{height:64px;padding:0 18px}.brand strong{font-size:15px}.article{padding:32px 18px 64px}h1{font-size:26px}}
 </style>
 </head>
 <body>
-
 <header class="topbar">
-  <div class="wrap">
-    <div class="logo">AI 首席财务官</div>
-    <a class="back" href="index.html">← 返回首页</a>
-  </div>
+  <a class="brand" href="index.html"><img src="assets/brand/aicfo-symbol.png" alt="AI 首席财务官"><strong>AI 首席财务官</strong></a>
+  <a class="back" href="index.html">← 返回首页</a>
 </header>
 
-<main class="article" id="article">
-  <div id="content"><p style="color:#6b7785">加载中…</p></div>
+<main class="article">
+  <div id="content"><p style="color:#687784">加载中…</p></div>
+  <div class="foot">AI 首席财务官 · 用 CFO 与资本的眼睛看公司 · <a href="index.html">返回首页</a></div>
 </main>
-
-<footer class="foot">
-  <div class="big">主理人：何斌</div>
-  <a class="back-foot" href="index.html">← 返回首页</a>
-  <div class="fine">AI 首席财务官 · 用资本视角看公司 · © 2026</div>
-</footer>
 
 <script src="posts.js"></script>
 <script>
-  (function(){
+  (function () {
     var box = document.getElementById('content');
-    function esc(s){ return (s||'').replace(/[&<>]/g,function(c){
-      return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; }); }
+    function esc(s) { return (s || '').replace(/[&<>]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c];
+    }); }
 
     var id = new URLSearchParams(location.search).get('id');
-    var post = (window.POSTS||[]).filter(function(p){ return p.id === id; })[0];
+    var post = (window.POSTS || []).filter(function (p) { return p.id === id; })[0];
 
-    if(!post){
-      box.innerHTML = '<p style="color:#6b7785">没有找到这篇文章。<a href="index.html" style="color:#185FA5">返回首页</a></p>';
+    if (!post) {
+      box.innerHTML = '<p style="color:#687784">没有找到这篇文章。<a href="index.html" style="color:#2f7f69">返回首页</a></p>';
       document.title = '未找到 · AI 首席财务官';
       return;
     }
@@ -82,11 +59,11 @@
     document.title = post.title + ' · AI 首席财务官';
 
     var paras = (post.body || post.summary || '').split('\n')
-      .map(function(t){ return t.trim(); })
-      .filter(function(t){ return t.length; })
-      .map(function(t){ return '<p>' + esc(t) + '</p>' }).join('');
+      .map(function (t) { return t.trim(); })
+      .filter(function (t) { return t.length; })
+      .map(function (t) { return '<p>' + esc(t) + '</p>' }).join('');
 
-    var meta = [post.cat||'洞察', post.date||'', (post.author||'何斌'), (post.readTime||'')]
+    var meta = [post.cat || '洞察', post.date || '', post.author || '何斌', post.readTime ? '约 ' + post.readTime : '']
       .filter(Boolean).join(' · ');
 
     var note = (post.body === post.summary)
@@ -94,7 +71,7 @@
       : '';
 
     box.innerHTML =
-      '<span class="cat">' + esc(post.cat||'洞察') + '</span>' +
+      '<span class="cat">' + esc(post.cat || '洞察') + '</span>' +
       '<h1>' + esc(post.title) + '</h1>' +
       '<div class="meta">' + esc(meta) + '</div>' +
       '<div class="body">' + paras + '</div>' +

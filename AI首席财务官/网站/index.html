@@ -12,6 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/brand/favicon.png">
   <style>
     /* Layout reminder — 顶部品牌条 + 左目录框 + 收窄内容画布；主理人只作为顶部链接进入。 */
     :root{--paper:#f7f7f4;--paper-deep:#eff2f3;--navy:#112c4f;--navy-2:#163d63;--blue:#3a6e99;--green:#2f7f69;--ink:#182631;--muted:#687784;--line:#ced8df;--line-dark:rgba(255,255,255,.16);--ease:cubic-bezier(.23,1,.32,1)}
@@ -45,6 +46,28 @@
       .directory a{padding:9px 10px;border-left:2px solid transparent;color:#31535e;font-size:15px;line-height:1.55}
       .directory a:before{display:none}.directory a:hover{border-color:var(--green);background:rgba(255,255,255,.48);color:var(--navy)}
       .directory-foot{margin-top:26px;padding:16px 7px 0;border-color:rgba(17,44,79,.18);color:#54716f;font-size:11px}
+    }
+
+    /* 桌面端侧栏是固定的一屏目录：不滚动，也不能靠小字号硬塞；先保持足够的阅读重量，再按高度温和收束。 */
+    @media(min-width:881px){
+      .directory{display:flex;flex-direction:column;overflow:hidden;padding:28px 18px 22px}
+      .directory-head{margin-bottom:20px;padding:0 8px 18px}.directory-head span{font-size:10px}.directory-head h2{margin-top:10px;font-size:24px;line-height:1.32}
+      .directory nav{gap:3px}.directory .group{margin:18px 0 8px;padding:0 8px;font-size:10px}
+      .directory a{padding:8px 10px;font-size:16px;line-height:1.45}
+      .directory-foot{margin-top:auto;padding:16px 8px 0;font-size:11px;line-height:1.65}
+    }
+    @media(min-width:881px) and (max-height:760px){
+      .directory{padding:23px 17px 16px}
+      .directory-head{margin-bottom:16px;padding:0 7px 14px}.directory-head h2{margin-top:8px;font-size:22px}.directory-head span{font-size:9px}
+      .directory nav{gap:2px}.directory .group{margin:14px 0 7px;padding:0 7px;font-size:10px}
+      .directory a{padding:7px 9px;font-size:15px;line-height:1.42}
+      .directory-foot{padding:14px 7px 0;font-size:10px;line-height:1.6}
+    }
+    @media(min-width:881px) and (max-height:620px){
+      .directory{padding:17px 15px 12px}
+      .directory-head{margin-bottom:11px;padding-bottom:10px}.directory-head h2{margin-top:7px;font-size:20px}.directory-head span{font-size:8px}
+      .directory .group{margin:10px 0 5px;font-size:9px}.directory a{padding:5px 8px;font-size:13px;line-height:1.34}
+      .directory-foot{padding-top:10px;font-size:8px;line-height:1.45}
     }
 
     /* 顶部品牌栏：中文名称是身份，第二行是可读的品牌承诺，而不是微小说明。 */
@@ -82,6 +105,17 @@
     .back-top.is-visible{opacity:1;pointer-events:auto;transform:translateY(0)}.back-top:hover{background:var(--navy);transform:translateY(-2px)}.back-top:focus-visible{outline:3px solid #e0c58d;outline-offset:3px}.back-top:active{transform:translateY(0) scale(.96)}
     @media(max-width:560px){.back-top{right:16px;bottom:max(18px,env(safe-area-inset-bottom));width:40px;height:40px;font-size:21px;box-shadow:2px 2px 0 var(--navy)}}
     @media(prefers-reduced-motion:reduce){.back-top{transition:none}}
+    /* 文章与洞察（由 posts.js 动态渲染） */
+    .post-list{border-top:1px solid var(--line)}
+    .post{display:grid;grid-template-columns:112px minmax(0,1fr);gap:18px;padding:22px 4px;border-bottom:1px solid var(--line)}
+    .post-date{color:var(--muted);font:500 11px/1.6 "IBM Plex Mono",monospace;letter-spacing:.04em;padding-top:2px}
+    .post-cat{display:inline-block;margin-bottom:7px;color:var(--green);font:500 10px/1 "IBM Plex Mono",monospace;letter-spacing:.08em}
+    .post h3{margin:0 0 7px;color:var(--navy);font-size:20px;line-height:1.4}
+    .post h3 a:hover{color:var(--green)}
+    .post p{margin:0;max-width:600px;color:var(--muted);font-size:12px;line-height:1.72}
+    .post-meta{margin-top:9px;color:var(--muted);font-size:11px}
+    .post-meta a{color:var(--green);border-bottom:1px solid var(--green)}
+    @media(max-width:560px){.post{grid-template-columns:1fr;gap:6px}.post-date{padding-top:0}.post h3{font-size:18px}}
   </style>
 </head>
 <body>
@@ -95,7 +129,7 @@
       <div class="directory-head"><span>PROBLEM MAP / 01—05</span><h2>企业现在卡在哪？</h2></div>
       <nav aria-label="问题目录">
         <a href="#growth">增长与现金</a><a href="#capital">融资与股权</a><a href="#governance">财税与治理</a><a href="#operations">经营协同</a><a href="#ai">AI 工作流</a>
-        <div class="group">内容档案</div><a href="#cases">公司案例库</a><a href="#tools">工具与自测</a>
+        <div class="group">内容档案</div><a href="#cases">公司案例库</a><a href="#insights">文章与洞察</a><a href="#tools">工具与自测</a><a href="workshop.html">诊断工作坊</a>
       </nav>
       <p class="directory-foot">用 CFO 和资本的眼睛，看清公司、产业与企业核心问题。</p>
     </aside>
@@ -103,12 +137,17 @@
       <section class="content-header"><h1>从真实案例里，<br>看清企业现在<br><em>要什么，先做什么。</em></h1><p>有二财经持续拆解公司、产业与资本事件；这里把其中可迁移的企业问题、判断框架、核对项与工具整理出来，帮助你找到现在真正该先理清的一件事。</p></section>
       <section class="intro-grid"><article class="intro-card"><p class="mini">HOW TO READ</p><h2>不是研究别人本身</h2><p>每一个公开案例，都是一类企业问题与关键判断的可见样本。看完案例，关键是知道自己能带走什么。</p></article><article class="intro-card problem"><p class="mini">FIRST PRINCIPLE</p><h2>公司是案例，问题与判断才是产品。</h2><p>内容先提供判断价值；只有当问题被识别，工具和协作才成为自然的下一步。</p></article></section>
       <section class="section" id="growth"><div class="section-top"><h2>从你的处境进入<br><em>问题与判断地图。</em></h2><p>融资、资本、财税、经营与 AI 不是知识栏目，而是企业在不同阶段会反复遇到的判断入口。</p></div><div class="topic-list"><article class="topic"><b>01 / GROWTH</b><h3>增长、利润与现金</h3><p>增长有了，利润和现金为什么没有同步变好？</p><a href="#cases">看案例 ↘</a></article><article class="topic" id="capital"><b>02 / CAPITAL</b><h3>融资、资本与股权</h3><p>融资、上市或股权安排时，到底该先看什么？</p><a href="#tools">看准备度 ↘</a></article><article class="topic" id="governance"><b>03 / TRUST</b><h3>财税、治理与信任</h3><p>数据、流程和责任边界，有没有留下隐患？</p><a href="#cases">看判断框架 ↘</a></article><article class="topic" id="operations"><b>04 / OPERATIONS</b><h3>经营分析与财务协同</h3><p>为什么管理层总看不清经营，汇报总是慢、乱、说不清？</p><a href="#tools">看工作流 ↘</a></article><article class="topic" id="ai"><b>05 / AI WORKFLOW</b><h3>AI 与专业交付</h3><p>AI 应先帮财务团队完成哪一项真实工作？</p><a href="企业财务AI体检（定版）.html">做体检 ↗</a></article></div></section>
-      <section class="section" id="cases"><div class="section-top"><h2>公司案例，<br><em>不是结论，是判断的证据。</em></h2><p>未来这里持续沉淀有二财经的公司研究。每一篇都要说明事实、判断、风险、可迁移的问题和核对项。</p></div><article class="case-card"><img src="assets/ai-cfo-case-evidence.jpg" alt="企业案例研究资料"><div class="case-copy"><p class="mini">CASE / 014 · 增长、利润与现金</p><h2>销量增长了，为什么利润和现金没有同步变好？</h2><p>当一家公司用价格、投入和渠道换取增长时，真正要看的不是单一销量，而是增长能否穿过毛利、营运资本和资本开支，最终留下可持续的现金。</p><div class="takeaway"><b>WHAT TO TAKE AWAY</b><span>用收入质量、毛利来源、营运资本与资本开支四点，回看自己的增长结构。</span></div><a href="#tools">查看下一步工具 ↗</a></div></article></section>
+      <section class="section" id="cases"><div class="section-top"><h2>公司案例，<br><em>不是结论，是判断的证据。</em></h2><p>未来这里持续沉淀有二财经的公司研究。每一篇都要说明事实、判断、风险、可迁移的问题和核对项。</p></div><article class="case-card"><img src="assets/ai-cfo-case-evidence.jpg" alt="企业案例研究资料" width="1400" height="1050" loading="lazy"><div class="case-copy"><p class="mini">CASE / 014 · 增长、利润与现金</p><h2>销量增长了，为什么利润和现金没有同步变好？</h2><p>当一家公司用价格、投入和渠道换取增长时，真正要看的不是单一销量，而是增长能否穿过毛利、营运资本和资本开支，最终留下可持续的现金。</p><div class="takeaway"><b>WHAT TO TAKE AWAY</b><span>用收入质量、毛利来源、营运资本与资本开支四点，回看自己的增长结构。</span></div><a href="#tools">查看下一步工具 ↗</a></div></article></section>
+      <section class="section" id="insights">
+        <div class="section-top"><h2>文章与洞察，<br><em>持续沉淀的判断。</em></h2><p>围绕 AI、经营、财务与资本的持续研究。公司是案例，问题与判断才是产品；这里归档可复用的方法与视角。</p></div>
+        <div class="post-list" id="post-list"></div>
+      </section>
       <section class="section" id="tools"><div class="section-top"><h2>看懂之后，<br><em>再确认自己缺什么。</em></h2><p>工具不替代正式意见；它帮助团队把事实、差距、责任人与下一步说清楚。</p></div><div class="tools"><article class="tool ai"><p class="mini">经营交付与财务 AI 协作</p><h3>企业财务 AI 体检</h3><p>从一个真实工作流开始，识别数据、流程、协作与审核边界。</p><a href="企业财务AI体检（定版）.html">开始梳理 ↗</a></article><article class="tool capital"><p class="mini">融资、上市与资本事项</p><h3>资本事项准备度自测</h3><p>在外部机构要材料前，先让资料、股权、治理与责任人形成一张图。</p><a href="上市自测问卷_交互版.html">开始核对 ↗</a></article></div></section>
       <section class="principal" id="principal"><p class="eyebrow">PRINCIPAL / 主理人</p><h2>有二财经 / 何斌</h2><p>以 CFO 与资本判断为专业内核，持续研究公司、产业、经营、资本与 AI 协作问题。先帮助企业建立共同语言与共同事实，再讨论方案、项目或长期协作。</p><p class="boundary">不做交易建议；不把 AI 包装成替代判断的工具；用事实、边界与可验证的下一步完成专业交付。</p></section>
     </div></main>
   </div>
   <button class="back-top" type="button" aria-label="回到页面顶部" title="回到顶部">↑</button>
+  <script src="posts.js"></script>
   <script>
     /* 目录跳转按可阅读标题落点定位，而不是机械对齐章节容器顶端。 */
     (() => {
@@ -158,6 +197,29 @@
       window.addEventListener('load', () => window.setTimeout(resetInitialPosition, 0));
       window.addEventListener('pageshow', resetInitialPosition);
       updateBackTopVisibility();
+
+      // 文章与洞察：由 posts.js 渲染（按日期倒序）
+      (function renderPosts() {
+        var list = document.getElementById('post-list');
+        if (!list || !window.POSTS || !window.POSTS.length) return;
+        var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+        }); };
+        var posts = window.POSTS.slice().sort(function (a, b) {
+          return String(b.date || '').localeCompare(String(a.date || ''));
+        });
+        list.innerHTML = posts.map(function (p) {
+          var url = 'article.html?id=' + encodeURIComponent(p.id || '');
+          var d = p.date ? '<span class="post-date">' + esc(p.date) + '</span>' : '';
+          var cat = '<span class="post-cat">' + esc(p.cat || '洞察') + '</span>';
+          var meta = [p.author || '何斌', p.readTime ? '约 ' + esc(p.readTime) : ''].filter(Boolean).join(' · ');
+          return '<article class="post">' + d + '<div>' + cat +
+            '<h3><a href="' + url + '">' + esc(p.title) + '</a></h3>' +
+            '<p>' + esc(p.summary || '') + '</p>' +
+            '<div class="post-meta">' + esc(meta) + ' · <a href="' + url + '">阅读 →</a></div>' +
+            '</div></article>';
+        }).join('');
+      })();
     })();
   </script>
 </body>
