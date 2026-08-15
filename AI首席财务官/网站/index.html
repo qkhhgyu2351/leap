@@ -29,27 +29,39 @@
     @media(max-width:880px){.canvas{padding-top:30px}}
     @media(max-width:560px){.canvas{padding-top:26px}}
 
-    /* AiCfo 横向组合标：符号在左，英文标识在右，适配页眉的紧凑横向空间。 */
-    .brand img{width:182px;height:54px;margin:-6px 0 -6px -12px;transform:none;object-fit:contain}
-    @media(max-width:560px){.brand img{width:132px;height:43px;margin:-5px 0 -5px -9px;transform:none}}
+    /* 页眉保留图形符号与中文全称两层；AiCfo 横向组合标作为辅助资源归档，不在此处并列。 */
+    .brand img{width:52px;height:52px;margin:-7px -6px -7px -8px;transform:scale(1.18);object-fit:contain}
+    @media(max-width:560px){.brand img{width:43px;height:43px;margin:-5px -5px -5px -7px;transform:scale(1.12)}}
+    /* 首屏层级优化：左栏成为轻量问题索引，主内容与页面定位重新取得第一视觉优先级。 */
+    @media(min-width:881px){
+      .shell{grid-template-columns:258px minmax(0,1fr)}
+      .directory{padding:27px 18px;background:linear-gradient(155deg,#dce8e5 0%,#d1dfdc 56%,#c9d9dc 100%);color:var(--navy);box-shadow:inset -1px 0 rgba(17,44,79,.12)}
+      .directory:before{opacity:.08;background:radial-gradient(circle at 10% 8%,rgba(255,255,255,.9),transparent 35%),linear-gradient(120deg,transparent 25%,rgba(17,44,79,.05),transparent 62%)}
+      .directory-head{margin-bottom:19px;padding:0 7px 16px;border-color:rgba(17,44,79,.22)}
+      .directory-head span{color:#527a76}.directory-head h2{color:var(--navy);font-size:21px}
+      .directory .group{margin:18px 0 7px;padding:0 7px;color:#5f827f;font-size:11px}
+      .directory a{padding:9px 10px;border-left:2px solid transparent;color:#31535e;font-size:15px;line-height:1.55}
+      .directory a:before{display:none}.directory a:hover{border-color:var(--green);background:rgba(255,255,255,.48);color:var(--navy)}
+      .directory-foot{margin-top:26px;padding:16px 7px 0;border-color:rgba(17,44,79,.18);color:#54716f;font-size:11px}
+    }
   </style>
 </head>
 <body>
   <header class="top">
-    <a class="brand" href="index.html"><img src="assets/brand/aicfo-lockup.png" alt="AiCfo 标志"><span class="brand-copy"><strong>AI 首席财务官</strong><span>用 CFO 和资本的眼睛，看清公司、产业与企业关键事务。</span></span></a>
-    <a class="principal-link" href="#principal">主理人介绍 ↗</a>
+    <a class="brand" href="index.html"><img src="assets/brand/aicfo-symbol.png" alt="AI 首席财务官图形标志"><span class="brand-copy"><strong>AI 首席财务官</strong><span>AI 首席财务官：把我的判断力变成你能用的东西。</span></span></a>
+    <a class="principal-link" href="#principal">主理人：何斌 ↗</a>
   </header>
   <div class="shell">
     <aside class="directory">
-      <div class="directory-head"><span>PROBLEM MAP / 01—05</span><h2>企业关键问题</h2></div>
+      <div class="directory-head"><span>PROBLEM MAP / 01—05</span><h2>企业现在卡在哪？</h2></div>
       <nav aria-label="问题目录">
         <a href="#growth">增长与现金</a><a href="#capital">融资与股权</a><a href="#governance">财税与治理</a><a href="#operations">经营协同</a><a href="#ai">AI 工作流</a>
         <div class="group">内容档案</div><a href="#cases">公司案例库</a><a href="#tools">工具与自测</a>
       </nav>
-      <p class="directory-foot">有二财经展示判断力；AI 首席财务官把判断变成你能用的东西。</p>
+      <p class="directory-foot">用 CFO 和资本的眼睛，看清公司、产业与企业核心问题。</p>
     </aside>
     <main class="canvas"><div class="content">
-      <section class="content-header"><p class="eyebrow">AI CFO / 判断工作台</p><h1>从真实案例里，<br>看清企业现在<br><em>要什么。先做什么。</em></h1><p>有二财经持续拆解公司、产业与资本事件；这里把其中可迁移的企业问题、判断框架、核对项与工具整理出来，帮助你找到现在真正该先理清的一件事。</p></section>
+      <section class="content-header"><h1>从真实案例里，<br>看清企业现在<br><em>要什么。先做什么。</em></h1><p>有二财经持续拆解公司、产业与资本事件；这里把其中可迁移的企业问题、判断框架、核对项与工具整理出来，帮助你找到现在真正该先理清的一件事。</p></section>
       <section class="intro-grid"><article class="intro-card"><p class="mini">HOW TO READ</p><h2>不是研究别人本身</h2><p>每一个公开案例，都是一类企业问题与关键判断的可见样本。看完案例，关键是知道自己能带走什么。</p></article><article class="intro-card problem"><p class="mini">FIRST PRINCIPLE</p><h2>公司是案例，问题与判断才是产品。</h2><p>内容先提供判断价值；只有当问题被识别，工具和协作才成为自然的下一步。</p></article></section>
       <section class="section" id="growth"><div class="section-top"><h2>从你的处境进入<br><em>问题与判断地图。</em></h2><p>融资、资本、财税、经营与 AI 不是知识栏目，而是企业在不同阶段会反复遇到的判断入口。</p></div><div class="topic-list"><article class="topic"><b>01 / GROWTH</b><h3>增长、利润与现金</h3><p>增长有了，利润和现金为什么没有同步变好？</p><a href="#cases">看案例 ↘</a></article><article class="topic" id="capital"><b>02 / CAPITAL</b><h3>融资、资本与股权</h3><p>融资、上市或股权安排时，到底该先看什么？</p><a href="#tools">看准备度 ↘</a></article><article class="topic" id="governance"><b>03 / TRUST</b><h3>财税、治理与信任</h3><p>数据、流程和责任边界，有没有留下隐患？</p><a href="#cases">看判断框架 ↘</a></article><article class="topic" id="operations"><b>04 / OPERATIONS</b><h3>经营分析与财务协同</h3><p>为什么管理层总看不清经营，汇报总是慢、乱、说不清？</p><a href="#tools">看工作流 ↘</a></article><article class="topic" id="ai"><b>05 / AI WORKFLOW</b><h3>AI 与专业交付</h3><p>AI 应先帮财务团队完成哪一项真实工作？</p><a href="企业财务AI体检（定版）.html">做体检 ↗</a></article></div></section>
       <section class="section" id="cases"><div class="section-top"><h2>公司案例，<br><em>不是结论，是判断的证据。</em></h2><p>未来这里持续沉淀有二财经的公司研究。每一篇都要说明事实、判断、风险、可迁移的问题和核对项。</p></div><article class="case-card"><img src="assets/ai-cfo-case-evidence.jpg" alt="企业案例研究资料"><div class="case-copy"><p class="mini">CASE / 014 · 增长、利润与现金</p><h2>销量增长了，为什么利润和现金没有同步变好？</h2><p>当一家公司用价格、投入和渠道换取增长时，真正要看的不是单一销量，而是增长能否穿过毛利、营运资本和资本开支，最终留下可持续的现金。</p><div class="takeaway"><b>WHAT TO TAKE AWAY</b><span>用收入质量、毛利来源、营运资本与资本开支四点，回看自己的增长结构。</span></div><a href="#tools">查看下一步工具 ↗</a></div></article></section>
