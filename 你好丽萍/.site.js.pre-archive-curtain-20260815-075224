@@ -294,7 +294,7 @@ function renderArchive() {
   var list = sorted(global.ENTRIES || []).filter(function (x) { return !x.interlude; });
 
   var cnt = document.getElementById('archiveCount');
-  if (cnt) cnt.textContent = '共 ' + list.length + ' 幕';
+  if (cnt) cnt.textContent = '共 ' + list.length + ' 条';
 
   var groups = [], seen = {};
   list.forEach(function (it) {
