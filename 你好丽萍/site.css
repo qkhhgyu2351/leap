@@ -13,7 +13,7 @@
   --accent2:  #315B6B;   /* 湖铅蓝 · 结构 / 时间 / 链接（原雾蓝） */
   --line:     #E0DBD0;
   --serif: "Iowan Old Style", Palatino, Georgia, "Noto Serif SC", "Songti SC", "宋体", serif;
-  --sans: -apple-system, "Helvetica Neue", "PingFang SC", sans-serif;
+  --sans: "Helvetica Neue", "PingFang SC", sans-serif;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
@@ -163,7 +163,7 @@ body.pg-archive .page-head::before {
 }
 
 /* 流里的时间分隔：轻量「萍」印章，穿插在不同日子之间 */
-.day-seal { text-align: center; padding: 60px 0 56px;
+.day-seal { text-align: center;
   display: flex; align-items: center; justify-content: center; gap: 12px; }
 .day-seal::before, .day-seal::after {
   content: ''; flex: 1; max-width: 110px;
@@ -175,8 +175,7 @@ body.pg-archive .page-head::before {
 .day-seal img { width: 40px; height: auto; opacity .82; flex-shrink: 0; }
 
 /* 分隔符：多种形式（萍图 / 金句 / 致）共享的波浪延长线 + 排版 */
-.divider { display: flex; align-items: center; justify-content: center; gap: 12px;
-  padding: 60px 0 56px; }
+.divider { display: flex; align-items: center; justify-content: center; gap: 12px; }
 .divider .d-line {
   content: ''; flex: 1; max-width: 120px; height: 6px;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 6'%3E%3Cpath d='M0 3 Q6 0 12 3 T24 3 T36 3 T48 3 T60 3 T72 3 T84 3 T96 3 T108 3 T120 3' stroke='%23B5896B' fill='none' stroke-width='1' opacity='.35'/%3E%3C/svg%3E");
@@ -488,7 +487,8 @@ body.pg-archive .page-head::before {
   box-shadow: 0 2px 16px rgba(37, 42, 41, .05);
 }
 
-/* 区隔语必须处于前后两条内容的视觉中点：前一条的既有留白 + 上方 20px，等于下方 98px。 */
+/* 区隔语/印章的纵向节奏统一在此定义（base 里不再写 padding，避免重复覆盖）。
+   上方 20px 接前一条留白、下方 98px 是其视觉中点。 */
 .divider,
 .day-seal { padding: 20px 0 98px; }
 @media (max-width: 600px) {
