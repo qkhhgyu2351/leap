@@ -80,6 +80,14 @@
     }
 
     @media(max-width:620px){.revenue-flow{grid-template-columns:1fr;gap:8px}.revenue-flow span{justify-content:flex-start;min-height:0;padding:13px 14px;text-align:left}.revenue-flow span:not(:last-of-type):after{content:"↓";right:auto;left:50%;top:100%;bottom:auto;transform:translate(-50%,6px)}}
+
+    /* 顶部品牌区参照正式 index：桌面端留出更完整的上下呼吸，让标志与两行信息成为稳定的页眉锚点。 */
+    @media(min-width:901px){
+      .topbar{height:98px;padding:0 clamp(24px,5vw,74px)}
+      .topbar-icon{width:60px;height:60px;flex-basis:60px}
+      .topbar-brand{gap:16px}.topbar-copy{gap:7px}.topbar-copy strong{font-size:22px;line-height:1.08}.topbar-copy span{font-size:14px;line-height:1.35}.topbar-status{font-size:10px}
+      .layout{min-height:calc(100vh - 98px)}.side{top:98px;height:calc(100vh - 98px)}.source-title,.atlas,.article [id]{scroll-margin-top:122px}
+    }
     /* ===== 侧栏终版：覆盖此前所有 .side 相关定义，仅此一份生效 ===== */
     @media(min-width:901px){
       .side{display:flex;flex-direction:column;overflow:hidden;padding:26px 18px 16px}
