@@ -139,16 +139,13 @@ function nextQuote() {
   return quote || '';
 }
 
-/* 指定日期交界的区隔语：来自「你好想法」的现有想法，只作用于对应的前后两天。 */
-var DATE_BOUNDARY_PHRASES = {
-  '2026-08-16|2026-08-15': '总要允许有些人短暂的出现在生活里，也要坦然接受任何人的离开。'
-};
+
 /* ---- 分隔符：多种形式轮换，不再有「独立体系」的特殊大块 ----
    kind:
      'seal' 萍图 + 波浪线（图形式）
      'quote' 金句（文字呼吸点，绝不重复）
-     'zhi'  指定日期交界的主题句；其他情况使用默认主题句 */
-function dividerNode(kind, newerDate, olderDate) {
+     'zhi'  致：那些已经过去的日子…（主题句）            */
+function dividerNode(kind) {
   if (kind === 'quote') {
     var q = el('div', 'divider divider-quote');
     q.appendChild(el('span', 'd-line'));
@@ -158,10 +155,8 @@ function dividerNode(kind, newerDate, olderDate) {
   }
   if (kind === 'zhi') {
     var z = el('div', 'divider divider-zhi');
-    var key = String(newerDate || '') + '|' + String(olderDate || '');
-    var zhiText = DATE_BOUNDARY_PHRASES[key] || '致：那些已经过去的日子、循环往复的将来。';
     z.appendChild(el('span', 'd-line'));
-    z.appendChild(el('p', 'zhi', zhiText));
+    z.appendChild(el('p', 'zhi', '致：那些已经过去的日子、循环往复的将来。'));
     z.appendChild(el('span', 'd-line'));
     return z;
   }
@@ -258,7 +253,7 @@ function renderFeed(opt) {
         var kind;
         if (!firstDividerDone) { kind = 'zhi'; firstDividerDone = true; }
         else { toggle = !toggle; kind = toggle ? 'quote' : 'seal'; }
-        frag.appendChild(dividerNode(kind, lastDate, it.date));
+        frag.appendChild(dividerNode(kind));
         sinceDivider = 0;
       } else if (shown > 0 && sinceDivider >= 3) {
         /* 同一天内容多了，也插一道呼吸点（金句/萍图轮换），免得一整片 */
