@@ -8,7 +8,7 @@
   --bg:       #F4F1EB;
   --bg-soft:  #EAE5DA;
   --ink:      #252A29;
-  --ink-soft: #717671;
+  --ink-soft: #636866;
   --accent:   #B4654A;   /* 哑赤陶 · 小面积提醒 / 印章感（原暖金） */
   --accent2:  #315B6B;   /* 湖铅蓝 · 结构 / 时间 / 链接（原雾蓝） */
   --line:     #E0DBD0;
@@ -172,7 +172,7 @@ body.pg-archive .page-head::before {
   background-repeat: repeat-x;
   background-size: 60px 6px;
   background-position: center; }
-.day-seal img { width: 40px; height: auto; opacity .82; flex-shrink: 0; }
+.day-seal img { width: 40px; height: auto; opacity: .82; flex-shrink: 0; }
 
 /* 分隔符：多种形式（萍图 / 金句 / 致）共享的波浪延长线 + 排版 */
 .divider { display: flex; align-items: center; justify-content: center; gap: 12px; }
@@ -399,7 +399,7 @@ body.pg-archive .page-head::before {
   z-index: 0;
 }
 .closing > * { position: relative; z-index: 1; }
-.closing-seal { width: 140px; height: auto; opacity .82; margin-bottom: 18px; }
+.closing-seal { width: 140px; height: auto; opacity: .82; margin-bottom: 18px; }
 .closing-line { font-size: 17px; color: var(--text-on-bg, var(--ink)); letter-spacing: 4px;
                 line-height: 1.9; font-style: italic; }
 
