@@ -481,7 +481,7 @@ body.pg-archive .page-head::before {
 /* 聊天记录截图应像夹在信里的旧页：保留可读性，但退入纸张底色。 */
 .entry .photo[src*="weixin-"],
 .article .photo[src*="weixin-"] {
-  opacity: .76;
+  opacity: .56;
   filter: sepia(.12) saturate(.82) contrast(.90) brightness(1.04);
   mix-blend-mode: multiply;
   box-shadow: 0 2px 16px rgba(37, 42, 41, .05);
