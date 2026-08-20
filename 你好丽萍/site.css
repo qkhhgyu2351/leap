@@ -486,6 +486,14 @@ body.pg-archive .page-head::before {
   mix-blend-mode: multiply;
   box-shadow: 0 2px 16px rgba(37, 42, 41, .05);
 }
+/* 8/19 七夕的聊天截图：用户嫌太清晰，单独调淡（当前 .40，正在微调）。 */
+.entry .photo[src*="20260819-carina-chat"],
+.article .photo[src*="20260819-carina-chat"] {
+  opacity: .40;
+  filter: sepia(.12) saturate(.82) contrast(.90) brightness(1.04);
+  mix-blend-mode: multiply;
+  box-shadow: 0 2px 16px rgba(37, 42, 41, .05);
+}
 
 /* 区隔语/印章的纵向节奏统一在此定义（base 里不再写 padding，避免重复覆盖）。
    上方 20px 接前一条留白、下方 98px 是其视觉中点。 */
