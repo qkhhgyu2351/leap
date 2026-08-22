@@ -144,11 +144,21 @@ var DATE_BOUNDARY_PHRASES = {
   '2026-08-16|2026-08-15': '总要允许有些人短暂的出现在生活里，也要坦然接受任何人的离开。',
   '2026-08-19|2026-08-16': '安逸是一种牢笼，会把人困住，逆境是成长的阶梯。'
 };
+/* 按文章长短、密度和主题转折挑选，不按固定条数插入。 */
+var DATE_BOUNDARY_KINDS = {
+  '2026-08-22|2026-08-19': 'seal',
+  '2026-08-19|2026-08-16': 'zhi',
+  '2026-08-16|2026-08-15': 'zhi',
+  '2026-08-13|2026-08-08': 'seal',
+  '2026-08-07|2026-08-06': 'seal',
+  '2026-08-06|2026-08-03': 'seal',
+  '2026-08-03|2026-08-02': 'seal'
+};
 /* ---- 分隔符：多种形式轮换，不再有「独立体系」的特殊大块 ----
    kind:
      'seal' 萍图 + 波浪线（图形式）
      'quote' 金句（文字呼吸点，绝不重复）
-     'zhi'  指定日期交界的主题句；其他情况使用默认主题句 */
+     'zhi'  只在明确挑选的日期交界使用主题句 */
 function dividerNode(kind, newerDate, olderDate) {
   if (kind === 'quote') {
     var q = el('div', 'divider divider-quote');
@@ -160,7 +170,8 @@ function dividerNode(kind, newerDate, olderDate) {
   if (kind === 'zhi') {
     var z = el('div', 'divider divider-zhi');
     var key = String(newerDate || '') + '|' + String(olderDate || '');
-    var zhiText = DATE_BOUNDARY_PHRASES[key] || '致：那些已经过去的日子、循环往复的将来。';
+    var zhiText = DATE_BOUNDARY_PHRASES[key];
+    if (!zhiText) return daySealNode();
     z.appendChild(el('span', 'd-line'));
     z.appendChild(el('p', 'zhi', zhiText));
     z.appendChild(el('span', 'd-line'));
@@ -247,29 +258,22 @@ function renderFeed(opt) {
        传正整数才截断（目前首页用 0，也就是一条不漏）。 */
     var LIMIT = (typeof opt.limit === 'number' && opt.limit > 0) ? opt.limit : list.length;
     var frag = document.createDocumentFragment();
-    var shown = 0, i = 0, lastDate = null, firstDividerDone = false, toggle = false;
-    var sinceDivider = 0;   /* 距上一次分隔已铺了几条内容 */
+    var shown = 0, i = 0, lastDate = null;
 
     for (; i < list.length && shown < LIMIT; i++) {
       var it = list[i];
       /* 穿插语不计数 —— 它不是一条内容，只是喘口气 */
       if (it.interlude) { frag.appendChild(interludeNode(it)); continue; }
       if (lastDate !== null && it.date !== lastDate) {
-        /* 跨天：主题句/金句/萍图 轮换，第一道用「致」 */
-        var kind;
-        if (!firstDividerDone) { kind = 'zhi'; firstDividerDone = true; }
-        else { toggle = !toggle; kind = toggle ? 'quote' : 'seal'; }
-        frag.appendChild(dividerNode(kind, lastDate, it.date));
-        sinceDivider = 0;
-      } else if (shown > 0 && sinceDivider >= 3) {
-        /* 同一天内容多了，也插一道呼吸点（金句/萍图轮换），免得一整片 */
-        toggle = !toggle;
-        frag.appendChild(dividerNode(toggle ? 'quote' : 'seal'));
-        sinceDivider = 0;
+        /* 只在明确需要的主题转折处换气；同一天不自动插入区隔。 */
+        var key = String(lastDate) + '|' + String(it.date);
+        var boundaryKind = DATE_BOUNDARY_KINDS[key];
+        if (boundaryKind) {
+          frag.appendChild(dividerNode(boundaryKind, lastDate, it.date));
+        }
       }
       frag.appendChild(entryNode(it, opt.feed));
       lastDate = it.date;
-      sinceDivider++;
       shown++;
     }
     /* 正好卡在穿插语前面的话，把它一并铺完 ——
