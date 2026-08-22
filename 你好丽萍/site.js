@@ -189,6 +189,7 @@ function bodyInto(box, text) {
 /* ---- 首页/回忆页里的一条 ---- */
 function entryNode(it, feed) {
   var w = el('article', 'entry');
+  if (idOf(it) === '2026-08-22-小区别墅门前的小碎花') w.classList.add('entry-villa-tree');
   var href = linkOf(it, feed);
 
   var date = el('a', 'date');
@@ -401,6 +402,7 @@ function renderEntry() {
   var backText = '← 回到首页';
 
   var box = document.getElementById('article');
+  if (id === '2026-08-22-小区别墅门前的小碎花') box.classList.add('entry-villa-tree');
   {
     var list = sorted(raw).filter(function (x) { return !x.interlude; });
     var i = -1;

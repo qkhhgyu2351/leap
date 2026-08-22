@@ -246,6 +246,9 @@ body.pg-archive .page-head::before {
   -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 14%, #000 78%, transparent 100%);
           mask-image: linear-gradient(180deg, transparent 0, #000 14%, #000 78%, transparent 100%);
 }
+/* 碎花树文章的湖心树群底图偏蓝，为保留文字清晰度只单独减弱这一篇。 */
+.entry.entry-villa-tree.has-bg::before,
+.article.entry-villa-tree.has-bg::before { opacity: .16; }
 /* 底纹版的图注：不是给某张照片配的，所以更轻、离得更远 */
 .entry.has-bg .photo-caption,
 .article.has-bg .photo-caption { margin-top: 20px; opacity: .8; }
