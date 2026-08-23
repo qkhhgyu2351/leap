@@ -644,6 +644,10 @@ function initBGM() {
   }
 
   var KEY_TIME = 'liping-bgm-time';
+  var KEY_PLAY = 'liping-bgm-playing';
+  /* 上一页离开时音乐在播吗？整页跳转后（本地 file:// 预览就是这样）
+     据此在新页面续播，而不是等用户再点一下。 */
+  var wasPlaying = sessionStorage.getItem(KEY_PLAY) === '1';
   /* 「用户手动关掉了」只放在内存里。绝不写进 sessionStorage —— 那会导致
      关过一次之后，整个浏览器会话再也不自动播，刷新都救不回来。 */
   var userOff = false;
@@ -685,7 +689,8 @@ function initBGM() {
     warmed = true;
     try { audio.preload = 'auto'; audio.load(); } catch (err) {}
   }
-  if (document.readyState === 'complete') setTimeout(prewarm, 1500);
+  if (wasPlaying) setTimeout(prewarm, 200);   /* 上一页在播：尽快续上，别等那 1.5 秒 */
+  else if (document.readyState === 'complete') setTimeout(prewarm, 1500);
   else global.addEventListener('load', function () { setTimeout(prewarm, 1500); });
   /* 万一用户比预热还快：任何一次触碰都立刻开始缓冲，不必等那 1.5 秒 */
   ['pointerdown','touchstart','keydown','wheel','scroll'].forEach(function (e) {
@@ -733,10 +738,15 @@ function initBGM() {
     sync();
   });
 
-  /* 记住进度，翻页接着放 */
-  var save = function () { sessionStorage.setItem(KEY_TIME, String(audio.currentTime || 0)); };
+  /* 记住进度 + 是否在播，翻页接着放 */
+  var save = function () {
+    sessionStorage.setItem(KEY_TIME, String(audio.currentTime || 0));
+    sessionStorage.setItem(KEY_PLAY, (audio.paused || audio.muted) ? '0' : '1');
+  };
   setInterval(save, 2000);
   global.addEventListener('pagehide', save);
+  /* 用户主动暂停后立刻记「不在播」，避免续播又把它拉起来 */
+  audio.addEventListener('pause', function () { sessionStorage.setItem(KEY_PLAY, '0'); });
   sync();
 }
 
@@ -771,36 +781,70 @@ function initPage() {
 
 /* ============================================================
    软导航：站内跳转用 JS 换内容，不整页重载。
-   这样 <audio> 元素一直活着 —— 音乐不断、不重来、也不会
-   出现「每个页面各起一个播放器」这种荒唐事。
-   fetch 失败（比如本地双击打开）就退回普通跳转，功能不受影响。
+   这样 <audio> 元素一直活着 —— 音乐不断、不重来。
+   关键：不依赖 fetch —— 三个页面的结构由数据 + 模板生成，
+   所以本地 file:// 双击打开也一样生效（file:// 下 fetch 被
+   浏览器禁掉，旧版在本地会退回整页跳转、音乐必断）。
    ============================================================ */
+/* 首页 hero（含书法 SVG）模板：软导航去 archive/entry 再回来时用它重建 */
+var HERO_HTML = "<section class=\"hero\" id=\"latest\"><h1 class=\"sr-only\">你好，丽萍</h1>\n  <div class=\"hero-bg\" aria-hidden=\"true\"></div>\n  <svg class=\"title\" viewBox=\"6 -922 4427 1050\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"你好，丽萍\"><g transform=\"scale(1 -1)\"><g class=\"t-hi\"><path d=\"M707 305H731Q756 306 770.5 292.5Q785 279 790 279Q798 279 826.0 250.0Q854 221 854 214Q854 205 838 195Q825 186 773.0 168.0Q721 150 697.5 145.5Q674 141 665.5 134.0Q657 127 649.0 129.5Q641 132 696 182Q745 226 751.0 245.0Q757 264 729 287ZM531 654Q511 593 513.0 590.5Q515 588 593 627Q650 655 668.5 660.0Q687 665 729 665Q766 665 778.0 663.0Q790 661 797 652Q823 616 777.0 538.0Q731 460 651 406L622 387L620 273Q618 178 610.5 108.0Q603 38 593.5 27.5Q584 17 571.5 19.5Q559 22 534 40Q503 60 475.0 67.0Q447 74 435 95Q428 109 422.0 111.5Q416 114 404 111Q377 105 362.0 121.0Q347 137 317 205Q290 268 276 164Q271 134 263.5 127.0Q256 120 237 127Q221 134 211.0 163.0Q201 192 195.0 201.0Q189 210 199 238Q215 284 214.5 332.5Q214 381 197 381Q191 381 141.5 346.0Q92 311 89 305Q87 301 77 288Q62 267 52 293Q46 306 46 329Q46 352 50.0 361.5Q54 371 67 385Q98 414 151.5 496.0Q205 578 248 659Q270 701 274.5 714.5Q279 728 274 738Q263 755 275 754Q284 753 302 740Q325 725 323.5 711.5Q322 698 291 649Q263 604 241.0 562.5Q219 521 194.5 480.5Q170 440 170.0 436.0Q170 432 204.5 426.5Q239 421 252.5 408.0Q266 395 275.0 395.0Q284 395 309 447Q317 463 322.5 472.0Q328 481 332.5 486.0Q337 491 339.5 491.0Q342 491 345 489Q354 482 368 494Q394 518 437.0 615.5Q480 713 480 749Q480 774 485.5 776.5Q491 779 518.0 765.0Q545 751 547.5 730.5Q550 710 531 654ZM698 606Q673 606 603.5 567.5Q534 529 528 513Q527 510 532.5 505.0Q538 500 547 496Q570 486 583.0 471.5Q596 457 605 457Q618 457 651.0 500.5Q684 544 699 581Q707 600 707.0 604.0Q707 608 698 606ZM340 380Q337 383 336 394Q334 409 324.5 409.0Q315 409 304 352Q292 293 292.5 275.5Q293 258 308 258Q323 258 345.5 245.0Q368 232 388 237Q430 249 483 290Q518 316 523.5 333.0Q529 350 512 367Q497 381 494.5 426.5Q492 472 490.0 474.5Q488 477 423 425Q353 370 340 380ZM521 272Q509 272 472.0 218.5Q435 165 439 156Q444 150 474 140Q504 129 510.0 139.5Q516 150 522 212Q527 272 521 272Z\" transform=\"translate(0 0)\"/><path d=\"M263 756Q271 756 286 749Q321 733 330.0 685.0Q339 637 317 590L302 557L319 540L337 521L362 536Q386 551 399.5 568.5Q413 586 439.0 596.0Q465 606 479 613Q580 660 627.0 666.0Q674 672 686 638Q691 623 687.5 611.5Q684 600 660 561Q625 506 601 474L577 441L608 412Q640 382 640 374Q640 367 669.0 366.5Q698 366 724 374Q750 381 797 366Q833 356 843.0 346.0Q853 336 848 315Q845 304 833.5 301.0Q822 298 768 296Q691 291 669 287Q653 284 650.0 279.0Q647 274 647 251Q647 222 630.5 157.5Q614 93 602 75Q576 34 501 39Q451 43 420.5 60.5Q390 78 371 114Q353 151 353 166Q353 177 350 177Q349 178 337 163Q326 152 319.5 149.5Q313 147 302 150Q283 154 279 166Q275 183 265.0 197.5Q255 212 249 212Q241 212 223 184Q193 140 159.0 130.0Q125 120 103 149Q85 174 66.5 236.0Q48 298 51 324Q54 338 62.5 344.0Q71 350 114 368Q154 385 154.0 392.5Q154 400 170.0 426.0Q186 452 191.0 468.5Q196 485 226.0 554.0Q256 623 268 666Q275 694 275.5 704.0Q276 714 270 727L258 751Q255 756 263 756ZM577 586Q576 587 569.0 584.5Q562 582 550.5 576.5Q539 571 525 564Q490 544 480.0 542.0Q470 540 455 548Q432 559 420.5 555.0Q409 551 380 522Q346 487 338.5 456.0Q331 425 311.0 372.5Q291 320 291.0 309.0Q291 298 316 249Q337 207 340 206Q342 206 347 219Q353 239 350 277L349 315L410 319Q472 323 492 330Q515 337 516 347Q516 352 508 352Q498 352 490.0 368.5Q482 385 478.0 406.0Q474 427 476.0 445.5Q478 464 487 466Q534 481 568 558Q578 581 577 586ZM270 475Q277 475 277.0 482.0Q277 489 270.0 489.0Q263 489 263.0 482.0Q263 475 270 475ZM80 306Q65 297 92.0 252.5Q119 208 140 208Q155 208 185.5 248.5Q216 289 210 301Q207 311 186 318Q168 324 162.5 324.0Q157 324 143.5 318.0Q130 312 109.0 312.0Q88 312 80 306ZM574 270H539Q505 270 501.5 266.0Q498 262 454 258L410 253L408 219Q407 196 410.5 184.5Q414 173 430 153Q446 132 454.0 127.5Q462 123 484 123Q510 124 530.5 135.0Q551 146 557 165Q564 181 569 226Z\" transform=\"translate(900 0)\"/><path d=\"M419 236Q419 242 424 242Q458 242 481.0 201.5Q504 161 504.0 137.5Q504 114 499.5 93.0Q495 72 468.5 6.5Q442 -59 427.5 -59.0Q413 -59 405.0 -25.5Q397 8 397.0 41.5Q397 75 403.5 107.5Q410 140 414 160Q423 196 423 209Z\" transform=\"translate(1800 0)\"/></g><g class=\"t-name\"><path d=\"M641 756Q687 741 687 718Q687 710 640 707Q547 699 436 611Q369 560 347.0 535.5Q325 511 318 486Q309 450 318 450Q321 449 330 455Q352 466 382.5 461.0Q413 456 413 441Q413 428 417.0 428.0Q421 428 456.0 462.5Q491 497 505 494Q521 489 559.5 513.5Q598 538 639 577Q650 588 658.0 589.5Q666 591 700.0 584.5Q734 578 740.5 573.5Q747 569 750 551Q783 385 783 156V31H765Q750 31 729.5 41.0Q709 51 703 60Q697 71 657 95Q621 116 602.0 134.0Q583 152 588 160Q593 169 601 162Q608 156 644.5 145.0Q681 134 693 134Q700 134 701.0 146.0Q702 158 700 198Q696 264 688.5 273.0Q681 282 648.5 293.5Q616 305 604 311Q590 319 582.5 306.5Q575 294 571 256Q555 112 544 93Q528 64 498 94Q489 102 485.0 113.0Q481 124 482.5 132.5Q484 141 491 141Q519 141 519 305Q520 385 518.0 405.5Q516 426 505 439Q491 458 481.5 458.0Q472 458 451 416Q436 387 432.0 366.5Q428 346 425 282Q419 149 394 143Q383 141 366 154Q348 169 325.5 178.0Q303 187 294 185Q283 180 283 164Q283 127 260 127Q244 127 232.0 153.0Q220 179 225 203Q229 226 235 267Q261 432 269 457Q276 478 309.5 515.5Q343 553 383 585Q430 623 455 645Q480 668 467 666Q450 665 352 616Q250 563 222 560Q200 557 169.5 568.5Q139 580 123 599Q113 610 120 611Q126 612 153 612Q205 612 270.0 632.0Q335 652 437 698Q472 714 519.5 732.0Q567 750 588 758Q599 764 609.5 763.5Q620 763 641 756ZM640 496Q622 482 589.5 465.0Q557 448 557.0 443.0Q557 438 568 405Q576 382 581.5 377.5Q587 373 604 374Q629 376 659 370L689 364L685 418Q680 471 675 491Q672 508 664.5 509.0Q657 510 640 496ZM325 418Q318 409 308.5 339.5Q299 270 305 266Q307 265 317.0 276.0Q327 287 338 304Q359 335 364.0 359.5Q369 384 359 410Q353 425 344.0 427.5Q335 430 325 418ZM341 254Q330 242 332.0 235.5Q334 229 345 229Q359 229 359 247Q359 274 341 254Z\" transform=\"translate(2700 0)\"/><path d=\"M220 485Q236 470 235.5 457.0Q235 444 218 437Q198 429 187 424Q179 419 179 422Q178 425 182 439Q190 458 186 479Q183 491 187.0 496.5Q191 502 200.0 498.5Q209 495 220 485ZM540 637Q585 632 585.0 614.0Q585 596 538 550Q463 476 501 474Q516 473 544 485Q582 499 602 499Q620 499 638.0 490.5Q656 482 659.0 473.0Q662 464 619.5 423.0Q577 382 580 379Q586 374 628.5 375.0Q671 376 678 383Q686 390 711.5 387.0Q737 384 737 376Q737 371 763 359Q786 349 791.5 335.5Q797 322 784 314Q771 307 722 307Q700 307 672.5 303.0Q645 299 620.0 293.0Q595 287 574.5 279.5Q554 272 542.5 264.0Q531 256 533 250Q536 241 539 138Q539 74 536.5 44.5Q534 15 524 -21Q509 -79 503.0 -84.5Q497 -90 478 -87L458 -82L457 53Q455 157 452.0 184.5Q449 212 441 212Q434 212 387.5 188.5Q341 165 287 150Q236 136 224.0 129.5Q212 123 205 111Q196 90 180.5 96.0Q165 102 152 130Q144 146 143.5 157.0Q143 168 148 191Q156 227 153.0 267.0Q150 307 156.5 307.0Q163 307 187 283Q204 265 209.0 264.0Q214 263 224 273Q236 287 273.5 365.5Q311 444 311.0 475.0Q311 506 329.5 523.0Q348 540 354 540Q362 540 426.0 579.5Q490 619 500 629Q511 641 540 637ZM332 486Q332 459 321.5 433.0Q311 407 317 402Q321 398 345.5 420.5Q370 443 392.5 470.5Q415 498 415.0 506.0Q415 514 408.5 516.5Q402 519 381 519Q348 519 340.0 513.5Q332 508 332 486ZM549 441Q546 442 538 437Q528 432 533.0 426.5Q538 421 546 429Q555 439 549 441ZM275 334Q271 320 265 302Q256 263 252 237Q250 220 252.0 216.0Q254 212 263 212Q280 212 321.5 234.0Q363 256 396 283Q421 304 428.0 314.0Q435 324 435 338Q435 361 427.5 366.0Q420 371 375 336Q337 307 325.5 307.0Q314 307 309 338Q297 397 275 334ZM544 352Q535 342 540 337Q544 332 565.0 338.5Q586 345 586 352Q586 359 578.0 361.5Q570 364 559.5 361.0Q549 358 544 352ZM247 865Q263 847 279 817Q297 781 307.5 776.0Q318 771 350 782Q377 792 426 800Q467 807 478.0 817.0Q489 827 489 858Q489 882 495 882Q501 882 522.5 865.5Q544 849 556 836Q569 823 601 810Q627 801 644.5 787.0Q662 773 658 764Q656 756 604 758L553 761L524 729Q494 697 468.0 682.0Q442 667 442.0 662.0Q442 657 400.5 629.0Q359 601 350.5 587.5Q342 574 335.5 574.0Q329 574 351 597Q385 633 421.0 695.0Q457 757 452 770Q448 781 410.5 779.5Q373 778 347 766Q321 755 318.5 740.5Q316 726 333 698Q344 679 345.5 657.5Q347 636 335.5 631.5Q324 627 304.5 636.5Q285 646 281 657Q274 678 261.5 680.0Q249 682 219 667Q178 647 158.5 645.0Q139 643 124 657Q113 666 108.5 677.5Q104 689 107.5 696.5Q111 704 120 704Q134 704 187.0 722.5Q240 741 243 747Q252 759 229 834Q222 858 222 871Q222 892 247 865Z\" transform=\"translate(3600 0)\"/></g></g></svg>\n  <div class=\"eyebrow\">A QUIET CORNER FOR MISSING</div>\n  <p class=\"sub\">有些话不论说给谁听，<br>写下来，它就有了去处。</p>\n  <div class=\"updated\" id=\"updated\" hidden></div>\n  <div class=\"reading-starts\">\n    <div class=\"scroll-hint\">↓ 往下慢慢读</div>\n    <a class=\"reading-jump-start\" href=\"#earliest\">或从最早读起 ↓</a>\n  </div>\n</section>";
+
+function viewHTML(view) {
+  if (view === 'archive') {
+    return '<section class="page-head">' +
+      '<img class="zh-seal" src="assets/img/logo-ping-watercolor.png" alt="萍">' +
+      '<p class="lead">经历过的事，从不会消失。<br>' +
+      '<span class="lead-2">真正让你懂得爱的人，都是用离开来教的。</span></p>' +
+      '<div class="ar-count" id="archiveCount"></div></section>' +
+      '<div class="archive-filter">' +
+      '<input id="arFilter" type="search" placeholder="查找关键词" autocomplete="off" aria-label="查找关键词">' +
+      '</div>' +
+      '<div class="archive" id="archive"></div>' +
+      '<div class="back-home"><a href="index.html">← 回到首页</a></div>';
+  }
+  if (view === 'entry') {
+    return '<article class="article" id="article"></article>' +
+      '<div class="back-home"><a id="backHome" href="index.html">← 回到首页</a></div>';
+  }
+  return HERO_HTML +
+    '<div class="stream" id="stream" data-feed="memories"></div>' +
+    '<nav class="reading-jumps" aria-label="阅读位置"><a href="#latest">↑ 回到最新</a></nav>' +
+    '<div class="more-days" id="moreDays"><a href="archive.html">进入到阅读清单，我的巨蟹 →</a></div>';
+}
+
 (function () {
-  if (!global.history || !global.history.pushState || !global.fetch) return;
-  var KEEP = ['bgm', 'bgmToggle'];
+  if (!global.history || !global.history.pushState) return;
+
+  var TITLES = { feed: '你好，丽萍', archive: '往日 · 你好，丽萍', entry: '你好，丽萍' };
+
+  function targetView(url) {
+    var base = String(url || '').split('/').pop();
+    if (/^archive\.html/.test(base)) return 'archive';
+    if (/^entry\.html/.test(base)) return 'entry';
+    return 'feed';
+  }
+
+  function setMenu(v) {
+    var now = document.querySelector('.topbar .m-now');
+    var more = document.querySelector('.topbar .m-more');
+    if (!now || !more) return;
+    if (v === 'archive') { more.classList.add('on'); now.classList.remove('on'); }
+    else if (v === 'feed') { now.classList.add('on'); more.classList.remove('on'); }
+    else { now.classList.remove('on'); more.classList.remove('on'); }
+  }
 
   function go(url, push) {
-    fetch(url, { credentials: 'same-origin', cache: 'no-store' }).then(function (res) {
-      if (!res.ok) throw new Error(res.status);
-      return res.text();
-    }).then(function (html) {
-      var doc = new DOMParser().parseFromString(html, 'text/html');
-      var keep = KEEP.map(function (id) { return document.getElementById(id); })
-                     .filter(Boolean);
-      Array.prototype.slice.call(document.body.children).forEach(function (elm) {
-        if (keep.indexOf(elm) === -1 && elm.tagName !== 'SCRIPT') elm.remove();
-      });
-      var frag = document.createDocumentFragment();
-      Array.prototype.slice.call(doc.body.children).forEach(function (elm) {
-        if (KEEP.indexOf(elm.id) !== -1 || elm.tagName === 'SCRIPT') return;
-        frag.appendChild(document.importNode(elm, true));
-      });
-      document.body.insertBefore(frag, keep[0] || null);
-      document.title = doc.title;
-      if (push) history.pushState({ soft: 1 }, '', url);
-      global.scrollTo(0, 0);
-      initPage();
-    }).catch(function () { location.href = url; });
+    var app = document.getElementById('view');
+    if (!app) { location.href = url; return; }
+    var v = targetView(url);
+    app.innerHTML = viewHTML(v);
+    document.body.className = v === 'archive' ? 'pg-archive' : '';
+    setMenu(v);
+    /* Safari 在 file:// 下 pushState 会抛 SecurityError —— 不能让它打断渲染 */
+    if (push) { try { history.pushState({ soft: 1 }, '', url); } catch (err) {} }
+    global.scrollTo(0, 0);
+    initPage();
+    if (v !== 'entry') document.title = TITLES[v];
   }
 
   document.addEventListener('click', function (e) {
@@ -809,8 +853,6 @@ function initPage() {
     if (!a || a.target || a.hasAttribute('download')) return;
     var href = a.getAttribute('href');
     if (!href || href.charAt(0) === '#' || /^[a-z]+:/i.test(href)) return;
-    /* 要认带查询串的链接 —— 单条页面是 entry.html?feed=…&id=…，
-       只匹配结尾的 .html 会漏掉它，那样点进一条内容音乐就断了。 */
     if (!/\.html(\?|$)/i.test(href)) return;
     e.preventDefault();
     go(href, true);
@@ -821,10 +863,15 @@ function initPage() {
   });
 })();
 
-/* 音乐只初始化一次。软导航不重载页面，重复初始化会挂上第二套监听。 */
-if (!global.__bgmReady) { global.__bgmReady = true; initBGM(); }
 
-initPage();
+/* 音乐只初始化一次。软导航不重载页面，重复初始化会挂上第二套监听。
+   音乐初始化万一抛错也不能挡住正文渲染 —— 各自 try/catch 兜底。 */
+if (!global.__bgmReady) {
+  global.__bgmReady = true;
+  try { initBGM(); } catch (err) {}
+}
+
+try { initPage(); } catch (err) {}
 
 global.SITE = { renderFeed: renderFeed, renderEntry: renderEntry,
                 renderArchive: renderArchive, initReveal: initReveal, initPage: initPage };
