@@ -670,6 +670,7 @@ function initBGM() {
     btn.classList.toggle('playing', on);
     btn.setAttribute('aria-pressed', on ? 'true' : 'false');
     btn.setAttribute('aria-label', on ? '关掉背景音乐' : '播放背景音乐');
+    btn.setAttribute('title', on ? '关掉背景音乐' : '播放背景音乐');
   }
   ['play','pause','volumechange'].forEach(function (e) { audio.addEventListener(e, sync); });
 
@@ -706,7 +707,7 @@ function initBGM() {
       var p = audio.play();
       if (p && p.then) p.then(sync).catch(function () {});
     } catch (err) {}
-    fadeIn();   /* 首次起播从 0 淡入到 0.4，不突兀 */
+    fadeIn();
     sync();
   }
   ['pointerdown','touchstart','click','keydown','wheel','scroll'].forEach(function (e) {
@@ -751,6 +752,20 @@ function initBGM() {
 }
 
 
+/* 首页长页的两端定位；软导航替换页面时先清理上一页监听。 */
+var longPageNavCleanup = null;
+function initLongPageNav() {
+  if (longPageNavCleanup) { longPageNavCleanup(); longPageNavCleanup = null; }
+  var nav = document.getElementById('pageNav');
+  if (!nav) return;
+  function syncNav() {
+    nav.classList.toggle('is-visible', global.scrollY > 560);
+  }
+  global.addEventListener('scroll', syncNav, { passive: true });
+  syncNav();
+  longPageNavCleanup = function () { global.removeEventListener('scroll', syncNav); };
+}
+
 /* ============================================================
    每页内容就绪后跑这个。软导航换完内容也会再跑一次，
    所以渲染要看 DOM 上的标记，而不是写在页面里的 inline script
@@ -776,6 +791,7 @@ function initPage() {
   if (cl) adaptTextColor(cl, 'assets/img/dusk.jpg');
   var hero = document.querySelector('.hero');
   if (hero) adaptTextColor(hero, 'assets/img/莱芜雪野湖清晨雾气中的湖心树木群.jpg');
+  initLongPageNav();
   initReveal();
 }
 
@@ -808,6 +824,7 @@ function viewHTML(view) {
   }
   return HERO_HTML +
     '<div class="stream" id="stream" data-feed="memories"></div>' +
+    '<nav class="page-nav" id="pageNav" aria-label="长页阅读定位"><a href="#latest">回最新</a><a href="#bottom">到底部</a></nav>' +
     '<nav class="reading-jumps" aria-label="阅读位置"><a href="#latest">↑ 回到最新</a></nav>' +
     '<div class="more-days" id="moreDays"><a href="archive.html">进入到阅读清单，我的巨蟹 →</a></div>';
 }

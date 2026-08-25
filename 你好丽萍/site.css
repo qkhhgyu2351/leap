@@ -84,20 +84,27 @@ img { max-width: 100%; }
   font-family: var(--serif); font-size: 12px; letter-spacing: 4px;
   color: var(--text-on-bg, var(--ink-soft)); text-transform: uppercase;
   max-width: min(520px, 76vw); margin: 0 auto 18px;
+  text-shadow: 0 1px 0 rgba(244, 241, 235, .78);
 }
 .hero .title { width: min(520px, 76vw); height: auto; margin: 0 auto 18px; display: block; }
 .hero .title .t-hi   { fill: var(--accent); }
 .hero .title .t-name { fill: var(--ink); }
-.hero .sub { font-size: 19px; line-height: 2.1; color: var(--text-on-bg, var(--ink)); }
+.hero .sub {
+  font-size: 19px; line-height: 2.1; color: var(--text-on-bg, var(--ink));
+  text-shadow: 0 1px 0 rgba(244, 241, 235, .78);
+}
 .hero .scroll-hint {
-  margin-top: 34px; font-size: 14px; letter-spacing: 3px; color: var(--accent); opacity: .75;
+  margin-top: 34px; font-size: 14px; letter-spacing: 3px; color: var(--accent); opacity: .94;
+  text-shadow: 0 1px 0 rgba(244, 241, 235, .88);
 }
 
 /* 最新内容是哪天 —— 一进来就看得到 */
 .hero .updated {
   display: inline-flex; align-items: center; justify-content: center;
-  flex-wrap: wrap; gap: 4px 9px; margin-top: 30px;
+  flex-wrap: wrap; gap: 4px 9px; margin-top: 30px; padding: 5px 10px;
   font-family: var(--sans); font-size: 14px; letter-spacing: .8px; color: var(--text-on-bg, var(--accent2));
+  background: rgba(244, 241, 235, .46); border: 1px solid rgba(224, 219, 208, .72); border-radius: 999px;
+  text-shadow: 0 1px 0 rgba(244, 241, 235, .88);
 }
 .hero .updated .lbl { color: var(--ink-soft); }
 .hero .updated .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent2); flex-shrink: 0; }
@@ -471,8 +478,37 @@ body.pg-archive .page-head::before {
 .reading-jumps a { padding-bottom: 2px; border-bottom: 1px solid transparent; transition: color .3s, border-color .3s; }
 .reading-jumps a:hover, .reading-jumps a:focus-visible { color: var(--accent); border-color: var(--accent); outline: none; }
 @media (max-width: 600px) { .reading-jumps { gap: 16px; padding-bottom: 22px; font-size: 11px; letter-spacing: 1px; } }
-.reading-jump-start { display: inline-block; margin-top: 15px; color: var(--ink-soft); font-size: 12px; letter-spacing: 1.4px; transition: color .3s; }
-.reading-jump-start:hover, .reading-jump-start:focus-visible { color: var(--accent); outline: none; }
+.reading-jump-start {
+  display: inline-block; margin-top: 15px; padding: 5px 9px;
+  color: var(--text-on-bg, var(--accent2)); font-size: 12px; letter-spacing: 1.4px;
+  background: rgba(244, 241, 235, .42); border: 1px solid rgba(224, 219, 208, .68); border-radius: 999px;
+  text-shadow: 0 1px 0 rgba(244, 241, 235, .88); transition: color .3s, background .3s, border-color .3s;
+}
+.reading-jump-start:hover, .reading-jump-start:focus-visible {
+  color: var(--accent); background: rgba(244, 241, 235, .78); border-color: var(--accent); outline: none;
+}
+/* 长页浮动定位：超过首屏后才显现，提供回到最新与最早一篇的快捷入口。 */
+.page-nav {
+  position: fixed; top: 50%; right: 22px; z-index: 35;
+  display: flex; flex-direction: column; gap: 8px;
+  transform: translate(14px, -50%); opacity: 0; pointer-events: none;
+  transition: opacity .25s ease, transform .25s ease;
+}
+.page-nav.is-visible { transform: translate(0, -50%); opacity: 1; pointer-events: auto; }
+.page-nav a {
+  min-width: 48px; padding: 7px 8px; border: 1px solid rgba(224, 219, 208, .92); border-radius: 999px;
+  background: rgba(244, 241, 235, .88); box-shadow: 0 4px 14px rgba(37, 42, 41, .08);
+  color: var(--accent2); font-family: var(--sans); font-size: 11px; letter-spacing: .8px; text-align: center;
+  transition: color .25s, border-color .25s, transform .25s;
+}
+.page-nav a:hover, .page-nav a:focus-visible { color: var(--accent); border-color: var(--accent); outline: none; transform: translateX(-2px); }
+@media (max-width: 600px) {
+  .page-nav { right: 12px; top: auto; bottom: 18px; transform: translateY(12px); flex-direction: row; }
+  .page-nav.is-visible { transform: translateY(0); }
+  .page-nav a { min-width: 44px; padding: 6px 7px; background: rgba(244, 241, 235, .94); }
+  .page-nav a:hover, .page-nav a:focus-visible { transform: translateY(-2px); }
+}
+
 /* 卷首两种阅读路径：上下两行，箭头贴着字（不做外扩，避免离字太远） */
 .hero .reading-starts {
   display: flex; flex-direction: column; align-items: center; gap: 12px;

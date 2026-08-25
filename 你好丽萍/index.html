@@ -23,7 +23,7 @@
 <link rel="icon" type="image/svg+xml" href="assets/img/logo-seal.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-<link rel="stylesheet" href="site.css?v=20260823b">
+<link rel="stylesheet" href="site.css?v=20260825a">
 </head>
 <body>
 <div class="topbar">
@@ -48,13 +48,13 @@
   </div>
 </section>
 
-<div class="stream" id="stream" data-feed="memories"></div><nav class="reading-jumps" aria-label="阅读位置"><a href="#latest">↑ 回到最新</a></nav>
+<div class="stream" id="stream" data-feed="memories"></div><nav class="page-nav" id="pageNav" aria-label="长页阅读定位"><a href="#latest">回最新</a><a href="#bottom">到底部</a></nav><nav class="reading-jumps" aria-label="阅读位置"><a href="#latest">↑ 回到最新</a></nav>
 <div class="more-days" id="moreDays">
   <a href="archive.html">进入到阅读清单，我的巨蟹 →</a>
 </div>
 </main>
 
-<section class="closing">
+<section class="closing" id="bottom">
   <img class="closing-seal" src="assets/img/logo-ping-watercolor.png" alt="">
   <p class="closing-line">有些地方，风一吹就散了；<br>有些话，留在这里，就一直在。</p>
 </section>
@@ -62,10 +62,10 @@
 
 <audio id="bgm" src="assets/audio/lunar-dance.mp3" loop preload="none" playsinline></audio>
 <button class="bgm-toggle" id="bgmToggle" type="button" hidden
-        aria-pressed="false" aria-label="播放背景音乐"><span></span><span></span><span></span></button>
+        aria-pressed="false" aria-label="播放背景音乐" title="播放背景音乐"><span></span><span></span><span></span></button>
 
 <script src="entries.js"></script>
 <script src="memories.js"></script>
-<script src="site.js?v=20260823b"></script>
+<script src="site.js?v=20260825b"></script>
 </body>
 </html>
