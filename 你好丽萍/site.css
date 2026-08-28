@@ -953,9 +953,20 @@ body.pg-archive .page-head::before {
   .archive-filter { max-width: none; }
   .archive-filter { padding: 0 16px; }
   .ar-list { margin: 0 16px; }
-  .ar-list a { display: block; padding: 16px; }
-  .ar-date { margin-bottom: 6px; }
-  .ar-title { font-size: 17px; }
+  .ar-list a { display: block; padding: 20px 18px; }
+  .ar-date {
+    display: block;
+    grid-column: auto;
+    grid-row: auto;
+    margin: 0 0 10px 0;
+  }
+  .ar-title,
+  .ar-excerpt {
+    display: block;
+    grid-column: auto;
+  }
+  .ar-title { font-size: 17px; margin-bottom: 8px; line-height: 1.45; }
+  .ar-excerpt { font-size: 13px; line-height: 1.7; }
 
   .article { padding: 102px 20px 36px; }
   .article h1 { font-size: 27px; margin-bottom: 25px; }
