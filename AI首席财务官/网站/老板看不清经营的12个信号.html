@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>老板看不清经营的 12 个信号（第一批）· AI 首席财务官</title>
+<meta name="description" content="用公开公司与行业案例，讲清增长企业为什么有报表却看不清经营、有数据却做不出及时取舍。第一批 6 个信号，每篇同一结构：案例→经营事实→CFO判断→常见卡点→核对表→下一步。">
+<link rel="icon" type="image/png" href="assets/brand/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#f7f7f4;--navy:#112c4f;--blue:#3a6e99;--green:#2f7f69;--ink:#182631;--muted:#687784;--line:#ced8df;--ease:cubic-bezier(.23,1,.32,1)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font:15px/1.82 "Noto Sans SC","PingFang SC",sans-serif;color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .topbar{position:sticky;top:0;z-index:20;height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 clamp(22px,5vw,74px);background:rgba(247,247,244,.93);border-bottom: 1px solid var(--line);backdrop-filter:blur(18px)}
+  .brand{display:flex;align-items:center;gap:12px}.brand img{width:44px;height:44px;object-fit:contain}.brand strong{font:600 17px/1 "Noto Serif SC",serif;color:var(--navy);letter-spacing:.01em}
+  .back{display:inline-flex;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid var(--navy);color:var(--navy);font-size:12px;transition:.18s var(--ease)}.back:hover{color:var(--green);border-color:var(--green)}
+  .wrap{max-width:920px;margin:0 auto;padding:clamp(40px,6vw,72px) 22px 96px}
+  .cat{display:inline-block;margin-bottom:14px;color:var(--green);font:500 11px/1 "IBM Plex Mono",monospace;letter-spacing:.1em}
+  h1{margin:0 0 14px;color:var(--navy);font:600 clamp(28px,4vw,40px)/1.34 "Noto Serif SC","Songti SC",serif;letter-spacing:-.02em}
+  .intro{font-size:16px;color:#2c3642;margin-bottom:14px}
+  .intro b{color:var(--navy)}
+  .sub{color:var(--muted);font:500 12px/1.6 "IBM Plex Mono",monospace;letter-spacing:.03em;margin-bottom:30px;padding-bottom:22px;border-bottom:1px solid var(--line)}
+
+  .signal{margin:42px 0;padding:26px 28px;background:#fff;border:1px solid var(--line);border-top:4px solid var(--navy)}
+  .signal:nth-child(odd){border-top-color:var(--blue)}
+  .sig-no{color:var(--green);font:600 12px/1 "IBM Plex Mono",monospace;letter-spacing:.12em}
+  .sig-title{color:var(--navy);font:600 clamp(20px,3vw,26px)/1.4 "Noto Serif SC",serif;margin:6px 0 22px}
+  .block{display:grid;grid-template-columns:120px 1fr;gap:12px 18px;padding:14px 0;border-top:1px dashed var(--line)}
+  .block:first-of-type{border-top:none}
+  .blk-label{font:600 13px/1.5 "IBM Plex Mono",monospace;color:var(--blue);letter-spacing:.04em;white-space:nowrap}
+  .blk-body{color:#2c3642;font-size:14px;line-height:1.8}
+  .blk-body b{color:var(--navy)}
+  .blk-body ul{margin:6px 0 0;padding-left:18px}
+  .blk-body li{margin-bottom:5px}
+  .check{margin-top:16px;padding:16px 18px;background:#e4efeb;border-left:3px solid var(--green)}
+  .check .mini{color:var(--green);font:500 10px/1 "IBM Plex Mono",monospace;letter-spacing:.1em;display:block;margin-bottom:10px}
+  .check ol{margin:0;padding-left:20px;color:#3d5f59;font-size:13px;line-height:1.85}
+  .next{margin-top:14px;padding:14px 18px;background:#eef2f5;border-left:3px solid var(--blue)}
+  .next .mini{color:var(--blue);font:500 10px/1 "IBM Plex Mono",monospace;letter-spacing:.1em;display:block;margin-bottom:8px}
+  .next p{color:#2c3642;font-size:14px;line-height:1.8}
+  .toc{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0 8px}
+  .toc a{display:inline-block;padding:8px 14px;border:1px solid var(--line);border-radius:2px;color:var(--navy);font-size:13px;transition:.18s var(--ease)}
+  .toc a:hover{border-color:var(--green);color:var(--green)}
+  .foot{margin-top:48px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+  .foot a{color:var(--green);border-bottom:1px solid var(--green)}
+  @media(max-width:560px){.topbar{height:64px;padding:0 18px}.brand strong{font-size:15px}.wrap{padding:32px 18px 64px}h1{font-size:27px}.block{grid-template-columns:1fr;gap:4px}.blk-label{margin-top:8px}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="index.html"><img src="assets/brand/aicfo-symbol.png" alt="AI 首席财务官"><strong>AI 首席财务官</strong></a>
+  <a class="back" href="index.html">← 返回首页</a>
+</header>
+
+<main class="wrap">
+  <span class="cat">经营判断 · 第一主线 / 第二主线</span>
+  <h1>老板看不清经营的 12 个信号（第一批）</h1>
+  <p class="intro">增长型企业的管理层，常常<b>有报表、却看不清经营；有数据、却做不出及时取舍</b>。这套系列用一个公司 / 行业案例，拆出一个经营事实、一份 CFO 判断、一类企业常见卡点，再给你一张能带走的核对表和一个不硬推销的下一步。本批先讲 6 个，后续再补齐到 12 个。</p>
+  <div class="sub">何斌 · 2026-08-28 · 约 12 分钟 · 面向老板与财务负责人</div>
+
+  <div class="toc">
+    <a href="#s1">① 销量涨了，利润现金没同步</a>
+    <a href="#s2">② 经营会人人有数，老板不知砍投</a>
+    <a href="#s3">③ 预算年初完整、年中失效</a>
+    <a href="#s4">④ 应收·库存·资本开支吞现金</a>
+    <a href="#s5">⑤ 汇报慢乱说不清</a>
+    <a href="#s6">⑥ AI 先做哪一项</a>
+  </div>
+
+  <!-- 信号 1 -->
+  <section class="signal" id="s1">
+    <span class="sig-no">信号 01</span>
+    <h2 class="sig-title">销量增长了，为什么利润和现金没有同步变好？</h2>
+
+    <div class="block">
+      <div class="blk-label">一个公司 / 行业案例</div>
+      <div class="blk-body">以我们持续跟踪的新能源整车行业为例：多家二线车企在 2022–2025 年交付量从月销几千冲到数万、乃至数十万，新闻标题一片"爆发"。但同期不少企业的<b>归母净利润仍为负</b>，<b>经营性现金流长期低于净利润</b>，甚至为负。老板看着销量曲线兴奋，盯着账户却发愁——钱去哪了？</div>
+    </div>
+    <div class="block">
+      <div class="blk-label">一个经营事实</div>
+      <div class="blk-body">销量增长会同时放大四件事：①<b>价格战</b>压低单车毛利；②<b>零部件采购与原料</b>要现款或短账期，资金前置；③<b>资本开支</b>（新工厂、新产线）集中在早期；④<b>应收与库存</b>随规模同步膨胀。这四股力量，常把"多卖出一辆车"带来的现金，悄悄吞掉。</div>
+    </div>
+    <div class="block">
+      <div class="blk-label">CFO 判断</div>
+      <div class="blk-body"><b>增长 ≠ 赚钱，更 ≠ 现金。</b>真正的经营质量，要看"经营现金流 / 营业收入"是否被结构性吞噬，以及单车经济模型是否成立。只盯交付量，是在用最显眼的指标，掩盖最致命的失血。</div>
+    </div>
+    <div class="block">
+      <div class="blk-label">企业常见同类卡点</div>
+      <div class="blk-body">
+        <ul>
+          <li>把"交付量"当唯一 KPI，毛利、回款、现金流无人背指标；</li>
+          <li>不拆<b>单车经济模型</b>（制造成本、销售费用、质保、研发摊薄）；</li>
+          <li>用融资募集的钱去补经营现金流缺口，把短期失血"盖"过去。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="check">
+      <span class="mini">带走的核对表 · 增长质量 5 问</span>
+      <ol>
+        <li>单车毛利有没有随销量上升而改善，还是被价格战吃掉？</li>
+        <li>经营性现金流 / 营业收入，这一年是在变大还是变小？</li>
+        <li>应收周转天数、库存周转天数，是在缩短还是拉长？</li>
+        <li>资本开支占收入比重，是否超过经营现金流能覆盖的范围？</li>
+        <li>把融资净流入剔除后，主业自身能不能造血？</li>
+      </ol>
+    </div>
+    <div class="next">
+      <span class="mini">一个不硬推销的下一步</span>
+      <p>别再只看"卖了多少"。先做一张<b>增长质量核对表</b>：把单车毛利、经营现金流、应收与库存周转、资本开支占比四项并列到同一张月度图里，看它们是否随销量同向改善。需要模板或自动抓取数据的工具，可以再聊。</p>
+    </div>
+  </section>
+
+  <!-- 信号 2 -->
+  <section class="signal" id="s2">
+    <span class="sig-no">信号 02</span>
+    <h2 class="sig-title">为什么月度经营会上每个人都有数据，老板仍不知道该先砍什么、投什么？</h2>
+
+    <div class="block">
+      <div class="blk-label">一个公司 / 行业案例</div>
+      <div class="blk-body">以多品牌整车集团（如长安、广汽这类"合资 + 自营"结构）的月度经营会为例：每个事业部都准备了 PPT，营收、利润、费用、产量一应俱全。但散会后老板最常问的是"所以呢？先动谁？"——没人能直接回答。</div>
+    </div>
+    <div class="block">
+      <div class="blk-label">一个经营事实</div>
+      <div class="blk-body">数据不缺，缺的是<b>可比口径</b>和<b>事前假设 vs 事后结果</b>的对照。各单元用的成本分摊、收入确认、口径不一致；汇报只讲"发生了什么"，不讲"为什么偏离、该谁负责、下步怎么动"。</div>
+    </div>
+    <div class="block">
+      <div class="blk-label">CFO 判断</div>
+      <div class="blk-body"><b>经营会失效，不是因为数据少，而是缺乏"统一决策口径 + 偏差归因"的机制。</b>老板要的不是更多图表，而是"在三个问题里，先砍哪个、投哪个"的判断依据。</div>
+    </div>
+    <div class="block">
+      <div class="blk-label">企业常见同类卡点</div>
+      <div class="blk-body">
+        <ul>
+          <li>业财口径打架：财务按准则、业务按口径，两套数；</li>
+          <li>没有优先级框架：所有问题平铺，老板自己排优先级；</li>
+          <li>汇报重描述、轻判断：把"数据展示"当成"经营分析"。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="check">
+      <span class="mini">带走的核对表 · 经营会 4 检</span>
+      <ol>
+        <li>所有单元是否用同一套成本/收入口径，可直接相加？</li>
+        <li>每项数据是否带"预算 / 同期 / 目标"三栏对比？</li>
+        <li>每个偏差是否标了责任人，而不只是原因？</li>
+        <li>会议是否当场产出"下月先做哪 3 件事"的结论？</li>
+      </ol>
+    </div>
+    <div class="next">
+      <span class="mini">一个不硬推销的下一步</span>
+      <p>把经营会从"汇报会"改成"<b>异常归因会</b>"：只汇报偏离阈值的项目，每页必须含"原因—责任人—下步动作"。可从一个月度经营仪表盘起步，把可比口径先统一起来。</p>
+    </div>
+  </section>
+
+  <!-- 信号 3 -->
+  <section class="signal" id="s3">
+    <span class="sig-no">信号 03</span>
+    <h2 class="sig-title">预算为什么总在年初很完整、年中就失效？</h2>
+
+    <div class="block">
+      <div class="blk-label">一个公司 / 行业案例</div>
+      <div class="blk-body">大量制造与贸易企业年初花一两个月做出"漂亮的年度预算"，分到了部门、写进了考核。但一到年中，价格、汇率、订单同时波动，预算与实际偏离 20% 以上，最后沦为"年初定、年中改、年末补"的形式主义。</div>
+    </div>
+    <div class="block">
+      <div class="blk-label">一个经营事实</div>
+      <div class="blk-body">年度预算通常基于<b>单一情景</b>（增长、回款正常、利率不变）。一旦关键假设被打破，整张表就失去锚点；而企业又缺乏<b>滚动预测</b>去动态修正，于是要么硬套、要么弃用。</div>
+    </div>
+    <div class="block">
+      <div class="blk-label">CFO 判断</div>
+      <div class="blk-body"><b>预算不是承诺，是假设。</b>失效的根因不是"预测不准"，而是把静态的年度目标，当成了动态的管理工具。没有滚动预测与情景管理，预算只会越做越没人信。</div>
+    </div>
+    <div class="block">
+      <div class="blk-label">企业常见同类卡点</div>
+      <div class="blk-body">
+        <ul>
+          <li>一次性年度编制，全年不滚动；</li>
+          <li>考核刚性绑定预算，导致"宁低勿高"博弈；</li>
+          <li>缺乏基准 / 悲观 / 乐观三套情景，无法快速切换。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="check">
+      <span class="mini">带走的核对表 · 预算健康 4 检</span>
+      <ol>
+        <li>有没有至少月度滚动的 13 周 / 月度现金流预测？</li>
+        <li>预算是否区分"固定承诺"与"弹性支出"？</li>
+        <li>是否准备了悲观 / 基准 / 乐观三套情景？</li>
+        <li>偏差超过阈值时，有没有既定的调整机制？</li>
+      </ol>
+    </div>
+    <div class="next">
+      <span class="mini">一个不硬推销的下一步</span>
+      <p>把"年度预算"降级为"<b>年度框架 + 月度滚动</b>"：年度只定目标与资源上限，真正管理靠每月滚动预测。先从一个现金流滚动表做起，不必一步到位上系统。</p>
+    </div>
+  </section>
+
+  <!-- 信号 4 -->
+  <section class="signal" id="s4">
+    <span class="sig-no">信号 04</span>
+    <h2 class="sig-title">应收、库存和资本开支，怎样一起吞掉一家增长企业的现金？</h2>
+
+    <div class="block">
+      <div class="blk-label">一个公司 / 行业案例</div>
+      <div class="blk-body">我们此前聊过的"钢板企业"：上游要预付款买钢材，下游经销商又有账期，生意盘子做得越大，资金缺口越深，长期结构性失血。这类情形不只出现在钢贸——整车、电子、装备制造的供应链里比比皆是。</div>
+    </div>
+    <div class="block">
+      <div class="blk-label">一个经营事实</div>
+      <div class="blk-body">营运资金有三个"漏桶"：<b>应收</b>（钱在外面）、<b>库存</b>（钱在货里）、<b>资本开支</b>（钱在设备里）。增长越快，三个桶一起漏得越凶；而企业常把应收当现金、把库存当资产、把资本开支当"未来收益"。</div>
+    </div>
+    <div class="block">
+      <div class="blk-label">CFO 判断</div>
+      <div class="blk-body"><b>利润在报表上，现金在桶里。</b>看一家企业会不会"越增长越缺钱"，盯三个周转天数（DSO 应收、DIO 库存、DPO 应付）和自由现金流，比看利润表更准。</div>
+    </div>
+    <div class="block">
+      <div class="blk-label">企业常见同类卡点</div>
+      <div class="blk-body">
+        <ul>
+          <li>把应收账款、商业承兑当成"马上到账的现金"；</li>
+          <li>为保交付盲目备货，库存成为沉默成本；</li>
+          <li>资本开支前置，折旧与利息先到、回报后到。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="check">
+      <span class="mini">带走的核对表 · 现金漏桶 5 检</span>
+      <ol>
+        <li>应收周转天数（DSO）是否在拉长，逾期占比多少？</li>
+        <li>库存周转天数（DIO）是否高于行业，有无滞销？</li>
+        <li>应付周转（DPO）能否覆盖前两者，形成正向现金周期？</li>
+        <li>自由现金流（经营 − 资本开支）是否为正？</li>
+        <li>把应收 + 库存 + 资本开支加总，占收入多少？</li>
+  </ol>
+    </div>
+    <div class="next">
+      <span class="mini">一个不硬推销的下一步</span>
+      <p>建一张<b>营运资金周转看板</b>，把 DSO / DIO / DPO 按月画出现金周期曲线。先解决"看得见"，再谈"管得住"。需要指标口径与抓取逻辑的，可以单独帮你梳理。</p>
+    </div>
+  </section>
+
+  <!-- 信号 5 -->
+  <section class="signal" id="s5">
+    <span class="sig-no">信号 05</span>
+    <h2 class="sig-title">管理层汇报"慢、乱、说不清"，究竟是数据问题、流程问题还是责任问题？</h2>
+
+    <div class="block">
+      <div class="blk-label">一个公司 / 行业案例</div>
+      <div class="blk-body">不少企业的月度汇报：财务要等 15 号才出数、数据口径各部门不一、汇报时互相"甩锅"——老板听完仍不清楚到底卡在哪。多数人第一反应是"换工具"，但往往换完还是老样子。</div>
+    </div>
+    <div class="block">
+      <div class="blk-label">一个经营事实</div>
+      <div class="blk-body">"慢、乱、说不清"通常混着三类病：<b>数据问题</b>（口径乱、滞后、缺字段）；<b>流程问题</b>（无模板、无时限、无复核）；<b>责任问题</b>（无人对结论与动作负责）。三类病因不同，治法完全不同。</div>
+    </div>
+    <div class="block">
+      <div class="blk-label">CFO 判断</div>
+      <div class="blk-body"><b>先诊断，再开药。</b>数据问题靠系统治理；流程问题靠模板与时限；责任问题靠 RACI 与考核。把三者混为一谈，是所有整改失败的根因。</div>
+    </div>
+    <div class="block">
+      <div class="blk-label">企业常见同类卡点</div>
+      <div class="blk-body">
+        <ul>
+          <li>一上来就买 BI 工具，却没解决口径与责任；</li>
+          <li>汇报无标准模板，每人一套叙事；</li>
+          <li>结论无 owner，问题永远"联合负责 = 没人负责"。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="check">
+      <span class="mini">带走的核对表 · 三问诊断</span>
+      <ol>
+        <li>数据是慢/错，还是根本没有统一口径？（→ 数据问题）</li>
+        <li>有没有固定模板、时限与复核节点？（→ 流程问题）</li>
+        <li>每个结论有没有唯一责任人签字？（→ 责任问题）</li>
+      </ol>
+    </div>
+    <div class="next">
+      <span class="mini">一个不硬推销的下一步</span>
+      <p>先做一层<b>数据治理小闭环</b>：统一口径、定模板、卡时限，再谈汇报自动化。先把"说清楚"跑通，AI 才能在此基础上帮你"说更快"。</p>
+    </div>
+  </section>
+
+  <!-- 信号 6 -->
+  <section class="signal" id="s6">
+    <span class="sig-no">信号 06</span>
+    <h2 class="sig-title">AI 应先帮财务团队做哪一项：资料、分析、汇报，还是项目协同？</h2>
+
+    <div class="block">
+      <div class="blk-label">一个公司 / 行业案例</div>
+      <div class="blk-body">我们调研过的财务团队，80% 的时间花在找数据、对齐格式、写周报，而非做判断。老板一上来就想让 AI "替我做决策"，结果往往落不了地——模型不会背锅，业务也不认。</div>
+    </div>
+    <div class="block">
+      <div class="blk-label">一个经营事实</div>
+      <div class="blk-body">按"价值 × 可行性"排序：<b>资料整理</b>（抓数、清洗、归档）最稳、争议最小；<b>分析初稿</b>（异常识别、草稿）次之；<b>汇报结构化</b>易见效；<b>项目协同</b>（跨部门推动、责任追踪）最难、最依赖组织授权。</div>
+    </div>
+    <div class="block">
+      <div class="blk-label">CFO 判断</div>
+    <div class="blk-body"><b>AI 先当"副驾"，不当"司机"。</b>从低风险、高重复的资料整理切入，快速攒信任；再看分析，最后才碰协同。一上来做决策/协同，最容易翻车。</div>
+    </div>
+    <div class="block">
+      <div class="blk-label">企业常见同类卡点</div>
+      <div class="blk-body">
+        <ul>
+          <li>跳过基础治理，直接要"AI 帮我管项目"；</li>
+          <li>把 AI 当人来问责，出了偏差无人接；</li>
+          <li>工具碎片化，资料没沉淀，分析无积累。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="check">
+      <span class="mini">带走的核对表 · AI 切入 4 步</span>
+      <ol>
+        <li>资料：能否把取数、清洗、归档自动化，省下 30% 时间？</li>
+        <li>分析：能否生成异常清单与初稿，由人做判断？</li>
+        <li>汇报：能否按固定模板自动成稿？</li>
+        <li>协同：是否先把责任与流程定好，再谈自动化？</li>
+      </ol>
+    </div>
+    <div class="next">
+      <span class="mini">一个不硬推销的下一步</span>
+      <p>从一个<b>资料整理小流程</b>开始：把某类报表的取数 + 清洗 + 归档先跑通，用两周验证效率。先有"可信的副驾"，再谈"自动驾驶"。这正是我们要打磨的"经营事实与财务 AI 协作诊断"的方向。</p>
+    </div>
+  </section>
+
+  <div class="foot">AI 首席财务官 · 用 CFO 与资本的眼睛看公司 · <a href="index.html">返回首页</a></div>
+</main>
+</body>
+</html>

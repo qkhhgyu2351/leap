@@ -401,7 +401,10 @@ function setShare(it, d) {
 
 /* ---- 单条页面 ---- */
 function renderEntry() {
-  var q = new URLSearchParams(location.search);
+  /* 优先从软导航参数读取（file:// 下 pushState 失败时 URL 不更新），
+     没有再回退到 location.search（直接访问 entry.html 时走这里） */
+  var paramStr = global.__softNavParams || location.search.substring(1);
+  var q = new URLSearchParams(paramStr);
   var feed = q.get('feed') || 'home';
   var id = q.get('id') || '';
   var raw = feed === 'memories' ? (global.MEMORIES || []) : (global.ENTRIES || []);
@@ -875,11 +878,19 @@ function viewHTML(view) {
     var app = document.getElementById('view');
     if (!app) { location.href = url; return; }
     var v = targetView(url);
+    /* 解析目标 URL 的参数，存在全局变量里。
+       file:// 等协议下 pushState 会失败、URL 不更新，
+       renderEntry 优先从这里读参数，保证文章能正确显示。
+       不回退到整页跳转——整页跳转会导致音乐中断。 */
+    var qIndex = url.indexOf('?');
+    global.__softNavParams = qIndex >= 0 ? url.substring(qIndex + 1) : '';
+    if (push) {
+      try { history.pushState({ soft: 1 }, '', url); }
+      catch (err) { /* pushState 失败但继续软导航，参数已存在 __softNavParams */ }
+    }
     app.innerHTML = viewHTML(v);
     document.body.className = v === 'archive' ? 'pg-archive' : '';
     setMenu(v);
-    /* Safari 在 file:// 下 pushState 会抛 SecurityError —— 不能让它打断渲染 */
-    if (push) { try { history.pushState({ soft: 1 }, '', url); } catch (err) {} }
     global.scrollTo(0, 0);
     initPage();
     if (v !== 'entry') document.title = TITLES[v];

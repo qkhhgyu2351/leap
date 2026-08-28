@@ -209,7 +209,7 @@
           return String(b.date || '').localeCompare(String(a.date || ''));
         });
         list.innerHTML = posts.map(function (p) {
-          var url = 'article.html?id=' + encodeURIComponent(p.id || '');
+          var url = p.url || ('article.html?id=' + encodeURIComponent(p.id || ''));
           var d = p.date ? '<span class="post-date">' + esc(p.date) + '</span>' : '';
           var cat = '<span class="post-cat">' + esc(p.cat || '洞察') + '</span>';
           var meta = [p.author || '何斌', p.readTime ? '约 ' + esc(p.readTime) : ''].filter(Boolean).join(' · ');

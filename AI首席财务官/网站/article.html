@@ -50,6 +50,8 @@
     var id = new URLSearchParams(location.search).get('id');
     var post = (window.POSTS || []).filter(function (p) { return p.id === id; })[0];
 
+    if (post && post.url) { window.location.href = post.url; return; }
+
     if (!post) {
       box.innerHTML = '<p style="color:#687784">没有找到这篇文章。<a href="index.html" style="color:#2f7f69">返回首页</a></p>';
       document.title = '未找到 · AI 首席财务官';
