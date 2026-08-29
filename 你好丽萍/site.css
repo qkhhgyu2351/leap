@@ -186,7 +186,7 @@ img { max-width: 100%; }
   column-gap: 18px;
   align-items: start;
   max-width: 720px;
-  margin: 0 auto 78px;
+  margin: 0 auto 56px;
   padding: 0;
   opacity: 0;
   transform: translateY(24px);
@@ -341,15 +341,16 @@ img { max-width: 100%; }
 }
 
 /* === 6. 分隔节点 === */
-/* 桌面端：分隔节点跟右侧卡片中线对齐（偏移61px = 日期栏122px的一半） */
+/* 桌面端：分隔节点跟右侧卡片内容区对齐（左留 122px 给日期栏） */
 @media (min-width: 601px) {
   .stream > .divider,
   .stream > .day-seal,
   .stream > .interlude {
-    width: calc(min(720px, 100%) - 122px);
+    width: 100%;
+    max-width: 720px;
     margin-left: auto;
     margin-right: auto;
-    transform: translateX(61px);
+    padding-left: 122px;
   }
 }
 
@@ -359,7 +360,8 @@ img { max-width: 100%; }
   align-items: center;
   justify-content: center;
   gap: 16px;
-  padding: 43px 0 73px;
+  padding: 28px 0;
+  margin-bottom: 56px;
   text-align: center;
 }
 .day-seal::before,
@@ -393,8 +395,8 @@ img { max-width: 100%; }
 }
 
 .interlude {
-  margin: 0 0 66px;
-  padding: 12px 0;
+  margin: 0 0 56px;
+  padding: 28px 0;
   text-align: center;
   opacity: 0;
   transform: translateY(20px);
@@ -687,7 +689,7 @@ body.pg-archive .page-head::before {
 .closing {
   position: relative;
   text-align: center;
-  padding: 52px 24px 66px;
+  padding: 52px 0 66px 122px;
   border-top: 1px solid var(--line);
   overflow: hidden;
 }
@@ -715,7 +717,7 @@ body.pg-archive .page-head::before {
 
 .more-days {
   text-align: center;
-  padding: 24px 24px 84px;
+  padding: 24px 0 84px 122px;
   margin-top: 30px;
 }
 .more-days a {
@@ -893,7 +895,7 @@ body.pg-archive .page-head::before {
   .entry {
     display: block;
     max-width: none;
-    margin: 0 0 78px;
+    margin: 0 0 36px;
     padding: 0;
   }
   .entry::after {
@@ -947,12 +949,12 @@ body.pg-archive .page-head::before {
     font-size: 13px;
     line-height: 1.85;
   }
-  .day-seal { gap: 12px; padding: 24px 0 36px; }
-  .divider { padding: 24px 0 36px; }
+  .day-seal { gap: 12px; padding: 20px 0; margin-bottom: 36px; }
+  .divider { padding: 20px 0; margin-bottom: 36px; }
   .day-seal::before,
   .day-seal::after { width: 28px; }
   .day-seal img { width: 34px; }
-  .interlude { margin-bottom: 28px; padding: 8px 0; }
+  .interlude { margin: 0 0 36px; padding: 20px 0; }
 
   .archive,
   .archive-filter { max-width: none; }
@@ -977,6 +979,7 @@ body.pg-archive .page-head::before {
   .article h1 { font-size: 27px; margin-bottom: 25px; }
   .article .body { font-size: 17px; line-height: 2; }
 
+  .more-days { padding: 24px 20px 60px; }
   .closing { padding: 42px 20px 50px; }
   .closing-line { font-size: 15px; letter-spacing: 1.5px; }
   .closing-seal { width: 110px; }
