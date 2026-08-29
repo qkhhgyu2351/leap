@@ -915,9 +915,11 @@ body.pg-archive .page-head::before {
     margin-left: 20px;
     margin-right: 20px;
   }
-  .entry .t { margin-top: 20px; }
+  .entry .t { margin-top: 28px; }
   /* 没有标题时，正文作为第一个内容元素也要有顶部间距 */
-  .entry > .body:nth-child(2) { margin-top: 20px; }
+  .entry > .body:nth-child(2) { margin-top: 28px; }
+  /* 卡片最后一个内容元素底部留空 */
+  .entry > *:last-child { margin-bottom: 36px; }
   .entry .photo { max-width: 82%; margin-left: auto; margin-right: auto; }
   .entry.has-bg::before {
     top: 34px; bottom: 0;
@@ -945,17 +947,18 @@ body.pg-archive .page-head::before {
     font-size: 13px;
     line-height: 1.85;
   }
-  .day-seal { gap: 12px; }
+  .day-seal { gap: 12px; padding: 24px 0 36px; }
+  .divider { padding: 24px 0 36px; }
   .day-seal::before,
   .day-seal::after { width: 28px; }
   .day-seal img { width: 34px; }
-  .interlude { margin-bottom: 48px; }
+  .interlude { margin-bottom: 28px; padding: 8px 0; }
 
   .archive,
   .archive-filter { max-width: none; }
   .archive-filter { padding: 0 16px; }
   .ar-list { margin: 0 16px; }
-  .ar-list a { display: block; padding: 20px 18px; }
+  .ar-list a { display: block; padding: 24px 20px; }
   .ar-date {
     display: block;
     grid-column: auto;
