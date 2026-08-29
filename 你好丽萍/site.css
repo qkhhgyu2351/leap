@@ -915,7 +915,9 @@ body.pg-archive .page-head::before {
     margin-left: 20px;
     margin-right: 20px;
   }
-  .entry .t { margin-top: 0; }
+  .entry .t { margin-top: 20px; }
+  /* 没有标题时，正文作为第一个内容元素也要有顶部间距 */
+  .entry > .body:nth-child(2) { margin-top: 20px; }
   .entry .photo { max-width: 82%; margin-left: auto; margin-right: auto; }
   .entry.has-bg::before {
     top: 34px; bottom: 0;
