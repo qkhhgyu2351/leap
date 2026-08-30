@@ -41,7 +41,7 @@ window.ENTRIES = [
   {
     date: "2026-08-31",
     interlude: true,
-    quote: "世界上只有一种真正的英雄主义，那就是认清生活的真相之后依然热爱生活。\nIl n'y a qu'un héroïsme au monde : c'est de voir le monde tel qu'il est et de l'aimer.",
+    quote: "世界上只有一种真正的英雄主义，那就是认清生活的真相之后依然热爱生活。",
     source: "—— 罗曼·罗兰"
   },
 
