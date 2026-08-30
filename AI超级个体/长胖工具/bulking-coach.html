@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="增重教练">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#FF6B35">
+<meta name="application-name" content="增重教练">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Ccircle cx='96' cy='96' r='96' fill='%23FF6B35'/%3E%3Ctext x='96' y='120' text-anchor='middle' font-size='100' font-weight='bold' fill='white' font-family='sans-serif'%3E%E8%83%96%3C/text%3E%3C/svg%3E">
+<script>
+(function() {
+  const iconSvg = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><circle cx='96' cy='96' r='96' fill='%23FF6B35'/><text x='96' y='120' text-anchor='middle' font-size='100' font-weight='bold' fill='white' font-family='sans-serif'>\u80D6</text></svg>";
+  const iconDataUri = 'data:image/svg+xml,' + encodeURIComponent(iconSvg);
+  const manifest = {
+    name: "增重教练",
+    short_name: "增重教练",
+    description: "个性化增重教练 - 科学增重，专业指导",
+    start_url: location.href,
+    display: "standalone",
+    background_color: "#FFF8F0",
+    theme_color: "#FF6B35",
+    orientation: "portrait",
+    icons: [{
+      src: iconDataUri,
+      sizes: "192x192",
+      type: "image/svg+xml",
+      purpose: "any maskable"
+    }]
+  };
+  const blob = new Blob([JSON.stringify(manifest)], {type: 'application/json'});
+  const link = document.createElement('link');
+  link.rel = 'manifest';
+  link.href = URL.createObjectURL(blob);
+  document.head.appendChild(link);
+})();
+</script>
+<title>增重教练 - 个性化专业指导</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+  }
+  html {
+    touch-action: manipulation;
+    overscroll-behavior: none;
+  }
+  body {
+    font-family: 'Nunito', 'PingFang SC', sans-serif;
+    background: #FFF8F0;
+    color: #2D3436;
+    min-height: 100vh;
+    padding-bottom: 90px;
+    overscroll-behavior: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  input, textarea, select {
+    -webkit-user-select: auto;
+    user-select: auto;
+    -webkit-touch-callout: default;
+  }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #FFF8F0; }
+  ::-webkit-scrollbar-thumb { background: #ddd; border-radius: 3px; }
+
+  .app-header {
+    background: linear-gradient(135deg, #FF6B35, #FF8C5A);
+    color: white;
+    padding: 16px 16px 12px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom: 3px solid #2D3436;
+  }
+  .app-header h1 {
+    font-size: 1.6rem;
+    font-weight: 900;
+    text-shadow: 2px 2px 0 #2D3436;
+    letter-spacing: 1px;
+  }
+  .app-header .subtitle {
+    font-size: 0.8rem;
+    font-weight: 600;
+    opacity: 0.9;
+    margin-top: 4px;
+  }
+
+  .card {
+    background: #FFFFFF;
+    border: 3px solid #2D3436;
+    border-radius: 16px;
+    box-shadow: 4px 4px 0 #2D3436;
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+  .card-title {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #2D3436;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .card-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    background: #FFE66D;
+    color: #2D3436;
+    padding: 2px 10px;
+    border-radius: 20px;
+    border: 2px solid #2D3436;
+  }
+
+  .form-input {
+    width: 100%;
+    background: #F8F8F8;
+    border: 2px solid #2D3436;
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: #2D3436;
+    outline: none;
+    box-shadow: 3px 3px 0 #2D3436;
+    min-height: 44px;
+  }
+  .form-input:focus {
+    border-color: #FF6B35;
+    box-shadow: 3px 3px 0 #FF6B35;
+  }
+  .form-input::placeholder {
+    color: #bbb;
+    font-weight: 600;
+  }
+  .form-label {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: #2D3436;
+    margin-bottom: 6px;
+    display: block;
+  }
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .btn-primary {
+    background: #FF6B35;
+    border: 2px solid #2D3436;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    padding: 12px 24px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+    box-shadow: 3px 3px 0 #2D3436;
+    transition: all 0.15s ease;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  .btn-primary:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 #2D3436;
+  }
+  .btn-primary:active {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0 #2D3436;
+  }
+
+  .btn-secondary {
+    background: #FFFFFF;
+    border: 2px solid #2D3436;
+    color: #2D3436;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    padding: 10px 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    box-shadow: 2px 2px 0 #2D3436;
+    transition: all 0.15s ease;
+    min-height: 44px;
+  }
+  .btn-secondary:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0 #2D3436;
+  }
+
+  .bottom-tab-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: #FFFFFF;
+    border-top: 3px solid #2D3436;
+    padding: 6px 12px;
+    padding-bottom: max(6px, env(safe-area-inset-bottom));
+    display: flex;
+    gap: 6px;
+    max-width: 100%;
+  }
+  .bottom-tab-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 0;
+    min-height: 56px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.75rem;
+    border: 2.5px solid #ccc;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #FFFFFF;
+    color: #888;
+    box-shadow: 2px 2px 0 rgba(45,52,54,0.15);
+  }
+  .bottom-tab-btn .tab-icon {
+    font-size: 1.3rem;
+    margin-bottom: 2px;
+    line-height: 1;
+  }
+  .bottom-tab-btn .tab-text {
+    font-size: 0.7rem;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+  .bottom-tab-btn.active {
+    background: #FF6B35;
+    color: white;
+    border-color: #2D3436;
+    box-shadow: 3px 3px 0 #2D3436;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.15);
+  }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes bounceIn {
+    0% { transform: scale(0.9); }
+    50% { transform: scale(1.08); }
+    70% { transform: scale(0.97); }
+    100% { transform: scale(1); }
+  }
+
+  .main-container {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  .advice-card {
+    background: linear-gradient(135deg, #E0FFF8, #A8E6CF);
+    border: 3px solid #2D3436;
+    border-radius: 16px;
+    box-shadow: 4px 4px 0 #2D3436;
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+  .advice-card.primary {
+    background: linear-gradient(135deg, #FFF0E0, #FFE66D);
+  }
+  .advice-icon {
+    font-size: 2rem;
+    margin-bottom: 8px;
+  }
+  .advice-title {
+    font-size: 1rem;
+    font-weight: 900;
+    color: #2D3436;
+    margin-bottom: 6px;
+  }
+  .advice-text {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #555;
+    line-height: 1.6;
+  }
+
+  .phase-card {
+    background: #FFFFFF;
+    border: 2px solid #2D3436;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 10px;
+  }
+  .phase-card.active {
+    border-color: #FF6B35;
+    background: #FFF0E0;
+  }
+  .phase-name {
+    font-weight: 900;
+    color: #2D3436;
+    margin-bottom: 4px;
+  }
+  .phase-desc {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #888;
+  }
+
+  .stat-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .stat-box {
+    flex: 1;
+    background: #FFFFFF;
+    border: 2px solid #2D3436;
+    border-radius: 12px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 2px 2px 0 #2D3436;
+  }
+  .stat-value {
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: #FF6B35;
+    display: block;
+  }
+  .stat-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #888;
+  }
+
+  .progress-bar {
+    height: 20px;
+    background: #F0F0F0;
+    border: 2px solid #2D3436;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #FF6B35, #FFE66D);
+    transition: width 0.5s ease;
+  }
+
+  .food-card {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    border: 2px solid #ccc;
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 10px 10px;
+    min-height: 44px;
+  }
+  .food-card:hover {
+    transform: scale(1.02);
+  }
+  .food-card:active {
+    transform: scale(0.95);
+  }
+  .food-card.eaten {
+    border-color: #2D3436;
+    background: #4ECDC4;
+    animation: bounceIn 0.4s ease;
+    box-shadow: 2px 2px 0 #2D3436;
+  }
+
+  canvas { max-height: 250px; }
+
+  .onboarding-step {
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
+  .onboarding-step.active {
+    display: block;
+  }
+
+  .radio-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .radio-option {
+    flex: 1;
+    min-width: 100px;
+    padding: 12px;
+    border: 2px solid #ccc;
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #FFFFFF;
+  }
+  .radio-option:hover {
+    border-color: #FF6B35;
+  }
+  .radio-option.selected {
+    border-color: #2D3436;
+    background: #FFE66D;
+    box-shadow: 2px 2px 0 #2D3436;
+  }
+  .radio-emoji {
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .radio-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #2D3436;
+  }
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <h1>🏋️ 增重教练</h1>
+  <div class="subtitle" id="headerSubtitle">您的专属增重伙伴</div>
+</header>
+
+<main class="main-container" id="mainContent" style="padding-top: 16px;">
+</main>
+
+<nav class="bottom-tab-nav" id="bottomTabNav" style="display: none;">
+</nav>
+
+<script>
+const STORAGE_KEYS = {
+  USER_PROFILE: 'bulkingCoach_profile',
+  DAILY_RECORDS: 'bulkingCoach_records',
+  ONBOARDING_COMPLETE: 'bulkingCoach_onboarding'
+};
+
+const ACTIVITY_MULTIPLIERS = {
+  sedentary: 1.2,
+  light: 1.375,
+  moderate: 1.55,
+  active: 1.725,
+  very_active: 1.9
+};
+
+const ACTIVITY_LABELS = {
+  sedentary: '久坐不动',
+  light: '轻度活动',
+  moderate: '中度活动',
+  active: '高度活动',
+  very_active: '极高活动'
+};
+
+const MEAL_PLANS = {
+  base: [
+    { name: '早餐', emoji: '🌅', targetCal: 600, foods: [
+      { name: '鸡蛋×3', emoji: '🥚', cal: 210, prot: 18 },
+      { name: '全麦面包×2片', emoji: '🍞', cal: 160, prot: 8 },
+      { name: '牛奶250ml', emoji: '🥛', cal: 160, prot: 8 },
+      { name: '香蕉×1', emoji: '🍌', cal: 90, prot: 1 }
+    ]},
+    { name: '加餐1', emoji: '🥜', targetCal: 300, foods: [
+      { name: '混合坚果30g', emoji: '🥜', cal: 180, prot: 5 },
+      { name: '酸奶200g', emoji: '🥛', cal: 120, prot: 6 }
+    ]},
+    { name: '午餐', emoji: '🍱', targetCal: 700, foods: [
+      { name: '米饭200g', emoji: '🍚', cal: 230, prot: 4 },
+      { name: '鸡胸肉150g', emoji: '🍗', cal: 165, prot: 31 },
+      { name: '西兰花150g', emoji: '🥦', cal: 50, prot: 4 },
+      { name: '番茄炒蛋', emoji: '🍳', cal: 255, prot: 12 }
+    ]},
+    { name: '加餐2', emoji: '🍪', targetCal: 400, foods: [
+      { name: '花生酱面包×2', emoji: '🥜', cal: 350, prot: 12 },
+      { name: '香蕉×1', emoji: '🍌', cal: 90, prot: 1 }
+    ]},
+    { name: '晚餐', emoji: '🌙', targetCal: 700, foods: [
+      { name: '米饭200g', emoji: '🍚', cal: 230, prot: 4 },
+      { name: '牛肉150g', emoji: '🥩', cal: 250, prot: 39 },
+      { name: '蔬菜', emoji: '🥬', cal: 100, prot: 3 },
+      { name: '豆腐100g', emoji: '🧈', cal: 120, prot: 8 }
+    ]},
+    { name: '睡前', emoji: '🥛', targetCal: 300, foods: [
+      { name: '牛奶250ml', emoji: '🥛', cal: 160, prot: 8 },
+      { name: '蛋白粉1勺', emoji: '💪', cal: 120, prot: 24 }
+    ]}
+  ]
+};
+
+let currentTab = 'today';
+let chartInstances = {};
+let tempProfile = {};
+let onboardingStep = 0;
+
+function calculateBMR(profile) {
+  if (profile.gender === 'male') {
+    return 88.362 + (13.397 * profile.currentWeight) +
+           (4.799 * profile.height) - (5.677 * profile.age);
+  } else {
+    return 447.593 + (9.247 * profile.currentWeight) +
+           (3.098 * profile.height) - (4.330 * profile.age);
+  }
+}
+
+function calculateTDEE(profile) {
+  const bmr = calculateBMR(profile);
+  return bmr * ACTIVITY_MULTIPLIERS[profile.activityLevel];
+}
+
+function calculateCalorieGoal(profile) {
+  const tdee = calculateTDEE(profile);
+  return Math.round(tdee + 400);
+}
+
+function calculateProteinGoal(profile) {
+  return Math.round(profile.currentWeight * 2.0);
+}
+
+function generatePhasedPlan(profile) {
+  const weeksNeeded = Math.ceil((profile.targetWeight - profile.currentWeight) * 2);
+  return [
+    { name: '适应期', weeks: 2, calorieMultiplier: 1.0, intensity: 'low', description: '让身体适应新的饮食和训练节奏' },
+    { name: '快速增长期', weeks: Math.max(4, weeksNeeded - 4), calorieMultiplier: 1.1, intensity: 'moderate', description: '主要的增重阶段，逐步增加热量摄入' },
+    { name: '巩固期', weeks: 2, calorieMultiplier: 1.0, intensity: 'maintain', description: '巩固成果，避免快速反弹' }
+  ];
+}
+
+function getCurrentPhase(profile, records) {
+  const phases = generatePhasedPlan(profile);
+  const startDate = new Date(profile.createdAt);
+  const today = new Date();
+  const weeksPassed = Math.floor((today - startDate) / (7 * 24 * 60 * 60 * 1000));
+  
+  let accumulatedWeeks = 0;
+  for (let i = 0; i < phases.length; i++) {
+    accumulatedWeeks += phases[i].weeks;
+    if (weeksPassed < accumulatedWeeks) {
+      return { ...phases[i], index: i };
+    }
+  }
+  return { ...phases[phases.length - 1], index: phases.length - 1 };
+}
+
+function generatePersonalizedAdvice(profile, records) {
+  const advice = [];
+  const calorieGoal = calculateCalorieGoal(profile);
+  const proteinGoal = calculateProteinGoal(profile);
+  const phase = getCurrentPhase(profile, records);
+  
+  const recordDates = Object.keys(records || {});
+  const recentRecords = recordDates.slice(-7);
+  const avgCalories = recentRecords.length > 0 ?
+    recentRecords.reduce((sum, d) => sum + (records[d].totalCalories || 0), 0) / recentRecords.length : 0;
+  const avgProtein = recentRecords.length > 0 ?
+    recentRecords.reduce((sum, d) => sum + (records[d].totalProtein || 0), 0) / recentRecords.length : 0;
+
+  advice.push({
+    type: 'primary',
+    icon: '📊',
+    title: `当前阶段：${phase.name}`,
+    text: phase.description
+  });
+
+  advice.push({
+    type: 'primary',
+    icon: '🎯',
+    title: '每日目标',
+    text: `热量: ${calorieGoal} 大卡 / 蛋白质: ${proteinGoal}g`
+  });
+
+  if (recentRecords.length >= 3) {
+    if (avgCalories < calorieGoal * 0.9) {
+      advice.push({
+        type: 'info',
+        icon: '⚠️',
+        title: '热量摄入不足',
+        text: '最近一周平均热量摄入低于目标，建议增加主食和健康脂肪的摄入'
+      });
+    } else if (avgCalories > calorieGoal * 1.2) {
+      advice.push({
+        type: 'info',
+        icon: '💡',
+        title: '热量摄入偏高',
+        text: '热量摄入略高，注意控制在目标±10%范围内最佳'
+      });
+    }
+
+    if (avgProtein < proteinGoal * 0.85) {
+      advice.push({
+        type: 'info',
+        icon: '🥩',
+        title: '蛋白质需要加强',
+        text: '蛋白质是肌肉增长的关键，建议增加鸡胸肉、牛肉、鱼肉、蛋白粉等'
+      });
+    }
+  }
+
+  advice.push({
+    type: 'info',
+    icon: '📚',
+    title: '增重科学',
+    text: '健康增重速度：每周0.25-0.5kg最佳。肌肉增长需要：热量盈余 + 足够蛋白质 + 阻力训练 + 充足休息。'
+  });
+
+  return advice;
+}
+
+function getStorage() {
+  try {
+    return {
+      profile: JSON.parse(localStorage.getItem(STORAGE_KEYS.USER_PROFILE) || 'null'),
+      records: JSON.parse(localStorage.getItem(STORAGE_KEYS.DAILY_RECORDS) || '{}'),
+      onboardingComplete: localStorage.getItem(STORAGE_KEYS.ONBOARDING_COMPLETE) === 'true'
+    };
+  } catch {
+    return { profile: null, records: {}, onboardingComplete: false };
+  }
+}
+
+function saveProfile(profile) {
+  localStorage.setItem(STORAGE_KEYS.USER_PROFILE, JSON.stringify(profile));
+}
+
+function saveRecords(records) {
+  localStorage.setItem(STORAGE_KEYS.DAILY_RECORDS, JSON.stringify(records));
+}
+
+function completeOnboarding() {
+  localStorage.setItem(STORAGE_KEYS.ONBOARDING_COMPLETE, 'true');
+}
+
+function dateKey(d) {
+  const dt = d instanceof Date ? d : new Date(d);
+  return dt.getFullYear() + '-' + String(dt.getMonth()+1).padStart(2,'0') + '-' + String(dt.getDate()).padStart(2,'0');
+}
+
+function todayKey() { return dateKey(new Date()); }
+
+function renderOnboarding() {
+  const mainContent = document.getElementById('mainContent');
+  const bottomTabNav = document.getElementById('bottomTabNav');
+  bottomTabNav.style.display = 'none';
+  document.getElementById('headerSubtitle').textContent = '建立您的个人档案';
+  
+  const steps = [
+    () => `
+      <div class="onboarding-step active" id="step-0">
+        <div class="card">
+          <div class="card-title">
+            <span>👋 欢迎来到增重教练</span>
+            <span class="card-badge">1/5</span>
+          </div>
+          <p style="font-size:0.9rem;font-weight:600;color:#555;line-height:1.8;">
+            在这里，我们将根据您的个人数据，为您制定专属的增重计划。
+            让我们从基础信息开始！
+          </p>
+        </div>
+        <button class="btn-primary" onclick="nextStep()">开始 →</button>
+      </div>
+    `,
+    () => `
+      <div class="onboarding-step active" id="step-1">
+        <div class="card">
+          <div class="card-title">
+            <span>📏 基础信息</span>
+            <span class="card-badge">2/5</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">性别</label>
+            <div class="radio-group">
+              <div class="radio-option ${tempProfile.gender === 'male' ? 'selected' : ''}" onclick="selectGender('male')">
+                <span class="radio-emoji">👨</span>
+                <span class="radio-label">男</span>
+              </div>
+              <div class="radio-option ${tempProfile.gender === 'female' ? 'selected' : ''}" onclick="selectGender('female')">
+                <span class="radio-emoji">👩</span>
+                <span class="radio-label">女</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">年龄</label>
+            <input type="number" class="form-input" id="ageInput" placeholder="输入年龄" 
+                   value="${tempProfile.age || ''}" oninput="updateTempProfile('age', this.value)">
+          </div>
+        </div>
+        <button class="btn-primary" onclick="nextStep()" ${!tempProfile.gender || !tempProfile.age ? 'disabled style="opacity:0.5;cursor:not-allowed;"' : ''}>下一步 →</button>
+      </div>
+    `,
+    () => `
+      <div class="onboarding-step active" id="step-2">
+        <div class="card">
+          <div class="card-title">
+            <span>⚖️ 体重目标</span>
+            <span class="card-badge">3/5</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">身高 (cm)</label>
+            <input type="number" class="form-input" id="heightInput" placeholder="例如：175" 
+                   value="${tempProfile.height || ''}" oninput="updateTempProfile('height', this.value)">
+          </div>
+          <div class="form-group">
+            <label class="form-label">当前体重 (kg)</label>
+            <input type="number" class="form-input" id="currentWeightInput" placeholder="例如：55" 
+                   value="${tempProfile.currentWeight || ''}" oninput="updateTempProfile('currentWeight', this.value)">
+          </div>
+          <div class="form-group">
+            <label class="form-label">目标体重 (kg)</label>
+            <input type="number" class="form-input" id="targetWeightInput" placeholder="例如：65" 
+                   value="${tempProfile.targetWeight || ''}" oninput="updateTempProfile('targetWeight', this.value)">
+          </div>
+        </div>
+        <button class="btn-primary" onclick="nextStep()" ${!tempProfile.height || !tempProfile.currentWeight || !tempProfile.targetWeight ? 'disabled style="opacity:0.5;cursor:not-allowed;"' : ''}>下一步 →</button>
+      </div>
+    `,
+    () => `
+      <div class="onboarding-step active" id="step-3">
+        <div class="card">
+          <div class="card-title">
+            <span>🏃 活动水平</span>
+            <span class="card-badge">4/5</span>
+          </div>
+          <div class="radio-group" style="flex-direction:column;">
+            ${Object.entries(ACTIVITY_LABELS).map(([key, label]) => `
+              <div class="radio-option ${tempProfile.activityLevel === key ? 'selected' : ''}" 
+                   onclick="selectActivity('${key}')" style="flex:100%;">
+                <span class="radio-label" style="font-size:0.9rem;">${label}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+        <button class="btn-primary" onclick="nextStep()" ${!tempProfile.activityLevel ? 'disabled style="opacity:0.5;cursor:not-allowed;"' : ''}>下一步 →</button>
+      </div>
+    `,
+    () => `
+      <div class="onboarding-step active" id="step-4">
+        <div class="card">
+          <div class="card-title">
+            <span>🎉 计划预览</span>
+            <span class="card-badge">5/5</span>
+          </div>
+          <div class="stat-row">
+            <div class="stat-box">
+              <span class="stat-value">${calculateCalorieGoal(tempProfile)}</span>
+              <span class="stat-label">每日热量</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-value">${calculateProteinGoal(tempProfile)}</span>
+              <span class="stat-label">蛋白质(g)</span>
+            </div>
+          </div>
+          ${generatePhasedPlan(tempProfile).map((phase, i) => `
+            <div class="phase-card ${i === 0 ? 'active' : ''}">
+              <div class="phase-name">${phase.name} · ${phase.weeks}周</div>
+              <div class="phase-desc">${phase.description}</div>
+            </div>
+          `).join('')}
+        </div>
+        <button class="btn-primary" onclick="finishOnboarding()">开始我的增重旅程！ 🚀</button>
+      </div>
+    `
+  ];
+  
+  mainContent.innerHTML = steps.map((step, i) => step().replace('active', i === onboardingStep ? 'active' : '')).join('');
+}
+
+function selectGender(gender) {
+  tempProfile.gender = gender;
+  renderOnboarding();
+}
+
+function selectActivity(activity) {
+  tempProfile.activityLevel = activity;
+  renderOnboarding();
+}
+
+function updateTempProfile(key, value) {
+  const numValue = parseFloat(value);
+  if (!isNaN(numValue)) {
+    tempProfile[key] = numValue;
+  } else {
+    tempProfile[key] = value;
+  }
+  // 重新渲染以更新按钮状态
+  renderOnboarding();
+}
+
+function nextStep() {
+  onboardingStep++;
+  renderOnboarding();
+}
+
+function finishOnboarding() {
+  tempProfile.createdAt = new Date().toISOString();
+  saveProfile(tempProfile);
+  completeOnboarding();
+  initApp();
+}
+
+function renderMainApp() {
+  const { profile, records } = getStorage();
+  const bottomTabNav = document.getElementById('bottomTabNav');
+  bottomTabNav.style.display = 'flex';
+  document.getElementById('headerSubtitle').textContent = `${profile.currentWeight}kg → ${profile.targetWeight}kg`;
+  
+  bottomTabNav.innerHTML = `
+    <button class="bottom-tab-btn ${currentTab === 'today' ? 'active' : ''}" onclick="switchTab('today')">
+      <span class="tab-icon">📋</span>
+      <span class="tab-text">今日</span>
+    </button>
+    <button class="bottom-tab-btn ${currentTab === 'progress' ? 'active' : ''}" onclick="switchTab('progress')">
+      <span class="tab-icon">📈</span>
+      <span class="tab-text">进度</span>
+    </button>
+    <button class="bottom-tab-btn ${currentTab === 'advice' ? 'active' : ''}" onclick="switchTab('advice')">
+      <span class="tab-icon">💡</span>
+      <span class="tab-text">建议</span>
+    </button>
+    <button class="bottom-tab-btn ${currentTab === 'profile' ? 'active' : ''}" onclick="switchTab('profile')">
+      <span class="tab-icon">👤</span>
+      <span class="tab-text">档案</span>
+    </button>
+  `;
+  
+  renderCurrentTab();
+}
+
+function switchTab(tab) {
+  currentTab = tab;
+  renderMainApp();
+}
+
+function renderCurrentTab() {
+  const { profile, records } = getStorage();
+  const mainContent = document.getElementById('mainContent');
+  
+  switch(currentTab) {
+    case 'today':
+      renderTodayTab(profile, records);
+      break;
+    case 'progress':
+      renderProgressTab(profile, records);
+      break;
+    case 'advice':
+      renderAdviceTab(profile, records);
+      break;
+    case 'profile':
+      renderProfileTab(profile);
+      break;
+  }
+}
+
+function renderTodayTab(profile, records) {
+  const mainContent = document.getElementById('mainContent');
+  const today = todayKey();
+  const todayRecord = records[today] || { weight: null, eaten: [], workoutDone: [], totalCalories: 0, totalProtein: 0 };
+  const calorieGoal = calculateCalorieGoal(profile);
+  const proteinGoal = calculateProteinGoal(profile);
+  const mealPlan = MEAL_PLANS.base;
+  
+  const totals = calculateTodayTotals(todayRecord.eaten);
+  const totalCal = totals.totalCalories;
+  const totalProt = totals.totalProtein;
+  
+  mainContent.innerHTML = `
+    <div class="card">
+      <div class="card-title">
+        <span>⚖️ 今日体重</span>
+        <span class="card-badge">${todayRecord.weight ? '已记录' : '未记录'}</span>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <input type="number" class="form-input" id="weightInputToday" placeholder="输入体重" value="${todayRecord.weight || ''}">
+        <button class="btn-secondary" onclick="recordTodayWeight()">记录</button>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">
+        <span>🔥 今日热量</span>
+        <span style="font-size:0.85rem;font-weight:800;color:#FF6B35;">${totalCal} / ${calorieGoal}</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width:${Math.min(100, totalCal/calorieGoal*100)}%;"></div>
+      </div>
+      <div style="margin-top:10px;font-size:0.8rem;font-weight:700;color:#888;">
+        蛋白质: <span style="color:#4ECDC4;font-weight:900;">${totalProt}g / ${proteinGoal}g</span>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title">
+        <span>🍽️ 今日饮食</span>
+      </div>
+      ${mealPlan.map((meal, mi) => `
+        <div style="margin-bottom:16px;">
+          <div style="font-size:0.9rem;font-weight:800;color:#FF6B35;margin-bottom:8px;">
+            ${meal.emoji} ${meal.name}
+            <span style="font-size:0.7rem;font-weight:600;color:#888;margin-left:8px;">${meal.targetCal}大卡</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+            ${meal.foods.map((food, fi) => {
+              const id = mi + '-' + fi;
+              const isEaten = todayRecord.eaten.includes(id);
+              return `
+                <div class="food-card ${isEaten ? 'eaten' : ''}" onclick="toggleFood('${id}')">
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <span style="font-size:1.2rem;">${food.emoji}</span>
+                    <div style="flex:1;min-width:0;">
+                      <div style="font-size:0.8rem;font-weight:700;">${food.name}</div>
+                      <div style="font-size:0.7rem;font-weight:600;color:#888;">${food.cal}大卡 · ${food.prot}g蛋白</div>
+                    </div>
+                    ${isEaten ? '<span style="font-size:1rem;">✅</span>' : ''}
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function calculateTodayTotals(eaten) {
+  const mealPlan = MEAL_PLANS.base;
+  let totalCal = 0, totalProt = 0;
+  eaten.forEach(id => {
+    const [mi, fi] = id.split('-').map(Number);
+    if (mealPlan[mi] && mealPlan[mi].foods[fi]) {
+      totalCal += mealPlan[mi].foods[fi].cal;
+      totalProt += (mealPlan[mi].foods[fi].prot || 0);
+    }
+  });
+  return { totalCalories: totalCal, totalProtein: totalProt };
+}
+
+function toggleFood(id) {
+  const { profile, records } = getStorage();
+  const today = todayKey();
+  if (!records[today]) records[today] = { weight: null, eaten: [], workoutDone: [], totalCalories: 0, totalProtein: 0 };
+  
+  const idx = records[today].eaten.indexOf(id);
+  if (idx >= 0) {
+    records[today].eaten.splice(idx, 1);
+  } else {
+    records[today].eaten.push(id);
+  }
+  
+  const totals = calculateTodayTotals(records[today].eaten);
+  records[today].totalCalories = totals.totalCalories;
+  records[today].totalProtein = totals.totalProtein;
+  
+  saveRecords(records);
+  renderTodayTab(profile, records);
+}
+
+function recordTodayWeight() {
+  const input = document.getElementById('weightInputToday');
+  const weight = parseFloat(input.value);
+  if (!weight) return;
+  
+  const { profile, records } = getStorage();
+  const today = todayKey();
+  if (!records[today]) records[today] = { weight: null, eaten: [], workoutDone: [], totalCalories: 0, totalProtein: 0 };
+  records[today].weight = weight;
+  saveRecords(records);
+  renderTodayTab(profile, records);
+}
+
+function renderProgressTab(profile, records) {
+  const mainContent = document.getElementById('mainContent');
+  
+  const recordDates = Object.keys(records).sort();
+  const last30 = [];
+  const now = new Date();
+  for (let i = 29; i >= 0; i--) {
+    const d = new Date(now);
+    d.setDate(d.getDate() - i);
+    last30.push(dateKey(d));
+  }
+  
+  const weightData = last30.map(k => records[k]?.weight || null);
+  const calorieData = last30.map(k => records[k]?.totalCalories || 0);
+  
+  mainContent.innerHTML = `
+    <div class="card">
+      <div class="card-title"><span>⚖️ 体重趋势</span></div>
+      <canvas id="weightChart"></canvas>
+    </div>
+    <div class="card">
+      <div class="card-title"><span>🔥 热量摄入</span></div>
+      <canvas id="calorieChart"></canvas>
+    </div>
+  `;
+  
+  setTimeout(() => {
+    const wCtx = document.getElementById('weightChart').getContext('2d');
+    if (chartInstances.weight) chartInstances.weight.destroy();
+    chartInstances.weight = new Chart(wCtx, {
+      type: 'line',
+      data: {
+        labels: last30.map(k => k.slice(5)),
+        datasets: [{
+          label: '体重 (kg)',
+          data: weightData,
+          borderColor: '#FF6B35',
+          backgroundColor: 'rgba(255,107,53,0.1)',
+          fill: true,
+          tension: 0.3,
+          pointRadius: 3,
+          spanGaps: true
+        }, {
+          label: '目标体重',
+          data: Array(30).fill(profile.targetWeight),
+          borderColor: '#4ECDC4',
+          borderDash: [5,5],
+          pointRadius: 0,
+          fill: false
+        }]
+      },
+      options: { responsive: true, plugins: { legend: { labels: { color: '#888' } } } }
+    });
+    
+    const cCtx = document.getElementById('calorieChart').getContext('2d');
+    if (chartInstances.calorie) chartInstances.calorie.destroy();
+    chartInstances.calorie = new Chart(cCtx, {
+      type: 'bar',
+      data: {
+        labels: last30.map(k => k.slice(5)),
+        datasets: [{
+          label: '实际热量',
+          data: calorieData,
+          backgroundColor: calorieData.map(v => v >= calculateCalorieGoal(profile) ? 'rgba(78,205,196,0.7)' : 'rgba(255,107,53,0.7)'),
+          borderRadius: 6
+        }, {
+          label: '目标热量',
+          data: Array(30).fill(calculateCalorieGoal(profile)),
+          type: 'line',
+          borderColor: '#4ECDC4',
+          borderDash: [5,5],
+          pointRadius: 0
+        }]
+      },
+      options: { responsive: true, plugins: { legend: { labels: { color: '#888' } } } }
+    });
+  }, 100);
+}
+
+function renderAdviceTab(profile, records) {
+  const mainContent = document.getElementById('mainContent');
+  const advice = generatePersonalizedAdvice(profile, records);
+  
+  mainContent.innerHTML = advice.map(a => `
+    <div class="advice-card ${a.type === 'primary' ? 'primary' : ''}">
+      <div class="advice-icon">${a.icon}</div>
+      <div class="advice-title">${a.title}</div>
+      <div class="advice-text">${a.text}</div>
+    </div>
+  `).join('');
+}
+
+function renderProfileTab(profile) {
+  const mainContent = document.getElementById('mainContent');
+  const bmr = Math.round(calculateBMR(profile));
+  const tdee = Math.round(calculateTDEE(profile));
+  const calorieGoal = calculateCalorieGoal(profile);
+  const proteinGoal = calculateProteinGoal(profile);
+  const phases = generatePhasedPlan(profile);
+  const currentPhase = getCurrentPhase(profile, {});
+  
+  mainContent.innerHTML = `
+    <div class="card">
+      <div class="card-title"><span>👤 个人信息</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:0.85rem;">
+        <div><strong>性别:</strong> ${profile.gender === 'male' ? '男' : '女'}</div>
+        <div><strong>年龄:</strong> ${profile.age}岁</div>
+        <div><strong>身高:</strong> ${profile.height}cm</div>
+        <div><strong>当前:</strong> ${profile.currentWeight}kg</div>
+        <div><strong>目标:</strong> ${profile.targetWeight}kg</div>
+        <div><strong>活动:</strong> ${ACTIVITY_LABELS[profile.activityLevel]}</div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title"><span>📊 代谢数据</span></div>
+      <div class="stat-row">
+        <div class="stat-box">
+          <span class="stat-value">${bmr}</span>
+          <span class="stat-label">基础代谢</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-value">${tdee}</span>
+          <span class="stat-label">每日消耗</span>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-box">
+          <span class="stat-value">${calorieGoal}</span>
+          <span class="stat-label">目标热量</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-value">${proteinGoal}g</span>
+          <span class="stat-label">蛋白质</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-title"><span>📅 阶段计划</span></div>
+      ${phases.map((phase, i) => `
+        <div class="phase-card ${i === currentPhase.index ? 'active' : ''}">
+          <div class="phase-name">${i === currentPhase.index ? '▶ ' : ''}${phase.name} · ${phase.weeks}周</div>
+          <div class="phase-desc">${phase.description}</div>
+        </div>
+      `).join('')}
+    </div>
+    
+    <button class="btn-secondary" onclick="resetProfile()" style="width:100%;margin-top:10px;">
+      重新设置档案
+    </button>
+  `;
+}
+
+function resetProfile() {
+  if (confirm('确定要重新设置档案吗？所有历史记录将被保留。')) {
+    localStorage.removeItem(STORAGE_KEYS.ONBOARDING_COMPLETE);
+    localStorage.removeItem(STORAGE_KEYS.USER_PROFILE);
+    tempProfile = {};
+    onboardingStep = 0;
+    initApp();
+  }
+}
+
+function initApp() {
+  const storage = getStorage();
+  
+  if (!storage.onboardingComplete) {
+    renderOnboarding();
+  } else {
+    renderMainApp();
+  }
+}
+
+document.addEventListener('DOMContentLoaded', initApp);
+</script>
+</body>
+</html>

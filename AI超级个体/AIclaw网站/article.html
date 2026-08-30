@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>超级个体社区</title>
+<meta name="description" content="围绕超级个体与一人公司，讲 AI 如何改变个体与公司。">
+<meta name="theme-color" content="#f5f7fa">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232563eb'/%3E%3Ctext x='16' y='22' font-size='18' text-anchor='middle' fill='white' font-family='sans-serif'%3E超%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html">
+      <span class="logo">超</span>
+      <span>超级个体社区</span>
+    </a>
+    <nav class="nav">
+      <a href="index.html" class="hide-sm">首页</a>
+      <span class="search-btn" data-search-open role="button">
+        <span>搜索</span><kbd>⌘K</kbd>
+      </span>
+    </nav>
+  </div>
+</header>
+
+<main class="article" id="article"></main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span>© 2026 超级个体社区</span>
+    <span>AI 时代，一个人就是一支队伍</span>
+  </div>
+</footer>
+
+<!-- 搜索弹窗 -->
+<div class="modal-mask" id="searchMask">
+  <div class="modal">
+    <input id="searchInput" placeholder="搜索帖子标题或内容…" autocomplete="off">
+    <div class="results" id="searchResults"></div>
+    <div class="hint">⌘K / Ctrl+K 打开 · Esc 关闭</div>
+  </div>
+</div>
+
+<script src="posts.js"></script>
+<script src="site.js"></script>
+</body>
+</html>
