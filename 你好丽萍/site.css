@@ -689,7 +689,7 @@ body.pg-archive .page-head::before {
 .closing {
   position: relative;
   text-align: center;
-  padding: 52px 0 66px 122px;
+  padding: 52px 0 66px;
   border-top: 1px solid var(--line);
   overflow: hidden;
 }
@@ -717,7 +717,7 @@ body.pg-archive .page-head::before {
 
 .more-days {
   text-align: center;
-  padding: 24px 0 84px 122px;
+  padding: 24px 0 84px;
   margin-top: 30px;
 }
 .more-days a {
