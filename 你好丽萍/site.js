@@ -186,6 +186,34 @@ function bodyInto(box, text) {
   });
 }
 
+/* ============================================================
+   配图占位尺寸
+   ------------------------------------------------------------
+   <img> 不写 width/height，加载前高度就是 0。配上 loading="lazy"，
+   图要等滚到跟前才开始下 —— 于是「到底部」按点击那一刻算出的页面高度
+   是「图还没长出来」的假底，滚过去之后图一张张到位、页面又长高几千像素
+   （这四张是聊天截图，竖长图，加起来将近 5000px），第一次点就到底不了，
+   再点一次才准。
+   写上 width/height 之后，浏览器会先按宽高比撑出占位框，页面高度从头
+   到尾不变，懒加载照旧。
+   新增配图时在这里补一条即可；忘了补也不会再点不准，goBottom 有兜底。
+   ============================================================ */
+var PHOTO_SIZE = {
+  'assets/img/20260819-carina-chat.png':   [1260, 3388],
+  'assets/img/同一件事做十年就变得有意义了.jpg': [1260, 3021],
+  'assets/img/weixin-20260806.jpg':        [1200, 2556],
+  'assets/img/weixin-20260805.jpg':        [1260, 4110]
+};
+function photoNode(src, alt) {
+  var img = el('img', 'photo');
+  img.src = src;
+  img.alt = alt || '';
+  var s = PHOTO_SIZE[src];
+  if (s) { img.width = s[0]; img.height = s[1]; }
+  img.loading = 'lazy'; img.decoding = 'async';
+  return img;
+}
+
 /* ---- 首页/回忆页里的一条 ---- */
 function entryNode(it, feed) {
   var w = el('article', 'entry');
@@ -218,9 +246,7 @@ function entryNode(it, feed) {
     if (it.caption && it.caption.indexOf('底图') === 0) w.classList.add('tif-cap');
   }
   if (it.image) {
-    var img = el('img', 'photo'); img.src = it.image; img.alt = it.imageCaption || it.caption || '';
-    img.loading = 'lazy'; img.decoding = 'async';
-    w.appendChild(img);
+    w.appendChild(photoNode(it.image, it.imageCaption || it.caption));
     var ic = it.imageCaption || (it.caption ? it.caption : '');
     if (ic) w.appendChild(el('div', 'photo-caption', ic));
   }
@@ -439,9 +465,7 @@ function renderEntry() {
         if (it.caption && it.caption.indexOf('底图') === 0) box.classList.add('tif-cap');
       }
       if (it.image) {
-        var img = el('img', 'photo'); img.src = it.image; img.alt = it.imageCaption || it.caption || '';
-        img.loading = 'lazy'; img.decoding = 'async';
-        box.appendChild(img);
+        box.appendChild(photoNode(it.image, it.imageCaption || it.caption));
         var ic = it.imageCaption || '';
         if (ic) box.appendChild(el('div', 'photo-caption', ic));
       }
@@ -560,8 +584,8 @@ function rgbCss(c) { return 'rgb(' + c[0] + ',' + c[1] + ',' + c[2] + ')'; }
    可读 —— 底图在网页里是 .26 透明度叠在米色纸面(--bg)上，先合成出
            「文字实际坐着的底色」，据此选深墨或浅墨，再扫描明度直到
            WCAG 对比 ≥4.5，所以换哪张图、底图是亮是暗都不会糊。
-   读不到像素（如本地双击打开被跨域拦）一律回退深雾蓝，安全默认。 */
-var PAPER = [244, 241, 235];   // --bg #F4F1EB 矿物档案·石灰纸白
+   读不到像素（如本地双击打开被跨域拦）一律回退深墨，安全默认。 */
+var PAPER = [250, 250, 248];   // --bg #FAFAF8
 function adaptTextColor(elm, url, opts) {
   opts = opts || {};
   var alpha = opts.alpha != null ? opts.alpha : 0.26;
@@ -606,12 +630,12 @@ function adaptTextColor(elm, url, opts) {
         if (contrast(rgb, ef) >= 4.5) { chosen = rgb; break; }
       }
       elm.style.setProperty('--text-on-bg',
-        chosen ? rgbCss(chosen) : (dark ? 'rgb(38,35,31)' : 'rgb(247,244,238)'));
+        chosen ? rgbCss(chosen) : (dark ? 'rgb(38,36,33)' : 'rgb(248,248,246)'));
     } catch (e) {
-      elm.style.setProperty('--text-on-bg', '#2F4554');
+      elm.style.setProperty('--text-on-bg', '#34322E');
     }
   };
-  img.onerror = function () { elm.style.setProperty('--text-on-bg', '#2F4554'); };
+  img.onerror = function () { elm.style.setProperty('--text-on-bg', '#34322E'); };
   img.src = url;
 }
 
@@ -628,10 +652,12 @@ function rgbHue(r, g, b) {
 }
 
 /* ============================================================
-   背景音乐
-   带声音的自动播放会被所有浏览器拦截，「静音自动播放」一律放行。
-   所以：先试一次带声音播；不成就等用户任意一次触碰再补上，
-   声音瞬间就出（已经缓冲好了）。微信里可以直接带声音自动播。
+   背景音乐 —— 只在用户点按钮时播。
+
+   2026-08-31 改动：删掉全部自动播放尝试（载入即播 / 任意滚动点击补播 /
+   微信 JSBridge 起播 / 切回标签页续播）与 9MB 音频的后台预热。
+   自动响背景音乐是上一代个人主页的标志性行为，也拦不住浏览器策略。
+   音乐本身、按钮、淡入、进度记忆全部保留，开关完全交给人。
    ============================================================ */
 function initBGM() {
   var audio = document.getElementById('bgm');
@@ -654,26 +680,14 @@ function initBGM() {
   }
 
   var KEY_TIME = 'liping-bgm-time';
-  var KEY_PLAY = 'liping-bgm-playing';
-  /* 上一页离开时音乐在播吗？整页跳转后（本地 file:// 预览就是这样）
-     据此在新页面续播，而不是等用户再点一下。 */
-  var wasPlaying = sessionStorage.getItem(KEY_PLAY) === '1';
-  /* 「用户手动关掉了」只放在内存里。绝不写进 sessionStorage —— 那会导致
-     关过一次之后，整个浏览器会话再也不自动播，刷新都救不回来。 */
-  var userOff = false;
 
-  /* 音频文件不存在就别显示按钮 */
+  /* 按钮默认亮着；文件真不存在时 error 会把它收起来。
+     preload 保持 none —— 没点播放就一个字节都不下，不跟首屏抢带宽。 */
+  btn.hidden = false;
   audio.addEventListener('error', function () { btn.hidden = true; });
-  audio.addEventListener('canplay', function () { btn.hidden = false; }, { once: true });
 
-  /* 翻页后接着上一页的进度 —— 这几页是真跳转，
-     不接进度的话每翻一页音乐都从头开始。 */
-  var at = parseFloat(sessionStorage.getItem(KEY_TIME) || '0');
-  if (at > 0) {
-    audio.addEventListener('loadedmetadata', function () {
-      if (at < audio.duration) audio.currentTime = at;
-    }, { once: true });
-  }
+  /* 上次听到哪儿（等用户点了播放之后再 seek，不提前动音频） */
+  var savedAt = parseFloat(sessionStorage.getItem(KEY_TIME) || '0');
 
   function sync() {
     var on = !audio.paused && !audio.muted;
@@ -684,86 +698,42 @@ function initBGM() {
   }
   ['play','pause','volumechange'].forEach(function (e) { audio.addEventListener(e, sync); });
 
-  /* 先试一次带声音播。失败也不退回「静音播放」——
-     元素一旦以静音豁免的身份跑起来，浏览器会给它打标记，之后解不了静音。 */
-  audio.muted = false;
-  audio.play().catch(function () {});
-
-  /* 延迟预热：页面上的 preload 是 none，一开始一个字节都不下，
-     首屏不用跟 3MB 的音频抢带宽。等首屏画完再过 1.5 秒，
-     后台悄悄开始缓冲 —— 人从看到页面到伸手去碰通常要 3~5 秒，
-     那时候早缓冲好了，触碰即出声，和以前没有区别。
-     注意：这里只管「什么时候开始下载」，不碰任何播放逻辑。 */
-  var warmed = false;
-  function prewarm() {
-    if (warmed || userOff) return;
-    warmed = true;
-    try { audio.preload = 'auto'; audio.load(); } catch (err) {}
-  }
-  if (wasPlaying) setTimeout(prewarm, 200);   /* 上一页在播：尽快续上，别等那 1.5 秒 */
-  else if (document.readyState === 'complete') setTimeout(prewarm, 1500);
-  else global.addEventListener('load', function () { setTimeout(prewarm, 1500); });
-  /* 万一用户比预热还快：任何一次触碰都立刻开始缓冲，不必等那 1.5 秒 */
-  ['pointerdown','touchstart','keydown','wheel','scroll'].forEach(function (e) {
-    global.addEventListener(e, prewarm, { passive: true, once: true });
-  });
-
-  /* 任何一次交互都再试一次，而且监听器永不卸载：
-     卸载之后如果音频再被暂停（切后台、浏览器策略），就再也唤不醒了。 */
-  function start() {
-    if (userOff || !audio.paused) return;
-    try {
-      audio.muted = false;
-      var p = audio.play();
-      if (p && p.then) p.then(sync).catch(function () {});
-    } catch (err) {}
-    fadeIn();
-    sync();
-  }
-  ['pointerdown','touchstart','click','keydown','wheel','scroll'].forEach(function (e) {
-    global.addEventListener(e, start, { passive: true });
-  });
-  audio.addEventListener('canplay', start);
-  audio.addEventListener('loadeddata', start);
-
-  /* 微信内置浏览器允许直接带声音自动播 */
-  function wechatGo() { if (!userOff) { audio.muted = false; audio.play().catch(function () {}); sync(); } }
-  document.addEventListener('WeixinJSBridgeReady', wechatGo, false);
-  if (global.WeixinJSBridge) wechatGo();
-
-  document.addEventListener('visibilitychange', function () {
-    if (!document.hidden && !userOff && audio.paused) audio.play().catch(function () {});
-  });
-
   btn.addEventListener('click', function (e) {
     e.stopPropagation();
     if (audio.paused || audio.muted) {
-      userOff = false;
+      /* 第一次点才开始下载，之后同一会话内再点是即时的 */
+      try { audio.preload = 'auto'; } catch (err) {}
       var p = audio.play();
-      if (p && p.then) p.then(function () { audio.muted = false; sync(); }).catch(function () {});
-      else audio.muted = false;
+      if (p && p.then) {
+        p.then(function () {
+          audio.muted = false;
+          if (savedAt > 0 && savedAt < audio.duration) audio.currentTime = savedAt;
+          fadeIn();
+          sync();
+        }).catch(function () {});
+      } else {
+        audio.muted = false;
+        fadeIn();
+      }
     } else {
-      userOff = true;
       audio.pause();
     }
     sync();
   });
 
-  /* 记住进度 + 是否在播，翻页接着放 */
+  /* 只记进度，不据此自动续播 */
   var save = function () {
     sessionStorage.setItem(KEY_TIME, String(audio.currentTime || 0));
-    sessionStorage.setItem(KEY_PLAY, (audio.paused || audio.muted) ? '0' : '1');
   };
   setInterval(save, 2000);
   global.addEventListener('pagehide', save);
-  /* 用户主动暂停后立刻记「不在播」，避免续播又把它拉起来 */
-  audio.addEventListener('pause', function () { sessionStorage.setItem(KEY_PLAY, '0'); });
   sync();
 }
 
 
 /* 首页长页的两端定位；软导航替换页面时先清理上一页监听。 */
 var longPageNavCleanup = null;
+var bottomTimer = null;   /* 「到底部」的补位定时器，滚动条交还用户时清掉 */
 function initLongPageNav() {
   if (longPageNavCleanup) { longPageNavCleanup(); longPageNavCleanup = null; }
   var nav = document.getElementById('pageNav');
@@ -771,22 +741,60 @@ function initLongPageNav() {
   function syncNav() {
     nav.classList.toggle('is-visible', global.scrollY > 560);
   }
+  function bottomTarget() {
+    var doc = document.documentElement;
+    var body = document.body;
+    var height = Math.max(doc ? doc.scrollHeight : 0, body ? body.scrollHeight : 0);
+    return Math.max(0, height - global.innerHeight);
+  }
+  function scrollTo(t) {
+    try { global.scrollTo({ top: t, behavior: 'smooth' }); }
+    catch (err) { global.scrollTo(0, t); }
+  }
+  /* 用户中途自己滚了就别再跟他抢滚动条 */
+  function abort() { clearTimeout(bottomTimer); bottomTimer = null; }
   function goBottom(e) {
     var a = e.target.closest && e.target.closest('a[href="#bottom"]');
     if (!a) return;
     e.preventDefault();
-    var doc = document.documentElement;
-    var body = document.body;
-    var height = Math.max(doc ? doc.scrollHeight : 0, body ? body.scrollHeight : 0);
-    var top = Math.max(0, height - global.innerHeight);
-    try { global.scrollTo({ top: top, behavior: 'smooth' }); }
-    catch (err) { global.scrollTo(0, top); }
+    clearTimeout(bottomTimer);
+
+    var lastY = 0, idle = 0, ticks = 0, first = true;
+    function tick() {
+      bottomTimer = null;
+      var y = global.scrollY || global.pageYOffset || 0;
+      var target = bottomTarget();
+      var gap = target - y;
+      /* 到底了（误差 2px 内）—— 收工 */
+      if (gap <= 2) return;
+
+      /* 上一轮位置没动＝平滑滚动已经停下，但还没到底
+         （多半是图片陆续到位把页面撑高了）：再补一次。
+         还在滚的过程中就不打断它，免得动画反复重启、一顿一顿。 */
+      if (first || Math.abs(y - lastY) < 1) {
+        idle++;
+        scrollTo(target);
+      } else {
+        idle = 0;
+      }
+      first = false;
+      lastY = y;
+
+      if (idle >= 3 || ++ticks >= 20) return;   /* 连补三次还不到底 / 超过约 5 秒，别再折腾 */
+      bottomTimer = setTimeout(tick, 260);
+    }
+    tick();
   }
   global.addEventListener('scroll', syncNav, { passive: true });
   nav.addEventListener('click', goBottom);
+  global.addEventListener('wheel', abort, { passive: true });
+  global.addEventListener('touchmove', abort, { passive: true });
   syncNav();
   longPageNavCleanup = function () {
+    clearTimeout(bottomTimer); bottomTimer = null;
     global.removeEventListener('scroll', syncNav);
+    global.removeEventListener('wheel', abort);
+    global.removeEventListener('touchmove', abort);
     nav.removeEventListener('click', goBottom);
   };
 }

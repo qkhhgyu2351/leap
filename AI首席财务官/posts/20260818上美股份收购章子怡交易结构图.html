@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="../assets/brand/favicon.png">
+<title>上美股份收购 newpage一页 · 交易结构图 · AI 首席财务官</title>
+<style>
+  :root{
+    --bg:#f5f7fa; --card:#ffffff; --ink:#2c3e50; --sub:#7f8c8d;
+    --gold:#b8860b; --gold-soft:#faf3df; --red:#c0392b; --red-soft:#fbeae8;
+    --line:#e2e6ea;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    line-height:1.6;padding:32px 20px 60px}
+  .wrap{max-width:920px;margin:0 auto}
+  header{text-align:center;margin-bottom:8px}
+  header h1{font-size:24px;font-weight:700;color:var(--ink)}
+  header .sub{font-size:14px;color:var(--sub);margin-top:6px}
+  .tag{display:inline-block;background:var(--gold-soft);color:var(--gold);
+    border:1px solid var(--gold);border-radius:20px;padding:3px 14px;
+    font-size:12px;margin-top:10px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:22px 24px;margin-top:18px;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  .card h2{font-size:16px;font-weight:700;color:var(--ink);
+    border-left:4px solid var(--gold);padding-left:10px;margin-bottom:16px}
+  .card h2 .n{color:var(--gold);font-weight:700;margin-right:6px}
+  /* flow */
+  .flow{display:flex;flex-direction:column;gap:14px}
+  .row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .box{border-radius:10px;padding:12px 16px;font-size:13px;min-width:150px}
+  .box .t{font-weight:700;font-size:14px}
+  .box .d{font-size:12px;color:var(--sub)}
+  .b-buyer{background:var(--gold-soft);border:1px solid var(--gold)}
+  .b-veh{background:#eef4fb;border:1px solid #9bb8d8}
+  .b-target{background:#eaf5ee;border:1px solid #5dab7c}
+  .b-seller{background:var(--red-soft);border:1px solid var(--red)}
+  .arrow{color:var(--sub);font-size:18px;font-weight:700}
+  .arrow.sm{font-size:14px}
+  .note{font-size:12px;color:var(--sub);margin-top:4px}
+  /* equity bars */
+  .eq{margin-bottom:18px}
+  .eq .lab{font-size:13px;font-weight:700;margin-bottom:8px;color:var(--ink)}
+  .bar{display:flex;height:34px;border-radius:6px;overflow:hidden;font-size:11px;color:#fff;font-weight:600}
+  .bar>div{display:flex;align-items:center;justify-content:center}
+  .seg1{background:#9bb8d8} .seg2{background:var(--gold)} .seg3{background:var(--red)} .seg4{background:#b4b2a9}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--sub);margin-top:8px}
+  .legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+  .cap{font-size:11px;color:var(--sub);text-align:center;margin-top:6px}
+  /* cash */
+  .cash{display:flex;gap:16px;flex-wrap:wrap}
+  .cash .item{flex:1;min-width:240px;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+  .cash .item .nm{font-weight:700;font-size:14px}
+  .cash .item .amt{font-size:22px;font-weight:700;color:var(--red);margin:6px 0 2px}
+  .cash .item .rt{font-size:12px;color:var(--sub)}
+  /* timeline */
+  .tl{position:relative;padding-left:8px}
+  .tl .step{display:flex;gap:14px;padding:10px 0;border-bottom:1px dashed var(--line)}
+  .tl .step:last-child{border-bottom:none}
+  .tl .dot{flex:none;width:30px;height:30px;border-radius:50%;background:var(--gold);
+    color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px}
+  .tl .txt .h{font-weight:700;font-size:14px}
+  .tl .txt .p{font-size:12px;color:var(--sub)}
+  /* terms */
+  .terms{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .terms .term{border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+  .terms .term .k{font-size:12px;color:var(--gold);font-weight:700}
+  .terms .term .v{font-size:13px;margin-top:3px}
+  footer{font-size:11px;color:var(--sub);text-align:center;margin-top:24px;line-height:1.7}
+  /* 站点统一顶栏（与 AI首席财务官 其他内页一致） */
+  .topbar{position:sticky;top:0;z-index:20;height:64px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 clamp(20px,5vw,40px);background:rgba(247,247,244,.93);border-bottom:1px solid #d7dde1;backdrop-filter:blur(18px)}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+  .brand img{width:38px;height:38px;object-fit:contain}
+  .brand strong{font:600 16px/1 "Noto Serif SC",serif;color:#315B6B;letter-spacing:.01em}
+  .back{display:inline-flex;align-items:center;gap:6px;padding:8px 0;border-bottom:1px solid #315B6B;color:#315B6B;font-size:12px;text-decoration:none;transition:.18s}
+  .site-foot{max-width:920px;margin:28px auto 50px;padding:0 20px;font-size:12px;color:#8a949c;line-height:1.8;text-align:center}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../index.html"><img src="../assets/brand/aicfo-symbol.png" alt="AI 首席财务官"><strong>AI 首席财务官</strong></a>
+  <a class="back" href="../index.html">← 返回首页</a>
+</header>
+<div class="wrap">
+  <header>
+    <h1>上美股份增持 newpage一页 · 交易结构图</h1>
+    <div class="sub">章子怡经「大脚投资」套现 3.045 亿元，四年回报近 100 倍；上美将持股由 51% 提至 80%</div>
+    <div class="tag">数据来源：上美股份(02145.HK) 2026-08-11 公告及公开报道</div>
+  </header>
+
+  <!-- 1 交易结构 -->
+  <div class="card">
+    <h2><span class="n">01</span>交易结构设计（怎么实现的）</h2>
+    <div class="flow">
+      <div class="row">
+        <div class="box b-buyer"><div class="t">上美股份 02145.HK</div><div class="d">收购方 · 上市公司</div></div>
+        <div class="arrow">➜</div>
+        <div class="box b-veh"><div class="t">上海青道</div><div class="d">上美全资子公司（收购主体）</div></div>
+      </div>
+      <div class="row">
+        <div class="arrow" style="padding-left:60px">➜ 现金约 3.84 亿元，收购 29% 股权</div>
+      </div>
+      <div class="row">
+        <div class="box b-target"><div class="t">上海怡页（newpage一页）</div><div class="d">标的 · 婴童功效护肤品牌运营主体</div></div>
+      </div>
+      <div class="row" style="margin-top:4px">
+        <div class="box b-seller" style="flex:1">
+          <div class="t">卖方① 共青城大脚投资合伙企业（有限合伙）</div>
+          <div class="d">章子怡持股 99% · 出售 23% 股权 · 对价约 3.045 亿元</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="box b-seller" style="flex:1">
+          <div class="t">卖方② 刘明（上美股份副总裁 / 品牌创始人之一）</div>
+          <div class="d">出售 6% 股权 · 对价约 7943.96 万元</div>
+        </div>
+      </div>
+      <div class="note">支付方式：全部现金（非发行股份）。交易本质是上市公司对孵化品牌的「内部增持」，而非从外部买壳。</div>
+    </div>
+  </div>
+
+  <!-- 2 股权前后 -->
+  <div class="card">
+    <h2><span class="n">02</span>交易前后股权结构对比</h2>
+    <div class="eq">
+      <div class="lab">交易前</div>
+      <div class="bar">
+        <div class="seg1" style="width:51%">上海青道 51%</div>
+        <div class="seg2" style="width:29%">大脚投资 29%</div>
+        <div class="seg3" style="width:11%">刘明 11%</div>
+        <div class="seg4" style="width:9%">其他 9%</div>
+      </div>
+      <div class="cap">上美经上海青道(51%)+关联方上海红道(4%) 合计掌控约 55%</div>
+    </div>
+    <div class="eq">
+      <div class="lab">交易后</div>
+      <div class="bar">
+        <div class="seg1" style="width:80%">上海青道 80%</div>
+        <div class="seg2" style="width:6%">大脚投资 6%</div>
+        <div class="seg3" style="width:5%">刘明 5%</div>
+        <div class="seg4" style="width:9%">其他 9%</div>
+      </div>
+      <div class="cap">上海青道持股 51% → 80%；章子怡保留 6%，继续任代言人 / 联合创始人</div>
+    </div>
+    <div class="legend">
+      <span><i class="seg1"></i>上海青道（上美）</span>
+      <span><i class="seg2"></i>大脚投资（章子怡）</span>
+      <span><i class="seg3"></i>刘明</span>
+      <span><i class="seg4"></i>其他股东（含红道等）</span>
+    </div>
+  </div>
+
+  <!-- 3 资金流向 -->
+  <div class="card">
+    <h2><span class="n">03</span>资金流向与回报</h2>
+    <div class="cash">
+      <div class="item">
+        <div class="nm">大脚投资（章子怡）收 3.045 亿</div>
+        <div class="amt">≈100–130 倍</div>
+        <div class="rt">原始成本 230 万元（公告）/ 实缴约 300 万元；仍持 6% ≈ 7973 万元账面价值</div>
+      </div>
+      <div class="item">
+        <div class="nm">刘明收 7943.96 万</div>
+        <div class="amt">创始人兑现</div>
+        <div class="rt">原始成本 120 万元；仍持 5%，继续负责运营</div>
+      </div>
+    </div>
+    <div class="note" style="margin-top:10px">二人合计套现约 3.84 亿元；风险（品牌溢价）随之转移给上市公司与公众股东。</div>
+  </div>
+
+  <!-- 4 时间线 -->
+  <div class="card">
+    <h2><span class="n">04</span>五步时间线</h2>
+    <div class="tl">
+      <div class="step"><div class="dot">1</div><div class="txt"><div class="h">2022.03 入股孵化</div><div class="p">章子怡经大脚投资、刘明等入股上海怡页；newpage一页 2022 年 5 月产品上市</div></div></div>
+      <div class="step"><div class="dot">2</div><div class="txt"><div class="h">2022–2025 品牌爆发</div><div class="p">2025 年收入 8.8 亿、净利 1.32 亿（同比 +131% / +151%），为定价提供基础</div></div></div>
+      <div class="step"><div class="dot">3</div><div class="txt"><div class="h">2026.08.11 公告收购</div><div class="p">上海青道拟以 3.84 亿收购 29% 股权（大脚 23% + 刘明 6%）</div></div></div>
+      <div class="step"><div class="dot">4</div><div class="txt"><div class="h">交割 · 资金到账</div><div class="p">上海青道持股 51% → 80%；章子怡、刘明落袋现金</div></div></div>
+      <div class="step"><div class="dot">5</div><div class="txt"><div class="h">保留权益 + 期权</div><div class="p">章子怡留 6% 股权与代言身份；5 年内可要求按 10 倍 PE 再售 5%（上限 5 亿）</div></div></div>
+    </div>
+  </div>
+
+  <!-- 5 关键条款 -->
+  <div class="card">
+    <h2><span class="n">05</span>关键条款</h2>
+    <div class="terms">
+      <div class="term"><div class="k">整体估值</div><div class="v">约 13.24 亿元（3.045 亿 ÷ 23%），对应 2025 净利约 10 倍 PE</div></div>
+      <div class="term"><div class="k">支付方式</div><div class="v">全部现金，未发行股份，不稀释上市公司股本</div></div>
+      <div class="term"><div class="k">看涨期权</div><div class="v">大脚投资可要求额外收购 5% 股权，按上年净利 10 倍 PE，上限 5 亿元</div></div>
+      <div class="term"><div class="k">卖方留任</div><div class="v">章子怡留 6% + 代言人 / 联合创始人；刘明留 5% + 运营</div></div>
+    </div>
+  </div>
+
+  <footer>
+    本图示仅基于已披露公告与公开报道梳理交易结构，不构成任何投资建议。<br>
+    生成于 2026-08-18 · 浅底信息图（金 / 红配色）
+  </footer>
+</div>
+<div class="site-foot">
+  <p><a class="back" href="../index.html">← 返回 AI 首席财务官首页</a></p>
+</div>
+</body>
+</html>

@@ -12,11 +12,16 @@
 <meta property="og:url" content="https://leaping.site/archive.html">
 <meta property="og:site_name" content="你好，丽萍">
 <meta property="og:locale" content="zh_CN">
-<meta name="theme-color" content="#F4F1EB">
+<meta name="theme-color" content="#F9F8F5">
 <link rel="icon" type="image/svg+xml" href="assets/img/logo-seal.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-<link rel="stylesheet" href="site.css?v=20260825a">
+<link rel="stylesheet" href="site.css?v=20260831c">
+<noscript><style>
+  /* 入场动画的初始态是 opacity:0，靠 JS 加 .visible 才显示。
+     JS 被拦截或加载失败时整页空白，这里兜底强制显示。 */
+  .entry, .interlude { opacity: 1 !important; transform: none !important; }
+</style></noscript>
 </head>
 <body class="pg-archive">
 <div class="topbar">
@@ -52,10 +57,10 @@
 
 <audio id="bgm" src="assets/audio/lunar-dance.mp3" loop preload="none" playsinline></audio>
 <button class="bgm-toggle" id="bgmToggle" type="button" hidden
-        aria-pressed="false" aria-label="播放背景音乐" title="播放背景音乐"><span></span><span></span><span></span></button>
+        aria-pressed="false" aria-label="播放背景音乐" title="播放背景音乐"><span class="bgm-label">音乐</span></button>
 
 <script src="entries.js"></script>
 <script src="memories.js"></script>
-<script src="site.js?v=20260825b"></script>
+<script src="site.js?v=20260831c"></script>
 </body>
 </html>

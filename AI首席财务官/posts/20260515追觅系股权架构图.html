@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="../assets/brand/favicon.png">
+<title>追觅系股权架构图 · AI 首席财务官</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700;900&display=swap');
+  
+  :root {
+    --bg: #f5f4f0;
+    --text: #1a1a1a;
+    --text2: #555;
+    --text3: #999;
+    --purple: #534AB7;
+    --purple-bg: #EEEDFE;
+    --teal: #0F6E56;
+    --teal-bg: #E1F5EE;
+    --red: #C7402B;
+    --red-bg: #FAECE7;
+    --amber: #B07015;
+    --amber-bg: #FAEEDA;
+    --pink: #993556;
+    --pink-bg: #FBEAF0;
+    --blue: #185FA5;
+    --blue-bg: #E6F1FB;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  .header {
+    background: linear-gradient(135deg, #2D2670 0%, #534AB7 60%, #7F77DD 100%);
+    color: #fff;
+    padding: 48px 32px 40px;
+    text-align: center;
+  }
+  .header h1 { font-size: 28px; font-weight: 700; letter-spacing: 3px; }
+  .header .sub { font-size: 14px; opacity: 0.8; margin-top: 10px; font-weight: 300; }
+  .header .meta { font-size: 11px; opacity: 0.5; margin-top: 16px; }
+
+  .legend-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    padding: 16px 24px;
+    background: #fff;
+    border-bottom: 1px solid #e8e6e1;
+    font-size: 12px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text2);
+  }
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+  .legend-line {
+    width: 28px;
+    height: 2px;
+    flex-shrink: 0;
+  }
+  .legend-line.solid { background: #888; }
+  .legend-line.dashed { background: repeating-linear-gradient(90deg, #bbb 0, #bbb 5px, transparent 5px, transparent 9px); }
+
+  .diagram-section {
+    padding: 32px 16px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .diagram-section h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--purple);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .diagram-section h2 .icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
+    background: var(--purple);
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+  .diagram-section .desc {
+    font-size: 12px;
+    color: var(--text3);
+    margin-bottom: 20px;
+    padding-left: 36px;
+  }
+
+  .svg-wrap {
+    background: #fff;
+    border: 1px solid #e8e6e1;
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 40px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    overflow-x: auto;
+  }
+  .svg-wrap svg { width: 100%; height: auto; display: block; }
+
+  .note-box {
+    background: #FFF8F0;
+    border: 1px solid #F0D0A0;
+    border-left: 4px solid var(--amber);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 12px;
+    color: #6B4A1A;
+    margin: 16px 0;
+    line-height: 1.7;
+  }
+  .note-box strong { color: #8B5A00; }
+
+  .footer {
+    text-align: center;
+    padding: 32px 20px;
+    color: var(--text3);
+    font-size: 11px;
+    border-top: 1px solid #e8e6e1;
+    margin-top: 40px;
+  }
+
+  /* 站点统一顶栏（与 AI首席财务官 其他内页一致） */
+  .topbar { position: sticky; top: 0; z-index: 20; height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 0 clamp(20px, 5vw, 40px); background: rgba(247, 247, 244, .93); border-bottom: 1px solid #d7dde1; backdrop-filter: blur(18px); }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .brand img { width: 38px; height: 38px; object-fit: contain; }
+  .brand strong { font: 600 16px/1 "Noto Serif SC", serif; color: #315B6B; letter-spacing: .01em; }
+  .back { display: inline-flex; align-items: center; gap: 6px; padding: 8px 0; border-bottom: 1px solid #315B6B; color: #315B6B; font-size: 12px; text-decoration: none; transition: .18s; }
+  .site-foot { max-width: 820px; margin: 28px auto 50px; padding: 0 40px; font-size: 12px; color: #8a949c; line-height: 1.8; text-align: center; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="../index.html"><img src="../assets/brand/aicfo-symbol.png" alt="AI 首席财务官"><strong>AI 首席财务官</strong></a>
+  <a class="back" href="../index.html">← 返回首页</a>
+</header>
+
+<div class="header">
+  <h1>追觅系股权架构图</h1>
+  <div class="sub">俞浩的"实业+资本"双轮驱动 —— 从241万母公司到252亿基金矩阵</div>
+  <div class="meta">数据截止 2026年5月15日 &nbsp;|&nbsp; 来源：风鸟·基金业协会·企查查·上市公司公告</div>
+</div>
+
+<div class="legend-bar">
+  <div class="legend-item"><div class="legend-dot" style="background:var(--purple)"></div>俞浩个人控股层</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--teal)"></div>追觅科技母公司层</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>私募基金平台层</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div>孵化项目层</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--pink)"></div>资本运作层</div>
+  <div class="legend-item"><div class="legend-line solid"></div>控股/出资</div>
+  <div class="legend-item"><div class="legend-line dashed"></div>间接/平行</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 图1：五层股权穿透全景图 -->
+<!-- ============================================================ -->
+<div class="diagram-section">
+  <h2><span class="icon">1</span>五层股权穿透全景图</h2>
+  <div class="desc">从俞浩个人到退出路径，逐层穿透的核心股权与控制关系</div>
+  <div class="svg-wrap">
+    <svg viewBox="0 0 1080 1020" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M2 2L8 5L2 8" fill="none" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+        <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M2 2L8 5L2 8" fill="none" stroke="#bbb" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></marker>
+        <marker id="a-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M2 2L8 5L2 8" fill="none" stroke="#C7402B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+        <filter id="sh"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.08"/></filter>
+      </defs>
+
+      <!-- ====== 第一层背景 ====== -->
+      <rect x="20" y="15" width="1040" height="110" rx="12" fill="#EEEDFE" stroke="#534AB7" stroke-width="1"/>
+      <text x="38" y="36" font-size="11" font-weight="600" fill="#534AB7">第一层 · 俞浩个人控股层</text>
+
+      <!-- 俞浩节点 -->
+      <rect x="50" y="50" width="120" height="56" rx="10" fill="#fff" stroke="#534AB7" stroke-width="2" filter="url(#sh)"/>
+      <text x="110" y="73" text-anchor="middle" font-size="14" font-weight="700" fill="#3C3489">俞 浩</text>
+      <text x="110" y="92" text-anchor="middle" font-size="9" fill="#534AB7">追觅科技实控人</text>
+
+      <!-- 雷鸣节点 -->
+      <rect x="400" y="50" width="120" height="56" rx="10" fill="#fff" stroke="#534AB7" stroke-width="1.5" filter="url(#sh)"/>
+      <text x="460" y="73" text-anchor="middle" font-size="14" font-weight="700" fill="#3C3489">雷 鸣</text>
+      <text x="460" y="92" text-anchor="middle" font-size="9" fill="#534AB7">华兴出身·联席总裁</text>
+
+      <!-- 徐腾节点 -->
+      <rect x="560" y="50" width="100" height="56" rx="10" fill="#fff" stroke="#534AB7" stroke-width="1.2" filter="url(#sh)"/>
+      <text x="610" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="#3C3489">徐 腾</text>
+      <text x="610" y="92" text-anchor="middle" font-size="9" fill="#534AB7">法定代表人</text>
+
+      <!-- 王童姝节点 -->
+      <rect x="690" y="50" width="100" height="56" rx="10" fill="#fff" stroke="#534AB7" stroke-width="1.2" filter="url(#sh)"/>
+      <text x="740" y="73" text-anchor="middle" font-size="13" font-weight="600" fill="#3C3489">王童姝</text>
+      <text x="740" y="92" text-anchor="middle" font-size="9" fill="#534AB7">监事</text>
+
+      <!-- ====== 第二层背景 ====== -->
+      <rect x="20" y="145" width="1040" height="120" rx="12" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+      <text x="38" y="166" font-size="11" font-weight="600" fill="#0F6E56">第二层 · 追觅科技母公司层</text>
+
+      <!-- 追觅科技（苏州） -->
+      <rect x="50" y="180" width="260" height="68" rx="10" fill="#fff" stroke="#0F6E56" stroke-width="2" filter="url(#sh)"/>
+      <text x="180" y="202" text-anchor="middle" font-size="13" font-weight="700" fill="#085041">追觅科技（苏州）有限公司</text>
+      <text x="180" y="220" text-anchor="middle" font-size="10" fill="#0F6E56">注册资本241万 · 营收~400亿</text>
+      <text x="180" y="236" text-anchor="middle" font-size="9" fill="#999">俞浩直接31.15% + 天空漫步间接19.02% ≈ 50.17%</text>
+
+      <!-- 天空漫步 -->
+      <rect x="340" y="185" width="200" height="55" rx="10" fill="#fff" stroke="#0F6E56" stroke-width="1.2" filter="url(#sh)"/>
+      <text x="440" y="207" text-anchor="middle" font-size="12" font-weight="600" fill="#085041">天空漫步科技（苏州）</text>
+      <text x="440" y="225" text-anchor="middle" font-size="9" fill="#0F6E56">俞浩100%控股 → 持追觅19.02%</text>
+
+      <!-- 追觅梦创 -->
+      <rect x="570" y="185" width="220" height="55" rx="10" fill="#fff" stroke="#0F6E56" stroke-width="1.5" filter="url(#sh)"/>
+      <text x="680" y="207" text-anchor="middle" font-size="12" font-weight="600" fill="#085041">追觅梦创科技（苏州）</text>
+      <text x="680" y="225" text-anchor="middle" font-size="9" fill="#0F6E56">全资子公司 · 注册资本20亿</text>
+
+      <!-- 星空计划 -->
+      <rect x="820" y="180" width="220" height="68" rx="10" fill="#fff" stroke="#534AB7" stroke-width="1.5" stroke-dasharray="6,3" filter="url(#sh)"/>
+      <text x="930" y="202" text-anchor="middle" font-size="12" font-weight="600" fill="#3C3489">星空计划（上海）汽车科技</text>
+      <text x="930" y="220" text-anchor="middle" font-size="9" fill="#534AB7">俞浩96.652% · 注册10亿 · 实缴0</text>
+      <text x="930" y="236" text-anchor="middle" font-size="9" fill="#C7402B">⚠ 子公司股权冻结232万</text>
+
+      <!-- ====== 第三层背景 ====== -->
+      <rect x="20" y="290" width="1040" height="240" rx="12" fill="#FAECE7" stroke="#C7402B" stroke-width="1"/>
+      <text x="38" y="311" font-size="11" font-weight="600" fill="#C7402B">第三层 · 私募基金平台层</text>
+
+      <!-- 追创创投（GP主体） -->
+      <rect x="50" y="325" width="280" height="88" rx="10" fill="#fff" stroke="#C7402B" stroke-width="2" filter="url(#sh)"/>
+      <text x="190" y="350" text-anchor="middle" font-size="13" font-weight="700" fill="#712B13">追创创业投资（厦门）有限公司</text>
+      <text x="190" y="368" text-anchor="middle" font-size="10" fill="#C7402B">GP主体 · 注册资本1000万</text>
+      <line x1="70" y1="378" x2="310" y2="378" stroke="#eee" stroke-width="1"/>
+      <text x="190" y="394" text-anchor="middle" font-size="10" fill="#555">徐腾 51% · 王童姝 29% · 雷鸣 20%</text>
+      <text x="190" y="408" text-anchor="middle" font-size="9" fill="#C7402B">⚠ 雷鸣2025-09才入股（从王童姝受让20%）</text>
+
+      <!-- 追创志远 -->
+      <rect x="380" y="325" width="280" height="88" rx="10" fill="#fff" stroke="#C7402B" stroke-width="1.8" filter="url(#sh)"/>
+      <text x="520" y="350" text-anchor="middle" font-size="13" font-weight="700" fill="#712B13">厦门追创志远创业投资合伙企业</text>
+      <text x="520" y="368" text-anchor="middle" font-size="10" fill="#C7402B">注册资本3010万 · 实缴1505万</text>
+      <line x1="400" y1="378" x2="640" y2="378" stroke="#eee" stroke-width="1"/>
+      <text x="520" y="394" text-anchor="middle" font-size="10" fill="#555">雷鸣(LP) 59.80% ── 1800万</text>
+      <text x="520" y="408" text-anchor="middle" font-size="10" fill="#555">俞浩(LP) 39.87% ── 1200万 · 追创创投(GP) 0.33% ── 10万</text>
+
+      <!-- 苏州追创管理 -->
+      <rect x="50" y="440" width="220" height="52" rx="10" fill="#fff" stroke="#C7402B" stroke-width="1" filter="url(#sh)"/>
+      <text x="160" y="462" text-anchor="middle" font-size="11" font-weight="600" fill="#712B13">苏州追创企业管理合伙企业</text>
+      <text x="160" y="480" text-anchor="middle" font-size="9" fill="#C7402B">追创创投 3.23% GP · 100万</text>
+
+      <!-- 厦门追创管理 -->
+      <rect x="300" y="440" width="220" height="52" rx="10" fill="#fff" stroke="#C7402B" stroke-width="1" filter="url(#sh)"/>
+      <text x="410" y="462" text-anchor="middle" font-size="11" font-weight="600" fill="#712B13">厦门追创企业管理合伙企业</text>
+      <text x="410" y="480" text-anchor="middle" font-size="9" fill="#C7402B">追创创投 0.33% GP · 10万</text>
+
+      <!-- 天空工场基金群 -->
+      <rect x="700" y="325" width="340" height="170" rx="12" fill="#fff" stroke="#C7402B" stroke-width="1.5" filter="url(#sh)"/>
+      <text x="870" y="350" text-anchor="middle" font-size="13" font-weight="700" fill="#712B13">天空工场创投基金群</text>
+      <text x="870" y="368" text-anchor="middle" font-size="10" fill="#C7402B">管理规模252亿 · 29只基金 · 53个LP · 已投75个项目</text>
+      <line x1="720" y1="380" x2="1020" y2="380" stroke="#eee" stroke-width="1"/>
+      <text x="870" y="398" text-anchor="middle" font-size="10" fill="#555">博昌基金 5亿 · 博峥 ~5亿 · 博铭 ~5亿</text>
+      <text x="870" y="416" text-anchor="middle" font-size="10" fill="#555">博楠 ~5亿 · 柳州AI创投</text>
+      <text x="870" y="436" text-anchor="middle" font-size="10" fill="#555">绍兴100亿 · 梁溪100亿 · 宿迁50亿</text>
+      <text x="870" y="454" text-anchor="middle" font-size="10" fill="#555">杭州20亿 · 苏州8亿 · 枣庄10亿 · 玉环10亿</text>
+      <text x="870" y="478" text-anchor="middle" font-size="10" font-weight="600" fill="#C7402B">GP杠杆：100万管5亿 = 499倍</text>
+
+      <!-- ====== 第四层背景 ====== -->
+      <rect x="20" y="555" width="1040" height="120" rx="12" fill="#FAEEDA" stroke="#B07015" stroke-width="1"/>
+      <text x="38" y="576" font-size="11" font-weight="600" fill="#B07015">第四层 · 孵化项目层（200+BU）</text>
+
+      <!-- 追创创投对外投资 -->
+      <rect x="50" y="590" width="300" height="68" rx="10" fill="#fff" stroke="#B07015" stroke-width="1.5" filter="url(#sh)"/>
+      <text x="200" y="612" text-anchor="middle" font-size="12" font-weight="600" fill="#633806">追创创投直接控股</text>
+      <text x="200" y="630" text-anchor="middle" font-size="9" fill="#555">北京追创智优 100% · 上海追创优选 100%</text>
+      <text x="200" y="646" text-anchor="middle" font-size="9" fill="#555">追创中部（河南）95% · 1.9亿</text>
+
+      <!-- 产业方向 -->
+      <rect x="380" y="590" width="140" height="68" rx="10" fill="#fff" stroke="#B07015" stroke-width="1" filter="url(#sh)"/>
+      <text x="450" y="614" text-anchor="middle" font-size="12" font-weight="600" fill="#633806">机器人</text>
+      <text x="450" y="632" text-anchor="middle" font-size="9" fill="#555">11家</text>
+
+      <rect x="540" y="590" width="120" height="68" rx="10" fill="#fff" stroke="#B07015" stroke-width="1" filter="url(#sh)"/>
+      <text x="600" y="614" text-anchor="middle" font-size="12" font-weight="600" fill="#633806">智能家居</text>
+      <text x="600" y="632" text-anchor="middle" font-size="9" fill="#555">10家</text>
+
+      <rect x="680" y="590" width="100" height="68" rx="10" fill="#fff" stroke="#B07015" stroke-width="1" filter="url(#sh)"/>
+      <text x="730" y="614" text-anchor="middle" font-size="12" font-weight="600" fill="#633806">汽车</text>
+      <text x="730" y="632" text-anchor="middle" font-size="9" fill="#555">8家</text>
+
+      <rect x="800" y="590" width="100" height="68" rx="10" fill="#fff" stroke="#B07015" stroke-width="1" filter="url(#sh)"/>
+      <text x="850" y="614" text-anchor="middle" font-size="12" font-weight="600" fill="#633806">新能源</text>
+      <text x="850" y="632" text-anchor="middle" font-size="9" fill="#555">5家</text>
+
+      <rect x="920" y="590" width="120" height="68" rx="10" fill="#fff" stroke="#B07015" stroke-width="1" filter="url(#sh)"/>
+      <text x="980" y="614" text-anchor="middle" font-size="12" font-weight="600" fill="#633806">AI+其他</text>
+      <text x="980" y="632" text-anchor="middle" font-size="9" fill="#555">23家</text>
+
+      <!-- ====== 第五层背景 ====== -->
+      <rect x="20" y="700" width="1040" height="110" rx="12" fill="#FBEAF0" stroke="#993556" stroke-width="1"/>
+      <text x="38" y="721" font-size="11" font-weight="600" fill="#993556">第五层 · 资本运作壳公司层</text>
+
+      <!-- 逐越鸿智 -->
+      <rect x="50" y="735" width="300" height="58" rx="10" fill="#fff" stroke="#993556" stroke-width="2" filter="url(#sh)"/>
+      <text x="200" y="757" text-anchor="middle" font-size="12" font-weight="700" fill="#72243E">苏州逐越鸿智科技发展合伙企业</text>
+      <text x="200" y="777" text-anchor="middle" font-size="10" fill="#993556">注册200万 → 22.82亿收购嘉美包装54.9%</text>
+
+      <!-- 嘉美包装 -->
+      <rect x="400" y="735" width="280" height="58" rx="10" fill="#fff" stroke="#993556" stroke-width="1.5" filter="url(#sh)"/>
+      <text x="540" y="757" text-anchor="middle" font-size="12" font-weight="700" fill="#72243E">嘉美包装（002969.SZ）</text>
+      <text x="540" y="777" text-anchor="middle" font-size="10" fill="#993556">已控54.9% · 浮盈~395% · 承诺36月不借壳</text>
+
+      <!-- 退出路径 -->
+      <rect x="720" y="735" width="320" height="58" rx="10" fill="#fff" stroke="#993556" stroke-width="1.2" filter="url(#sh)"/>
+      <text x="880" y="757" text-anchor="middle" font-size="12" font-weight="600" fill="#72243E">退出路径</text>
+      <text x="880" y="777" text-anchor="middle" font-size="10" fill="#555">①嘉美A股平台资产注入 · ②75项目"下饺子式IPO"</text>
+
+      <!-- ====== 连线 ====== -->
+      <!-- 俞浩 → 追觅科技（控制） -->
+      <line x1="110" y1="106" x2="150" y2="180" stroke="#888" stroke-width="1.8" marker-end="url(#a1)"/>
+      <text x="110" y="148" font-size="9" fill="#555" font-weight="500">直接31.15%</text>
+
+      <!-- 俞浩 → 天空漫步（100%控股） -->
+      <line x1="130" y1="106" x2="400" y2="185" stroke="#888" stroke-width="1.2" marker-end="url(#a1)"/>
+      <text x="260" y="140" font-size="9" fill="#555" font-weight="500">100%</text>
+
+      <!-- 俞浩 → 星空计划（96.652%，虚线=平行独立） -->
+      <line x1="170" y1="106" x2="870" y2="180" stroke="#bbb" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#a2)"/>
+      <text x="540" y="138" font-size="9" fill="#999">96.652% · 平行独立</text>
+
+      <!-- 天空漫步 → 追觅科技（19.02%） -->
+      <line x1="390" y1="213" x2="310" y2="213" stroke="#888" stroke-width="1.5" marker-end="url(#a1)"/>
+      <text x="345" y="207" font-size="9" fill="#555">19.02%</text>
+
+      <!-- 追觅科技 → 追觅梦创（全资） -->
+      <line x1="310" y1="213" x2="570" y2="213" stroke="#888" stroke-width="1.5" marker-end="url(#a1)"/>
+      <text x="440" y="207" font-size="9" fill="#555">100%全资</text>
+
+      <!-- 追觅科技 → 追创创投（发起设立） -->
+      <line x1="200" y1="248" x2="190" y2="325" stroke="#888" stroke-width="1.5" marker-end="url(#a1)"/>
+      <text x="170" y="290" font-size="9" fill="#555" font-weight="500">发起设立</text>
+
+      <!-- 雷鸣 → 追创创投（20%入股） -->
+      <line x1="460" y1="106" x2="280" y2="340" stroke="#888" stroke-width="1.2" marker-end="url(#a1)"/>
+      <text x="380" y="215" font-size="9" fill="#555">20% · 200万</text>
+
+      <!-- 徐腾 → 追创创投（51%） -->
+      <line x1="610" y1="106" x2="300" y2="340" stroke="#888" stroke-width="1.2" marker-end="url(#a1)"/>
+      <text x="480" y="225" font-size="9" fill="#555">51% · 510万</text>
+
+      <!-- 王童姝 → 追创创投（29%） -->
+      <line x1="740" y1="106" x2="310" y2="340" stroke="#888" stroke-width="1" marker-end="url(#a1)"/>
+      <text x="560" y="220" font-size="9" fill="#555">29% · 290万</text>
+
+      <!-- 雷鸣 → 追创志远（59.80% LP） -->
+      <line x1="480" y1="106" x2="500" y2="325" stroke="#0F6E56" stroke-width="1.5" marker-end="url(#a1)"/>
+      <text x="510" y="215" font-size="9" fill="#0F6E56" font-weight="500">LP 59.80%</text>
+
+      <!-- 俞浩 → 追创志远（39.87% LP） -->
+      <line x1="150" y1="106" x2="420" y2="325" stroke="#534AB7" stroke-width="1.5" marker-end="url(#a1)"/>
+      <text x="250" y="210" font-size="9" fill="#534AB7" font-weight="500">LP 39.87%</text>
+
+      <!-- 追创创投 → 追创志远（GP 0.33%） -->
+      <line x1="330" y1="370" x2="380" y2="370" stroke="#C7402B" stroke-width="2" marker-end="url(#a-r)"/>
+      <text x="355" y="362" font-size="9" fill="#C7402B" font-weight="600">GP 0.33%</text>
+
+      <!-- 追创创投 → 苏州追创管理（GP） -->
+      <line x1="160" y1="413" x2="160" y2="440" stroke="#C7402B" stroke-width="1.5" marker-end="url(#a-r)"/>
+      <text x="130" y="430" font-size="9" fill="#C7402B">GP</text>
+
+      <!-- 追创创投 → 厦门追创管理（GP） -->
+      <line x1="250" y1="413" x2="380" y2="440" stroke="#C7402B" stroke-width="1.5" marker-end="url(#a-r)"/>
+      <text x="300" y="422" font-size="9" fill="#C7402B">GP</text>
+
+      <!-- 苏州追创管理/厦门追创管理 → 天空工场 -->
+      <line x1="270" y1="470" x2="700" y2="410" stroke="#C7402B" stroke-width="1.2" marker-end="url(#a1)"/>
+      <text x="470" y="430" font-size="9" fill="#C7402B">GP管理</text>
+
+      <!-- 厦门追创管理 → 天空工场 -->
+      <line x1="520" y1="470" x2="700" y2="430" stroke="#C7402B" stroke-width="1.2" marker-end="url(#a1)"/>
+
+      <!-- 追创志远 → 天空工场（LP出资） -->
+      <line x1="660" y1="380" x2="700" y2="380" stroke="#C7402B" stroke-width="1.2" marker-end="url(#a1)"/>
+      <text x="680" y="372" font-size="9" fill="#C7402B">LP出资</text>
+
+      <!-- 天空工场 → 孵化项目 -->
+      <line x1="870" y1="495" x2="870" y2="590" stroke="#B07015" stroke-width="1.5" marker-end="url(#a1)"/>
+      <text x="895" y="545" font-size="9" fill="#B07015" font-weight="500">投资孵化</text>
+
+      <!-- 追创创投 → 孵化项目 -->
+      <line x1="190" y1="413" x2="200" y2="590" stroke="#B07015" stroke-width="1.2" marker-end="url(#a1)"/>
+      <text x="175" y="505" font-size="9" fill="#B07015">直接控股</text>
+
+      <!-- 孵化项目 → 退出路径 -->
+      <line x1="200" y1="658" x2="200" y2="735" stroke="#993556" stroke-width="1.5" marker-end="url(#a1)"/>
+      <text x="215" y="700" font-size="9" fill="#993556">退出</text>
+
+      <line x1="870" y1="658" x2="880" y2="735" stroke="#993556" stroke-width="1.2" marker-end="url(#a1)"/>
+      <text x="895" y="700" font-size="9" fill="#993556">退出</text>
+
+      <!-- 逐越鸿智 → 嘉美包装 -->
+      <line x1="350" y1="764" x2="400" y2="764" stroke="#993556" stroke-width="2" marker-end="url(#a1)"/>
+      <text x="375" y="756" font-size="9" fill="#993556" font-weight="500">收购</text>
+
+      <!-- ====== 左侧阅读指引 ====== -->
+      <line x1="10" y1="40" x2="10" y2="780" stroke="#ddd" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <polygon points="10,790 6,780 14,780" fill="#ddd"/>
+      <text x="10" y="808" text-anchor="middle" font-size="9" fill="#ccc">穿透方向</text>
+
+      <!-- ====== 右侧关键发现标注 ====== -->
+      <rect x="830" y="50" width="220" height="68" rx="8" fill="#FFF8F0" stroke="#F0D0A0" stroke-width="1"/>
+      <text x="845" y="70" font-size="10" font-weight="600" fill="#8B5A00">⚠ 关键发现</text>
+      <text x="845" y="87" font-size="9" fill="#6B4A1A">· 俞浩不直接持股追创创投</text>
+      <text x="845" y="102" font-size="9" fill="#6B4A1A">· 对基金控制绕不开雷鸣</text>
+      <text x="845" y="117" font-size="9" fill="#6B4A1A">· 星空计划与追觅平行独立</text>
+
+      <!-- 底部警示 -->
+      <rect x="50" y="830" width="980" height="50" rx="8" fill="#FAECE7" stroke="#C7402B" stroke-width="1"/>
+      <text x="540" y="852" text-anchor="middle" font-size="11" font-weight="600" fill="#C7402B">⚠ 三大预警</text>
+      <text x="540" y="870" text-anchor="middle" font-size="10" fill="#712B13">①科创板IPO存疑（未完成股改） · ②小GP管大LP（499倍杠杆） · ③星空计划零实缴+股权冻结</text>
+
+    </svg>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 图2：GP/LP杠杆结构详图 -->
+<!-- ============================================================ -->
+<div class="diagram-section">
+  <h2><span class="icon">2</span>GP/LP杠杆结构详图</h2>
+  <div class="desc">追创创投如何用1000万注册资本撬动252亿管理规模</div>
+  <div class="svg-wrap">
+    <svg viewBox="0 0 960 720" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="b1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M2 2L8 5L2 8" fill="none" stroke="#534AB7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+        <marker id="b2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M2 2L8 5L2 8" fill="none" stroke="#C7402B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+        <marker id="b3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M2 2L8 5L2 8" fill="none" stroke="#0F6E56" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+        <filter id="sh2"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.08"/></filter>
+      </defs>
+
+      <!-- 顶部标题 -->
+      <text x="480" y="38" text-anchor="middle" font-size="15" font-weight="700" fill="#3C3489">追创创投 GP/LP 杠杆结构</text>
+      <text x="480" y="56" text-anchor="middle" font-size="10" fill="#888">GP出资极低但掌握执行权 → LP出巨资但不管事</text>
+
+      <!-- ====== 自然人层 ====== -->
+      <rect x="50" y="75" width="860" height="60" rx="10" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.8"/>
+      <text x="68" y="93" font-size="9" fill="#534AB7" font-weight="500">自然人层</text>
+
+      <rect x="80" y="100" width="100" height="28" rx="6" fill="#fff" stroke="#534AB7" stroke-width="1.5" filter="url(#sh2)"/>
+      <text x="130" y="118" text-anchor="middle" font-size="11" font-weight="600" fill="#3C3489">徐腾 51%</text>
+
+      <rect x="210" y="100" width="100" height="28" rx="6" fill="#fff" stroke="#534AB7" stroke-width="1.2" filter="url(#sh2)"/>
+      <text x="260" y="118" text-anchor="middle" font-size="11" font-weight="600" fill="#3C3489">王童姝 29%</text>
+
+      <rect x="340" y="100" width="100" height="28" rx="6" fill="#fff" stroke="#534AB7" stroke-width="1.2" filter="url(#sh2)"/>
+      <text x="390" y="118" text-anchor="middle" font-size="11" font-weight="600" fill="#3C3489">雷鸣 20%</text>
+
+      <rect x="500" y="100" width="130" height="28" rx="6" fill="#fff" stroke="#534AB7" stroke-width="2" filter="url(#sh2)"/>
+      <text x="565" y="118" text-anchor="middle" font-size="11" font-weight="700" fill="#3C3489">俞浩 39.87%</text>
+
+      <rect x="670" y="100" width="130" height="28" rx="6" fill="#fff" stroke="#534AB7" stroke-width="2" filter="url(#sh2)"/>
+      <text x="735" y="118" text-anchor="middle" font-size="11" font-weight="700" fill="#3C3489">雷鸣 59.80%</text>
+
+      <!-- ====== GP层 ====== -->
+      <rect x="50" y="165" width="860" height="80" rx="10" fill="#FAECE7" stroke="#C7402B" stroke-width="0.8"/>
+      <text x="68" y="183" font-size="9" fill="#C7402B" font-weight="500">GP层（执行事务合伙人）</text>
+
+      <rect x="80" y="195" width="310" height="42" rx="8" fill="#fff" stroke="#C7402B" stroke-width="2" filter="url(#sh2)"/>
+      <text x="235" y="215" text-anchor="middle" font-size="12" font-weight="700" fill="#712B13">追创创投（厦门）有限公司</text>
+      <text x="235" y="231" text-anchor="middle" font-size="9" fill="#C7402B">GP主体 · 注册1000万 · 徐腾51%+王童姝29%+雷鸣20%</text>
+
+      <!-- 连线：自然人 → 追创创投 -->
+      <line x1="130" y1="128" x2="200" y2="195" stroke="#534AB7" stroke-width="1.2" marker-end="url(#b1)"/>
+      <line x1="260" y1="128" x2="260" y2="195" stroke="#534AB7" stroke-width="1" marker-end="url(#b1)"/>
+      <line x1="390" y1="128" x2="330" y2="195" stroke="#534AB7" stroke-width="1" marker-end="url(#b1)"/>
+
+      <!-- 追创志远（LP为主） -->
+      <rect x="430" y="195" width="310" height="42" rx="8" fill="#fff" stroke="#C7402B" stroke-width="1.5" filter="url(#sh2)"/>
+      <text x="585" y="215" text-anchor="middle" font-size="12" font-weight="700" fill="#712B13">追创志远创业投资合伙企业</text>
+      <text x="585" y="231" text-anchor="middle" font-size="9" fill="#C7402B">注册3010万 · 雷鸣59.80%LP + 俞浩39.87%LP</text>
+
+      <!-- 连线：自然人 → 追创志远 -->
+      <line x1="565" y1="128" x2="560" y2="195" stroke="#534AB7" stroke-width="1.5" marker-end="url(#b1)"/>
+      <line x1="735" y1="128" x2="650" y2="195" stroke="#534AB7" stroke-width="1.5" marker-end="url(#b1)"/>
+
+      <!-- 追创创投 → 追创志远（GP） -->
+      <line x1="390" y1="216" x2="430" y2="216" stroke="#C7402B" stroke-width="2.5" marker-end="url(#b2)"/>
+      <text x="410" y="208" font-size="9" fill="#C7402B" font-weight="700">GP 0.33%</text>
+
+      <!-- ====== 中间GP壳层 ====== -->
+      <rect x="50" y="275" width="860" height="65" rx="10" fill="#FAEADA" stroke="#B07015" stroke-width="0.8"/>
+      <text x="68" y="293" font-size="9" fill="#B07015" font-weight="500">GP壳层</text>
+
+      <rect x="80" y="305" width="240" height="28" rx="7" fill="#fff" stroke="#B07015" stroke-width="1.2" filter="url(#sh2)"/>
+      <text x="200" y="323" text-anchor="middle" font-size="10" font-weight="600" fill="#633806">苏州追创管理 · 追创创投3.23%GP · 100万</text>
+
+      <rect x="350" y="305" width="240" height="28" rx="7" fill="#fff" stroke="#B07015" stroke-width="1.2" filter="url(#sh2)"/>
+      <text x="470" y="323" text-anchor="middle" font-size="10" font-weight="600" fill="#633806">厦门追创管理 · 追创创投0.33%GP · 10万</text>
+
+      <!-- 追创创投 → GP壳 -->
+      <line x1="180" y1="237" x2="200" y2="305" stroke="#C7402B" stroke-width="1.5" marker-end="url(#b2)"/>
+      <line x1="280" y1="237" x2="430" y2="305" stroke="#C7402B" stroke-width="1.2" marker-end="url(#b2)"/>
+
+      <!-- ====== 基金层 ====== -->
+      <rect x="50" y="370" width="860" height="120" rx="10" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.8"/>
+      <text x="68" y="388" font-size="9" fill="#0F6E56" font-weight="500">基金层（GP管理，LP出钱）</text>
+
+      <!-- 博昌基金 -->
+      <rect x="80" y="400" width="200" height="75" rx="8" fill="#fff" stroke="#0F6E56" stroke-width="1.5" filter="url(#sh2)"/>
+      <text x="180" y="422" text-anchor="middle" font-size="11" font-weight="700" fill="#085041">天空工场博昌</text>
+      <text x="180" y="438" text-anchor="middle" font-size="9" fill="#0F6E56">注册5亿</text>
+      <text x="180" y="454" text-anchor="middle" font-size="9" fill="#0F6E56">GP 0.2% · 100万</text>
+      <text x="180" y="468" text-anchor="middle" font-size="9" fill="#0F6E56">LP 99.8% · 4.99亿</text>
+
+      <!-- 博峥基金 -->
+      <rect x="300" y="400" width="140" height="75" rx="8" fill="#fff" stroke="#0F6E56" stroke-width="1" filter="url(#sh2)"/>
+      <text x="370" y="422" text-anchor="middle" font-size="11" font-weight="600" fill="#085041">博峥</text>
+      <text x="370" y="438" text-anchor="middle" font-size="9" fill="#0F6E56">~5亿</text>
+      <text x="370" y="454" text-anchor="middle" font-size="9" fill="#0F6E56">同结构</text>
+
+      <!-- 博铭基金 -->
+      <rect x="460" y="400" width="140" height="75" rx="8" fill="#fff" stroke="#0F6E56" stroke-width="1" filter="url(#sh2)"/>
+      <text x="530" y="422" text-anchor="middle" font-size="11" font-weight="600" fill="#085041">博铭</text>
+      <text x="530" y="438" text-anchor="middle" font-size="9" fill="#0F6E56">~5亿</text>
+      <text x="530" y="454" text-anchor="middle" font-size="9" fill="#0F6E56">同结构</text>
+
+      <!-- 博楠基金 -->
+      <rect x="620" y="400" width="140" height="75" rx="8" fill="#fff" stroke="#0F6E56" stroke-width="1" filter="url(#sh2)"/>
+      <text x="690" y="422" text-anchor="middle" font-size="11" font-weight="600" fill="#085041">博楠</text>
+      <text x="690" y="438" text-anchor="middle" font-size="9" fill="#0F6E56">~5亿</text>
+      <text x="690" y="454" text-anchor="middle" font-size="9" fill="#0F6E56">同结构</text>
+
+      <!-- 其他基金 -->
+      <rect x="780" y="400" width="110" height="75" rx="8" fill="#f8f8f5" stroke="#0F6E56" stroke-width="1" stroke-dasharray="4,3"/>
+      <text x="835" y="428" text-anchor="middle" font-size="11" font-weight="500" fill="#0F6E56">其他25只</text>
+      <text x="835" y="446" text-anchor="middle" font-size="9" fill="#999">绍兴100亿</text>
+      <text x="835" y="462" text-anchor="middle" font-size="9" fill="#999">梁溪100亿等</text>
+
+      <!-- GP壳 → 基金 -->
+      <line x1="200" y1="333" x2="180" y2="400" stroke="#0F6E56" stroke-width="1.5" marker-end="url(#b3)"/>
+      <line x1="470" y1="333" x2="370" y2="400" stroke="#0F6E56" stroke-width="1" marker-end="url(#b3)"/>
+      <line x1="470" y1="333" x2="530" y2="400" stroke="#0F6E56" stroke-width="1" marker-end="url(#b3)"/>
+      <line x1="470" y1="333" x2="690" y2="400" stroke="#0F6E56" stroke-width="1" marker-end="url(#b3)"/>
+
+      <!-- 追创志远 → 基金（LP出资） -->
+      <line x1="585" y1="237" x2="585" y2="305" stroke="#0F6E56" stroke-width="1" stroke-dasharray="4,3"/>
+      <text x="598" y="275" font-size="8" fill="#0F6E56">LP出资</text>
+
+      <!-- ====== 杠杆数读 ====== -->
+      <rect x="80" y="520" width="820" height="145" rx="12" fill="#fff" stroke="#C7402B" stroke-width="1.5" filter="url(#sh2)"/>
+      <text x="490" y="548" text-anchor="middle" font-size="14" font-weight="700" fill="#C7402B">杠杆倍数一览</text>
+
+      <!-- 4个杠杆项 -->
+      <rect x="100" y="565" width="180" height="82" rx="8" fill="#FAECE7"/>
+      <text x="190" y="588" text-anchor="middle" font-size="10" font-weight="500" fill="#712B13">追创志远</text>
+      <text x="190" y="610" text-anchor="middle" font-size="22" font-weight="900" fill="#C7402B">301×</text>
+      <text x="190" y="632" text-anchor="middle" font-size="9" fill="#712B13">GP 10万 管理 3010万</text>
+
+      <rect x="300" y="565" width="180" height="82" rx="8" fill="#FAECE7"/>
+      <text x="390" y="588" text-anchor="middle" font-size="10" font-weight="500" fill="#712B13">博昌基金</text>
+      <text x="390" y="610" text-anchor="middle" font-size="22" font-weight="900" fill="#C7402B">499×</text>
+      <text x="390" y="632" text-anchor="middle" font-size="9" fill="#712B13">GP 100万 管理 5亿</text>
+
+      <rect x="500" y="565" width="180" height="82" rx="8" fill="#FAECE7"/>
+      <text x="590" y="588" text-anchor="middle" font-size="10" font-weight="500" fill="#712B13">追创创投整体</text>
+      <text x="590" y="610" text-anchor="middle" font-size="22" font-weight="900" fill="#C7402B">2,520×</text>
+      <text x="590" y="632" text-anchor="middle" font-size="9" fill="#712B13">注册1000万 管理252亿</text>
+
+      <rect x="700" y="565" width="180" height="82" rx="8" fill="#FFF8F0" stroke="#F0D0A0" stroke-width="1"/>
+      <text x="790" y="588" text-anchor="middle" font-size="10" font-weight="600" fill="#8B5A00">逐越鸿智→嘉美</text>
+      <text x="790" y="610" text-anchor="middle" font-size="22" font-weight="900" fill="#C7402B">1,141×</text>
+      <text x="790" y="632" text-anchor="middle" font-size="9" fill="#712B13">注册200万 收购22.82亿</text>
+
+    </svg>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 图3：俞浩控制权路径图 -->
+<!-- ============================================================ -->
+<div class="diagram-section">
+  <h2><span class="icon">3</span>俞浩控制权路径图</h2>
+  <div class="desc">俞浩如何在多主体间建立控制链，以及控制链条上的关键节点</div>
+  <div class="svg-wrap">
+    <svg viewBox="0 0 900 750" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="c1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M2 2L8 5L2 8" fill="none" stroke="#534AB7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+        <marker id="c-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M2 2L8 5L2 8" fill="none" stroke="#C7402B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+        <marker id="c3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M2 2L8 5L2 8" fill="none" stroke="#0F6E56" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+        <filter id="sh3"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.08"/></filter>
+      </defs>
+
+      <text x="450" y="28" text-anchor="middle" font-size="15" font-weight="700" fill="#3C3489">俞浩控制权路径全景</text>
+
+      <!-- 俞浩核心节点 -->
+      <rect x="340" y="50" width="220" height="70" rx="14" fill="#EEEDFE" stroke="#534AB7" stroke-width="2.5" filter="url(#sh3)"/>
+      <text x="450" y="80" text-anchor="middle" font-size="18" font-weight="900" fill="#3C3489">俞 浩</text>
+      <text x="450" y="102" text-anchor="middle" font-size="10" fill="#534AB7">回购老股~50亿 · 持股从45%→约70%</text>
+
+      <!-- ====== 路径1：追觅科技 ====== -->
+      <rect x="50" y="190" width="280" height="65" rx="10" fill="#fff" stroke="#534AB7" stroke-width="1.8" filter="url(#sh3)"/>
+      <text x="190" y="215" text-anchor="middle" font-size="13" font-weight="700" fill="#3C3489">追觅科技（苏州）有限公司</text>
+      <text x="190" y="235" text-anchor="middle" font-size="10" fill="#555">直接31.15% + 天空漫步间接19.02% ≈ 50.17%</text>
+      <text x="190" y="250" text-anchor="middle" font-size="9" fill="#534AB7">含回购后约70% · 注册资本241万</text>
+
+      <line x1="380" y1="95" x2="260" y2="190" stroke="#534AB7" stroke-width="2" marker-end="url(#c1)"/>
+      <text x="290" y="140" font-size="10" fill="#534AB7" font-weight="500">控股路径①</text>
+
+      <!-- 追觅梦创 -->
+      <rect x="50" y="300" width="220" height="50" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.5" filter="url(#sh3)"/>
+      <text x="160" y="322" text-anchor="middle" font-size="12" font-weight="600" fill="#085041">追觅梦创科技</text>
+      <text x="160" y="340" text-anchor="middle" font-size="9" fill="#0F6E56">全资 · 注册20亿 · 疑似上市主体</text>
+
+      <line x1="160" y1="255" x2="160" y2="300" stroke="#0F6E56" stroke-width="1.5" marker-end="url(#c3)"/>
+      <text x="175" y="280" font-size="9" fill="#0F6E56">100%全资</text>
+
+      <!-- ====== 路径2：追创志远 → 基金 ====== -->
+      <rect x="350" y="190" width="280" height="65" rx="10" fill="#fff" stroke="#534AB7" stroke-width="1.8" filter="url(#sh3)"/>
+      <text x="490" y="215" text-anchor="middle" font-size="13" font-weight="700" fill="#3C3489">追创志远创业投资合伙企业</text>
+      <text x="490" y="235" text-anchor="middle" font-size="10" fill="#555">LP 39.87%（1200万） · 雷鸣LP 59.80%</text>
+      <text x="490" y="250" text-anchor="middle" font-size="9" fill="#C7402B">⚠ 俞浩对基金控制绕不开雷鸣</text>
+
+      <line x1="450" y1="120" x2="470" y2="190" stroke="#534AB7" stroke-width="2" marker-end="url(#c1)"/>
+      <text x="485" y="158" font-size="10" fill="#534AB7" font-weight="500">控股路径②</text>
+      <text x="485" y="172" font-size="9" fill="#888">LP 39.87%</text>
+
+      <!-- 追创创投 -->
+      <rect x="700" y="190" width="180" height="55" rx="8" fill="#FAECE7" stroke="#C7402B" stroke-width="1.5" filter="url(#sh3)"/>
+      <text x="790" y="213" text-anchor="middle" font-size="12" font-weight="600" fill="#712B13">追创创投（GP）</text>
+      <text x="790" y="232" text-anchor="middle" font-size="9" fill="#C7402B">徐腾51%+王童姝29%+雷鸣20%</text>
+
+      <line x1="630" y1="222" x2="700" y2="218" stroke="#C7402B" stroke-width="2" marker-end="url(#c-r)"/>
+      <text x="665" y="210" font-size="9" fill="#C7402B" font-weight="600">GP 0.33%</text>
+
+      <!-- 俞浩不持股追创创投标注 -->
+      <rect x="690" y="260" width="190" height="35" rx="6" fill="#FFF8F0" stroke="#F0D0A0" stroke-width="1"/>
+      <text x="785" y="278" text-anchor="middle" font-size="10" font-weight="600" fill="#8B5A00">⚠ 俞浩不直接持股GP</text>
+      <text x="785" y="292" text-anchor="middle" font-size="9" fill="#8B5A00">控制链依赖：发起方+LP身份+雷鸣绑定</text>
+
+      <!-- ====== 路径3：星空计划 ====== -->
+      <rect x="50" y="410" width="260" height="70" rx="10" fill="#fff" stroke="#534AB7" stroke-width="1.5" stroke-dasharray="6,3" filter="url(#sh3)"/>
+      <text x="180" y="435" text-anchor="middle" font-size="13" font-weight="700" fill="#3C3489">星空计划（上海）汽车科技</text>
+      <text x="180" y="455" text-anchor="middle" font-size="10" fill="#555">俞浩96.652% · 注册10亿 · 实缴0</text>
+      <text x="180" y="472" text-anchor="middle" font-size="9" fill="#C7402B">⚠ 全资子公司股权冻结232万 · 3年</text>
+
+      <line x1="370" y1="100" x2="220" y2="410" stroke="#534AB7" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#c1)"/>
+      <text x="260" y="260" font-size="10" fill="#534AB7" font-weight="500">控股路径③</text>
+      <text x="260" y="275" font-size="9" fill="#888">96.652% · 平行独立主体</text>
+
+      <!-- ====== 路径4：逐越鸿智 → 嘉美 ====== -->
+      <rect x="380" y="410" width="260" height="65" rx="10" fill="#FBEAF0" stroke="#993556" stroke-width="1.8" filter="url(#sh3)"/>
+      <text x="510" y="435" text-anchor="middle" font-size="13" font-weight="700" fill="#72243E">逐越鸿智 → 嘉美包装</text>
+      <text x="510" y="455" text-anchor="middle" font-size="10" fill="#555">注册200万 → 22.82亿收购54.9%</text>
+      <text x="510" y="470" text-anchor="middle" font-size="9" fill="#993556">GP: 长空纪元科技（俞浩控制）· 浮盈~395%</text>
+
+      <line x1="480" y1="120" x2="500" y2="410" stroke="#993556" stroke-width="2" marker-end="url(#c1)"/>
+      <text x="520" y="270" font-size="10" fill="#993556" font-weight="500">控股路径④</text>
+      <text x="520" y="285" font-size="9" fill="#888">SPV穿透 · GP控制</text>
+
+      <!-- ====== 路径5：远行控股 ====== -->
+      <rect x="700" y="410" width="170" height="45" rx="8" fill="#fff" stroke="#534AB7" stroke-width="1" filter="url(#sh3)"/>
+      <text x="785" y="435" text-anchor="middle" font-size="12" font-weight="600" fill="#3C3489">远行控股（苏州）</text>
+      <text x="785" y="450" text-anchor="middle" font-size="9" fill="#555">控股平台</text>
+
+      <line x1="520" y1="105" x2="785" y2="410" stroke="#534AB7" stroke-width="1.2" marker-end="url(#c1)"/>
+      <text x="700" y="260" font-size="9" fill="#534AB7">控股路径⑤</text>
+
+      <!-- ====== 底部总结 ====== -->
+      <rect x="50" y="530" width="800" height="180" rx="12" fill="#fff" stroke="#534AB7" stroke-width="1.5" filter="url(#sh3)"/>
+      <text x="450" y="558" text-anchor="middle" font-size="14" font-weight="700" fill="#3C3489">俞浩五条控制路径总结</text>
+
+      <!-- 路径列表 -->
+      <text x="80" y="588" font-size="11" font-weight="600" fill="#534AB7">路径①</text>
+      <text x="130" y="588" font-size="11" fill="#333">追觅科技 → 直接31.15% + 天空漫步间接19.02% = 实控~70%</text>
+
+      <text x="80" y="612" font-size="11" font-weight="600" fill="#534AB7">路径②</text>
+      <text x="130" y="612" font-size="11" fill="#333">追创志远 → LP 39.87%（1200万），但GP控制权不直接归属俞浩</text>
+
+      <text x="80" y="636" font-size="11" font-weight="600" fill="#534AB7">路径③</text>
+      <text x="130" y="636" font-size="11" fill="#333">星空计划 → 96.652%个人控股，造车主体，与追觅科技平行独立</text>
+
+      <text x="80" y="660" font-size="11" font-weight="600" fill="#993556">路径④</text>
+      <text x="130" y="660" font-size="11" fill="#333">逐越鸿智 → 通过长空纪元GP控制 → 收购嘉美包装54.9%</text>
+
+      <text x="80" y="684" font-size="11" font-weight="600" fill="#534AB7">路径⑤</text>
+      <text x="130" y="684" font-size="11" fill="#333">远行控股 → 控股平台（角色待进一步穿透）</text>
+
+      <!-- 关键风险标注 -->
+      <rect x="610" y="575" width="220" height="110" rx="8" fill="#FAECE7" stroke="#C7402B" stroke-width="1"/>
+      <text x="720" y="595" text-anchor="middle" font-size="11" font-weight="600" fill="#C7402B">⚠ 控制链风险点</text>
+      <text x="720" y="618" text-anchor="middle" font-size="10" fill="#712B13">· 路径②依赖雷鸣合作</text>
+      <text x="720" y="638" text-anchor="middle" font-size="10" fill="#712B13">· 路径③零实缴+股权冻结</text>
+      <text x="720" y="658" text-anchor="middle" font-size="10" fill="#712B13">· 路径④承诺36月不借壳</text>
+      <text x="720" y="678" text-anchor="middle" font-size="10" fill="#712B13">· 追觅科技尚未完成股改</text>
+
+    </svg>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 图4：追觅科技（苏州）前十大股东 -->
+<!-- ============================================================ -->
+<div class="diagram-section">
+  <h2><span class="icon">4</span>追觅科技（苏州）股东结构图</h2>
+  <div class="desc">23个股东中前10大持股详情，俞浩通过直接+间接合计控制约50-70%</div>
+  <div class="svg-wrap">
+    <svg viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="sh4"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.08"/></filter>
+      </defs>
+
+      <text x="450" y="25" text-anchor="middle" font-size="14" font-weight="700" fill="#085041">追觅科技（苏州）有限公司 · 股东结构</text>
+      <text x="450" y="42" text-anchor="middle" font-size="10" fill="#888">注册资本241万 · 23个股东 · 有限责任（港澳台投资、非独资）</text>
+
+      <!-- 主体圆 -->
+      <circle cx="450" cy="280" r="90" fill="#E1F5EE" stroke="#0F6E56" stroke-width="2"/>
+      <text x="450" y="272" text-anchor="middle" font-size="14" font-weight="700" fill="#085041">追觅科技</text>
+      <text x="450" y="292" text-anchor="middle" font-size="10" fill="#0F6E56">（苏州）有限公司</text>
+      <text x="450" y="312" text-anchor="middle" font-size="9" fill="#0F6E56">俞浩实控~70%</text>
+
+      <!-- 前十大股东环绕 -->
+      <!-- 1. 天空漫步 19.02% - 俞浩100%控股，用紫色标注 -->
+      <rect x="30" y="75" width="220" height="50" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="2" filter="url(#sh4)"/>
+      <text x="140" y="96" text-anchor="middle" font-size="10" font-weight="600" fill="#3C3489">①天空漫步科技（苏州）19.02%</text>
+      <text x="140" y="114" text-anchor="middle" font-size="9" fill="#534AB7">俞浩100%控股 · 认缴45.80万</text>
+
+      <!-- 2. 行胜于言 5.24% -->
+      <rect x="30" y="140" width="220" height="42" rx="8" fill="#fff" stroke="#0F6E56" stroke-width="1.2" filter="url(#sh4)"/>
+      <text x="140" y="160" text-anchor="middle" font-size="10" font-weight="500" fill="#085041">②行胜于言（厦门）5.24%</text>
+      <text x="140" y="175" text-anchor="middle" font-size="9" fill="#888">有限合伙 · 已实缴</text>
+
+      <!-- 3. 奥闻投资 3.96% -->
+      <rect x="30" y="198" width="220" height="42" rx="8" fill="#fff" stroke="#0F6E56" stroke-width="1" filter="url(#sh4)"/>
+      <text x="140" y="218" text-anchor="middle" font-size="10" font-weight="500" fill="#085041">③宁波奥闻投资 3.96%</text>
+      <text x="140" y="233" text-anchor="middle" font-size="9" fill="#888">有限合伙 · 已实缴</text>
+
+      <!-- 4. 铧兴志格 3.89% -->
+      <rect x="30" y="256" width="220" height="42" rx="8" fill="#fff" stroke="#0F6E56" stroke-width="1" filter="url(#sh4)"/>
+      <text x="140" y="276" text-anchor="middle" font-size="10" font-weight="500" fill="#085041">④苏州铧兴志格 3.89%</text>
+      <text x="140" y="291" text-anchor="middle" font-size="9" fill="#888">有限合伙 · 已实缴</text>
+
+      <!-- 5. CPE 1.98% -->
+      <rect x="30" y="314" width="220" height="42" rx="8" fill="#fff" stroke="#185FA5" stroke-width="1" filter="url(#sh4)"/>
+      <text x="140" y="334" text-anchor="middle" font-size="10" font-weight="500" fill="#0C447C">⑤CPE Investment(HK) 1.98%</text>
+      <text x="140" y="349" text-anchor="middle" font-size="9" fill="#888">中信产业基金美元通道 · 已实缴</text>
+
+      <!-- 6. 源峰觅桐 1.98% -->
+      <rect x="30" y="372" width="220" height="42" rx="8" fill="#fff" stroke="#0F6E56" stroke-width="1" filter="url(#sh4)"/>
+      <text x="140" y="392" text-anchor="middle" font-size="10" font-weight="500" fill="#085041">⑥天津源峰觅桐 1.98%</text>
+      <text x="140" y="407" text-anchor="middle" font-size="9" fill="#888">有限合伙 · 已实缴</text>
+
+      <!-- 7. YF Aurora 1.76% -->
+      <rect x="650" y="75" width="220" height="50" rx="8" fill="#fff" stroke="#185FA5" stroke-width="1" filter="url(#sh4)"/>
+      <text x="760" y="96" text-anchor="middle" font-size="10" font-weight="500" fill="#0C447C">⑦YF Aurora(HK) 1.76%</text>
+      <text x="760" y="114" text-anchor="middle" font-size="9" fill="#888">疑似元璟资本美元通道</text>
+
+      <!-- 8. Stoneylake 1.17% -->
+      <rect x="650" y="140" width="220" height="42" rx="8" fill="#fff" stroke="#185FA5" stroke-width="1" filter="url(#sh4)"/>
+      <text x="760" y="160" text-anchor="middle" font-size="10" font-weight="500" fill="#0C447C">⑧Stoneylake AlphaOne 1.17%</text>
+      <text x="760" y="175" text-anchor="middle" font-size="9" fill="#888">疑似雪湖资本美元通道</text>
+
+      <!-- 9. 铧展祺舸 0.82% -->
+      <rect x="650" y="198" width="220" height="42" rx="8" fill="#fff" stroke="#0F6E56" stroke-width="1" filter="url(#sh4)"/>
+      <text x="760" y="218" text-anchor="middle" font-size="10" font-weight="500" fill="#085041">⑨厦门铧展祺舸 0.82%</text>
+      <text x="760" y="233" text-anchor="middle" font-size="9" fill="#888">有限合伙 · 已实缴</text>
+
+      <!-- 10. 华兴丰晔 0.65% -->
+      <rect x="650" y="256" width="220" height="42" rx="8" fill="#fff" stroke="#0F6E56" stroke-width="1" filter="url(#sh4)"/>
+      <text x="760" y="276" text-anchor="middle" font-size="10" font-weight="500" fill="#085041">⑩天津华兴丰晔 0.65%</text>
+      <text x="760" y="291" text-anchor="middle" font-size="9" fill="#888">有限合伙 · 未披露</text>
+
+      <!-- 其他13家 -->
+      <rect x="650" y="316" width="220" height="42" rx="8" fill="#f8f8f5" stroke="#ccc" stroke-width="1" stroke-dasharray="4,3"/>
+      <text x="760" y="336" text-anchor="middle" font-size="10" fill="#888">其他13家股东</text>
+      <text x="760" y="352" text-anchor="middle" font-size="9" fill="#bbb">合计 ≈ 60.53%</text>
+
+      <!-- 俞浩直接持股标注 -->
+      <rect x="650" y="380" width="220" height="50" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="2" filter="url(#sh4)"/>
+      <text x="760" y="401" text-anchor="middle" font-size="10" font-weight="700" fill="#3C3489">俞浩直接持股 31.15%</text>
+      <text x="760" y="420" text-anchor="middle" font-size="9" fill="#534AB7">+ 天空漫步间接19.02% ≈ 实控50.17%</text>
+
+      <!-- 连线 -->
+      <line x1="250" y1="100" x2="365" y2="230" stroke="#534AB7" stroke-width="1.5"/>
+      <line x1="250" y1="161" x2="365" y2="245" stroke="#0F6E56" stroke-width="1"/>
+      <line x1="250" y1="219" x2="365" y2="258" stroke="#0F6E56" stroke-width="1"/>
+      <line x1="250" y1="277" x2="365" y2="272" stroke="#0F6E56" stroke-width="1"/>
+      <line x1="250" y1="335" x2="365" y2="288" stroke="#185FA5" stroke-width="1"/>
+      <line x1="250" y1="393" x2="365" y2="305" stroke="#0F6E56" stroke-width="1"/>
+
+      <line x1="650" y1="100" x2="535" y2="230" stroke="#185FA5" stroke-width="1"/>
+      <line x1="650" y1="161" x2="535" y2="245" stroke="#185FA5" stroke-width="1"/>
+      <line x1="650" y1="219" x2="535" y2="258" stroke="#0F6E56" stroke-width="1"/>
+      <line x1="650" y1="277" x2="535" y2="272" stroke="#0F6E56" stroke-width="1"/>
+      <line x1="650" y1="337" x2="535" y2="300" stroke="#ccc" stroke-width="1" stroke-dasharray="3,3"/>
+      <line x1="650" y1="405" x2="535" y2="310" stroke="#534AB7" stroke-width="1.8"/>
+
+      <!-- 底部注 -->
+      <rect x="50" y="460" width="800" height="40" rx="8" fill="#FFF8F0" stroke="#F0D0A0" stroke-width="1"/>
+      <text x="450" y="482" text-anchor="middle" font-size="10" fill="#8B5A00">境外机构穿透：CPE(HK) → 中信产业基金美元基金通道 | YF Aurora(HK) → 疑似元璟资本 | Stoneylake → 疑似雪湖资本</text>
+
+    </svg>
+  </div>
+</div>
+
+<div class="footer">
+  <p>追觅系股权架构图 &nbsp;|&nbsp; 数据截止 2026年5月15日</p>
+  <p>本内容仅为专业观点分享，不构成任何投资建议。投资有风险，决策需谨慎。</p>
+</div>
+
+<div class="site-foot">
+  <p><a class="back" href="../index.html">← 返回 AI 首席财务官首页</a></p>
+</div>
+
+</body>
+</html>

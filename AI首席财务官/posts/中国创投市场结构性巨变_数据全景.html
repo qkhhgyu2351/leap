@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="../assets/brand/favicon.png">
+<title>中国创投市场结构性巨变 · 2025-2026H1数据全景 · AI 首席财务官</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    background: #e8eaed;
+    padding: 24px 0;
+    -webkit-font-smoothing: antialiased;
+  }
+  #infographic {
+    width: 820px;
+    margin: 0 auto;
+    background: #ffffff;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .header {
+    background: linear-gradient(135deg, #0a1628 0%, #15314d 60%, #1a3a5c 100%);
+    padding: 44px 40px 38px;
+    color: #ffffff;
+    position: relative;
+  }
+  .header::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #c0392b, #e67e22, #2a6f97);
+  }
+  .header-tag { font-size: 12px; letter-spacing: 4px; color: rgba(255,255,255,0.5); text-transform: uppercase; margin-bottom: 10px; }
+  .header h1 { font-size: 34px; font-weight: 800; letter-spacing: 1px; line-height: 1.25; margin-bottom: 10px; }
+  .header-sub { font-size: 16px; color: rgba(255,255,255,0.7); font-weight: 400; letter-spacing: 2px; }
+  .thesis { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 28px 40px; background: #f7f8fa; border-bottom: 1px solid #e8eaed; }
+  .thesis-box { padding: 10px 18px; border-radius: 4px; font-size: 15px; font-weight: 700; letter-spacing: 1px; }
+  .thesis-box.red { background: #fdeaea; color: #c0392b; border: 1px solid #f5c6c6; }
+  .thesis-box.blue { background: #e8f1f8; color: #1a3a5c; border: 1px solid #b8d4e8; }
+  .thesis-box.gray { background: #f0f0f0; color: #666; border: 1px solid #d5d5d5; }
+  .thesis-arrow { color: #b0b8c4; font-size: 20px; font-weight: 300; }
+  .section { padding: 30px 40px; }
+  .section-title { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; }
+  .section-bar { width: 4px; height: 22px; border-radius: 2px; flex-shrink: 0; }
+  .section-bar.red { background: #c0392b; }
+  .section-bar.blue { background: #2a6f97; }
+  .section-bar.gray { background: #7f8c8d; }
+  .section-bar.orange { background: #e67e22; }
+  .section-bar.green { background: #27ae60; }
+  .section-bar.purple { background: #8e44ad; }
+  .section-title h2 { font-size: 20px; font-weight: 800; color: #1a1a2e; letter-spacing: 0.5px; }
+  .section-title .en { font-size: 12px; color: #999; font-weight: 400; margin-left: 6px; }
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 14px; }
+  .stat-card { background: #f7f8fa; border-radius: 6px; padding: 18px 16px; text-align: center; border-top: 3px solid; }
+  .stat-card.s1 { border-color: #2a6f97; }
+  .stat-card.s2 { border-color: #27ae60; }
+  .stat-card.s3 { border-color: #8e44ad; }
+  .stat-card.s4 { border-color: #e67e22; }
+  .stat-number { font-size: 28px; font-weight: 800; line-height: 1.1; margin-bottom: 4px; font-family: "DIN Alternate", "Helvetica Neue", Arial, sans-serif; }
+  .stat-card.s1 .stat-number { color: #2a6f97; }
+  .stat-card.s2 .stat-number { color: #27ae60; }
+  .stat-card.s3 .stat-number { color: #8e44ad; }
+  .stat-card.s4 .stat-number { color: #e67e22; }
+  .stat-unit { font-size: 13px; font-weight: 600; color: #555; }
+  .stat-label { font-size: 12px; color: #888; margin-top: 6px; line-height: 1.4; }
+  .stat-change { font-size: 11px; margin-top: 6px; padding: 2px 8px; border-radius: 10px; display: inline-block; font-weight: 600; }
+  .stat-change.up { background: #e8f8ef; color: #27ae60; }
+  .stat-change.down { background: #fdeaea; color: #c0392b; }
+  .chart-block { margin-bottom: 22px; }
+  .chart-block:last-child { margin-bottom: 0; }
+  .chart-caption { font-size: 13px; color: #666; margin-bottom: 10px; font-weight: 500; }
+  .chart-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  .chart-year { width: 42px; font-size: 13px; color: #888; font-weight: 600; text-align: right; flex-shrink: 0; }
+  .chart-track { flex: 1; height: 30px; background: #f0f0f0; border-radius: 4px; overflow: hidden; position: relative; }
+  .chart-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; min-width: 50px; }
+  .chart-fill.red { background: linear-gradient(90deg, #e74c3c, #c0392b); }
+  .chart-fill.red-light { background: rgba(192,57,43,0.35); }
+  .chart-fill.gray { background: linear-gradient(90deg, #bdc3c7, #7f8c8d); }
+  .chart-fill.gray-light { background: rgba(127,140,141,0.3); }
+  .chart-fill.blue { background: linear-gradient(90deg, #3498db, #2a6f97); }
+  .chart-fill.orange { background: linear-gradient(90deg, #f39c12, #e67e22); }
+  .chart-fill.green { background: linear-gradient(90deg, #2ecc71, #27ae60); }
+  .chart-fill.purple { background: linear-gradient(90deg, #9b59b6, #8e44ad); }
+  .chart-value { color: #fff; font-size: 13px; font-weight: 700; font-family: "DIN Alternate", "Helvetica Neue", Arial, sans-serif; }
+  .chart-value.dark { color: #333; }
+  .stat-line { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; padding-top: 14px; border-top: 1px dashed #e0e0e0; }
+  .stat-pill { background: #f7f8fa; border: 1px solid #e4e7eb; border-radius: 4px; padding: 8px 14px; font-size: 12px; color: #555; }
+  .stat-pill strong { color: #1a1a2e; font-size: 14px; font-family: "DIN Alternate", "Helvetica Neue", Arial, sans-serif; }
+  .callout { margin-top: 16px; padding: 14px 18px; background: #fff8f0; border-left: 3px solid #e67e22; border-radius: 0 4px 4px 0; }
+  .callout-title { font-size: 13px; font-weight: 700; color: #e67e22; margin-bottom: 4px; }
+  .callout-text { font-size: 13px; color: #555; line-height: 1.6; }
+  .callout.green-bg { background: #f0faf4; border-left-color: #27ae60; }
+  .callout.green-bg .callout-title { color: #27ae60; }
+  .stacked-bar { height: 44px; border-radius: 4px; overflow: hidden; display: flex; margin: 16px 0 12px; }
+  .stacked-seg { display: flex; align-items: center; justify-content: center; color: #fff; font-size: 14px; font-weight: 700; font-family: "DIN Alternate", "Helvetica Neue", Arial, sans-serif; }
+  .stacked-legend { display: flex; gap: 20px; font-size: 12px; color: #888; }
+  .legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: middle; }
+  .mode-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 22px; }
+  .mode-card { border-radius: 6px; padding: 20px; }
+  .mode-card.old { background: #f7f8fa; border: 1px solid #e0e3e8; }
+  .mode-card.new { background: #f0f5fa; border: 1px solid #c8dae8; }
+  .mode-badge { font-size: 11px; font-weight: 700; letter-spacing: 1px; padding: 3px 10px; border-radius: 10px; margin-bottom: 12px; display: inline-block; }
+  .mode-badge.old { background: #e0e3e8; color: #666; }
+  .mode-badge.new { background: #2a6f97; color: #fff; }
+  .mode-flow { font-size: 14px; color: #333; font-weight: 600; line-height: 1.8; }
+  .mode-flow .arrow { color: #b0b8c4; margin: 0 6px; }
+  .mode-note { font-size: 12px; color: #888; margin-top: 8px; }
+  .insight-list { display: flex; flex-direction: column; gap: 14px; }
+  .insight-item { display: flex; gap: 14px; padding: 16px 18px; background: #f7f8fa; border-radius: 6px; border-left: 3px solid; }
+  .insight-item:nth-child(1) { border-color: #c0392b; }
+  .insight-item:nth-child(2) { border-color: #e67e22; }
+  .insight-item:nth-child(3) { border-color: #2a6f97; }
+  .insight-item:nth-child(4) { border-color: #27ae60; }
+  .insight-num { font-size: 20px; font-weight: 800; font-family: "DIN Alternate", "Helvetica Neue", Arial, sans-serif; line-height: 1; flex-shrink: 0; width: 28px; }
+  .insight-item:nth-child(1) .insight-num { color: #c0392b; }
+  .insight-item:nth-child(2) .insight-num { color: #e67e22; }
+  .insight-item:nth-child(3) .insight-num { color: #2a6f97; }
+  .insight-item:nth-child(4) .insight-num { color: #27ae60; }
+  .insight-body h4 { font-size: 14px; font-weight: 700; color: #1a1a2e; margin-bottom: 4px; }
+  .insight-body p { font-size: 13px; color: #666; line-height: 1.6; }
+  .footer { background: #f7f8fa; padding: 24px 40px; border-top: 1px solid #e8eaed; }
+  .footer-sources { font-size: 11px; color: #999; line-height: 1.8; }
+  .footer-sources strong { color: #666; }
+  .footer-disclaimer { margin-top: 12px; padding-top: 12px; border-top: 1px dashed #d5d5d5; font-size: 11px; color: #aaa; line-height: 1.6; }
+  #download-btn { position: fixed; bottom: 32px; right: 32px; background: #1a3a5c; color: #fff; border: none; padding: 14px 28px; border-radius: 30px; font-size: 15px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 20px rgba(26,58,92,0.35); z-index: 999; transition: all 0.2s; letter-spacing: 1px; }
+  #download-btn:hover { background: #15314d; transform: translateY(-2px); }
+  #download-btn:active { transform: translateY(0); }
+  /* ---------- 站点导航（与 posts 其他页一致） ---------- */
+  .topbar { position: sticky; top: 0; z-index: 20; height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 0 clamp(20px, 5vw, 40px); background: rgba(247, 247, 244, .93); border-bottom: 1px solid #d7dde1; backdrop-filter: blur(18px); }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .brand img { width: 38px; height: 38px; object-fit: contain; }
+  .brand strong { font: 600 16px/1 "Noto Serif SC", serif; color: #315B6B; letter-spacing: .01em; }
+  .back { display: inline-flex; align-items: center; gap: 6px; padding: 8px 0; border-bottom: 1px solid #315B6B; color: #315B6B; font-size: 12px; text-decoration: none; transition: .18s; }
+  .back:hover { color: #B4654A; border-color: #B4654A; }
+  .foot { max-width: 820px; margin: 28px auto 60px; padding: 0 40px; font-size: 12px; color: #8a949c; line-height: 1.8; }
+  .foot .disc { margin-bottom: 10px; }
+  .foot .sign { font-weight: 600; color: #5b6770; margin-bottom: 6px; }
+  .foot .tags { color: #9aa4ac; }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../index.html"><img src="../assets/brand/aicfo-symbol.png" alt="AI 首席财务官"><strong>AI 首席财务官</strong></a>
+  <a class="back" href="../index.html">← 返回首页</a>
+</header>
+<div id="infographic">
+
+  <div class="header">
+    <div class="header-tag">CHINA VC MARKET 2025 → 2026 H1</div>
+    <h1>中国创投市场结构性巨变</h1>
+    <div class="header-sub">从2025换牌到2026新局 · 外资撤退 · 国资主导 · AI爆发 · 退出重启</div>
+  </div>
+
+  <div class="thesis">
+    <div class="thesis-box red">外资VC全面撤退</div>
+    <span class="thesis-arrow">→</span>
+    <div class="thesis-box blue">国资主导新秩序</div>
+    <span class="thesis-arrow">→</span>
+    <div class="thesis-box gray">AI爆发 · 退出重启</div>
+  </div>
+
+  <!-- SECTION 1: MARKET OVERVIEW -->
+  <div class="section">
+    <div class="section-title">
+      <div class="section-bar blue"></div>
+      <h2>一级市场全景</h2>
+      <span class="en">2025全年 → 2026上半年</span>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card s1">
+        <div class="stat-number">1.65<span class="stat-unit">万亿</span></div>
+        <div class="stat-label">2025年新募基金<br>5039只</div>
+        <div class="stat-change up">+14.1%</div>
+      </div>
+      <div class="stat-card s2">
+        <div class="stat-number">1.05<span class="stat-unit">万亿</span></div>
+        <div class="stat-label">2026H1新募基金<br>3981只</div>
+        <div class="stat-change up">+49.6%</div>
+      </div>
+      <div class="stat-card s3">
+        <div class="stat-number">5654<span class="stat-unit">亿</span></div>
+        <div class="stat-label">2026H1投资额<br>5944起</div>
+        <div class="stat-change up">+31.9%</div>
+      </div>
+      <div class="stat-card s4">
+        <div class="stat-number">14.77<span class="stat-unit">万亿</span></div>
+        <div class="stat-label">行业存续<br>总规模(2025)</div>
+      </div>
+    </div>
+    <div style="margin-top:14px; font-size:11px; color:#aaa; line-height:1.6;">
+      口径：2025年数据来源清科研究中心；2026H1数据来源清科研究中心（东方财富/同花顺援引）。2025年投资端（IT桔子口径）：9058起、8214亿元。
+    </div>
+  </div>
+
+  <!-- SECTION 2: STATE CAPITAL -->
+  <div class="section" style="border-top: 1px solid #f0f0f0;">
+    <div class="section-title">
+      <div class="section-bar red"></div>
+      <h2>国资主导，牌桌扩容</h2>
+      <span class="en">State Capital · 2025→2026H1</span>
+    </div>
+    <div class="chart-block">
+      <div class="chart-caption">LP出资结构中国资性质资金占比</div>
+      <div class="chart-row">
+        <div class="chart-year">2021</div>
+        <div class="chart-track"><div class="chart-fill red-light" style="width: 78.9%;"><span class="chart-value dark">78.9%</span></div></div>
+      </div>
+      <div class="chart-row">
+        <div class="chart-year">2025</div>
+        <div class="chart-track"><div class="chart-fill red" style="width: 90.2%;"><span class="chart-value">90.2%</span></div></div>
+      </div>
+      <div class="chart-row">
+        <div class="chart-year">H1'26</div>
+        <div class="chart-track"><div class="chart-fill red" style="width: 86%;"><span class="chart-value">86%</span></div></div>
+      </div>
+    </div>
+    <div class="chart-block">
+      <div class="chart-caption">政府引导基金 + 国企出资占比</div>
+      <div class="chart-row">
+        <div class="chart-year">2021</div>
+        <div class="chart-track"><div class="chart-fill red-light" style="width: 45.2%;"><span class="chart-value dark">45.2%</span></div></div>
+      </div>
+      <div class="chart-row">
+        <div class="chart-year">2025</div>
+        <div class="chart-track"><div class="chart-fill red" style="width: 67.5%;"><span class="chart-value">67.5%</span></div></div>
+      </div>
+    </div>
+    <div class="stat-line">
+      <div class="stat-pill">地方国资认缴 <strong>7961亿</strong> <span style="color:#27ae60">+85.2%</span></div>
+      <div class="stat-pill">国资直投渗透率 <strong>44.55%</strong></div>
+      <div class="stat-pill">国资管理规模占比 <strong>71.1%</strong></div>
+    </div>
+    <div class="callout green-bg">
+      <div class="callout-title">2026H1新变化 · 新资金方接棒</div>
+      <div class="callout-text">银行AIC（金融资产投资公司）出资319.70亿元（+32.08%）；产业类LP出资999.09亿元（+28.74%）。国资LP占比从90.2%微降至86%，不是国资退了，是牌桌在扩容。2026年6月新规：严控新设政府投资基金，县区原则上不得新设。</div>
+    </div>
+    <div style="margin-top:14px; font-size:11px; color:#aaa; line-height:1.6;">
+      口径：2025年数据来源执中ZERONE；2026H1数据来源烯牛数据（新浪财经援引）。国资管理人3,986家（35.2%）管理全行业71.1%资金（清科）。
+    </div>
+  </div>
+
+  <!-- SECTION 3: FOREIGN CAPITAL -->
+  <div class="section" style="border-top: 1px solid #f0f0f0;">
+    <div class="section-title">
+      <div class="section-bar gray"></div>
+      <h2>外资全面撤退</h2>
+      <span class="en">Foreign Capital Retreat · 2025</span>
+    </div>
+    <div class="chart-block">
+      <div class="chart-caption">美元基金投资额（亿元）</div>
+      <div class="chart-row">
+        <div class="chart-year">2021</div>
+        <div class="chart-track"><div class="chart-fill gray" style="width: 100%;"><span class="chart-value">5329亿 · 占35.9%</span></div></div>
+      </div>
+      <div class="chart-row">
+        <div class="chart-year">2025</div>
+        <div class="chart-track"><div class="chart-fill gray-light" style="width: 15.5%;"><span class="chart-value dark">827亿 · 占10.1%</span></div></div>
+      </div>
+    </div>
+    <div class="stat-line">
+      <div class="stat-pill">5年萎缩 <strong>84%</strong></div>
+      <div class="stat-pill">美元事件数 <strong>871→225起</strong></div>
+      <div class="stat-pill">外币基金募资 <strong>350亿</strong> <span style="color:#c0392b">−36%</span></div>
+    </div>
+    <div class="callout">
+      <div class="callout-title">典型案例 · 海纳亚洲SIG</div>
+      <div class="callout-text">曾以600万美元投资字节跳动，获利约1.5万倍，登顶全球VC史上最成功单笔投资之一。现已解散中国团队，不再寻找"下一个字节"。2026H1外币基金募资452.60亿（+122.5%），但仅19只基金，不改变大趋势。</div>
+    </div>
+    <div style="margin-top:14px; font-size:11px; color:#aaa; line-height:1.6;">
+      口径：美元基金数据来源IT桔子。份额占比按当年投资金额计算。
+    </div>
+  </div>
+
+  <!-- SECTION 4: AI EXPLOSION -->
+  <div class="section" style="border-top: 1px solid #f0f0f0;">
+    <div class="section-title">
+      <div class="section-bar purple"></div>
+      <h2>AI重塑投资地图</h2>
+      <span class="en">AI Explosion · 2026H1</span>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card s1">
+        <div class="stat-number">974<span class="stat-unit">起</span></div>
+        <div class="stat-label">AI融资事件<br>2026H1</div>
+        <div class="stat-change up">+101.7%</div>
+      </div>
+      <div class="stat-card s2">
+        <div class="stat-number">37.2<span class="stat-unit">%</span></div>
+        <div class="stat-label">AI占全市场<br>比重(↑自12.1%)</div>
+      </div>
+      <div class="stat-card s3">
+        <div class="stat-number">2155<span class="stat-unit">亿</span></div>
+        <div class="stat-label">IT行业投资<br>排名第一</div>
+      </div>
+      <div class="stat-card s4">
+        <div class="stat-number">1113<span class="stat-unit">亿</span></div>
+        <div class="stat-label">半导体投资<br>排名第二</div>
+      </div>
+    </div>
+    <div class="stat-line">
+      <div class="stat-pill">具身智能 <strong>228起</strong> <span style="color:#27ae60">+107%</span></div>
+      <div class="stat-pill">AI Agent <strong>83起</strong> <span style="color:#27ae60">+131%</span></div>
+      <div class="stat-pill">脑机接口 <strong>58起</strong> <span style="color:#27ae60">+222%</span></div>
+      <div class="stat-pill">DeepSeek估值 <strong>4000亿</strong> 单轮 <strong>510亿</strong></div>
+    </div>
+    <div style="margin-top:14px; font-size:11px; color:#aaa; line-height:1.6;">
+      口径：2026H1数据来源烯牛数据（新浪财经援引）及清科研究中心。10亿+大额融资97起，总规模2576.27亿元。成立不到一年获投项目1089个。
+    </div>
+  </div>
+
+  <!-- SECTION 5: EXIT CHANNEL -->
+  <div class="section" style="border-top: 1px solid #f0f0f0;">
+    <div class="section-title">
+      <div class="section-bar green"></div>
+      <h2>退出通道重启</h2>
+      <span class="en">Exit Channel Reopens · 2026H1</span>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card s1">
+        <div class="stat-number">1732<span class="stat-unit">笔</span></div>
+        <div class="stat-label">IPO退出<br>2026H1</div>
+        <div class="stat-change up">+198.6%</div>
+      </div>
+      <div class="stat-card s2">
+        <div class="stat-number">368<span class="stat-unit">笔</span></div>
+        <div class="stat-label">并购退出<br>2026H1</div>
+        <div class="stat-change up">+94.7%</div>
+      </div>
+      <div class="stat-card s3">
+        <div class="stat-number">71<span class="stat-unit">家</span></div>
+        <div class="stat-label">A股上市<br>融资694.66亿</div>
+        <div class="stat-change up">+39.2%</div>
+      </div>
+      <div class="stat-card s4">
+        <div class="stat-number">83<span class="stat-unit">家</span></div>
+        <div class="stat-label">港股上市<br>融资1636.72亿</div>
+        <div class="stat-change up">+94.2%</div>
+      </div>
+    </div>
+    <div class="stat-line">
+      <div class="stat-pill">北证主板 <strong>36家</strong> 占A股 <strong>51%</strong></div>
+      <div class="stat-pill">退出案例总数 <strong>2503笔</strong> <span style="color:#27ae60">+8.3%</span></div>
+      <div class="stat-pill">港股融资 <strong>1636.72亿</strong> <span style="color:#27ae60">+94.2%</span></div>
+    </div>
+    <div style="margin-top:14px; font-size:11px; color:#aaa; line-height:1.6;">
+      口径：2026H1数据来源清科研究中心（东方财富/同花顺援引）。北交所成为中小企业新通道，港股成为境外上市主阵地。
+    </div>
+  </div>
+
+  <!-- SECTION 6: PRIVATE VC -->
+  <div class="section" style="border-top: 1px solid #f0f0f0;">
+    <div class="section-title">
+      <div class="section-bar orange"></div>
+      <h2>民营VC的生存空间</h2>
+      <span class="en">Private VC Squeeze</span>
+    </div>
+    <div class="chart-caption">2025年 LP出资结构</div>
+    <div class="stacked-bar">
+      <div class="stacked-seg" style="width:90.2%; background:#c0392b;">国资 90.2%</div>
+      <div class="stacked-seg" style="width:9.8%; background:#e67e22;">9.8%</div>
+    </div>
+    <div class="stacked-legend">
+      <span><span class="legend-dot" style="background:#c0392b;"></span>国资背景 LP</span>
+      <span><span class="legend-dot" style="background:#e67e22;"></span>非国资（含外资、产业资本、金融机构等）</span>
+    </div>
+    <div class="stat-line">
+      <div class="stat-pill">纯外资LP约 <strong>1.5%</strong></div>
+      <div class="stat-pill">银行/信托资管 <span style="color:#c0392b">大幅收缩</span></div>
+      <div class="stat-pill">中小民营GP <span style="color:#c0392b">望资兴叹</span></div>
+    </div>
+  </div>
+
+  <!-- SECTION 7: MODE SHIFT & INSIGHTS -->
+  <div class="section" style="border-top: 1px solid #f0f0f0; background: #fafbfc;">
+    <div class="section-title">
+      <div class="section-bar blue"></div>
+      <h2>模式更替与企业家启示</h2>
+      <span class="en">Paradigm Shift</span>
+    </div>
+    <div class="mode-compare">
+      <div class="mode-card old">
+        <div class="mode-badge old">旧模式 · 已终结</div>
+        <div class="mode-flow">募美元 <span class="arrow">→</span> 烧钱扩张 <span class="arrow">→</span> 美股退出</div>
+        <div class="mode-note">互联网轻资产 · 商业模式创新估值</div>
+      </div>
+      <div class="mode-card new">
+        <div class="mode-badge new">新模式 · 进行中</div>
+        <div class="mode-flow">国资LP <span class="arrow">→</span> 招商落地 <span class="arrow">→</span> A股/港股退出</div>
+        <div class="mode-note">硬科技重资产 · 产业链价值评估</div>
+      </div>
+    </div>
+    <div class="insight-list">
+      <div class="insight-item">
+        <div class="insight-num">01</div>
+        <div class="insight-body">
+          <h4>钱在哪变了 — 国资仍是主力，但牌桌在扩容</h4>
+          <p>国资LP占比86%，仍是绝对主力。银行AIC（+32%）和产业资本（+29%）在增长。融资第一站仍是政府产业基金和国资平台，但银行AIC值得关注。</p>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">02</div>
+        <div class="insight-body">
+          <h4>什么能拿到钱 — AI+硬科技是唯一主赛道</h4>
+          <p>AI融资占全市场37.2%，半导体投资超千亿。成立不到一年就获投的项目有1089个——硬科技"成立即融资"成为常态。</p>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">03</div>
+        <div class="insight-body">
+          <h4>附加条件变了 — 招商绑定仍在，规则在细化</h4>
+          <p>国资投资仍绑定招商落地。6月新规"严控新设政府投资基金，县区原则上不得新设"——地方国资的钱会更集中、更挑剔，质量门槛在提高。</p>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">04</div>
+        <div class="insight-body">
+          <h4>退出路径变了 — 通道重启，A股+港股双轨</h4>
+          <p>IPO退出暴增198.6%，并购退出翻倍。北交所占A股上市51%，港股融资接近翻倍。上市规划应围绕A股科创板/北交所和港股双轨做。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-sources">
+      <strong>数据来源：</strong>清科研究中心（2025募资端、2026H1募资/投资/退出端）、IT桔子《2025~2026中国一级市场股权投资报告》（2025投资端、美元基金、国资渗透率）、执中ZERONE《中国机构投资者出资解读报告》（2025 LP出资结构）、烯牛数据《2026年H1中国私募股权市场深度解析报告》（2026H1 LP出资、AI融资）、行业报告（行业存续规模14.77万亿，中新网援引）。清科与IT桔子/烯牛数据投资端统计口径不同，数据不可直接横比。
+    </div>
+    <div class="footer-disclaimer">
+      本图示基于公开统计数据整理，仅供行业研究参考，不构成投资建议或审计意见。数据口径因统计机构不同可能存在差异，引用时请核注原始来源。更新日期：2026年7月。
+    </div>
+  </div>
+
+</div>
+
+<button id="download-btn" onclick="downloadPNG()">导出 PNG</button>
+
+<script>
+function downloadPNG() {
+  var btn = document.getElementById('download-btn');
+  btn.style.display = 'none';
+  html2canvas(document.getElementById('infographic'), {
+    scale: 2,
+    backgroundColor: '#ffffff',
+    useCORS: true,
+    logging: false
+  }).then(function(canvas) {
+    btn.style.display = 'block';
+    var link = document.createElement('a');
+    link.download = '中国创投市场结构性巨变_2025-2026H1数据全景.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  }).catch(function(err) {
+    btn.style.display = 'block';
+    alert('导出失败，请重试或直接截图');
+    console.error(err);
+  });
+}
+</script>
+<div class="foot">
+  <p class="disc">免责声明：本图示基于清科研究中心、IT桔子、执中 ZERONE、烯牛数据等公开统计报告整理，仅供行业研究参考，不构成投资建议或审计意见。各机构统计口径不同（如清科与 IT桔子投资端口径不可直接横比），引用时请核注原始来源。更新日期：2026 年 7 月。</p>
+  <p class="sign">何斌 | 金融 FMBA · 高级会计师 · 董秘 · CIA<br>多年企业财务与投资分析经验</p>
+  <p class="tags">#有二财经 #AI多懂企业你就有多强 #创投市场 #国资主导 #外资撤退 #AI融资 #退出重启</p>
+  <p style="margin-top:14px;"><a class="back" href="../index.html">← 返回首页</a></p>
+</div>
+</body>
+</html>

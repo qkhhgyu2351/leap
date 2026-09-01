@@ -210,13 +210,14 @@
         });
         list.innerHTML = posts.map(function (p) {
           var url = p.url || ('article.html?id=' + encodeURIComponent(p.id || ''));
+          var isImage = /\.(png|jpe?g|gif|webp|svg)$/i.test(url);
           var d = p.date ? '<span class="post-date">' + esc(p.date) + '</span>' : '';
           var cat = '<span class="post-cat">' + esc(p.cat || '洞察') + '</span>';
           var meta = [p.author || '何斌', p.readTime ? '约 ' + esc(p.readTime) : ''].filter(Boolean).join(' · ');
           return '<article class="post">' + d + '<div>' + cat +
             '<h3><a href="' + url + '">' + esc(p.title) + '</a></h3>' +
             '<p>' + esc(p.summary || '') + '</p>' +
-            '<div class="post-meta">' + esc(meta) + ' · <a href="' + url + '">阅读 →</a></div>' +
+            '<div class="post-meta">' + esc(meta) + ' · <a href="' + url + '">' + (isImage ? '查看大图 →' : '阅读 →') + '</a></div>' +
             '</div></article>';
         }).join('');
       })();

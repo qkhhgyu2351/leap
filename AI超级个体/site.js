@@ -112,7 +112,6 @@
     });
 
     draw();
-    setupSearch(function (q) { state.q = q; draw(); });
   }
 
   /* ---------- 详情页 ---------- */
@@ -197,8 +196,8 @@
 
   /* ---------- 启动 ---------- */
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", function () { renderHome(); renderArticle(); });
+    document.addEventListener("DOMContentLoaded", function () { renderHome(); renderArticle(); setupSearch(); });
   } else {
-    renderHome(); renderArticle();
+    renderHome(); renderArticle(); setupSearch();
   }
 })();
