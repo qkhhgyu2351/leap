@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>SpaceX上市全景链图谱 — 视频背景素材</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+    background: #f0ebe3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  .chart {
+    width: 1440px;
+    height: 1024px;
+    position: relative;
+    background:
+      linear-gradient(180deg, #faf6ef 0%, #f5ede0 50%, #efe7d9 100%);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+    overflow: hidden;
+  }
+
+  /* 标题 */
+  .title-bar {
+    text-align: center;
+    padding-top: 28px;
+    margin-bottom: 16px;
+  }
+  .main-title {
+    font-size: 42px;
+    font-weight: 800;
+    color: #1e3a5f;
+    letter-spacing: 4px;
+  }
+  .sub-title {
+    font-size: 15px;
+    color: #7a8ba3;
+    margin-top: 4px;
+    letter-spacing: 2px;
+  }
+
+  /* 马斯克信息卡片 */
+  .musk-card {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    width: 220px;
+    background: #fff5ee;
+    border: 2px solid #f4a261;
+    border-radius: 12px;
+    padding: 14px 18px;
+  }
+  .musk-card .label { font-size: 11px; color: #c07a3a; margin-bottom: 4px; }
+  .musk-card .big-num { font-size: 28px; font-weight: 800; color: #d35400; }
+  .musk-card .check { color: #27ae60; font-size: 16px; }
+  .musk-card .note { font-size: 11px; color: #b07a40; margin-top: 6px; line-height: 1.5; }
+
+  /* 板块卡片 */
+  .card-row-1 { display: flex; gap: 16px; padding: 0 24px; margin-bottom: 16px; }
+  .card {
+    flex: 1;
+    background: #fff;
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    position: relative;
+    border-top: 4px solid;
+  }
+  .card.blue { border-color: #3498db; }
+  .card.green { border-color: #27ae60; }
+  .card.purple { border-color: #9b59b6; }
+  .card.orange { border-color: #e67e22; }
+  .card.red { border-color: #e74c3c; }
+  .card.navy { border-color: #2980b9; }
+
+  .num-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    font-size: 14px; font-weight: 800;
+    color: #fff;
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+  .blue .num-badge { background: #3498db; }
+  .green .num-badge { background: #27ae60; }
+  .purple .num-badge { background: #9b59b6; }
+  .orange .num-badge { background: #e67e22; }
+  .red .num-badge { background: #e74c3c; }
+  .navy .num-badge { background: #2980b9; }
+
+  .card-title {
+    display: flex;
+    align-items: center;
+    font-size: 17px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 12px;
+  }
+  .card-body { font-size: 13px; line-height: 1.8; color: #555; }
+  .highlight-box {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .bg-red { background: #fee; color: #c0392b; }
+  .bg-green { background: #e8f8ed; color: #27ae60; }
+  .bg-blue { background: #ebf5fb; color: #2980b9; }
+  .tag-list { margin-top: 8px; }
+  .tag-item {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    margin: 2px 3px 2px 0;
+    background: #f0f0f0;
+    color: #666;
+  }
+  .tag-item.ok { background: #e8f8ec; color: #27ae60; }
+
+  /* 箭头连接 */
+  .arrow-h {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    flex-shrink: 0;
+    color: #9b59b6;
+    font-size: 22px;
+    padding-top: 36px;
+  }
+  .arrow-v {
+    text-align: center;
+    color: #9b59b6;
+    font-size: 22px;
+    padding: 4px 0;
+  }
+
+  /* 第二行 */
+  .card-row-2 { display: flex; gap: 16px; padding: 0 24px; margin-bottom: 16px; }
+
+  /* 底部区域：估值路径 + IPO挂牌 + 为何值得期待 */
+  .bottom-area {
+    display: grid;
+    grid-template-columns: 340px 1fr 300px;
+    gap: 16px;
+    padding: 0 24px;
+    height: 200px;
+  }
+
+  /* 估值路径 */
+  .valuation-path {
+    background: #fff;
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border-left: 5px solid #e67e22;
+  }
+  .val-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: #d35400;
+    margin-bottom: 14px;
+  }
+  .val-steps {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+  .val-step {
+    text-align: center;
+    flex: 1;
+  }
+  .val-year { font-size: 12px; color: #999; margin-bottom: 4px; }
+  .val-num { font-size: 22px; font-weight: 800; color: #d35400; }
+  .val-unit { font-size: 11px; color: #aaa; }
+  .val-desc { font-size: 10px; color: #bbb; margin-top: 2px; }
+  .val-arrow {
+    font-size: 20px;
+    color: #e67e22;
+    padding: 0 4px;
+  }
+  .val-chart {
+    margin-top: 12px;
+    height: 48px;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    padding: 0 8px;
+  }
+  .bar-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .bar {
+    width: 100%;
+    max-width: 44px;
+    border-radius: 4px 4px 0 0;
+    transition: height 0.5s;
+  }
+  .bar.y2020 { height: 25%; background: linear-gradient(to top, #f39c12, #f1c40f); }
+  .bar.y2025 { height: 55%; background: linear-gradient(to top, #e67e22, #f39c12); }
+  .bar.y2026 { height: 95%; background: linear-gradient(to top, #d35400, #e67e22); }
+  .bar-label { font-size: 10px; color: #999; margin-top: 4px; }
+
+  /* IPO挂牌 */
+  .ipo-banner {
+    background: linear-gradient(135deg, #1a237e 0%, #0d47a1 50%, #1565c0 100%);
+    border-radius: 12px;
+    padding: 20px 28px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .ipo-banner::before {
+    content: '';
+    position: absolute;
+    top: -30%; right: -15%;
+    width: 200px; height: 200px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+  }
+  .ipo-banner::after {
+    content: '';
+    position: absolute;
+    bottom: -20%; left: -10%;
+    width: 150px; height: 150px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+  .ipo-tag { font-size: 12px; opacity: 0.7; letter-spacing: 2px; margin-bottom: 6px; }
+  .ipo-code { font-size: 52px; font-weight: 900; letter-spacing: 3px; }
+  .ipo-date { font-size: 18px; font-weight: 600; margin-top: 4px; }
+  .ipo-slogan { font-size: 14px; opacity: 0.85; margin-top: 8px; letter-spacing: 1px; }
+  .ipo-sub { font-size: 11px; opacity: 0.5; margin-top: 4px; }
+
+  /* 为何值得期待 */
+  .why-worth {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px 18px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border-left: 5px solid #e74c3c;
+  }
+  .why-title {
+    font-size: 15px;
+    font-weight: 800;
+    color: #c0392b;
+    margin-bottom: 10px;
+  }
+  .why-item {
+    font-size: 12px;
+    color: #555;
+    line-height: 1.85;
+    padding-left: 14px;
+    position: relative;
+  }
+  .why-item::before {
+    content: '★';
+    position: absolute;
+    left: 0;
+    color: #e74c3c;
+    font-size: 10px;
+  }
+
+  /* 底部注释 */
+  .foot-note {
+    position: absolute;
+    bottom: 12px;
+    left: 24px;
+    right: 24px;
+    font-size: 11px;
+    color: #bbb;
+    text-align: center;
+  }
+
+  /* 装饰星星 */
+  .star {
+    position: absolute;
+    color: #f4d03f;
+    font-size: 14px;
+    opacity: 0.5;
+  }
+</style>
+</head>
+<body>
+
+<div class="chart">
+
+  <!-- 装饰星星 -->
+  <div class="star" style="top:80px;left:120px;">✦</div>
+  <div class="star" style="top:45px;left:480px;font-size:18px;opacity:0.3;">✧</div>
+  <div class="star" style="top:120px;left:900px;font-size:12px;">✦</div>
+  <div class="star" style="top:380px;left:1400px;font-size:16px;opacity:0.4;">✧</div>
+  <div class="star" style="top:520px;left:50px;font-size:10px;">✦</div>
+
+  <!-- 标题 -->
+  <div class="title-bar">
+    <div class="main-title">SpaceX 上市全景链图谱</div>
+    <div class="sub-title">从猎鹰9号到AI太空算力 · 定义未来太空基础设施</div>
+  </div>
+
+  <!-- 马斯克控股卡片 -->
+  <div class="musk-card">
+    <div class="label">马斯克控股</div>
+    <span class="big-num">82.4%</span><span class="check"> ✓</span> 投票权
+    <div class="note">全部新股增发<br>募资750亿美元<br>目标估值$1.75万亿</div>
+  </div>
+
+  <!-- 第一行：①②③ -->
+  <div class="card-row-1">
+    <!-- ① 猎鹰9号 -->
+    <div class="card blue">
+      <div class="card-title">
+        <span class="num-badge">①</span> 猎鹰9号可复用火箭降本60%
+      </div>
+      <div class="card-body">
+        <table style="width:100%;font-size:12px;border-collapse:collapse;">
+          <tr><td style="padding:3px;color:#888;width:50%;">发射制造成本</td><td style="padding:3px;"><s style="color:#bbb;">$6200万</s></td></tr>
+          <tr><td style="padding:3px;color:#888;"></td><td style="padding:3px;font-weight:700;color:#27ae60;">→ $2300万</td></tr>
+        </table>
+        <div class="tag-list" style="margin-top:8px;">
+          <span class="tag-item ok">10次+复用使用</span>
+          <span class="tag-item ok">快速周转</span>
+          <span class="tag-item ok">规模效应降本</span>
+        </div>
+        <div style="margin-top:8px;text-align:center;">
+          <span class="highlight-box bg-blue">最高复用 34 次（B1067）</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="arrow-h">→</div>
+
+    <!-- ② 星舰 -->
+    <div class="card green">
+      <div class="card-title">
+        <span class="num-badge">②</span> 星舰超重型火箭试飞
+      </div>
+      <div class="card-body">
+        <div class="tag-list">
+          <span class="tag-item ok">✓ 完全可复用</span>
+          <span class="tag-item ok">✓ 更大运力</span>
+          <span class="tag-item ok">✓ 更低成本</span>
+          <span class="tag-item ok">✓ 遥往深空</span>
+        </div>
+        <div style="margin-top:10px;padding:8px;background:#eafaf1;border-radius:6px;font-size:12px;line-height:1.7;">
+          <strong style="color:#27ae60;">近地轨道运载能力：</strong>100-150 吨<br>
+          <strong style="color:#27ae60;">箭体材料：</strong>不锈钢（成本≈传统方案 1/50）<br>
+          <strong style="color:#27ae60;">发动机：</strong>Raptor 全流量分级燃烧循环
+        </div>
+      </div>
+    </div>
+
+    <div class="arrow-h">→</div>
+
+    <!-- ③ 星链网络 -->
+    <div class="card purple">
+      <div class="card-title">
+        <span class="num-badge">③</span> 星链网络全球覆盖
+      </div>
+      <div class="card-body">
+        <div style="display:flex;gap:12px;margin-bottom:8px;">
+          <div style="text-align:center;flex:1;">
+            <div style="font-size:20px;font-weight:800;color:#8e44ad;">100+</div>
+            <div style="font-size:10px;color:#999;">国家/地区</div>
+          </div>
+          <div style="text-align:center;flex:1;">
+            <div style="font-size:20px;font-weight:800;color:#8e44ad;">数百万用户</div>
+            <div style="font-size:10px;color:#999;">低延迟·高速·可靠</div>
+          </div>
+        </div>
+        <div style="background:#f5eef8;border-radius:6px;padding:8px;font-size:12px;">
+          全球 ~75% 可操作卫星份额 · Starlink Mobile 30国覆盖
+        </div>
+      </div>
+    </div>
+
+    <div class="arrow-h">↓</div>
+
+    <!-- ④ xAI合并 -->
+    <div class="card orange" style="margin-top: -8px;">
+      <div class="card-title">
+        <span class="num-badge">④</span> xAI 合并（2500亿美元估值）
+      </div>
+      <div class="card-body">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <span style="background:#000;color:#fff;padding:4px 10px;border-radius:4px;font-weight:700;font-size:13px;">X</span>
+          <span style="font-size:16px;color:#ccc;">🤝</span>
+          <span style="background:#000;color:#fff;padding:4px 10px;border-radius:4px;font-weight:700;font-size:13px;">xAI</span>
+        </div>
+        <div class="tag-list">
+          <span class="tag-item">• AI 顶尖团队</span>
+          <span class="tag-item">• 大模型能力</span>
+          <span class="tag-item">• 数据+算力+场景</span>
+          <span class="tag-item">• 强强联合 协同加速</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第二行：⑤⑥ + IPO -->
+  <div class="card-row-2" style="align-items:flex-end;">
+    <!-- ⑤ AI太空算力 -->
+    <div class="card red" style="flex:1.2;">
+      <div class="card-title">
+        <span class="num-badge">⑤</span> AI 太空算力基础设施
+      </div>
+      <div class="card-body">
+        <div style="display:flex;gap:16px;">
+          <div style="flex:1;">
+            <div style="font-size:11px;color:#999;">太空数据中心构想</div>
+            <div style="font-size:12px;line-height:1.7;color:#666;margin-top:4px;">
+              • 利用太空太阳能供电<br>
+              • 真空天然散热优势<br>
+              • 解决热能耗散瓶颈<br>
+              • 支撑 AGI 时代算力需求
+            </div>
+          </div>
+          <div style="flex:1;text-align:right;">
+            <div style="font-size:11px;color:#999;">⚠️ 不确定性提示</div>
+            <div style="font-size:11px;line-height:1.7;color:#c0392b;margin-top:4px;">
+              • 技术可行性未验证<br>
+              • 商业模式未成熟<br>
+              • 远期期权 ≠ 确定性收益
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="arrow-h">→</div>
+
+    <!-- ⑥ IPO挂牌 -->
+    <div class="card navy" style="min-width:240px;">
+      <div class="card-title">
+        <span class="num-badge">⑥</span> 2026年6月12日 纳斯达克 SPCX 挂牌
+      </div>
+      <div class="card-body" style="text-align:center;">
+        <div style="background:#1a237e;color:#fff;border-radius:8px;padding:12px;margin:4px 0;">
+          <div style="font-size:12px;opacity:0.7;">Nasdaq</div>
+          <div style="font-size:28px;font-weight:900;letter-spacing:2px;">SPCX</div>
+          <div style="font-size:13px;font-weight:600;">LISTED JUNE 12, 2026</div>
+        </div>
+        <div style="margin-top:8px;font-size:13px;color:#c0392b;font-weight:700;">
+          开启太空与 AI 新时代！
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部区域 -->
+  <div class="bottom-area">
+    <!-- 估值路径 -->
+    <div class="valuation-path">
+      <div class="val-title">估值跃迁路径 ↗</div>
+      <div class="val-steps">
+        <div class="val-step">
+          <div class="val-year">2020年</div>
+          <div class="val-num">$460亿</div>
+          <div class="val-desc">可回收技术验证<br>商业化初期</div>
+        </div>
+        <div class="val-arrow">→</div>
+        <div class="val-step">
+          <div class="val-year">2025年</div>
+          <div class="val-num">$1万亿</div>
+          <div class="val-desc">星链规模化增长<br>星舰即将商用</div>
+        </div>
+        <div class="val-arrow">→</div>
+        <div class="val-step">
+          <div class="val-year">2026年IPO约</div>
+          <div class="val-num">$1.75万亿</div>
+          <div class="val-desc">太空+AI双轮驱动<br>全球基础设施公司<br>长期估值重估</div>
+        </div>
+      </div>
+      <div class="val-chart">
+        <div class="bar-wrap"><div class="bar y2020"></div><div class="bar-label">2020</div></div>
+        <div class="bar-wrap"><div class="bar y2025"></div><div class="bar-label">2025</div></div>
+        <div class="bar-wrap"><div class="bar y2026"></div><div class="bar-label">IPO</div></div>
+      </div>
+    </div>
+
+    <!-- IPO主视觉 -->
+    <div class="ipo-banner">
+      <div class="ipo-tag">NASDAQ GLOBAL SELECT MARKET</div>
+      <div class="ipo-code">SPCX</div>
+      <div class="ipo-date">LISTED · JUNE 12, 2026</div>
+      <div class="ipo-slogan">从地球到太空，从连接到智能</div>
+      <div class="ipo-sub">SpaceX 定义未来！</div>
+    </div>
+
+    <!-- 为何值得期待 -->
+    <div class="why-worth">
+      <div class="why-title">为何值得关注？</div>
+      <div class="why-item">垂直整合的太空生态</div>
+      <div class="why-item">持续领先的发射能力</div>
+      <div class="why-item">全球化网络与服务</div>
+      <div class="why-item">AI 时代的核心基础设施</div>
+    </div>
+  </div>
+
+  <!-- 注释 -->
+  <div class="foot-note">
+    注：本图为信息梳理与趋势展示，不构成投资建议。数据来源：公开资料整理（截至 2026年5月 S-1招股书）。映射关系不代表直接供货或业绩贡献。
+  </div>
+
+</div>
+
+</body>
+</html>

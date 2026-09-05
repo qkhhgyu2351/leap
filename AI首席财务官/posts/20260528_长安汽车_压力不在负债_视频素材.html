@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>长安汽车 · 真正的压力并不在于负债</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root{
+  --bg:#f7f8fc;--card:#fff;--border:#e6e9f0;--text:#1a1a2e;--sub:#7a7a9e;
+  --red:#e85d3a;--red-l:#fef0ec;--blue:#2d7dd2;--blue-l:#edf4fc;
+  --green:#1f9d6b;--green-l:#e2f5ec;--gold:#c5963a;--warn:#e74c3c;
+  --cyan:#00bcd4;--purple:#9c27b0;--orange:#ff9800;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+
+/* 每页为一个全屏滚动单元 */
+.page{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:56px 36px;position:relative;overflow:hidden}
+.page-tag{font-size:13px;color:var(--gold);text-transform:uppercase;letter-spacing:3px;margin-bottom:14px;font-weight:700}
+.page-title{font-size:42px;font-weight:800;text-align:center;max-width:880px;margin-bottom:10px;line-height:1.3;letter-spacing:-.5px}
+.page-subtitle{font-size:18px;color:var(--sub);text-align:center;max-width:720px;margin-bottom:30px}
+
+/* 数据卡片 */
+.card-row{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;max-width:1000px;margin:0 auto}
+.data-card{background:var(--card);border-radius:14px;padding:22px 26px;min-width:190px;flex:1;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.04);border:1px solid var(--border)}
+.data-card .label{font-size:13px;color:var(--sub);margin-bottom:7px}
+.data-card .value{font-size:38px;font-weight:800;margin-bottom:4px}
+.data-card .note{font-size:12px;color:var(--sub)}
+
+/* 图表区域 */
+.chart-section{background:var(--card);border-radius:14px;padding:28px 24px 20px;margin-bottom:0;box-shadow:0 2px 12px rgba(0,0,0,.04);border:1px solid var(--border);width:100%;max-width:1000px}
+.chart-section h2{font-size:19px;margin-bottom:6px;color:#1a1a2e}
+.chart-section .chart-note{font-size:12px;color:var(--sub);margin-bottom:18px}
+.chart-wrap{position:relative;width:100%;height:420px}
+.chart-wrap canvas{width:100%!important;height:100%!important}
+
+/* 核心观点 */
+.core-line{display:flex;align-items:flex-start;gap:14px;max-width:840px;margin:0 auto 28px;padding:16px 20px;background:#fffbf0;border-left:4px solid var(--gold);border-radius:0 8px 8px 0}
+.core-line .icon{font-size:22px;flex-shrink:0}
+.core-line .text{font-size:17px;font-weight:700;color:#5c4010;line-height:1.5}
+
+/* 同比标注 */
+.yoy-note{margin-top:14px;padding-top:12px;border-top:1px dashed #e0e0e0;font-size:12px;color:#666;line-height:1.8}
+.yoy-note .brand-label{font-weight:600;color:#333;margin-right:4px}
+.yoy-note .up{color:#e53935}
+.yoy-note .down{color:#2e7d32}
+.yoy-note .flat{color:#999}
+
+/* 数据说明 */
+.data-notes{background:var(--card);border-radius:14px;padding:20px 24px;box-shadow:0 2px 12px rgba(0,0,0,.04);border:1px solid var(--border);font-size:13px;color:#666;line-height:1.8;max-width:1000px;width:100%}
+.data-notes h3{font-size:15px;color:#333;margin-bottom:8px}
+.data-notes .tag{display:inline-block;background:#e8f4fd;color:#1565c0;padding:1px 8px;border-radius:3px;font-size:11px;margin-right:6px}
+
+.footer-note{text-align:center;font-size:12px;color:#aaa;margin-top:8px}
+
+/* 负债部分特殊样式 */
+.debt-indicator{display:flex;gap:20px;max-width:900px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+.di-card{background:var(--card);border-radius:14px;padding:24px 28px;text-align:center;min-width:200px;flex:1;border:1px solid var(--border);box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.di-card .di-val{font-size:36px;font-weight:800}
+.di-card .di-label{font-size:14px;color:var(--sub);margin-top:4px}
+.di-card .di-sub{font-size:12px;color:var(--sub);margin-top:2px}
+.di-card.good{border-top:3px solid var(--green)}
+.di-card.warn-card{border-top:3px solid var(--warn)}
+
+@media(max-width:768px){
+  .page{padding:40px 16px}
+  .page-title{font-size:28px}
+  .chart-wrap{height:320px}
+  .card-row{flex-direction:column}
+  .debt-indicator{flex-direction:column}
+  .data-card{min-width:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== 封面页 ===== -->
+<div class="page">
+  <div class="page-tag">长安汽车 · 深度拆解</div>
+  <div class="page-title">真正的压力<br>并不在于负债</div>
+  <div class="page-subtitle">2025年报 + 2026一季报数据全景</div>
+</div>
+
+<!-- ===== 第一部分：负债情况 ===== -->
+<div class="page">
+  <div class="page-tag">Part 1 · 负债</div>
+  <div class="page-title">负债端：看似危险，实则安全</div>
+  <div class="page-subtitle">2026年一季度末资产负债表关键数据</div>
+
+  <div class="debt-indicator" style="margin-bottom:28px">
+    <div class="di-card good">
+      <div class="di-val" style="color:var(--green)">398亿</div>
+      <div class="di-label">货币资金</div>
+      <div class="di-sub">一季度末账上现金</div>
+    </div>
+    <div class="di-card good">
+      <div class="di-val" style="color:var(--blue)">57.1%</div>
+      <div class="di-label">资产负债率</div>
+      <div class="di-sub">1907亿总资产 · 1090亿总负债</div>
+    </div>
+    <div class="di-card good">
+      <div class="di-val" style="color:var(--green)">23.3倍</div>
+      <div class="di-label">现金/(借款+债券)</div>
+      <div class="di-sub">借款+债券17.1亿 · 现金398亿</div>
+    </div>
+    <div class="di-card good">
+      <div class="di-val" style="color:var(--green)">17.1亿</div>
+      <div class="di-label">借款+债券</div>
+      <div class="di-sub">短借0.44亿+一年内到期6.71亿+债券10亿</div>
+    </div>
+  </div>
+
+  <div class="core-line" style="max-width:900px">
+    <div class="icon">&#128161;</div>
+    <div class="text">长安的负债大头是应付票据和应付账款（对上游供应商的占款），而不是银行借款。借款和债券合计仅17.1亿（短期借款0.44亿+一年内到期6.71亿+应付债券10亿），398亿现金对应17.1亿借款和债券，几乎不靠银行贷款。</div>
+  </div>
+
+</div>
+
+<!-- ===== 第二部分：合资联营板块 ===== -->
+<div class="page">
+  <div class="page-tag">Part 2 · 合资联营</div>
+  <div class="page-title">合资联营：销量与投资收益双杀</div>
+  <div class="page-subtitle">福特 · 马自达 · 阿维塔 · 2025.1 — 2026.5 月度销量</div>
+
+  <div class="chart-section">
+    <h2>合资联营板块月度销量</h2>
+    <p class="chart-note">阿维塔 · 长安马自达 · 长安福特 · 单位：辆</p>
+    <div class="chart-wrap"><canvas id="chart_jv"></canvas></div>
+    <div class="yoy-note" id="yoy_jv"></div>
+  </div>
+</div>
+
+<!-- ===== 第二部分B：投资收益 ===== -->
+<div class="page">
+  <div class="page-tag">Part 2 · 投资收益</div>
+  <div class="page-title">联营合营投资收益：Q4断崖下跌</div>
+  <div class="page-subtitle">"对联营企业和合营企业的投资收益" · 各季度单季数据（亿元）</div>
+
+  <div class="chart-section">
+    <h2>联营合营企业投资收益（单季）</h2>
+    <p class="chart-note">2025Q1 — 2026Q1 · 阿维塔2025年确认投资亏损12.12亿，Q4集中体现</p>
+    <div class="chart-wrap"><canvas id="chart_inv"></canvas></div>
+  </div>
+
+  <div class="core-line" style="margin-top:20px;max-width:900px">
+    <div class="icon">&#9888;&#65039;</div>
+    <div class="text">2025全年对联营合营企业投资收益为-4.3亿（2024年为+3.7亿）。Q4单季亏损5.70亿，主要来自阿维塔的投资亏损确认。福特、马自达销量也在持续萎缩。</div>
+  </div>
+</div>
+
+<!-- ===== 第三部分：自营品牌销量 ===== -->
+<div class="page">
+  <div class="page-tag">Part 3 · 自营销量</div>
+  <div class="page-title">自营品牌：有涨有跌，价格战侵蚀毛利</div>
+  <div class="page-subtitle">引力 · 启源 · 深蓝 · 凯程 · 2025.1 — 2026.5</div>
+
+  <div class="chart-section">
+    <h2>自营板块月度销量</h2>
+    <p class="chart-note">单位：辆 · 虚线为基于年报反推的月度均摊值</p>
+    <div class="chart-wrap"><canvas id="chart_self"></canvas></div>
+    <div class="yoy-note" id="yoy_self"></div>
+  </div>
+
+  <div class="core-line" style="margin-top:20px;max-width:900px">
+    <div class="icon">&#128176;</div>
+    <div class="text">2025年单车均价降至5.63万元（2024年为5.96万），海外均价从6.05万降至5.21万。价格战导致毛利率承压——国内毛利率下降、海外毛利率从26.2%降至19.5%。</div>
+  </div>
+</div>
+
+<!-- ===== 第四部分：毛利率趋势 ===== -->
+<div class="page">
+  <div class="page-tag">Part 4 · 毛利率</div>
+  <div class="page-title">综合毛利率：逐季改善后，2026Q1回落</div>
+  <div class="page-subtitle">2025Q1 — 2026Q1 · 价格战下毛利率承压</div>
+
+  <div class="chart-section">
+    <h2>综合毛利率季度趋势</h2>
+    <p class="chart-note">2025全年毛利率15.54%（同比+0.6pp）· 季度逐季向上至Q4的16.82% · 2026Q1回落至14.08%</p>
+    <div class="chart-wrap"><canvas id="chart_gm"></canvas></div>
+  </div>
+
+  <div class="core-line" style="margin-top:20px;max-width:900px">
+    <div class="icon">&#128200;</div>
+    <div class="text">2025年毛利率逐季走高（13.86%→15.2%→15.7%→16.82%），新能源规模效应+供应链降本推动改善。但2026Q1回落至14.08%，受价格战和淡季影响。国内毛利率约14%，海外毛利率19.49%，海外高出5个百分点。</div>
+  </div>
+</div>
+
+<!-- ===== 第五部分：出口 ===== -->
+<div class="page">
+  <div class="page-tag">Part 5 · 出口</div>
+  <div class="page-title">出口：唯一亮点，但也面临以价换量</div>
+  <div class="page-subtitle">2025.1 — 2026.5 月度出口销量 · 单位：辆</div>
+
+  <div class="chart-section">
+    <h2>海外出口月度销量</h2>
+    <p class="chart-note">2025全年出口63.7万辆（+18.85%）· 2026年1-5月出口35.6万辆</p>
+    <div class="chart-wrap"><canvas id="chart_export"></canvas></div>
+    <div class="yoy-note" id="yoy_export"></div>
+  </div>
+
+  <div class="core-line" style="margin-top:20px;max-width:900px">
+    <div class="icon">&#127758;</div>
+    <div class="text">出口是唯一正增长的板块，但海外毛利率从26.2%降至19.5%。2026年Q1受汇兑损失影响，财务费用同比多出13亿。以价换量的模式能否持续，需要观察。</div>
+  </div>
+</div>
+
+<!-- ===== 第六部分：现金流压力 ===== -->
+<div class="page">
+  <div class="page-tag">Part 6 · 现金流</div>
+  <div class="page-title">现金流：2026Q1经营现金流转负</div>
+  <div class="page-subtitle">经营活动现金流净额 · 各季度单季数据（亿元）</div>
+
+  <div class="chart-section">
+    <h2>经营活动现金流净额（单季）</h2>
+    <p class="chart-note">2025Q1 — 2026Q1</p>
+    <div class="chart-wrap"><canvas id="chart_cf"></canvas></div>
+  </div>
+
+  <div class="core-line" style="margin-top:20px;max-width:900px">
+    <div class="icon">&#128184;</div>
+    <div class="text">2025年全年经营现金流净额18.36亿（正），但2026Q1急转直下至-116.47亿。合资联营在跌、自营有涨有跌、唯一好的是出口——但出口也在以价换量。现金流压力可能还会加大。</div>
+  </div>
+</div>
+
+<!-- ===== 第七部分：应付票据占比 ===== -->
+<div class="page">
+  <div class="page-tag">Part 7 · 应付票据</div>
+  <div class="page-title">应付票据占比飙升至74%</div>
+  <div class="page-subtitle">应付票据 /（应付票据+应付账款）· 2025Q1 — 2026Q1</div>
+
+  <div class="chart-section">
+    <h2>应付票据与应付账款结构变化</h2>
+    <p class="chart-note">单位：亿元 · 柱状图为绝对值 · 折线为票据占比</p>
+    <div class="chart-wrap"><canvas id="chart_bill"></canvas></div>
+  </div>
+
+  <div class="core-line" style="margin-top:20px;max-width:900px">
+    <div class="icon">&#9888;&#65039;</div>
+    <div class="text">2026Q1应付票据494.81亿，占应付票据+应付账款之和的74.2%。应付票据比应付账款对上游供应商的压力更大——票据有明确的到期日，到期必须兑付，不像应付账款可以协商延期。</div>
+  </div>
+</div>
+
+<!-- ===== 数据说明 ===== -->
+<div class="page">
+  <div class="core-line" style="margin-top:20px;max-width:900px">
+    <div class="icon">&#128221;</div>
+    <div class="text">本分析基于公开财报及相关数据，仅为个人意见，不构成投资建议。所有数据均来源于公司定期报告、乘联会及公开媒体报道，旨在提供一个严谨的分析视角供投资者参考。</div>
+  </div>
+  <div class="page-tag" style="margin-top:24px">数据说明</div>
+  <div class="data-notes">
+    <h3>数据来源与口径说明</h3>
+    <p>
+      <span class="tag">负债/现金流数据</span> 来自长安汽车2025年一季报、半年报、三季报、年报及2026年一季报合并财务报表。借款+债券=短期借款+一年内到期的非流动负债+应付债券。<br>
+      <span class="tag">毛利率</span> 2025Q1=13.86%、Q2=15.2%（券商研报及半年报验证）、Q3=15.7%（三季报）、Q4=16.82%（年报），2026Q1=14.08%（一季报）。海外毛利率19.49%，国内毛利率约14%。<br>
+      <span class="tag">合资联营销量</span> 阿维塔来自官方产销快报及媒体报道；福特/马自达2025.1-5月来自官方产销快报，6-12月来自乘联会零售数据。<br>
+      <span class="tag">自营品牌销量</span> 引力/凯程部分月份基于年报全年数据反推均摊（虚线标识）；深蓝/启源全部有实测数据。<br>
+      <span class="tag">出口销量</span> 2025年部分月份基于年报全年63.7万辆反推均摊（虚线标识）；2026年1-5月全部有实测数据。<br>
+      <span class="tag">投资收益</span> 各季度"对联营企业和合营企业的投资收益"来自合并利润表。阿维塔2025年确认投资亏损12.12亿。
+    </p>
+  </div>
+</div>
+
+<script>
+// ==================== 图表1: 合资联营销量 ====================
+const ctx_jv = document.getElementById('chart_jv').getContext('2d');
+const labels = ['25/1','25/2','25/3','25/4','25/5','25/6','25/7','25/8','25/9','25/10','25/11','25/12','26/1','26/2','26/3','26/4','26/5'];
+
+const avatr = [8800, 5182, 10475, 11681, 12767, 10153, 10062, 10565, 11000, 13506, 14057, 10470, 2216, 4033, 5143, 5279, 7336];
+const mazda = [6600, 3800, 7159, 6100, 5602, 5569, 6003, 6422, 7493, 11376, 10002, 11705, 8008, 4702, 8909, 8410, 9755];
+const ford = [17512, 11991, 18265, 12734, 16481, 8502, 8259, 10365, 8629, 8099, 6598, 7600, 7054, 4676, 5461, 3501, 3822];
+
+new Chart(ctx_jv, {
+  type: 'line',
+  data: {
+    labels: labels,
+    datasets: [
+      { label: '阿维塔', data: avatr, borderColor: '#00bcd4', backgroundColor: 'rgba(0,188,212,0.06)', borderWidth: 2.5, pointRadius: 3, pointBackgroundColor: '#00bcd4', tension: 0.3, fill: false },
+      { label: '长安马自达', data: mazda, borderColor: '#e91e63', backgroundColor: 'rgba(233,30,99,0.04)', borderWidth: 2.5, pointRadius: 3, pointBackgroundColor: '#e91e63', tension: 0.3, fill: false },
+      { label: '长安福特', data: ford, borderColor: '#ff9800', backgroundColor: 'rgba(255,152,0,0.04)', borderWidth: 2.5, pointRadius: 3, pointBackgroundColor: '#ff9800', tension: 0.3, fill: false }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { position: 'top', labels: { usePointStyle: true, padding: 20, font: { size: 13 } } },
+      tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.raw.toLocaleString() + ' 辆' } }
+    },
+    scales: {
+      y: { beginAtZero: true, ticks: { callback: v => (v/1000).toFixed(0)+'k', font:{size:11} }, title: { display: true, text: '销量 (辆)' } },
+      x: { ticks: { font: { size: 10 }, maxRotation: 45 } }
+    }
+  }
+});
+
+// 合资联营 YoY
+function yoyPct(v26, v25) { if (!v25 || !v26) return null; return ((v26 - v25) / v25 * 100); }
+function yoySpan(v26, v25) {
+  const pct = yoyPct(v26, v25);
+  if (pct === null) return '<span class="flat">--</span>';
+  const cls = pct >= 0 ? 'up' : 'down';
+  const sign = pct >= 0 ? '+' : '';
+  return '<span class="'+cls+'">'+sign+pct.toFixed(1)+'%</span>';
+}
+const yj = [];
+[{n:'阿维塔',d26:[2216,4033,5143,5279,7336],d25:[8800,5182,10475,11681,12767]},
+ {n:'马自达',d26:[8008,4702,8909,8410,9755],d25:[6600,3800,7159,6100,5602]},
+ {n:'福特',d26:[7054,4676,5461,3501,3822],d25:[17512,11991,18265,12734,16481]}
+].forEach(b=>{
+  const m=[1,2,3,4,5].map((m,i)=>m+'月同比 '+yoySpan(b.d26[i],b.d25[i])).join('&nbsp;&nbsp;');
+  yj.push('<span class="brand-label">'+b.n+'</span> '+m);
+});
+document.getElementById('yoy_jv').innerHTML = yj.join('<br>');
+
+// ==================== 图表3: 联营合营投资收益 ====================
+const ctx_inv = document.getElementById('chart_inv').getContext('2d');
+const invLabels = ['25Q1','25Q2','25Q3','25Q4','26Q1'];
+const invData = [0.44, 0.12, 0.85, -5.70, 0.00];
+
+new Chart(ctx_inv, {
+  type: 'bar',
+  data: {
+    labels: invLabels,
+    datasets: [{
+      label: '联营合营投资收益（单季）',
+      data: invData,
+      backgroundColor: invData.map(v => v>=0 ? 'rgba(0,188,212,0.75)' : 'rgba(231,76,60,0.75)'),
+      borderColor: invData.map(v => v>=0 ? '#00bcd4' : '#e74c3c'),
+      borderWidth: 1.5,
+      borderRadius: 4
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { position: 'top', labels: { usePointStyle: true, padding: 20, font: { size: 13 } } },
+      tooltip: { callbacks: { label: ctx => { const v=ctx.raw; return '投资收益: '+(v>=0?'+':'')+v.toFixed(2)+' 亿元'; } } }
+    },
+    scales: {
+      y: { ticks: { callback: v=>(v>=0?'+':'')+v.toFixed(1)+'亿', font:{size:11} }, title: { display: true, text: '投资收益 (亿元)' } },
+      x: { ticks: { font: { size: 12 } } }
+    }
+  }
+});
+
+// ==================== 图表3: 毛利率趋势 ====================
+const ctx_gm = document.getElementById('chart_gm').getContext('2d');
+const gmLabels = ['25Q1','25Q2','25Q3','25Q4','26Q1'];
+const gmData = [13.86, 15.20, 15.70, 16.82, 14.08];
+
+new Chart(ctx_gm, {
+  type: 'line',
+  data: {
+    labels: gmLabels,
+    datasets: [{
+      label: '综合毛利率',
+      data: gmData,
+      borderColor: '#1f9d6b',
+      backgroundColor: 'rgba(31,157,107,0.08)',
+      borderWidth: 3,
+      pointRadius: 6,
+      pointBackgroundColor: '#1f9d6b',
+      tension: 0.3,
+      fill: true
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { position: 'top', labels: { usePointStyle: true, padding: 20, font: { size: 13 } } },
+      tooltip: { callbacks: { label: ctx => '毛利率: ' + ctx.raw.toFixed(2) + '%' } }
+    },
+    scales: {
+      y: {
+        min: 12, max: 18,
+        ticks: { callback: v => v.toFixed(1) + '%', font: { size: 11 } },
+        title: { display: true, text: '毛利率 (%)' }
+      },
+      x: { ticks: { font: { size: 12 } } }
+    }
+  }
+});
+
+// ==================== 图表4: 自营品牌销量 ====================
+const ctx_self = document.getElementById('chart_self').getContext('2d');
+
+const deepal = [24600,18738,24371,20138,25521,29893,27169,28235,33600,36792,33060,30999,16000,16000,31742,33187,33243];
+const qiyuan = [10800,7931,15274,11297,36579,38800,28568,37340,41200,36378,46909,33300,14800,18300,36875,32118,34528];
+const yinli = [150000,69143,109459,78408,63474,49047,112000,49047,49047,92000,49047,49047,42100,59700,103900,46900,48900];
+const kaicheng = [26491,19294,29703,21849,20148,17433,35000,17433,17433,21000,17433,17433,9500,14400,28100,20000,21100];
+const yinliM = [0,1,2,3,4,6,9,12,13,14,15,16];
+const kaichengM = [0,1,2,3,4,6,9,13,14,16];
+
+new Chart(ctx_self, {
+  type: 'line',
+  data: {
+    labels: labels,
+    datasets: [
+      { label: '长安引力', data: yinli, borderColor: '#4caf50', backgroundColor: 'rgba(76,175,80,0.04)', borderWidth: 2.5, pointRadius: 3, pointBackgroundColor: '#4caf50', tension: 0.3, fill: false,
+        segment: { borderDash: ctx => yinliM.includes(ctx.p0DataIndex) ? undefined : [8,4] } },
+      { label: '长安启源', data: qiyuan, borderColor: '#2196f3', backgroundColor: 'rgba(33,150,243,0.04)', borderWidth: 2.5, pointRadius: 3, pointBackgroundColor: '#2196f3', tension: 0.3, fill: false },
+      { label: '深蓝汽车', data: deepal, borderColor: '#9c27b0', backgroundColor: 'rgba(156,39,176,0.04)', borderWidth: 2.5, pointRadius: 3, pointBackgroundColor: '#9c27b0', tension: 0.3, fill: false },
+      { label: '长安凯程', data: kaicheng, borderColor: '#ff5722', backgroundColor: 'rgba(255,87,34,0.03)', borderWidth: 2, pointRadius: 2.5, pointBackgroundColor: '#ff5722', tension: 0.3, fill: false,
+        segment: { borderDash: ctx => kaichengM.includes(ctx.p0DataIndex) ? undefined : [6,4] } }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { position: 'top', labels: { usePointStyle: true, padding: 20, font: { size: 13 } } },
+      tooltip: { callbacks: { label: ctx => { let n=''; if(ctx.datasetIndex===0&&!yinliM.includes(ctx.dataIndex)) n=' (反推)'; if(ctx.datasetIndex===3&&!kaichengM.includes(ctx.dataIndex)) n=' (反推)'; return ctx.dataset.label+': '+ctx.raw.toLocaleString()+' 辆'+n; } } }
+    },
+    scales: {
+      y: { beginAtZero: true, ticks: { callback: v=>(v/1000).toFixed(0)+'k', font:{size:11} }, title: { display: true, text: '销量 (辆)' } },
+      x: { ticks: { font: { size: 10 }, maxRotation: 45 } }
+    }
+  }
+});
+
+// 自营品牌 YoY
+const ys = [];
+[{n:'引力',d26:[42100,59700,103900,46900,48900],d25:[150000,69143,109459,78408,63474]},
+ {n:'启源',d26:[14800,18300,36875,32118,34528],d25:[10800,7931,15274,11297,36579]},
+ {n:'深蓝',d26:[16000,16000,31742,33187,33243],d25:[24600,18738,24371,20138,25521],note:'(1-2月为估算)'},
+ {n:'凯程',d26:[9500,14400,28100,20000,21100],d25:[26491,19294,29703,21849,20148]}
+].forEach(b=>{
+  const m=[1,2,3,4,5].map((m,i)=>m+'月同比 '+yoySpan(b.d26[i],b.d25[i])).join('&nbsp;&nbsp;');
+  const note=b.note?' <span style="color:#999;font-size:11px">'+b.note+'</span>':'';
+  ys.push('<span class="brand-label">'+b.n+'</span> '+m+note);
+});
+document.getElementById('yoy_self').innerHTML = ys.join('<br>');
+
+// ==================== 图表6: 出口 ====================
+const ctx_export = document.getElementById('chart_export').getContext('2d');
+const expM = [0,2,6,7,10,12,13,14,15,16];
+const expEst = 54602;
+const expData = [62000,expEst,50048,expEst,expEst,expEst,32000,56000,expEst,expEst,55000,expEst,43628,64876,103900,72700,70700];
+
+new Chart(ctx_export, {
+  type: 'line',
+  data: {
+    labels: labels,
+    datasets: [{
+      label: '海外出口', data: expData,
+      borderColor: '#009688', backgroundColor: 'rgba(0,150,136,0.10)', borderWidth: 3, pointRadius: 4, pointBackgroundColor: '#009688', tension: 0.3, fill: true,
+      segment: { borderDash: ctx => expM.includes(ctx.p0DataIndex) ? undefined : [8,4] }
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { position: 'top', labels: { usePointStyle: true, padding: 20, font: { size: 13 } } },
+      tooltip: { callbacks: { label: ctx => { const n=expM.includes(ctx.dataIndex)?'':' (反推)'; return '出口: '+ctx.raw.toLocaleString()+' 辆'+n; } } }
+    },
+    scales: {
+      y: { beginAtZero: true, ticks: { callback: v=>(v/1000).toFixed(0)+'k', font:{size:11} }, title: { display: true, text: '销量 (辆)' } },
+      x: { ticks: { font: { size: 10 }, maxRotation: 45 } }
+    }
+  }
+});
+
+// 出口 YoY
+const ye = [];
+const exp26y = [43628,64876,103900,72700,70700];
+const exp25y = [62000,expEst,50048,expEst,expEst];
+const expYM = [1,2,3,4,5].map((m,i)=>m+'月同比 '+yoySpan(exp26y[i],exp25y[i])).join('&nbsp;&nbsp;');
+ye.push('<span class="brand-label">出口</span> '+expYM+' <span style="color:#999;font-size:11px">(1月/3月为实测，其余基于年报反推)</span>');
+document.getElementById('yoy_export').innerHTML = ye.join('<br>');
+
+// ==================== 图表7: 经营现金流 ====================
+const ctx_cf = document.getElementById('chart_cf').getContext('2d');
+// 经营现金流单季（亿元）: Q1=-35.01, Q2=-51.06(累计-86.07, H1=-86.07, 单季Q2=-51.06), Q3=+101.62(累计15.55, 单季=15.55-(-86.07)=101.62), Q4=+2.81(累计18.36, 单季=2.81), 2026Q1=-116.47
+// 验证: 2025Q1累计=-35.01, H1累计=-86.07, 前三季累计=15.55, 全年累计=18.36
+const cfLabels = ['25Q1','25Q2','25Q3','25Q4','26Q1'];
+const cfData = [-35.01, -51.06, 101.62, 2.81, -116.47];
+
+new Chart(ctx_cf, {
+  type: 'bar',
+  data: {
+    labels: cfLabels,
+    datasets: [{
+      label: '经营现金流净额（单季）',
+      data: cfData,
+      backgroundColor: cfData.map(v => v>=0 ? 'rgba(31,157,107,0.75)' : 'rgba(231,76,60,0.75)'),
+      borderColor: cfData.map(v => v>=0 ? '#1f9d6b' : '#e74c3c'),
+      borderWidth: 1.5,
+      borderRadius: 4
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { position: 'top', labels: { usePointStyle: true, padding: 20, font: { size: 13 } } },
+      tooltip: { callbacks: { label: ctx => { const v=ctx.raw; return '现金流: '+(v>=0?'+':'')+v.toFixed(2)+' 亿元'; } } }
+    },
+    scales: {
+      y: { ticks: { callback: v=>(v>=0?'+':'')+v.toFixed(0)+'亿', font:{size:11} }, title: { display: true, text: '现金流净额 (亿元)' } },
+      x: { ticks: { font: { size: 12 } } }
+    }
+  }
+});
+
+// ==================== 图表8: 应付票据占比 ====================
+const ctx_bill = document.getElementById('chart_bill').getContext('2d');
+const billLabels = ['25Q1','25Q2','25Q3','25Q4','26Q1'];
+// 应付票据（亿元）
+const billPayable = [406.39, 293.36, 329.28, 439.80, 494.81];
+// 应付账款（亿元）
+const acctPayable = [327.05, 252.25, 270.54, 298.41, 172.02];
+// 应付票据占比
+const billRatio = billPayable.map((b,i) => b/(b+acctPayable[i])*100);
+
+new Chart(ctx_bill, {
+  type: 'bar',
+  data: {
+    labels: billLabels,
+    datasets: [
+      {
+        label: '应付票据',
+        data: billPayable,
+        backgroundColor: 'rgba(231,76,60,0.70)',
+        borderColor: '#e74c3c',
+        borderWidth: 1.5,
+        borderRadius: 4,
+        order: 2
+      },
+      {
+        label: '应付账款',
+        data: acctPayable,
+        backgroundColor: 'rgba(45,125,210,0.60)',
+        borderColor: '#2d7dd2',
+        borderWidth: 1.5,
+        borderRadius: 4,
+        order: 2
+      },
+      {
+        label: '票据占比(%)',
+        data: billRatio,
+        type: 'line',
+        borderColor: '#c5963a',
+        backgroundColor: 'rgba(197,150,58,0.1)',
+        borderWidth: 3,
+        pointRadius: 6,
+        pointBackgroundColor: '#c5963a',
+        tension: 0.3,
+        yAxisID: 'y1',
+        order: 1
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { position: 'top', labels: { usePointStyle: true, padding: 20, font: { size: 13 } } },
+      tooltip: { callbacks: { label: ctx => {
+        if(ctx.datasetIndex===2) return '票据占比: '+ctx.raw.toFixed(1)+'%';
+        return ctx.dataset.label+': '+ctx.raw.toFixed(2)+' 亿元';
+      }}}
+    },
+    scales: {
+      y: {
+        type: 'linear',
+        position: 'left',
+        beginAtZero: true,
+        stacked: false,
+        ticks: { callback: v=>v.toFixed(0)+'亿', font:{size:11} },
+        title: { display: true, text: '金额 (亿元)' }
+      },
+      y1: {
+        type: 'linear',
+        position: 'right',
+        beginAtZero: false,
+        min: 50,
+        max: 80,
+        ticks: { callback: v=>v.toFixed(0)+'%', font:{size:11} },
+        title: { display: true, text: '票据占比 (%)' },
+        grid: { drawOnChartArea: false }
+      },
+      x: { ticks: { font: { size: 12 } } }
+    }
+  }
+});
+</script>
+
+</body>
+</html>

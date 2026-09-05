@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>长鑫科技 IPO前股东全名单</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f4f0; color: #1a1a1a; font-size: 14px; line-height: 1.6; }
+  .page { max-width: 900px; margin: 0 auto; padding: 32px 24px 60px; }
+
+  /* Header */
+  .header { margin-bottom: 28px; }
+  .header h1 { font-size: 22px; font-weight: 600; color: #1a1a1a; margin-bottom: 6px; }
+  .header .meta { font-size: 12px; color: #888; }
+
+  /* Warning box */
+  .warning { background: #fffbe6; border-left: 3px solid #EF9F27; border-radius: 0 6px 6px 0; padding: 10px 14px; font-size: 12px; color: #7a5a00; margin-bottom: 28px; line-height: 1.7; }
+
+  /* Category section */
+  .section { margin-bottom: 24px; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.07); background: #fff; }
+  .section-header { padding: 12px 18px; display: flex; align-items: center; gap: 10px; }
+  .section-header .num { font-size: 11px; font-weight: 600; opacity: 0.7; }
+  .section-header .title { font-size: 15px; font-weight: 600; flex: 1; }
+  .section-header .total { font-size: 16px; font-weight: 700; }
+
+  /* Table */
+  table { width: 100%; border-collapse: collapse; }
+  th { background: rgba(0,0,0,0.04); font-size: 11px; font-weight: 600; color: #666; text-align: left; padding: 7px 18px; border-bottom: 1px solid rgba(0,0,0,0.06); }
+  td { padding: 9px 18px; border-bottom: 1px solid rgba(0,0,0,0.04); vertical-align: top; font-size: 13px; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(0,0,0,0.02); }
+  .td-name { font-weight: 500; white-space: nowrap; width: 120px; }
+  .td-pct { font-weight: 600; white-space: nowrap; width: 70px; font-variant-numeric: tabular-nums; }
+  .td-note { color: #555; }
+
+  /* Note bar */
+  .note-bar { padding: 8px 18px; font-size: 12px; font-style: italic; border-top: 1px solid rgba(0,0,0,0.05); }
+
+  /* Summary */
+  .summary { background: #fff; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); overflow: hidden; margin-top: 8px; }
+  .summary-title { padding: 12px 18px 0; font-size: 15px; font-weight: 600; color: #1a1a1a; }
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1px; background: rgba(0,0,0,0.06); margin: 12px 0 0; }
+  .summary-card { background: #fff; padding: 14px 18px; }
+  .summary-card .cat { font-size: 11px; color: #888; margin-bottom: 4px; }
+  .summary-card .pct { font-size: 22px; font-weight: 700; margin-bottom: 2px; }
+  .summary-card .remark { font-size: 11px; color: #999; line-height: 1.5; }
+  .footer-note { padding: 14px 18px; font-size: 12px; color: #666; font-style: italic; border-top: 1px solid rgba(0,0,0,0.06); line-height: 1.7; }
+
+  /* Color themes per category */
+  .c-purple .section-header { background: #7F77DD; color: #fff; }
+  .c-purple .td-pct { color: #534AB7; }
+  .c-purple .note-bar { background: #f4f3fd; color: #534AB7; }
+
+  .c-coral .section-header { background: #C45A30; color: #fff; }
+  .c-coral .td-pct { color: #993C1D; }
+  .c-coral .note-bar { background: #fdf2ee; color: #993C1D; }
+
+  .c-teal .section-header { background: #1D9E75; color: #fff; }
+  .c-teal .td-pct { color: #0F6E56; }
+  .c-teal .note-bar { background: #edf8f4; color: #0F6E56; }
+
+  .c-amber .section-header { background: #EF9F27; color: #fff; }
+  .c-amber .td-pct { color: #854F0B; }
+  .c-amber .note-bar { background: #fff8ed; color: #854F0B; }
+
+  .c-blue .section-header { background: #378ADD; color: #fff; }
+  .c-blue .td-pct { color: #185FA5; }
+  .c-blue .note-bar { background: #eef5fc; color: #185FA5; }
+
+  .c-green .section-header { background: #639922; color: #fff; }
+  .c-green .td-pct { color: #3B6D11; }
+  .c-green .note-bar { background: #f2f8e9; color: #3B6D11; }
+
+  .c-gray .section-header { background: #5F5E5A; color: #fff; }
+  .c-gray .td-pct { color: #444441; }
+  .c-gray .note-bar { background: #f4f3f1; color: #5F5E5A; }
+
+  .c-pink .section-header { background: #D4537E; color: #fff; }
+  .c-pink .td-pct { color: #993556; }
+  .c-pink .note-bar { background: #fdf0f5; color: #993556; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <h1>长鑫科技 IPO前股东全名单</h1>
+    <div class="meta">数据来源：招股说明书（2025年5月版），第九次增资完成后发行前股权结构 · 整理日期：2026年5月</div>
+  </div>
+
+  <div class="warning">
+    ⚠️ 归类说明：清辉集电（21.67%）已穿透拆分——芯睿投资（朱一明）51%≈11.1% 归入创始人+员工平台，长鑫集成（合肥国资）49%≈10.6% 归入合肥+安徽国资。产投壹号/产投高成长属安徽省产投旗下，归安徽国资。鑫芯家园为员工持股，归员工平台。星棋道和为小米系关联基金，归产业资本。
+  </div>
+
+  <!-- 一、创始人+员工平台 -->
+  <div class="section c-purple">
+    <div class="section-header">
+      <span class="num">一</span>
+      <span class="title">创始人 & 员工平台</span>
+      <span class="total">~20.2%</span>
+    </div>
+    <table>
+      <tr><th>股东</th><th>持股</th><th>说明</th></tr>
+      <tr><td class="td-name">清辉集电</td><td class="td-pct">21.67%*</td><td class="td-note">第一大股东。内部由芯睿投资（朱一明）51% + 长鑫集成（合肥国资）49% 构成，创始人与国资捆绑在同一合伙企业，朱一明部分约11.1%归此类</td></tr>
+      <tr><td class="td-name">合肥集鑫</td><td class="td-pct">8.37%</td><td class="td-note">员工激励平台。朱一明通过合肥集鑫肆拾壹号（合伙企业）持有 <strong>15.36亿股</strong>激励股份，已是其本人名下资产（按2万亿估值约 <strong>510亿元</strong>）。他自愿承诺将其中 <strong>50%（约7.68亿股，约255亿元）分配给员工</strong>（不含本人）：上市满36个月后5年内分配前50%，10年内分配完剩余部分。且未来减持收益扣除成本后 <strong>全部无偿交付公司</strong>，朱一明个人不留差价。（来源：招股书第22页原文）</td></tr>
+      <tr><td class="td-name">鑫芯家园</td><td class="td-pct">0.75%</td><td class="td-note">员工持股平台，长鑫科技内部员工持股相关</td></tr>
+    </table>
+    <div class="note-bar">*清辉集电21.67%已穿透：朱一明部分≈11.1%计入本类，合肥国资部分≈10.6%计入第二类</div>
+  </div>
+
+  <!-- 二、合肥+安徽国资 -->
+  <div class="section c-coral">
+    <div class="section-header">
+      <span class="num">二</span>
+      <span class="title">合肥 & 安徽国资</span>
+      <span class="total">~37%</span>
+    </div>
+    <table>
+      <tr><th>股东</th><th>持股</th><th>说明</th></tr>
+      <tr><td class="td-name">长鑫集成</td><td class="td-pct">11.71%</td><td class="td-note">合肥市产业投资控股100%持有，合肥市政府直接出面的主力资金；另通过清辉集电间接持有约10.6%</td></tr>
+      <tr><td class="td-name">安徽省投</td><td class="td-pct">7.91%</td><td class="td-note">安徽省级国有资本运营平台</td></tr>
+      <tr><td class="td-name">产投壹号</td><td class="td-pct">1.85%</td><td class="td-note">安徽省产投旗下基金，2024年C轮融资进入</td></tr>
+      <tr><td class="td-name">合肥建长</td><td class="td-pct">1.50%</td><td class="td-note">合肥建投旗下（由碧桂园系汇碧五号于2024年12月转让而来）</td></tr>
+      <tr><td class="td-name">芜湖星原</td><td class="td-pct">0.90%</td><td class="td-note">安徽芜湖市产业基金</td></tr>
+      <tr><td class="td-name">安徽担保资管</td><td class="td-pct">0.75%</td><td class="td-note">安徽省担保集团下属资产管理公司</td></tr>
+      <tr><td class="td-name">安华创新</td><td class="td-pct">0.75%</td><td class="td-note">安徽产业资本</td></tr>
+      <tr><td class="td-name">安元星亿达</td><td class="td-pct">0.75%</td><td class="td-note">安徽系产业基金</td></tr>
+      <tr><td class="td-name">安徽交控</td><td class="td-pct">0.48%</td><td class="td-note">安徽省交通控股集团旗下</td></tr>
+      <tr><td class="td-name">产投高成长</td><td class="td-pct">0.07%</td><td class="td-note">安徽省产投旗下子基金</td></tr>
+    </table>
+    <div class="note-bar">直接持股合计约26.7%；加上通过清辉集电间接持有约10.6%，合计约37%</div>
+  </div>
+
+  <!-- 三、国家队 -->
+  <div class="section c-teal">
+    <div class="section-header">
+      <span class="num">三</span>
+      <span class="title">国家大基金</span>
+      <span class="total">~10%</span>
+    </div>
+    <table>
+      <tr><th>股东</th><th>持股</th><th>说明</th></tr>
+      <tr><td class="td-name">大基金二期</td><td class="td-pct">8.73%</td><td class="td-note">国家集成电路产业投资基金二期，股东包括财政部、国开行、中国烟草、地方国企，代表国家战略意志</td></tr>
+      <tr><td class="td-name">国调基金</td><td class="td-pct">1.12%</td><td class="td-note">国家发展投资基金，国家发改委背景</td></tr>
+      <tr><td class="td-name">中建材新材料基金</td><td class="td-pct">0.13%</td><td class="td-note">中国建材集团下属产业基金</td></tr>
+    </table>
+  </div>
+
+  <!-- 四、阿里系 -->
+  <div class="section c-amber">
+    <div class="section-header">
+      <span class="num">四</span>
+      <span class="title">阿里系</span>
+      <span class="total">~5.5%</span>
+    </div>
+    <table>
+      <tr><th>股东</th><th>持股</th><th>说明</th></tr>
+      <tr><td class="td-name">阿里云计算</td><td class="td-pct">3.85%</td><td class="td-note">2025年6月上市前夕追加投资61亿，认购价2.63元/股；阿里云是中国最大服务器DRAM消费者之一</td></tr>
+      <tr><td class="td-name">阿里网络</td><td class="td-pct">1.12%</td><td class="td-note">阿里巴巴早期入股，进价更低</td></tr>
+      <tr><td class="td-name">云锋卓越</td><td class="td-pct">0.49%</td><td class="td-note">马云的云锋基金，代表马云个人判断</td></tr>
+    </table>
+    <div class="note-bar">客户+股东双重身份，既用长鑫的内存，又分长鑫上市的钱 · 按2万亿估值，这5%价值约1000亿，相比追投61亿浮盈约12倍</div>
+  </div>
+
+  <!-- 五、银行+保险 -->
+  <div class="section c-blue">
+    <div class="section-header">
+      <span class="num">五</span>
+      <span class="title">银行 & 保险 & 金融机构</span>
+      <span class="total">~9.5%</span>
+    </div>
+    <table>
+      <tr><th>股东</th><th>持股</th><th>说明</th></tr>
+      <tr><td class="td-name">招银云亭</td><td class="td-pct">1.58%</td><td class="td-note">招商银行旗下直投基金</td></tr>
+      <tr><td class="td-name">农银投资</td><td class="td-pct">0.95%</td><td class="td-note">农业银行旗下</td></tr>
+      <tr><td class="td-name">建信投资</td><td class="td-pct">0.83%</td><td class="td-note">建设银行旗下</td></tr>
+      <tr><td class="td-name">建银国际</td><td class="td-pct">0.68%</td><td class="td-note">建设银行旗下国际业务平台</td></tr>
+      <tr><td class="td-name">建信领航</td><td class="td-pct">0.37%</td><td class="td-note">建设银行系</td></tr>
+      <tr><td class="td-name">国寿投资</td><td class="td-pct">0.79%</td><td class="td-note">中国人寿保险旗下</td></tr>
+      <tr><td class="td-name">人保资本</td><td class="td-pct">0.78%</td><td class="td-note">中国人民保险旗下</td></tr>
+      <tr><td class="td-name">人保科创</td><td class="td-pct">0.15%</td><td class="td-note">人保旗下科创专项基金</td></tr>
+      <tr><td class="td-name">阳光人寿</td><td class="td-pct">0.37%</td><td class="td-note">阳光保险集团</td></tr>
+      <tr><td class="td-name">中邮人寿</td><td class="td-pct">0.37%</td><td class="td-note">中国邮政旗下寿险</td></tr>
+      <tr><td class="td-name">中银资产</td><td class="td-pct">0.38%</td><td class="td-note">中国银行旗下资产管理</td></tr>
+      <tr><td class="td-name">交银金融</td><td class="td-pct">0.38%</td><td class="td-note">交通银行旗下</td></tr>
+      <tr><td class="td-name">东方资管</td><td class="td-pct">0.37%</td><td class="td-note">东方资产管理，四大AMC之一</td></tr>
+      <tr><td class="td-name">中金共赢</td><td class="td-pct">0.32%</td><td class="td-note">中金公司旗下（中金也是本次联席保荐人）</td></tr>
+      <tr><td class="td-name">海通徽银</td><td class="td-pct">0.47%</td><td class="td-note">海通证券+徽商银行联合基金</td></tr>
+      <tr><td class="td-name">天津海河</td><td class="td-pct">0.32%</td><td class="td-note">天津市海河产业基金</td></tr>
+    </table>
+    <div class="note-bar">工农建交招五大行系 + 国寿人保阳光中邮四大险资同时进场，长鑫是少数能让险资和银行直投齐聚的项目</div>
+  </div>
+
+  <!-- 六、产业资本 -->
+  <div class="section c-green">
+    <div class="section-header">
+      <span class="num">六</span>
+      <span class="title">产业资本（同行 & 客户）</span>
+      <span class="total">~3.5%</span>
+    </div>
+    <table>
+      <tr><th>股东</th><th>持股</th><th>说明</th></tr>
+      <tr><td class="td-name">兆易创新</td><td class="td-pct">1.80%</td><td class="td-note">A股上市存储芯片公司，主做Flash；投DRAM同行，国产半导体产业链内部互持</td></tr>
+      <tr><td class="td-name">星棋道和</td><td class="td-pct">0.81%</td><td class="td-note">小米系关联基金，2025年6月追加认购</td></tr>
+      <tr><td class="td-name">美的投资</td><td class="td-pct">0.75%</td><td class="td-note">美的集团，家电+智能汽车战略布局芯片供应链</td></tr>
+      <tr><td class="td-name">湖北小米</td><td class="td-pct">0.21%</td><td class="td-note">小米集团直接持股，既是客户（手机用DRAM），又是股东</td></tr>
+    </table>
+    <div class="note-bar">小米系合计（湖北小米+星棋道和）约1.02%，客户+股东双重身份</div>
+  </div>
+
+  <!-- 七、其他PE/VC/外资 -->
+  <div class="section c-gray">
+    <div class="section-header">
+      <span class="num">七</span>
+      <span class="title">其他 PE / VC / 外资</span>
+      <span class="total">~14%</span>
+    </div>
+    <table>
+      <tr><th>股东</th><th>持股</th><th>说明</th></tr>
+      <tr><td class="td-name">北京峰益</td><td class="td-pct">1.50%</td><td class="td-note">PE机构</td></tr>
+      <tr><td class="td-name">鑫芯励润</td><td class="td-pct">1.06%</td><td class="td-note">中信建投关联基金（中信建投为本次联席保荐人）</td></tr>
+      <tr><td class="td-name">宁波燕创</td><td class="td-pct">0.99%</td><td class="td-note">宁波系产业基金</td></tr>
+      <tr><td class="td-name">中安招商基金</td><td class="td-pct">0.78%</td><td class="td-note">招商系产业基金</td></tr>
+      <tr><td class="td-name">宁波君和</td><td class="td-pct">0.78%</td><td class="td-note">宁波系资本</td></tr>
+      <tr><td class="td-name">嘉兴恒旭</td><td class="td-pct">0.75%</td><td class="td-note">PE机构</td></tr>
+      <tr><td class="td-name">君挚璞创投</td><td class="td-pct">0.75%</td><td class="td-note">VC机构</td></tr>
+      <tr><td class="td-name">青岛朗格</td><td class="td-pct">0.75%</td><td class="td-note">产业基金</td></tr>
+      <tr><td class="td-name">Gamcier</td><td class="td-pct">0.72%</td><td class="td-note">外资机构，具体背景未披露</td></tr>
+      <tr><td class="td-name">华芯科泰</td><td class="td-pct">0.66%</td><td class="td-note">半导体产业基金，中金关联</td></tr>
+      <tr><td class="td-name">广州科集</td><td class="td-pct">0.64%</td><td class="td-note">广州产业基金</td></tr>
+      <tr><td class="td-name">工融金投</td><td class="td-pct">0.64%</td><td class="td-note">工银旗下金融投资</td></tr>
+      <tr><td class="td-name">深圳投控</td><td class="td-pct">0.59%</td><td class="td-note">深圳市投资控股，深圳国资</td></tr>
+      <tr><td class="td-name">Glades View</td><td class="td-pct">0.54%</td><td class="td-note">外资机构，2025年已部分减持转让给广州信德</td></tr>
+      <tr><td class="td-name">招证投资</td><td class="td-pct">0.54%</td><td class="td-note">招商证券直投</td></tr>
+      <tr><td class="td-name">前海方舟</td><td class="td-pct">0.50%</td><td class="td-note">深圳前海系PE</td></tr>
+      <tr><td class="td-name">广州信德</td><td class="td-pct">0.28%</td><td class="td-note">2025年从Glades View接盘部分股权</td></tr>
+      <tr><td class="td-name">北京君联</td><td class="td-pct">0.20%</td><td class="td-note">联想系VC（君联资本）</td></tr>
+      <tr><td class="td-name">和壮高新</td><td class="td-pct">0.13%</td><td class="td-note">产业资本</td></tr>
+      <tr><td class="td-name">芯鑫集电</td><td class="td-pct">0.13%</td><td class="td-note">建银国际关联方</td></tr>
+    </table>
+  </div>
+
+  <!-- 八、保荐人关联方 -->
+  <div class="section c-pink">
+    <div class="section-header">
+      <span class="num">八</span>
+      <span class="title">保荐人关联方（已披露利益关系）</span>
+      <span class="total">~1.4%</span>
+    </div>
+    <table>
+      <tr><th>股东</th><th>持股</th><th>说明</th></tr>
+      <tr><td class="td-name">中金共赢</td><td class="td-pct">0.32%</td><td class="td-note">中金公司全资子公司，中金是联席保荐人</td></tr>
+      <tr><td class="td-name">鑫芯励润</td><td class="td-pct">1.06%</td><td class="td-note">中信建投关联基金，中信建投是联席保荐人</td></tr>
+    </table>
+    <div class="note-bar">两家保荐人均持有发行人股份，招股书已作特别披露</div>
+  </div>
+
+  <!-- 总结 -->
+  <div class="summary">
+    <div class="summary-title">总结：这张股东名单的本质</div>
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="cat">合肥+安徽国资</div>
+        <div class="pct" style="color:#C45A30">~37%</div>
+        <div class="remark">直接26.7% + 通过清辉集电间接10.6%</div>
+      </div>
+      <div class="summary-card">
+        <div class="cat">创始人+员工平台</div>
+        <div class="pct" style="color:#7F77DD">~20.2%</div>
+        <div class="remark">朱一明≈11.1% + 合肥集鑫 + 鑫芯家园</div>
+      </div>
+      <div class="summary-card">
+        <div class="cat">国家大基金</div>
+        <div class="pct" style="color:#1D9E75">~10%</div>
+        <div class="remark">财政部/国开行/发改委背景</div>
+      </div>
+      <div class="summary-card">
+        <div class="cat">银行+保险</div>
+        <div class="pct" style="color:#378ADD">~9.5%</div>
+        <div class="remark">工农建交招 + 四大险资</div>
+      </div>
+      <div class="summary-card">
+        <div class="cat">其他PE/VC/外资</div>
+        <div class="pct" style="color:#5F5E5A">~14%</div>
+        <div class="remark">含深圳/广州地方国资</div>
+      </div>
+      <div class="summary-card">
+        <div class="cat">阿里系</div>
+        <div class="pct" style="color:#EF9F27">~5.5%</div>
+        <div class="remark">追投61亿，约12倍浮盈</div>
+      </div>
+      <div class="summary-card">
+        <div class="cat">产业资本</div>
+        <div class="pct" style="color:#639922">~3.5%</div>
+        <div class="remark">兆易1.8%、小米系1%、美的0.75%</div>
+      </div>
+    </div>
+    <div class="footer-note">一家2016年成立、连续亏损9年的公司，能聚集这么多层次的资本——地方政府、中央国资、科技巨头、银行险资、境外资本——本身就是中国半导体突围史的缩影。</div>
+  </div>
+
+</div>
+</body>
+</html>

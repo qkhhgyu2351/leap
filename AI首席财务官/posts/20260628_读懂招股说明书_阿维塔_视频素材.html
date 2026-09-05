@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>读懂招股说明书 · 阿维塔科技</title>
+<style>
+:root{
+  --bg:#fafaf8;--card:#fff;--border:#e4e4df;--text:#1a1a2e;--sub:#6b6b66;
+  --blue:#2d7dd2;--blue-l:#eaf2fb;--green:#1f9d6b;--green-l:#eaf7f1;
+  --orange:#e85d3a;--orange-l:#fef4f0;--gold:#c5963a;--gold-l:#fffaf0;
+  --red:#c0392b;--red-l:#fdf0ed;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);line-height:1.65}
+.page{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:56px 36px;position:relative;overflow:hidden}
+.page-tag{font-size:13px;color:var(--gold);text-transform:uppercase;letter-spacing:3px;margin-bottom:14px;font-weight:700}
+.page-title{font-size:42px;font-weight:800;text-align:center;max-width:880px;margin-bottom:10px;line-height:1.3;letter-spacing:-.5px}
+.page-subtitle{font-size:18px;color:var(--sub);text-align:center;max-width:720px;margin-bottom:34px}
+.page-bridge{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);font-size:15px;color:var(--gold);font-weight:600;text-align:center;border:1px dashed var(--gold);padding:8px 22px;border-radius:20px;background:rgba(255,255,255,.95);white-space:nowrap}
+
+.core-line{display:flex;align-items:flex-start;gap:14px;max-width:840px;margin:0 auto 32px;padding:16px 20px;background:var(--gold-l);border-left:4px solid var(--gold);border-radius:0 8px 8px 0}
+.core-line .icon{font-size:22px;flex-shrink:0}
+.core-line .text{font-size:17px;font-weight:700;color:#5c4010;line-height:1.5}
+
+/* cards */
+.card-row{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;max-width:960px;margin:0 auto}
+.data-card{background:var(--card);border-radius:12px;padding:24px 26px;min-width:200px;flex:1;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,.04);border:1px solid var(--border)}
+.data-card .label{font-size:13px;color:var(--sub);margin-bottom:8px}
+.data-card .value{font-size:38px;font-weight:800;margin-bottom:4px}
+.data-card .note{font-size:12px;color:var(--sub)}
+
+/* insight box */
+.insight-box{max-width:840px;margin:30px auto 0;background:var(--card);border-radius:12px;padding:20px 26px;font-size:15px;border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.03)}
+.insight-box .q{color:var(--gold);font-weight:700;margin-bottom:8px}
+.insight-box .a{color:var(--text);line-height:1.7}
+
+/* dual columns */
+.dual-row{display:flex;gap:20px;max-width:960px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+.dual-col{flex:1;min-width:360px;background:var(--card);border-radius:12px;padding:26px;box-shadow:0 2px 10px rgba(0,0,0,.04);border:1px solid var(--border)}
+.dual-col h3{font-size:20px;margin-bottom:4px}
+.dual-col .subhead{font-size:13px;color:var(--sub);margin-bottom:16px}
+
+/* table */
+.data-table{max-width:900px;margin:0 auto;width:100%;border-collapse:collapse;font-size:14px}
+.data-table th{background:#f2f2ed;padding:10px 12px;text-align:left;font-size:13px;color:var(--sub);font-weight:600}
+.data-table td{padding:10px 12px;border-bottom:1px solid var(--border)}
+.data-table .num{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+
+/* timeline */
+.timeline{max-width:860px;margin:0 auto;position:relative}
+.timeline::before{content:'';position:absolute;left:22px;top:0;bottom:0;width:2px;background:var(--border)}
+.tl-item{display:flex;gap:16px;margin-bottom:18px;position:relative}
+.tl-dot{width:46px;height:46px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;z-index:1}
+.tl-dot.c1{background:var(--blue)}.tl-dot.c2{background:var(--green)}.tl-dot.c3{background:var(--orange)}.tl-dot.c4{background:var(--gold)}
+.tl-body{background:var(--card);border-radius:10px;padding:16px 20px;flex:1;border:1px solid var(--border);box-shadow:0 1px 4px rgba(0,0,0,.03)}
+.tl-body .tl-date{font-size:12px;color:var(--sub);margin-bottom:4px}
+.tl-body .tl-title{font-size:16px;font-weight:700;margin-bottom:4px}
+.tl-body .tl-desc{font-size:14px;color:#444;line-height:1.6}
+
+/* framework grid */
+.fw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:920px;margin:0 auto}
+.fw-item{background:var(--card);border-radius:10px;padding:18px 16px;border:1px solid var(--border);text-align:center}
+.fw-item .fw-num{font-size:22px;font-weight:800;color:var(--blue);margin-bottom:4px}
+.fw-item .fw-label{font-size:14px;font-weight:700;margin-bottom:4px}
+.fw-item .fw-desc{font-size:12px;color:var(--sub);line-height:1.5}
+
+/* equity */
+.eq-section{margin-bottom:22px}
+.eq-section h3{font-size:17px;font-weight:700;margin-bottom:8px;padding-bottom:6px;border-bottom:2px solid var(--blue-l)}
+.eq-row{display:flex;justify-content:space-between;padding:5px 0;font-size:14px;border-bottom:1px dotted var(--border)}
+.eq-row .eq-name{color:#444}.eq-row .eq-pct{font-weight:700}
+
+/* evidence box */
+.ev-box{max-width:860px;margin:18px auto 0;background:var(--card);border-radius:10px;padding:16px 20px;font-size:13px;border:1px solid var(--border)}
+.ev-box .ev-title{font-size:13px;color:var(--sub);font-weight:700;margin-bottom:8px}
+.ev-box .ev-line{color:#555;line-height:1.6;margin-bottom:3px;padding-left:12px;border-left:2px solid var(--green)}
+.ev-box .ev-source{font-size:12px;color:var(--sub);margin-top:6px;font-style:italic}
+
+/* method card */
+.method-card{background:var(--card);border-radius:12px;padding:20px 24px;max-width:860px;margin:12px auto;border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.03)}
+.method-card h3{font-size:17px;font-weight:700;margin-bottom:10px;color:var(--blue)}
+.method-card ul{list-style:none;padding:0}
+.method-card li{font-size:15px;padding:6px 0;border-bottom:1px dotted var(--border);line-height:1.6}
+.method-card li:last-child{border:none}
+.method-card li .step{display:inline-block;width:22px;height:22px;background:var(--blue-l);color:var(--blue);border-radius:50%;text-align:center;line-height:22px;font-size:12px;font-weight:800;margin-right:8px}
+
+/* annotation */
+.annot{font-size:12px;color:var(--sub);margin-top:14px;text-align:center;max-width:840px;margin-left:auto;margin-right:auto;line-height:1.6}
+
+/* responsive */
+@media(max-width:768px){
+  .page-title{font-size:28px}.fw-grid{grid-template-columns:repeat(2,1fr)}
+  .dual-row{flex-direction:column}.dual-col{min-width:auto}
+  .page{padding:48px 20px}.page-bridge{white-space:normal;width:86%}
+  .tl-dot{width:36px;height:36px;font-size:11px}
+}
+</style>
+</head>
+<body>
+
+<!-- ========== P1 封面 ========== -->
+<section class="page">
+  <div class="page-tag">读懂招股说明书</div>
+  <div class="page-title">阿维塔科技 · 港股IPO<br>招股书全拆解</div>
+  <div class="page-subtitle">438页申请版本 · 2026年6月提交港交所<br>透过招股书看懂一家"不造车的车企"</div>
+  <div class="core-line">
+    <span class="icon">📖</span>
+    <span class="text">我们的角度：不是看车好不好，是看公司行不行——透过招股书看商业逻辑、治理结构、财务决策。</span>
+  </div>
+  <div class="page-bridge">先看招股书的整体框架 ↓</div>
+</section>
+
+<!-- ========== P2 招股书核心框架 ========== -->
+<section class="page">
+  <div class="page-tag">招股书结构 · 10大模块</div>
+  <div class="page-title">一本招股书，438页<br>拆开来看就这10块</div>
+  <div class="fw-grid" style="margin-top:20px">
+    <div class="fw-item"><div class="fw-num">01</div><div class="fw-label">概要 Summary</div><div class="fw-desc">公司干什么、怕什么、财报一页看</div></div>
+    <div class="fw-item"><div class="fw-num">02</div><div class="fw-label">风险因素 Risk</div><div class="fw-desc">200+页"万一"，看公司自己承认的软肋</div></div>
+    <div class="fw-item"><div class="fw-num">03</div><div class="fw-label">行业概览 Industry</div><div class="fw-desc">市场多大、增速多少、竞争格局</div></div>
+    <div class="fw-item"><div class="fw-num">04</div><div class="fw-label">监管法规 Regulation</div><div class="fw-desc">行业准入门槛、政策变化风险</div></div>
+    <div class="fw-item"><div class="fw-num">05</div><div class="fw-label">公司架构 Structure</div><div class="fw-desc">谁控股、有无VIE、子公司布局</div></div>
+    <div class="fw-item"><div class="fw-num">06</div><div class="fw-label">业务 Business</div><div class="fw-desc">怎么赚钱、靠什么竞争、渠道怎么铺</div></div>
+    <div class="fw-item"><div class="fw-num">07</div><div class="fw-label">财务 Finance</div><div class="fw-desc">利润表+现金流+负债，三年数据</div></div>
+    <div class="fw-item"><div class="fw-num">08</div><div class="fw-label">关联交易 Related</div><div class="fw-desc">跟控股股东/合作伙伴的交易</div></div>
+    <div class="fw-item"><div class="fw-num">09</div><div class="fw-label">募资用途 Use</div><div class="fw-desc">拿钱干什么，跟风险对照看</div></div>
+    <div class="fw-item"><div class="fw-num">10</div><div class="fw-label">历史融资 History</div><div class="fw-desc">谁进谁出、价格多少、股权怎么变</div></div>
+  </div>
+  <div class="insight-box">
+    <div class="q">🔍 读招股书的顺序</div>
+    <div class="a">先看<strong>概要</strong>建立全局感 → 再看<strong>股权架构</strong>搞清楚谁控制 → 精读<strong>业务模式</strong>和<strong>财务数据</strong> → 最后看<strong>风险因素</strong>和<strong>募资用途</strong>，验证"它怕什么"和"它想干什么"是否对得上。</div>
+  </div>
+  <div class="page-bridge">接下来看最关键的两个问题：谁控制？怎么赚钱？↓</div>
+</section>
+
+<!-- ========== P3 股权架构 + 长安联营企业 ========== -->
+<section class="page">
+  <div class="page-tag">股权架构 · 谁说了算</div>
+  <div class="page-title">长安控股40.99%，不并表<br>用权益法核算</div>
+  <div class="page-subtitle">阿维塔是长安汽车的<strong>联营企业</strong>，不在合并报表范围内<br>亏损按持股比例计入长安的"投资收益"</div>
+
+  <!-- 股权结构 -->
+  <div class="dual-row" style="margin-top:8px">
+    <div class="dual-col" style="border-left:4px solid var(--blue)">
+      <h3>控股股东阵营</h3>
+      <div class="subhead">招股书P102：C轮后股权结构</div>
+      <div class="eq-row"><span class="eq-name">长安汽车</span><span class="eq-pct" style="color:var(--blue)">40.99%</span></div>
+      <div class="eq-row"><span class="eq-name">CATL 宁德时代</span><span class="eq-pct">9.17%</span></div>
+      <div class="eq-row"><span class="eq-name">重庆安渝</span><span class="eq-pct">8.81%</span></div>
+      <div class="eq-row"><span class="eq-name">承安PE（重庆国资）</span><span class="eq-pct">7.27%</span></div>
+      <div class="eq-row"><span class="eq-name">南方工业资产</span><span class="eq-pct">6.34%</span></div>
+      <div class="eq-row"><span class="eq-name">交银金融资产投资</span><span class="eq-pct">3.34%</span></div>
+      <div class="eq-row"><span class="eq-name">国家绿色发展基金</span><span class="eq-pct">2.90%</span></div>
+      <div class="eq-row"><span class="eq-name">其他20+机构</span><span class="eq-pct">20.18%</span></div>
+    </div>
+    <div class="dual-col" style="border-left:4px solid var(--green)">
+      <h3>长安年报怎么说的</h3>
+      <div class="subhead">2025年报 · 多个出处</div>
+      <div style="font-size:13px;color:#444;line-height:1.7">
+        <p style="margin-bottom:8px"><strong>P4 释义：</strong>"阿维塔，指阿维塔科技（重庆）股份有限公司，公司的<strong>联营企业</strong>"</p>
+        <p style="margin-bottom:8px"><strong>P139 长期股权投资：</strong>阿维塔期初账面价值48.98亿 → 本期-12.12亿 → 期末<strong>36.86亿</strong></p>
+        <p style="margin-bottom:8px"><strong>P168 投资收益：</strong>权益法核算的长期股权投资收益<strong>-4.30亿</strong>（含阿维塔亏损按40.99%计入）</p>
+        <p style="margin-bottom:8px"><strong>P196 关联交易：</strong>长安向阿维塔销售整车零部件<strong>35.91亿</strong>（最大关联销售客户之一）</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <div class="q">🔍 这意味着什么？</div>
+    <div class="a">阿维塔亏损112亿，但长安的合并报表营收里<strong>没有阿维塔一分钱</strong>。长安只在自己报表里按40.99%比例确认投资亏损。所以看长安财报时，营收里不含阿维塔，但利润表里含着阿维塔的亏损份额——<strong>营收没涨、利润被拖</strong>。</div>
+  </div>
+  <div class="page-bridge">钱是谁投的？往下看完整融资历程 ↓</div>
+</section>
+
+<!-- ========== P4 完整融资历程 ========== -->
+<section class="page">
+  <div class="page-tag">融资历程 · 7轮/7年</div>
+  <div class="page-title">从长安+蔚来各50%<br>到长安绝对控制+20+机构</div>
+  <div class="page-subtitle">招股书P96-103：完整披露每一轮的投资人、金额、持股变化</div>
+
+  <div class="timeline" style="margin-top:16px">
+    <div class="tl-item">
+      <div class="tl-dot c1">1</div>
+      <div class="tl-body">
+        <div class="tl-date">2018年5月 · 创立</div>
+        <div class="tl-title">长安蔚来 — 长安50% / 蔚来50%</div>
+        <div class="tl-desc">注册资本18.8亿，各出资一半。最初定位是"长安+蔚来"的合资品牌。</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot c2">2</div>
+      <div class="tl-body">
+        <div class="tl-date">2020年6月 · 增资+股权转让</div>
+        <div class="tl-title">蔚来以1元名义对价转让4.62%给长安</div>
+        <div class="tl-desc">长安增资9000万，蔚来以<strong>名义对价1元</strong>转让4031万注册资本。完成后：长安95.38%、蔚来4.62%。蔚来实质上退出了。</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot c3">3</div>
+      <div class="tl-body">
+        <div class="tl-date">2021年3月 · 等比例增资</div>
+        <div class="tl-title">注册资本增至2.88亿</div>
+        <div class="tl-desc">长安和蔚来按原比例等比例增资，股权比例不变。</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot c4">4</div>
+      <div class="tl-body">
+        <div class="tl-date">2022年3月 · 战略轮（Series Strategy）</div>
+        <div class="tl-title">CATL首次入局 — 融资19.20亿</div>
+        <div class="tl-desc">CATL 7.70亿（23.99%）、承安PE 6.10亿（19.01%）、南方资产2.80亿（8.73%）、闽东时代1.60亿（5.00%）等。<strong>长安同步增资5亿</strong>，持股降至39.02%。蔚来降至1.13%。</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot c1">5</div>
+      <div class="tl-body">
+        <div class="tl-date">2022年8月-2023年8月 · A轮</div>
+        <div class="tl-title">绿色基金等9家入局 — 融资13.78亿</div>
+        <div class="tl-desc">绿色基金4.80亿、聚力展业2.30亿、青岛月湾1.58亿等。<strong>长安同步增资11.69亿</strong>，维持40.99%。CATL被稀释至17.10%。蔚来降至0.81%。</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot c2">6</div>
+      <div class="tl-body">
+        <div class="tl-date">2024年2月 · B轮</div>
+        <div class="tl-title">重庆产投母基金等入局 — 融资约12.50亿</div>
+        <div class="tl-desc">南方资产3亿、重庆产投母基金3.63亿、承安叁号3.63亿、交银金融资产投资3亿等。<strong>长安同步增资14.36亿</strong>，维持40.99%。CATL降至14.10%。</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot c3">7</div>
+      <div class="tl-body">
+        <div class="tl-date">2024年10月-2025年5月 · C轮</div>
+        <div class="tl-title">13家国资+产投入局 — 融资约63.75亿</div>
+        <div class="tl-desc">杭州产投5亿、合肥高新2.5亿、合肥国晶2.5亿、兵器新动能2亿、国投聚力2亿、南方装备创投3亿等。<strong>长安同步增资45.51亿</strong>，维持40.99%。CATL降至9.17%。<strong>蔚来全部退出</strong>（2025年9-11月老股转让给凯辉新渝）。</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot c4">IPO</div>
+      <div class="tl-body">
+        <div class="tl-date">2025年9月 · 股改 + 2026年6月 · 递交招股书</div>
+        <div class="tl-title">股份改制为股份有限公司 · 申请版本递交港交所</div>
+        <div class="tl-desc">注册资本30.65亿股（每股面值1元）。IPO前老股转让（2025年9-11月）：蔚来→凯辉新渝、创晟驰铭→红马基金/恒和三号/为中引智等，每股8.5-10.37元。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <div class="q">🔍 融资历程读出的信号</div>
+    <div class="a"><strong>长安从未减持</strong>——每轮都同步增资，维持40.99%控制权。<strong>CATL从24%→9%</strong>——每轮都被稀释，不愿加注。<strong>蔚来从50%→0</strong>——从联合创始到完全退出。<strong>C轮全是国资</strong>——杭州、合肥、兵器集团、国投，没有纯市场化资本在追。</div>
+  </div>
+  <div class="page-bridge">不造车，那它怎么赚钱？↓</div>
+</section>
+
+<!-- ========== P5 业务模式 ========== -->
+<section class="page">
+  <div class="page-tag">业务模式 · 资产轻量化</div>
+  <div class="page-title">一家"不造车的车企"<br>靠什么赚钱？</div>
+  <div class="page-subtitle">招股书P10原文：覆盖产品定义与设计、智能汽车工程、系统集成、销售与售后<br>制造全部外包给长安，阿维塔只做"软"的</div>
+
+  <div class="dual-row" style="margin-top:16px">
+    <div class="dual-col" style="border-left:4px solid var(--blue)">
+      <h3>价值链四环节（全自营）</h3>
+      <div class="subhead">P10: "design, develop and sell NEPVs"</div>
+      <div style="font-size:14px;line-height:2.0;color:#444">
+        <div>① <strong>产品定义与设计</strong> — 德国慕尼黑设计中心</div>
+        <div>② <strong>智能汽车工程</strong> — 集成华为ADS + 鸿蒙座舱</div>
+        <div>③ <strong>系统集成</strong> — 整车架构和软件平台</div>
+        <div>④ <strong>销售与售后</strong> — 双渠道（直销+分销）</div>
+      </div>
+    </div>
+    <div class="dual-col" style="border-left:4px solid var(--green)">
+      <h3>三大战略合作方</h3>
+      <div class="subhead">P10/P122/P126-127</div>
+      <div style="font-size:14px;line-height:2.0;color:#444">
+        <div>🏭 <strong>长安汽车</strong> — 唯一制造商 + 供应链 + 渠道</div>
+        <div>🔋 <strong>CATL</strong> — 电池技术 + 电芯供应 + 磐石底盘</div>
+        <div>🧠 <strong>华为/引望</strong> — ADS智驾 + 鸿蒙座舱（持股引望10%）</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dual-row" style="margin-top:20px">
+    <div class="dual-col" style="border-left:4px solid var(--orange)">
+      <h3>销售渠道</h3>
+      <div class="subhead">P13原文</div>
+      <div style="font-size:14px;line-height:2.0;color:#444">
+        <div>📱 <strong>直销 50.7%</strong> — App+官网+自营门店+代理商（赚佣金）</div>
+        <div>🏪 <strong>分销 49.3%</strong> — 经销商采购→品牌授权门店</div>
+        <div style="margin-top:4px;font-size:12px;color:var(--sub)">经销商数量：0（2023）→ 259（2024）→ 384（2025）</div>
+      </div>
+    </div>
+    <div class="dual-col" style="border-left:4px solid var(--gold)">
+      <h3>收入结构（2025年）</h3>
+      <div class="subhead">P12原文</div>
+      <div style="font-size:14px;line-height:2.0;color:#444">
+        <div>🚗 <strong>整车销售 93.3%</strong> — 239.18亿</div>
+        <div>🔧 <strong>其他 6.7%</strong> — 零部件+售后+智驾订阅+充电+金融</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <div class="q">🔍 像苹果还是像耐克？</div>
+    <div class="a">阿维塔不做制造，只做设计+品牌+渠道——跟苹果不造手机、耐克不造鞋一样。但区别在于：苹果对富士康有绝对议价权，阿维塔对长安（控股股东）没有。关联交易35.91亿，采购依赖度13.3%——<strong>既是靠山，也是软肋</strong>。</div>
+  </div>
+  <div class="page-bridge">光有模式不行，看财务数据 ↓</div>
+</section>
+
+<!-- ========== P6 财务数据 ========== -->
+<section class="page">
+  <div class="page-tag">财务数据 · 3年累计亏损112亿</div>
+  <div class="page-title">营收4.5倍增长<br>但离盈利还有多远？</div>
+  <div class="page-subtitle">IFRS口径，招股书P14-16摘要数据</div>
+
+  <!-- 利润表 -->
+  <table class="data-table" style="margin-top:20px">
+    <thead>
+      <tr><th>指标（亿元人民币）</th><th>2023</th><th>2024</th><th>2025</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>营收</td><td class="num">56.45</td><td class="num">151.95</td><td class="num" style="color:var(--green)">256.31</td></tr>
+      <tr><td>毛利率</td><td class="num" style="color:var(--red)">-3.0%</td><td class="num">6.3%</td><td class="num" style="color:var(--green)">9.4%</td></tr>
+      <tr><td>研发费用</td><td class="num">6.60</td><td class="num">12.14</td><td class="num">20.86</td></tr>
+      <tr><td>销售费用</td><td class="num">23.04</td><td class="num">30.36</td><td class="num">32.81</td></tr>
+      <tr><td>管理费用</td><td class="num">5.80</td><td class="num">7.06</td><td class="num">7.66</td></tr>
+      <tr style="background:#fef4f0"><td><strong>净亏损</strong></td><td class="num" style="color:var(--red)"><strong>-36.93</strong></td><td class="num" style="color:var(--red)"><strong>-40.18</strong></td><td class="num" style="color:var(--red)"><strong>-34.89</strong></td></tr>
+    </tbody>
+  </table>
+
+  <!-- 现金流 -->
+  <table class="data-table" style="margin-top:20px">
+    <thead>
+      <tr><th>现金流（亿元人民币）</th><th>2023</th><th>2024</th><th>2025</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>经营现金流</td><td class="num" style="color:var(--red)">-8.01</td><td class="num" style="color:var(--green)">+17.55</td><td class="num" style="color:var(--green)">+23.15</td></tr>
+      <tr><td>投资现金流</td><td class="num">-12.11</td><td class="num">-24.52</td><td class="num" style="color:var(--red)">-106.89</td></tr>
+      <tr><td>融资现金流</td><td class="num">+17.77</td><td class="num">+128.80</td><td class="num" style="color:var(--red)">-12.63</td></tr>
+      <tr style="background:#eaf7f1"><td><strong>年末现金</strong></td><td class="num"><strong>71.39</strong></td><td class="num"><strong>193.23</strong></td><td class="num"><strong>96.87</strong></td></tr>
+    </tbody>
+  </table>
+
+  <div class="insight-box">
+    <div class="q">🔍 三看财务</div>
+    <div class="a"><strong>看趋势：</strong>营收翻4.5倍，毛利率从负转正，亏损在收窄——方向是对的。<br><strong>看现金流：</strong>经营已转正+23亿，但投资引望花了92亿，现金从193亿→97亿。<br><strong>看2026年4月：</strong>现金进一步降至62.49亿，月均烧8.6亿——IPO是必须的。</div>
+  </div>
+  <div class="page-bridge">最后，一套读招股书的方法论 ↓</div>
+</section>
+
+<!-- ========== P7 读招股书方法论 ========== -->
+<section class="page">
+  <div class="page-tag">方法论 · 怎么读一本招股书</div>
+  <div class="page-title">读招股书的五步法</div>
+  <div class="page-subtitle">以阿维塔招股书为案例，总结一套可复用的方法</div>
+
+  <div class="method-card" style="border-left:4px solid var(--blue)">
+    <h3>第一步：先画框架图，建立全局感</h3>
+    <ul>
+      <li><span class="step">1</span>招股书几百页，不先建立全局感，很容易陷进去出不来</li>
+      <li><span class="step">2</span>10大模块：概要→风险→行业→法规→架构→业务→财务→关联交易→募资→融资史</li>
+      <li><span class="step">3</span>先花10分钟看目录和概要，画出自己的"知识地图"</li>
+    </ul>
+  </div>
+
+  <div class="method-card" style="border-left:4px solid var(--green)">
+    <h3>第二步：看股权结构——谁在控制、谁在退出</h3>
+    <ul>
+      <li><span class="step">1</span>控股股东是谁？IPO后持股会掉多少？</li>
+      <li><span class="step">2</span>老股东进出：谁留下了、谁跑了？（蔚来从50%→0，CATL从24%→9%）</li>
+      <li><span class="step">3</span>新进来的钱是什么性质？（C轮全是国资，无纯市场化资本）</li>
+      <li><span class="step">4</span>有无VIE架构？（阿维塔无VIE，纯内资）</li>
+    </ul>
+  </div>
+
+  <div class="method-card" style="border-left:4px solid var(--orange)">
+    <h3>第三步：看业务模式——靠什么赚钱</h3>
+    <ul>
+      <li><span class="step">1</span>价值链：自己做什么？外包什么？</li>
+      <li><span class="step">2</span>收入结构：主营业务占比？有没有其他收入？</li>
+      <li><span class="step">3</span>渠道结构：直销vs分销？渠道在扩张还是收缩？</li>
+      <li><span class="step">4</span>竞争壁垒：招股书自己说的竞争优势，你信不信？</li>
+    </ul>
+  </div>
+
+  <div class="method-card" style="border-left:4px solid var(--gold)">
+    <h3>第四步：看财务数据——三看原则</h3>
+    <ul>
+      <li><span class="step">1</span><strong>看趋势</strong>：营收增速、毛利率变化、亏损是否在收窄</li>
+      <li><span class="step">2</span><strong>看现金流</strong>：经营现金流是否转正？投资现金流花在哪？</li>
+      <li><span class="step">3</span><strong>看关联交易</strong>：跟控股股东的往来有多大？占比在升还是降？</li>
+    </ul>
+  </div>
+
+  <div class="method-card" style="border-left:4px solid var(--red)">
+    <h3>第五步：横向对标 + 注意申请版本限制</h3>
+    <ul>
+      <li><span class="step">1</span>跟同类公司比：阿维塔 vs 蔚来/理想/小鹏/极氪/小米</li>
+      <li><span class="step">2</span>申请版本的关键数字被[REDACTED]遮盖，估值要等聆讯后版本</li>
+      <li><span class="step">3</span>风险因素写了200+页——逐条看，看公司自己承认了什么软肋</li>
+    </ul>
+  </div>
+
+  <div class="page-bridge" style="position:relative;bottom:auto;left:auto;transform:none;margin-top:30px">以上分析来源于公开招股书和年报，不构成投资建议</div>
+</section>
+
+<!-- ========== P8 数据来源页 ========== -->
+<section class="page">
+  <div class="page-tag">数据来源</div>
+  <div class="page-title" style="font-size:32px">所有数据均来自原始文件</div>
+  
+  <div class="dual-row" style="margin-top:20px">
+    <div class="dual-col" style="border-left:4px solid var(--blue)">
+      <h3>阿维塔招股书</h3>
+      <div class="subhead">申请版本 · 2026年6月 · 438页</div>
+      <div style="font-size:13px;color:#444;line-height:1.8">
+        <div>• P10：业务模式描述</div>
+        <div>• P12：收入结构拆分</div>
+        <div>• P13：销售渠道数据</div>
+        <div>• P14-16：财务摘要</div>
+        <div>• P96-103：完整融资历程</div>
+        <div>• P102：C轮后股权结构</div>
+        <div>• P122/P126-127：战略合作</div>
+        <div>• P260：引望投资92亿</div>
+      </div>
+    </div>
+    <div class="dual-col" style="border-left:4px solid var(--green)">
+      <h3>长安汽车2025年报</h3>
+      <div class="subhead">A股000625 · 222页</div>
+      <div style="font-size:13px;color:#444;line-height:1.8">
+        <div>• P4：释义—阿维塔=联营企业</div>
+        <div>• P139：长期股权投资明细</div>
+        <div>• P168：权益法投资收益-4.30亿</div>
+        <div>• P179-180：联营企业汇总</div>
+        <div>• P188-196：关联交易明细</div>
+        <div>• P219-220：母公司长期股权投资</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="insight-box" style="margin-top:24px">
+    <div class="q">⚠️ 免责声明</div>
+    <div class="a">以上分析来源于公开招股说明书和年度报告，不构成投资建议。本人对任何汽车品牌都不存在偏见，希望它们发展良好，也希望严谨的分析对于汽车板块投资人来讲有意义。本视频不是讲车好与坏的，想要看哪个车好的，可以去找车评博主，有很多不错的博主可以参考。</div>
+  </div>
+</section>
+
+</body>
+</html>

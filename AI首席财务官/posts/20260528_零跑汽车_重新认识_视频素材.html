@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>零跑汽车 · 重新认识</title>
+<style>
+  :root {
+    --bg: #f5f7fa;
+    --card: #ffffff;
+    --ink: #1a1a2e;
+    --accent: #1a6fc4;
+    --accent-light: #e8f0fe;
+    --line: #e0e3e8;
+    --sub: #6b7280;
+    --red: #c0392b;
+    --green: #1e8449;
+    --gold: #b9770e;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.7;
+  }
+  .num { font-family: "Menlo", "SF Mono", "DIN Alternate", monospace; }
+
+  .page {
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 48px 40px; border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+  .page:nth-child(odd) { background: var(--bg); }
+  .page:nth-child(even) { background: #f0f4f8; }
+
+  .page-num {
+    position: absolute; top: 20px; right: 28px;
+    font-size: 13px; color: var(--sub); letter-spacing: 2px;
+  }
+
+  /* 悬念页大标题 */
+  .suspense-title {
+    font-size: 42px; font-weight: 900; text-align: center;
+    max-width: 800px; line-height: 1.4; letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+  .suspense-clue {
+    font-size: 19px; color: var(--sub); text-align: center;
+    max-width: 700px; line-height: 1.85; margin-bottom: 8px;
+  }
+  .suspense-clue b { color: var(--ink); font-weight: 700; }
+
+  /* 数据卡片 */
+  .card-row { display: flex; gap: 16px; width: 100%; max-width: 940px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+  .data-card {
+    flex: 1; min-width: 200px;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 20px 16px; text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .data-card .label { font-size: 14px; color: var(--sub); margin-bottom: 6px; font-weight: 600; }
+  .data-card .value { font-size: 38px; font-weight: 900; }
+  .data-card .note { font-size: 13px; color: var(--sub); margin-top: 6px; line-height: 1.5; }
+
+  /* 核心句 */
+  .core-line {
+    width: 100%; max-width: 940px;
+    border-left: 4px solid var(--accent);
+    background: var(--accent-light);
+    padding: 14px 18px; margin: 22px 0;
+    font-size: 19px; font-weight: 700; line-height: 1.7;
+  }
+
+  /* 揭晓页 */
+  .reveal-name {
+    font-size: 64px; font-weight: 900; letter-spacing: 8px;
+    color: var(--accent); margin-bottom: 8px;
+  }
+  .reveal-tag {
+    font-size: 16px; color: var(--sub); letter-spacing: 3px; margin-bottom: 32px;
+  }
+
+  /* 时间轴 */
+  .timeline { width: 100%; max-width: 940px; margin: 20px 0; }
+  .tl-row { display: flex; align-items: flex-start; margin-bottom: 18px; }
+  .tl-year {
+    min-width: 70px; font-size: 15px; font-weight: 800;
+    color: var(--accent); padding-top: 2px; text-align: right; padding-right: 16px;
+    border-right: 3px solid var(--accent); padding-bottom: 8px;
+  }
+  .tl-dot { width: 10px; height: 10px; background: var(--accent); border-radius: 50%; margin: 5px 12px 0 -7px; flex-shrink: 0; }
+  .tl-content { flex: 1; padding-left: 12px; }
+  .tl-content .tl-title { font-size: 16px; font-weight: 700; margin-bottom: 3px; }
+  .tl-content .tl-desc { font-size: 14.5px; color: var(--sub); line-height: 1.7; }
+
+  /* 对比条 */
+  .vs-bar {
+    width: 100%; max-width: 940px; display: flex; gap: 14px; margin: 14px 0; flex-wrap: wrap;
+  }
+  .vs-item {
+    flex: 1; min-width: 240px;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 10px; padding: 16px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+  }
+  .vs-item .v { font-size: 34px; font-weight: 900; }
+  .vs-item .l { font-size: 15px; margin-top: 4px; font-weight: 600; }
+  .vs-item .s { font-size: 13px; color: var(--sub); margin-top: 4px; line-height: 1.5; }
+
+  /* 数据表格 */
+  .data-table {
+    width: 100%; max-width: 940px; border-collapse: collapse;
+    background: var(--card); border-radius: 12px; overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin: 18px 0;
+  }
+  .data-table th {
+    background: var(--accent); color: #fff; font-size: 14px;
+    padding: 11px 14px; text-align: left; letter-spacing: 1px;
+  }
+  .data-table td { padding: 11px 14px; border-bottom: 1px solid var(--line); font-size: 16px; }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table .num-cell { text-align: right; font-weight: 700; }
+
+  /* 结尾三件事 */
+  .watch-list { width: 100%; max-width: 940px; margin-top: 20px; }
+  .watch-item {
+    display: flex; gap: 16px; align-items: flex-start;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 10px; padding: 18px; margin-bottom: 12px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+  }
+  .watch-num {
+    min-width: 36px; height: 36px; background: var(--accent); color: #fff;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 800; flex-shrink: 0; margin-top: 2px;
+  }
+  .watch-body .watch-title { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+  .watch-body .watch-desc { font-size: 14.5px; color: var(--sub); line-height: 1.7; }
+
+  .src {
+    font-size: 12.5px; color: #aab0b8; margin-top: 18px;
+    width: 100%; max-width: 940px; line-height: 1.7;
+    border-top: 1px dashed var(--line); padding-top: 8px;
+  }
+
+  .page-title {
+    font-size: 42px; font-weight: 900; text-align: center;
+    margin-bottom: 12px; line-height: 1.35; letter-spacing: 1px;
+  }
+  .page-sub {
+    font-size: 18px; color: var(--sub); text-align: center;
+    margin-bottom: 28px; max-width: 800px;
+  }
+  .page-sub strong { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<!-- ============ P1 悬念：纯线索，不揭晓 ============ -->
+<section class="page">
+  <div class="page-num">1 / 7</div>
+  <div class="suspense-title">一家极少上"热搜"的车企<br>悄悄把"性价比"这件事做成了盈利</div>
+  <div class="suspense-clue">它的创始人，你大概率叫不出名字</div>
+  <div class="suspense-clue">它的发布会，没有PPT、没有"重新定义"、没有老板金句</div>
+  <div class="suspense-clue">但2025年，它成了<strong>继理想之后年度盈利</strong>的新势力</div>
+  <div class="suspense-clue">2026年5月，它单月交付<strong>81,569台</strong>，新势力第一个破8万</div>
+  <div class="suspense-clue" style="margin-top:16px; font-size:17px; color:var(--ink);">大家都应该猜到的是哪个车企？</div>
+</section>
+
+<!-- ============ P2 揭晓 + 数据卡片 ============ -->
+<section class="page">
+  <div class="page-num">2 / 7</div>
+  <div class="reveal-name">零跑</div>
+  <div class="reveal-tag">LEAPMOTOR · 新车 · 9863.HK</div>
+
+  <div class="card-row">
+    <div class="data-card">
+      <div class="label">2025年交付</div>
+      <div class="value num" style="color:var(--accent);">59.66万</div>
+      <div class="note">+103.1% · 新势力第一</div>
+    </div>
+    <div class="data-card">
+      <div class="label">2025年营收</div>
+      <div class="value num" style="color:var(--accent);">647.3亿</div>
+      <div class="note">+101.3%</div>
+    </div>
+    <div class="data-card">
+      <div class="label">2025年净利润</div>
+      <div class="value num" style="color:var(--green);">+5.38亿</div>
+      <div class="note">首次全年盈利 · 新势力年度盈利</div>
+    </div>
+    <div class="data-card">
+      <div class="label">单车净利</div>
+      <div class="value num" style="color:var(--gold);">902元</div>
+      <div class="note">卖10万的车，每辆净赚一部手机</div>
+    </div>
+  </div>
+
+  <div class="core-line">
+    创始人是谁？朱江明——大华股份联合创始人，做安防监控起家，摄像头做到全球第二。2015年在西班牙街头看到电动车，决定造车。他想得很简单：大华在电子制造上的积累，为什么不能搬到汽车上？
+  </div>
+</section>
+
+<!-- ============ P3 原点：大华基因 ============ -->
+<section class="page">
+  <div class="page-num">3 / 7</div>
+  <div class="page-title">2015年西班牙街头<br>改变了他的人生轨迹</div>
+  <div class="page-sub">在瓦伦西亚看到满街的雷诺电动车，朱江明决定：把造智能硬件的逻辑，用到造车上</div>
+
+  <div class="timeline">
+    <div class="tl-row">
+      <div class="tl-year">2001</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-title">朱江明联合创办大华技术</div>
+        <div class="tl-desc">安防监控，从零做到全球第二。核心能力：芯片、算法、硬件全自研，把成本压到极致——这套逻辑，后来直接搬进了造车。</div>
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-year">2015</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-title">零跑汽车成立</div>
+        <div class="tl-desc">朱江明在西班牙瓦伦西亚看到雷诺电动车，决定把大华的电子制造经验搬到汽车上。别人造车先搞发动机、底盘，零跑先搞智能驾驶芯片、中央集成式电子架构——用造智能硬件的逻辑来造车。</div>
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-year">2019</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-title">首款量产车S01交付</div>
+        <div class="tl-desc">不被看好，年销仅千台。但自研路线没动摇——八合一电驱、CTC电池底盘一体化，这些后来成为核心竞争力的技术，这时候已经在啃了。</div>
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-year">2023—2025</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-title">C系列爆量，全年盈利</div>
+        <div class="tl-desc">C11、C16连续爆款，"半价理想"外号传开。2025年全年交付59.66万台，净利润5.38亿——性价比赛道，第一次有人赚到了钱。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="core-line">
+    大华做了20年电子制造，知道怎么在薄利里抠利润。零跑把这套基因带进了造车——这是它和"汽车人创业"最根本的区别。
+  </div>
+</section>
+
+<!-- ============ P4 核心问题：性价比怎么赚钱 ============ -->
+<section class="page">
+  <div class="page-num">4 / 7</div>
+  <div class="page-title">"性价比"三个字<br>在汽车行业等于"薄利"</div>
+  <div class="page-sub">零跑外号"半价理想"——配置接近理想，价格卖一半。<strong>它怎么在别人赚不到钱的赛道里，把钱赚到了？</strong></div>
+
+  <div class="core-line">
+    答案在大华基因里：核心零部件65%自研自造。别人外采，它自产——省掉Tier1的中间利润，成本压到行业做不到的低。
+  </div>
+
+  <table class="data-table">
+    <tr><th>环节</th><th>零跑的做法</th><th style="text-align:right;">2025年数据</th></tr>
+    <tr>
+      <td><strong>造车成本</strong></td>
+      <td>八合一电驱、CTC电池底盘一体化、智驾芯片——65%整车成本来自自研零部件</td>
+      <td class="num-cell" style="color:var(--green);">毛利率14.5%<br><span style="font-size:12px;font-weight:400;">2024年才8.4%</span></td>
+    </tr>
+    <tr>
+      <td><strong>研发效率</strong></td>
+      <td>只投"今天能装上车"的东西，不做远期概念</td>
+      <td class="num-cell">42.9亿<br><span style="font-size:12px;font-weight:400;">单车约7,200元</span></td>
+    </tr>
+    <tr>
+      <td><strong>渠道效率</strong></td>
+      <td>不重金铺直营，靠性价比口碑走量</td>
+      <td class="num-cell">销售费率5.6%<br><span style="font-size:12px;font-weight:400;">行业偏低</span></td>
+    </tr>
+    <tr>
+      <td><strong>出海成本</strong></td>
+      <td>不烧钱建海外渠道——借Stellantis的网卖车，"反向合资"</td>
+      <td class="num-cell" style="color:var(--green);">出口6.7万台<br><span style="font-size:12px;font-weight:400;">新势力出口第一</span></td>
+    </tr>
+  </table>
+
+  <div class="src">来源：65%自研自造——公司2025年报及2026Q1公告；毛利率14.5%（2024年8.4%）——2025年报；研发42.9亿、销售费率5.6%——2025年报管理层讨论与分析；出口67,052台——2025年报</div>
+</section>
+
+<!-- ============ P5 裂缝：Q1的反差 ============ -->
+<section class="page">
+  <div class="page-num">5 / 7</div>
+  <div class="page-title">但2026年Q1<br>这份成绩单让人皱眉</div>
+  <div class="page-sub">销量在涨、营收在涨，<strong>利润重新见红，毛利率大幅下滑</strong></div>
+
+  <table class="data-table">
+    <tr><th>指标</th><th>2026年Q1</th><th>对比</th></tr>
+    <tr>
+      <td>营收</td>
+      <td class="num-cell">108.2亿</td>
+      <td>+8.0%</td>
+    </tr>
+    <tr>
+      <td>销量</td>
+      <td class="num-cell">110,155台</td>
+      <td>+25.8%（量升，但均价在降）</td>
+    </tr>
+    <tr>
+      <td>毛利率</td>
+      <td class="num-cell" style="color:var(--red);">9.4%</td>
+      <td>去年同期14.9% / 上季度15.0%</td>
+    </tr>
+    <tr>
+      <td>归母净利润</td>
+      <td class="num-cell" style="color:var(--red);">-3.9亿</td>
+      <td>由盈转亏</td>
+    </tr>
+    <tr>
+      <td>经营现金流</td>
+      <td class="num-cell" style="color:var(--red);">-66.1亿</td>
+      <td>2025全年为+126.2亿</td>
+    </tr>
+    <tr>
+      <td>在手资金</td>
+      <td class="num-cell">306.3亿</td>
+      <td>单季减少约72亿，安全垫仍厚</td>
+    </tr>
+  </table>
+
+  <div class="core-line">
+    毛利率从15%跌到9.4%——公司公告解释两点：①低价车（B系列+A10）占比上升；②对Stellantis的技术授权收入（高毛利）Q1缩量。量在涨、价在降、高毛利副业在缩——这三件事碰在一起，Q1的亏损就不意外了。
+  </div>
+
+  <div class="src">来源：营收108.2亿（+8.0%）、毛利率9.4%及归因原文、净亏3.9亿、经营现金流-66.1亿、在手306.3亿——零跑2026Q1业绩公告（2026.5.15）</div>
+</section>
+
+<!-- ============ P6 新变量：4-6月的变化 ============ -->
+<section class="page">
+  <div class="page-num">6 / 7</div>
+  <div class="page-title">Q1的裂缝，4月开始补</div>
+  <div class="page-sub">连续上了三款新车——<strong>走量的基本盘没松，第一次把车价摸到20万以上</strong></div>
+
+  <div class="vs-bar">
+    <div class="vs-item">
+      <div class="v num" style="color:var(--accent);">A10</div>
+      <div class="l">10万内首搭激光雷达</div>
+      <div class="s">3月26日上市</div>
+      <div style="font-size:20px;font-weight:700;color:var(--accent);margin-top:6px;">首月大定超4万台</div>
+    </div>
+    <div class="vs-item">
+      <div class="v num" style="color:var(--gold);">D19</div>
+      <div class="l">21.98—26.98万 · 旗舰SUV</div>
+      <div class="s">4月16日上市 · 零跑第一次卖过20万</div>
+      <div style="font-size:20px;font-weight:700;color:var(--gold);margin-top:6px;">15天大定超1.5万台</div>
+    </div>
+    <div class="vs-item">
+      <div class="v" style="color:var(--green);">D99</div>
+      <div class="l">旗舰MPV · 6月25日预售</div>
+      <div class="s">车长超5.2米，增程+纯电双动力，7月上市交付。继续往上打价格带。</div>
+    </div>
+  </div>
+
+  <div class="card-row" style="margin-top:20px;">
+    <div class="data-card">
+      <div class="label">4月交付</div>
+      <div class="value num" style="color:var(--accent);">71,387</div>
+      <div class="note">破新势力月销纪录 · 同比+73.9%</div>
+    </div>
+    <div class="data-card">
+      <div class="label">5月交付</div>
+      <div class="value num" style="color:var(--accent);">81,569</div>
+      <div class="note">新势力首个破8万 · 同比+81%</div>
+    </div>
+    <div class="data-card">
+      <div class="label">Q1出口</div>
+      <div class="value num" style="color:var(--green);">40,901台</div>
+      <div class="note">同比+442% · 占销量37.1%</div>
+    </div>
+  </div>
+
+  <div class="core-line">
+    关键问题：A10卖得越多，毛利率压力越大。D19/D99能不能把均价和毛利拉回来？这道算术题，Q3财报会给出第一个答案。
+  </div>
+
+  <div class="src">来源：A10 48小时订单破万、首月大定4万+——2026Q1公告；D19 15天大定1.5万——新华网；4月71,387台、5月81,569台——公司交付公告；Q1出口40,901台（+442%）——2026Q1公告</div>
+</section>
+
+<!-- ============ P7 三个看点（原P8，合并了原P7军令状内容） ============ -->
+<section class="page">
+  <div class="page-num">7 / 7</div>
+  <div class="page-title">零跑，往后盯三件事</div>
+
+  <div class="watch-list">
+    <div class="watch-item">
+      <div class="watch-num">1</div>
+      <div class="watch-body">
+        <div class="watch-title">D19/D99能不能把均价拉起来？</div>
+        <div class="watch-desc">"半价理想"的外号是流量，也是天花板。D平台能不能让零跑摘掉"性价比"的帽子，Q3财报第一个见分晓。均价每涨1万，对利润的影响比多卖1万台车还大。</div>
+      </div>
+    </div>
+    <div class="watch-item">
+      <div class="watch-num">2</div>
+      <div class="watch-body">
+        <div class="watch-title">出口能不能稳住月均3万台以上？</div>
+        <div class="watch-desc">Q1出口占销量37.1%，欧洲16国上牌同比+726.5%，意大利拿下了纯电销冠。反向合资不走烧钱路线，但Stellantis的合作收入Q1在缩量——这块高毛利业务能不能回来，直接影响毛利率。</div>
+      </div>
+    </div>
+    <div class="watch-item">
+      <div class="watch-num">3</div>
+      <div class="watch-body">
+        <div class="watch-title">100万辆×50亿，军令状能不能交？</div>
+        <div class="watch-desc">管理层目标：2026年销量100万辆、净利润50亿。Q1亏3.9亿，后三季度要补约54亿。单车净利要从902元跳到5,000元——一年翻5.5倍。1-5月完成26.3%，销量端月均8万+够得到，但利润端才是真正的考点。Q3是全年最关键季度：D19/D99规模交付+出口旺季，如果单车净利能摸到2,000-3,000元，军令状就还在轨道上。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="core-line" style="margin-top:28px;">
+    朱江明从大华出来，把电子制造的成本逻辑带进了造车。在最难赚钱的赛道里，他把钱赚到了。接下来看的是：他能不能在更高的价格带上，再做一次。
+  </div>
+
+  <div class="src">
+    来源：零跑汽车2025年报（经审计）、2026Q1业绩公告、2026年4-6月交付公告<br>
+    100万辆/50亿目标——2025年报电话会，副总裁李腾飞"净利润目标维持50亿元不变"（每日经济新闻2026-03-17）<br>
+    本内容为公司公开信息分析，不构成投资建议
+  </div>
+</section>
+
+</body>
+</html>

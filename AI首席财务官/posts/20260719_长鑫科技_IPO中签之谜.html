@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>长鑫科技 IPO 中签之谜</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #f5f7fa;
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    color: #1f2933;
+    line-height: 1.6;
+    padding: 24px 16px 48px;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+
+  .hero {
+    background: linear-gradient(135deg, #ffffff 0%, #fdf6e3 100%);
+    border: 2px solid #b8860b;
+    border-radius: 16px;
+    padding: 28px 24px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-size: 25px; font-weight: 800; color: #1f2933; letter-spacing: .5px;
+  }
+  .hero .sub { font-size: 15px; color: #666; margin-top: 10px; }
+  .hero .tag {
+    display: inline-block; margin-top: 14px; padding: 5px 14px;
+    background: #c0392b; color: #fff; font-size: 13px; border-radius: 20px; font-weight: 700;
+  }
+
+  .card {
+    background: #fff; border-radius: 14px; padding: 22px 22px; margin-bottom: 16px;
+    border-left: 5px solid #b8860b;
+    box-shadow: 0 2px 10px rgba(0,0,0,.04);
+  }
+  .card.alt { border-left-color: #c0392b; }
+  .card .step { font-size: 12px; color: #b8860b; font-weight: 700; letter-spacing: 1px; }
+  .card.alt .step { color: #c0392b; }
+  .card h2 { font-size: 19px; font-weight: 800; margin: 6px 0 14px; }
+
+  .nums { display: flex; gap: 12px; flex-wrap: wrap; }
+  .num-box {
+    flex: 1; min-width: 150px; background: #fafafa; border: 1px solid #eee;
+    border-radius: 10px; padding: 14px; text-align: center;
+  }
+  .num-box .v { font-size: 26px; font-weight: 800; color: #c0392b; }
+  .num-box .v.g { color: #1f7a1f; }
+  .num-box .l { font-size: 13px; color: #555; margin-top: 4px; }
+
+  .judge {
+    background: #fdf6e3; border: 1px dashed #b8860b; border-radius: 10px;
+    padding: 14px 16px; margin-top: 14px; font-size: 15px; font-weight: 600; color: #5a4a12;
+  }
+  .judge.bad {
+    background: #fdf0ee; border: 1px dashed #c0392b; color: #8a2b1f;
+  }
+
+  .formula {
+    background: #1f2933; color: #fff; border-radius: 10px; padding: 14px 16px;
+    font-size: 15px; margin-top: 14px; text-align: center; letter-spacing: .5px;
+  }
+  .formula .hi { color: #f4c542; font-weight: 800; }
+
+  table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 14px; }
+  th, td { border: 1px solid #eee; padding: 9px 10px; text-align: left; }
+  th { background: #fafafa; font-weight: 700; }
+  td.r, th.r { text-align: right; }
+  .red { color: #c0392b; font-weight: 700; }
+  .gold { color: #b8860b; font-weight: 700; }
+
+  .flow { display: flex; align-items: stretch; gap: 0; margin-top: 14px; flex-wrap: wrap; }
+  .fnode {
+    flex: 1; min-width: 120px; background: #fafafa; border: 1px solid #e2e2e2;
+    border-radius: 8px; padding: 12px 10px; text-align: center; position: relative;
+  }
+  .fnode .t { font-size: 13px; font-weight: 700; color: #b8860b; }
+  .fnode .d { font-size: 12px; color: #555; margin-top: 5px; }
+  .arrow { display: flex; align-items: center; color: #999; font-size: 20px; padding: 0 4px; }
+
+  .point {
+    background: #fff; border-radius: 14px; padding: 22px; margin-bottom: 16px;
+    border: 2px solid #c0392b; box-shadow: 0 2px 10px rgba(192,57,43,.06);
+  }
+  .point .step { font-size: 12px; color: #c0392b; font-weight: 700; letter-spacing: 1px; }
+  .point h2 { font-size: 19px; font-weight: 800; margin: 6px 0 14px; }
+  .point li { margin: 8px 0 8px 20px; font-size: 15px; }
+  .point .hl { background: #fdf0ee; padding: 2px 6px; border-radius: 4px; font-weight: 700; color: #c0392b; }
+
+  .disclaimer {
+    background: #eef2f5; border-radius: 12px; padding: 16px 18px; font-size: 12.5px;
+    color: #555; line-height: 1.7; border: 1px solid #dde3e8;
+  }
+  .disclaimer b { color: #333; }
+  .foot { text-align: center; font-size: 12px; color: #999; margin-top: 18px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <h1>长鑫科技 IPO 中签之谜</h1>
+    <div class="sub">943 万户疯抢 · 770 万个中签号码 · 官方中签率却只有 0.47%？<br>这三个数单位都不一样，不能直接相除——错把"号码数"当"账户数"，就会算出离谱的"81.7%中奖率"</div>
+    <div class="tag">来源：7/19 网下配售及网上中签结果公告</div>
+  </div>
+
+  <!-- ① 三个反差数字 -->
+  <div class="card">
+    <div class="step">① 三个数字同时摆出来</div>
+    <h2>直觉上，这不该叫"难中"</h2>
+    <div class="nums">
+      <div class="num-box">
+        <div class="v">943 万</div>
+        <div class="l">网上有效申购户数<br>（报了名的"户"）</div>
+      </div>
+      <div class="num-box">
+        <div class="v g">770 万</div>
+        <div class="l">中签号码个数<br>（每条=500股，≠账户数！）</div>
+      </div>
+      <div class="num-box">
+        <div class="v">0.47%</div>
+        <div class="l">最终中签率<br>（官方口径，按"股"算）</div>
+      </div>
+    </div>
+    <div class="judge bad">👉 三个数单位根本不同：一个是"户"、一个是"号码"、一个是"股"。很多人拿 <b>770万 ÷ 943万 = 81.7%</b>，算出"八成户都中了"——这是把"中签号码数"误当成了"中签账户数"，账从根上就错了。</div>
+  </div>
+
+  <!-- ② 两个分母 -->
+  <div class="card alt">
+    <div class="step">② 矛盾根源：分母不同</div>
+    <h2>"中签率"和"中签号码数"是两件事</h2>
+    <table>
+      <tr><th>维度</th><th class="r">算法</th><th class="r">结果</th><th>含义</th></tr>
+      <tr>
+        <td><b>按"股"算</b><br>（官方中签率）</td>
+        <td class="r">38.51亿中签股<br>÷ 8169亿申购股</td>
+        <td class="r red">0.47%</td>
+        <td>你每申购 1 股，只有 0.47% 能成交——这才是公告写的"中签率"</td>
+      </tr>
+      <tr>
+        <td><b>按"账户"算</b></td>
+        <td class="r">中签账户数<br>（未披露）</td>
+        <td class="r gold">未知</td>
+        <td>公告只公布中签号码字符串，<b>不公布散户账户名</b>；且一人可中多号，中签账户数 ≤ 770万、确切数未知</td>
+      </tr>
+    </table>
+    <div class="formula">中签率 <span class="hi">0.4714%</span> = 网上最终发行 38.51亿股 ÷ 网上有效申购 8169亿股　<span class="hi">（按"股"计，不按"人"计）</span></div>
+    <div class="judge">👉 所以"81.7%的户都中了"是伪命题：770万是<b>号码数</b>不是账户数，账户数压根没披露。能确认的是两个口径——官方中签率 0.47%（按股），以及 770万个中签号码（按号）。</div>
+  </div>
+
+  <!-- ③ 为什么人人中却只中500股 -->
+  <div class="card">
+    <div class="step">③ 为什么散户感觉"人人中"</div>
+    <h2>海量小签，广撒网</h2>
+    <div class="formula">38.51亿股 ÷ 500股/号 = <span class="hi">7,702,207 个中签号码</span>　（≈770万条签号洒向散户）</div>
+    <div class="nums" style="margin-top:14px;">
+      <div class="num-box">
+        <div class="v" style="font-size:20px;">顶格可申</div>
+        <div class="l">单户科创板顶格申购可申报<br><b>上千万股</b></div>
+      </div>
+      <div class="num-box">
+        <div class="v" style="font-size:20px;">每号 500 股</div>
+        <div class="l">摇中 1 个号 = <b>500 股</b><br>多数人只中 1 个号（但账户数未知）</div>
+      </div>
+    </div>
+    <div class="judge">👉 "人人中一口"是真实感受——770万条签号铺得极广；但它<b>不等于"中签率高"</b>。0.47% 才是官方口径（按股），"人人中一口"只是发行份额被拆成了海量 500 股小签。</div>
+  </div>
+
+  <!-- ④ 制度根源：回拨 -->
+  <div class="card alt">
+    <div class="step">④ 制度根源：回拨+绿鞋把筹码塞给网上</div>
+    <h2>为什么网上份额大到能铺 770 万条签号</h2>
+    <div class="flow">
+      <div class="fnode">
+        <div class="t">战配只拿 24.93%</div>
+        <div class="d">顶格预留 50%<br>只落 16.67亿股<br>16.77亿回流公发池</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="fnode">
+        <div class="t">网上申购 244 倍</div>
+        <div class="d">超 100 倍<br>触发回拨<br>网下拨 5.02亿股给网上</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="fnode">
+        <div class="t">绿鞋 +10.03亿</div>
+        <div class="d">超额配售<br>定向给网上</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="fnode">
+        <div class="t">网上占 50.07%</div>
+        <div class="d">38.51亿股<br>铺向散户</div>
+      </div>
+    </div>
+    <div class="judge">👉 战略配售顶格预留 50% 却只用了 24.93%，叠加回拨 + 绿鞋，网上最终拿到 38.51亿股（占全额行使后发行总量 50.07%）——这正是 770 万个中签号码"盛况"的来源，是制度设计，不是市场自发。</div>
+  </div>
+
+  <!-- ⑤ 观点落点 -->
+  <div class="point">
+    <div class="step">⑤ 这图到底要表达什么观点</div>
+    <h2>0.47% 的真相：不是你难中，是你"中了也只尝一口"</h2>
+    <ul>
+      <li><span class="hl">这不是"人人捡钱"，是"人人象征性分到一口"。</span>38.51亿股被拆成 770万个 500股小签洒向散户，单签账面市值不到 4500 元。</li>
+      <li>它预告了上市首日的格局：海量中签账户（账户数未披露）绝大部分是"只中 500 股"的散筹，<span class="hl">一旦卖出就是抛压</span>；而真正想拿筹码的机构，在网下被 70% 锁定 6 个月。</li>
+      <li>所以首日约 <b>45 亿流通盘</b>，是"散筹微筹 + 机构锁仓"后的稀缺博弈——<span class="hl">波动会很大，但不是因为筹码少，是因为筹码太散</span>。</li>
+      <li>回头看"943万户疯抢"：热度是真的，但分配是"撒胡椒面"。<span class="hl">中签率 0.47%（按股）不等于"难中"，它等于"中到了也只给你一口"</span>。</li>
+    </ul>
+  </div>
+
+  <!-- ⑥ 合规 -->
+  <div class="disclaimer">
+    <b>免责声明：</b>以上数据均来源于长鑫科技《首次公开发行股票并在科创板上市网下初步配售结果及网上中签结果公告》（2026-07-19）及《网上发行申购情况及中签率公告》（2026-07-16）等公开披露文件。文中"770万为号码数、中签账户数不披露""中签率 0.47% 按股计算"等解读，为基于公开数据的推算与解释，不构成任何投资建议。本人不荐股、不预测股价涨跌、不暗示收益。A 股打新需符合市值门槛与交易规则，投资有风险，入市需谨慎。
+  </div>
+
+  <div class="foot">有二财经 · 长鑫科技 IPO 拆解 · 数据截至 2026-07-19 公告</div>
+</div>
+</body>
+</html>

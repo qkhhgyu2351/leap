@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>比亚迪 vs 特斯拉 · 哪些能比，哪些不能比（终版）</title>
+<style>
+:root{
+  --bg:#f7f8fc;--card:#fff;--border:#e6e9f0;--text:#1a1a2e;--sub:#7a7a9e;
+  --byd:#e85d3a;--byd-l:#fef0ec;--tsla:#2d7dd2;--tsla-l:#edf4fc;
+  --gold:#c5963a;--warn:#e74c3c;--ok:#1f9d6b;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.page{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:56px 36px;position:relative;overflow:hidden}
+.page-tag{font-size:13px;color:var(--gold);text-transform:uppercase;letter-spacing:3px;margin-bottom:14px;font-weight:700}
+.tier{display:inline-block;font-size:12px;color:#fff;border-radius:20px;padding:4px 15px;letter-spacing:1px;margin-bottom:14px;font-weight:700}
+.tier.t1{background:var(--ok)} .tier.t2{background:var(--gold)} .tier.t3{background:var(--warn)}
+.page-title{font-size:38px;font-weight:800;text-align:center;max-width:880px;margin-bottom:10px;line-height:1.3;letter-spacing:-.5px}
+.page-title.sm{font-size:29px}
+.page-subtitle{font-size:16px;color:var(--sub);text-align:center;max-width:720px;margin-bottom:30px}
+.core-line{display:flex;align-items:flex-start;gap:14px;max-width:840px;margin:0 auto 28px;padding:16px 20px;background:#fffbf0;border-left:4px solid var(--gold);border-radius:0 8px 8px 0}
+.core-line .icon{font-size:22px;flex-shrink:0}
+.core-line .text{font-size:17px;font-weight:700;color:#5c4010;line-height:1.5}
+.page-bridge{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-size:15px;color:var(--gold);font-weight:600;text-align:center;border:1px dashed var(--gold);padding:8px 22px;border-radius:20px;background:rgba(255,255,255,.9);white-space:nowrap}
+
+.card-row{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;max-width:980px;margin:0 auto}
+.data-card{background:var(--card);border-radius:14px;padding:22px 26px;min-width:190px;flex:1;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.04);border:1px solid var(--border)}
+.data-card .label{font-size:13px;color:var(--sub);margin-bottom:7px}
+.data-card .value{font-size:30px;font-weight:800;margin-bottom:4px}
+.data-card .note{font-size:12px;color:var(--sub)}
+.data-card.byd{border-top:3px solid var(--byd)} .data-card.tsla{border-top:3px solid var(--tsla)}
+
+/* 6 premise grid */
+.lim-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:880px;margin:0 auto}
+.lim-item{background:var(--card);border-radius:12px;padding:18px 22px;border-left:4px solid var(--gold);box-shadow:0 1px 8px rgba(0,0,0,.03)}
+.lim-item .li-ic{font-size:20px}
+.lim-item .li-t{font-size:16px;font-weight:700;margin:4px 0}
+.lim-item .li-d{font-size:13px;color:var(--sub);line-height:1.5}
+@media(max-width:768px){.lim-grid{grid-template-columns:1fr}}
+
+.ruler{display:flex;gap:16px;max-width:900px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+.rc{flex:1;min-width:200px;background:var(--card);border-radius:14px;padding:22px;text-align:center;border:1px solid var(--border);box-shadow:0 2px 10px rgba(0,0,0,.04)}
+.rc .n{font-size:30px}.rc .t{font-size:16px;font-weight:800;margin:8px 0 4px}.rc .d{font-size:13px;color:var(--sub)}
+
+.dim{max-width:880px;margin:0 auto 14px;background:var(--card);border-radius:14px;border:1px solid var(--border);box-shadow:0 2px 12px rgba(0,0,0,.04);overflow:hidden}
+.dim .dh{display:flex;justify-content:space-between;align-items:center;padding:11px 20px;background:#f0f2f8;font-weight:700;font-size:15px;gap:10px}
+.dim .dh .can{font-size:12px;font-weight:700;padding:3px 10px;border-radius:12px;white-space:nowrap}
+.dim .dh .can.y{background:#e2f5ec;color:var(--ok)} .dim .dh .can.m{background:#fdf3e0;color:var(--gold)} .dim .dh .can.n{background:#fbe9e9;color:var(--warn)}
+.dim .dbody{display:flex}
+.dim .col{flex:1;padding:13px 20px;font-size:14px}
+.dim .col.b{border-right:1px solid var(--border)}
+.dim .col .nm{font-size:12px;color:var(--sub);margin-bottom:3px}
+.dim .col .vl{font-size:21px;font-weight:800}
+.dim .col.b .vl{color:var(--byd)} .dim .col.t .vl{color:var(--tsla)}
+.dim .why{padding:11px 20px;background:#fffdf7;font-size:13.5px;color:#5c4010;border-top:1px solid var(--border)}
+.dim .why b{color:var(--text)}
+
+.insight-box{max-width:840px;margin:22px auto 0;background:var(--card);border-radius:14px;padding:18px 24px;font-size:15px;border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.03)}
+.insight-box .q{color:var(--gold);font-weight:700;margin-bottom:7px}
+.insight-box .a{color:var(--text);line-height:1.7}
+
+.data-table{max-width:880px;margin:0 auto;width:100%;border-collapse:collapse;font-size:13.5px;background:var(--card);border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.data-table th{background:#f0f2f8;padding:10px 12px;text-align:left;font-size:12.5px;color:var(--sub);font-weight:700}
+.data-table td{padding:9px 12px;border-bottom:1px solid var(--border)}
+.data-table tr:last-child td{border-bottom:none}
+.data-table .num{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.data-table .can{font-weight:700;font-size:12px}
+.data-table .cy{color:var(--ok)} .data-table .cm{color:var(--gold)} .data-table .cn{color:var(--warn)}
+
+.variant{max-width:880px;margin:0 auto;background:linear-gradient(135deg,#1a1a2e,#2c2c4a);color:#fff;border-radius:18px;padding:32px;text-align:center}
+.variant .lab{font-size:13px;letter-spacing:2px;color:var(--gold);font-weight:700;margin-bottom:12px}
+.variant .big{font-size:24px;font-weight:800;line-height:1.5}
+.variant .big em{color:var(--gold);font-style:normal}
+.variant .sm{font-size:15px;opacity:.85;margin-top:16px;line-height:1.7}
+.annot{font-size:12px;color:var(--sub);margin-top:14px;text-align:center;max-width:840px;margin-left:auto;margin-right:auto;line-height:1.6}
+.lad{display:flex;align-items:center;gap:12px;max-width:760px;margin:7px auto;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:9px 14px}
+.lad .lstep{font-size:12.5px;color:var(--sub);width:150px;flex:none}
+.lad .lbarwrap{flex:1;height:20px;background:#eef1f7;border-radius:6px;overflow:hidden}
+.lad .lbar{height:100%;border-radius:6px;background:var(--tsla)}
+.lad .lval{width:52px;text-align:right;font-weight:800;font-size:16px;color:var(--tsla)}
+.ladnote{font-size:12px;color:var(--gold);text-align:center;margin:1px 0 5px;font-weight:600}
+.mtx{max-width:760px;margin:8px auto;width:100%;border-collapse:collapse;font-size:13px;background:var(--card);border-radius:12px;overflow:hidden;border:1px solid var(--border)}
+.mtx th{background:#f0f2f8;padding:8px 10px;font-size:12px;color:var(--sub);font-weight:700;text-align:center}
+.mtx th.b{color:var(--byd)} .mtx th.t{color:var(--tsla)}
+.mtx td{padding:7px 10px;border-bottom:1px solid var(--border);text-align:center}
+.mtx td:first-child{text-align:left;color:var(--text)}
+.mtx tr:last-child td{border-bottom:none}
+.mtx .yes{color:var(--ok);font-weight:800}.mtx .no{color:var(--warn);font-weight:800}.mtx .mid{color:var(--sub);font-size:12px}
+.dupont{max-width:860px;margin:6px auto;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.dpr{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin:8px 0}
+.dpr .nm{font-size:13px;font-weight:800;width:56px;text-align:right;flex:none}
+.dpr.b .nm{color:var(--byd)} .dpr.t .nm{color:var(--tsla)}
+.box{background:#f4f6fb;border:1px solid var(--border);border-radius:9px;padding:7px 11px;text-align:center;min-width:70px}
+.box .bl{font-size:10.5px;color:var(--sub)} .box .bv{font-size:17px;font-weight:800}
+.box.key{background:#fff4ec;border-color:var(--byd)} .box.keyt{background:#eef5fc;border-color:var(--tsla)}
+.op{font-size:16px;font-weight:800;color:var(--sub)}
+.box.res.b .bv{color:var(--byd)} .box.res.t .bv{color:var(--tsla)}
+.bar{display:flex;align-items:center;gap:12px;max-width:760px;margin:7px auto}
+.bar .bnm{width:150px;font-size:13px;color:var(--sub);flex:none}
+.bar .bwrap{flex:1;height:24px;background:#eef1f7;border-radius:6px;overflow:hidden}
+.bar .bfill{height:100%;border-radius:6px}
+.bar .bval{width:60px;text-align:right;font-weight:800;font-size:17px}
+@media(max-width:768px){.lad .lstep{width:104px;font-size:11px}.mtx{font-size:11.5px}.bar .bnm{width:96px;font-size:11px}.dpr .nm{width:44px}}
+@media(max-width:768px){.page-title{font-size:25px}.page-title.sm{font-size:21px}.card-row,.ruler{flex-direction:column}.data-card,.rc{min-width:auto}.page{padding:46px 16px}.page-bridge{white-space:normal;width:88%}.dim .dbody{flex-direction:column}.dim .col.b{border-right:none;border-bottom:1px solid var(--border)}.data-table{font-size:12px}}
+</style>
+</head>
+<body>
+
+<!-- P1 钩子 -->
+<section class="page">
+  <div class="page-tag">拆解上市公司 · 有二财经</div>
+  <div class="page-title sm">如果我是比亚迪，我一定会想：<br>凭什么特斯拉能 372 倍 PE，<br>我才 <span style="color:var(--byd)">30 倍</span>？</div>
+  <div class="page-subtitle" style="margin-bottom:18px">这个差距合理吗？还是说市场瞎了？</div>
+  <div class="core-line"><span class="icon">🔥</span><span class="text">我一年卖的车是特斯拉的近 3 倍，赚的钱也不比特斯少——但它的市值是我的 12 倍。我表示不服，很多买了比亚迪的人也不服，心里想着这么好的公司肯定是被低估了，想着以后肯定能到特斯拉那个级别。</span></div>
+  <div class="page-subtitle">为了搞清楚这些疑问，我准备把比亚迪和特斯拉这两个企业做个对比，简称"<b style="color:var(--gold)">比特比</b>"。哈哈哈。</div>
+</section>
+
+<!-- P2 六个前提 -->
+<section class="page">
+  <div class="page-tag">动手之前 · 先认清一件事</div>
+  <div class="page-title sm">把数字一列就比高低？<br>这 4 条<span style="color:var(--warn)">局限性</span>先看清楚</div>
+  <div class="page-subtitle">谁要是把数字简单一列就比高低，一定会比错——先看清这 4 条</div>
+  <div class="lim-grid">
+    <div class="lim-item"><div class="li-ic">🔬</div><div class="li-t">① 披露颗粒度不同（最要命）</div><div class="li-d">美股 10-K 把分部收入+成本都单列，能算到纯业务；A股年报常只到大类。同一个"汽车毛利率"，特斯拉能拆到 15.3%，比亚迪只到 20.48% 大类——能比到多深，先天就不一样。</div></div>
+    <div class="lim-item"><div class="li-ic">🧩</div><div class="li-t">② 业务也有很多不同</div><div class="li-d"><b>比亚迪：</b>乘用车、商用车、电池、储能、手机代工、云轨、半导体、金融、矿产……（全在报表里）<br><b>特斯拉：</b>汽车、碳积分、能源、超充/保险、FSD软件、AI/机器人<br>两家"集团毛利率"里裹的业务完全不同——直接比，是拿苹果比橘子。</div></div>
+    <div class="lim-item"><div class="li-ic">📈</div><div class="li-t">③ 发展阶段不同</div><div class="li-d">比亚迪还在疯狂建厂（扩张期，自由现金流为负），特斯拉工厂高峰已过（成熟期，自由现金流为正）。同一个指标，含义完全不同。</div></div>
+    <div class="lim-item"><div class="li-ic">🏛️</div><div class="li-t">④ 市场与估值体系不同</div><div class="li-d">A+H 股 vs 纳斯达克：投资者结构、定价逻辑两套——一个按制造业定价（PE 30），一个按未来期权定价（PE 372）。PE 差 12 倍，不是公司差 12 倍。</div></div>
+  </div>
+  <div class="page-subtitle" style="margin-top:12px;font-size:12.5px">注：会计准则 CAS vs GAAP 现在差异不大、能对清楚（最相关的就一个研发资本化口径），口径调一下即可；货币按汇率统一折算，不单列。</div>
+  <div class="page-bridge">局限都清楚了 —— 直接来，全局对比 ↓</div>
+</section>
+
+<!-- P4 全局PK：先亮估值→业务→资产负债表→利润表+现金流→回到估值 -->
+<section class="page">
+  <span class="tier t1">全局对比</span>
+  <div class="page-title sm">两家到底是不是一类？<br>先把全貌摆出来</div>
+  <div class="page-subtitle">一趟讲完——从业务、家底、利润、现金流全摆出来，最后回到估值</div>
+
+  <div style="max-width:760px;margin:0 auto;width:100%">
+
+    <div style="margin:6px 0 8px;font-size:12.5px;font-weight:800;color:var(--gold);letter-spacing:2px;text-align:center;border-top:2px solid var(--border);padding-top:8px">① 估值 —— 先看市场给的最终答案</div>
+    <div style="margin-bottom:3px;font-size:14px;font-weight:700;text-align:center">📈 市值</div>
+    <div class="bar"><div class="bnm" style="color:var(--byd);font-weight:800">比亚迪</div><div class="bwrap"><div class="bfill" style="width:8%;background:var(--byd)"></div></div><div class="bval" style="color:var(--byd)">~0.8万亿</div></div>
+    <div class="bar" style="margin-bottom:4px"><div class="bnm" style="color:var(--tsla);font-weight:800">特斯拉</div><div class="bwrap"><div class="bfill" style="width:100%;background:var(--tsla)"></div></div><div class="bval" style="color:var(--tsla)">~10万亿</div></div>
+    <div style="font-size:12.5px;color:var(--sub);text-align:center;margin-bottom:10px">PE 30 vs 372，PB 3.6 vs 18.15——<b>12 倍。凭什么？</b></div>
+    <div class="core-line" style="margin-bottom:8px"><span class="icon">🔍</span><span class="text">市场给了一个悬殊的答案。那两家的生意本身差在哪？↓</span></div>
+
+    <div style="margin:6px 0 8px;font-size:12.5px;font-weight:800;color:var(--gold);letter-spacing:2px;text-align:center;border-top:2px solid var(--border);padding-top:8px">② 业务 —— PE差12倍，先看两家到底怎么做生意的</div>
+    <div style="margin-bottom:3px;font-size:14px;font-weight:700;text-align:center">🚗 销量（2025全年）</div>
+    <div class="bar"><div class="bnm" style="color:var(--byd);font-weight:800">比亚迪</div><div class="bwrap"><div class="bfill" style="width:100%;background:var(--byd)"></div></div><div class="bval" style="color:var(--byd)">460万</div></div>
+    <div class="bar" style="margin-bottom:4px"><div class="bnm" style="color:var(--tsla);font-weight:800">特斯拉</div><div class="bwrap"><div class="bfill" style="width:36%;background:var(--tsla)"></div></div><div class="bval" style="color:var(--tsla)">164万</div></div>
+    <div style="font-size:12.5px;color:var(--sub);text-align:center;margin-bottom:10px">差 2.8 倍——但数量≠质量 ↓</div>
+    <div style="margin-bottom:3px;font-size:14px;font-weight:700;text-align:center">🚙 单车均价</div>
+    <div class="bar"><div class="bnm" style="color:var(--byd);font-weight:800">比亚迪</div><div class="bwrap"><div class="bfill" style="width:41%;background:var(--byd)"></div></div><div class="bval" style="color:var(--byd)">≈11.9万</div></div>
+    <div class="bar" style="margin-bottom:4px"><div class="bnm" style="color:var(--tsla);font-weight:800">特斯拉</div><div class="bwrap"><div class="bfill" style="width:100%;background:var(--tsla)"></div></div><div class="bval" style="color:var(--tsla)">≈28.9万</div></div>
+    <div style="font-size:12.5px;color:var(--sub);text-align:center;margin-bottom:14px">单价差 2.4 倍——<b>数量差2.8倍、单价差2.4倍，两条路从根上就不同。</b>那收入上谁大？↓</div>
+    <div style="margin-bottom:3px;font-size:14px;font-weight:700;text-align:center">💰 营业收入（含手机代工）</div>
+    <div class="bar"><div class="bnm" style="color:var(--byd);font-weight:800">比亚迪</div><div class="bwrap"><div class="bfill" style="width:100%;background:var(--byd)"></div></div><div class="bval" style="color:var(--byd)">8,039亿</div></div>
+    <div class="bar" style="margin-bottom:4px"><div class="bnm" style="color:var(--tsla);font-weight:800">特斯拉</div><div class="bwrap"><div class="bfill" style="width:85%;background:var(--tsla)"></div></div><div class="bval" style="color:var(--tsla)">6,827亿</div></div>
+    <div style="font-size:12.5px;color:var(--sub);text-align:center;margin-bottom:14px">含手机代工（比亚迪电子）1,552亿——剔除后汽车业务 <b>6,487亿 ≈ 特斯拉 6,827亿</b>，两家汽车营收基本持平。手机代工净利率仅1.8%，拉低了集团净利率 ↓</div>
+    <div style="margin-bottom:3px;font-size:14px;font-weight:700;text-align:center">💴 净利率</div>
+    <div class="bar"><div class="bnm" style="color:var(--byd);font-weight:800">比亚迪</div><div class="bwrap"><div class="bfill" style="width:100%;background:var(--byd)"></div></div><div class="bval" style="color:var(--byd)">4.06%</div></div>
+    <div class="bar" style="margin-bottom:4px"><div class="bnm" style="color:var(--tsla);font-weight:800">特斯拉</div><div class="bwrap"><div class="bfill" style="width:99%;background:var(--tsla)"></div></div><div class="bval" style="color:var(--tsla)">4.00%</div></div>
+    <div style="font-size:12.5px;color:var(--sub);text-align:center;margin-bottom:8px"><b style="color:var(--text)">集团净利率几乎一样（4.06% vs 4.00%）</b>——但手机代工净利率只有1.8%，拉低了整体。剔除后：汽车分部净利率 <b>比亚迪4.60% vs 特斯拉4.00%，比亚迪更高。</b> 那PE差12倍不是差在利润率。看人效 ↓</div>
+    <div class="core-line" style="margin-bottom:6px;background:#fdf8f3;border-left-color:var(--gold)"><span class="icon">🎯</span><span class="text" style="color:#5c4010">PM视角：汽车分部净利率比亚迪4.60%高于特斯拉4.00%——手机代工（净利率1.8%）拉低了集团到4.06%。比亚迪用70万人（纯汽车）、靠硬件；特斯拉用14万人、卖高价车+软件。<b>人均产出差4倍</b>——这就是制造业和科技公司的本质区别。</span></div>
+    <div style="margin-bottom:3px;font-size:14px;font-weight:700;text-align:center">👷 员工人数</div>
+    <div class="bar"><div class="bnm" style="color:var(--byd);font-weight:800">比亚迪</div><div class="bwrap"><div class="bfill" style="width:100%;background:var(--byd)"></div></div><div class="bval" style="color:var(--byd)">~70万</div></div>
+    <div class="bar" style="margin-bottom:4px"><div class="bnm" style="color:var(--tsla);font-weight:800">特斯拉</div><div class="bwrap"><div class="bfill" style="width:20%;background:var(--tsla)"></div></div><div class="bval" style="color:var(--tsla)">~14万</div></div>
+    <div style="font-size:12.5px;color:var(--sub);text-align:center;margin-bottom:8px">5 倍差距 → 人均产出车 ≈6.6辆 vs ≈11.7辆（1.8倍）、人均营收 ≈115万 vs ≈461万（4倍）、人均净利 ≈4.7万 vs ≈18.4万（3.9倍）。制造业堆人、科技靠自动化</div>
+    <div class="core-line" style="margin-bottom:14px;background:#fdf8f3;border-left-color:var(--byd)"><span class="icon">🎯</span><span class="text" style="color:#8b4513">PM视角：70万人（纯汽车业务，已扣除手机代工约17万人）堆出的规模——市场看到的是"制造业的效率机器"，给的是制造业的估值。14万人撑起的AI叙事——市场看到的是"可能变成AI平台的期权"。<b>业务数据本身就在告诉市场：给比亚迪30倍、给特斯拉372倍，不是没道理。</b></span></div>
+
+    <div style="margin:6px 0 8px;font-size:12.5px;font-weight:800;color:var(--gold);letter-spacing:2px;text-align:center;border-top:2px solid var(--border);padding-top:8px">③ 资产负债表 —— 家底扛不扛得住</div>
+    <div style="margin-bottom:3px;font-size:14px;font-weight:700;text-align:center">🏗️ 总资产</div>
+    <div class="bar"><div class="bnm" style="color:var(--byd);font-weight:800">比亚迪</div><div class="bwrap"><div class="bfill" style="width:94%;background:var(--byd)"></div></div><div class="bval" style="color:var(--byd)">8,837亿</div></div>
+    <div class="bar" style="margin-bottom:4px"><div class="bnm" style="color:var(--tsla);font-weight:800">特斯拉</div><div class="bwrap"><div class="bfill" style="width:100%;background:var(--tsla)"></div></div><div class="bval" style="color:var(--tsla)">9,386亿</div></div>
+    <div style="font-size:12.5px;color:var(--sub);text-align:center;margin-bottom:8px">家底差不多——但结构不同：特斯拉现金多，比亚迪厂房设备多。资产结构后面专拆。那负债呢？↓</div>
+    <div style="margin-bottom:3px;font-size:14px;font-weight:700;text-align:center">⚖️ 资产负债率</div>
+    <div class="bar"><div class="bnm" style="color:var(--byd);font-weight:800">比亚迪</div><div class="bwrap"><div class="bfill" style="width:100%;background:var(--byd)"></div></div><div class="bval" style="color:var(--byd)">70.75%</div></div>
+    <div class="bar" style="margin-bottom:4px"><div class="bnm" style="color:var(--tsla);font-weight:800">特斯拉</div><div class="bwrap"><div class="bfill" style="width:56%;background:var(--tsla)"></div></div><div class="bval" style="color:var(--tsla)">39.87%</div></div>
+    <div style="font-size:12.5px;color:var(--sub);text-align:center;margin-bottom:8px">差 30 个点——但大头是应付账款（占供应商无息的钱、议价能力），不是欠银行。总资产差不太多，负债率差这么多，净资产呢？↓</div>
+    <div style="margin-bottom:3px;font-size:14px;font-weight:700;text-align:center">📦 净资产</div>
+    <div class="bar"><div class="bnm" style="color:var(--byd);font-weight:800">比亚迪</div><div class="bwrap"><div class="bfill" style="width:46%;background:var(--byd)"></div></div><div class="bval" style="color:var(--byd)">2,586亿</div></div>
+    <div class="bar" style="margin-bottom:4px"><div class="bnm" style="color:var(--tsla);font-weight:800">特斯拉</div><div class="bwrap"><div class="bfill" style="width:100%;background:var(--tsla)"></div></div><div class="bval" style="color:var(--tsla)">5,594亿</div></div>
+    <div style="font-size:12.5px;color:var(--sub);text-align:center;margin-bottom:8px">差 2 倍——特斯拉利润滚存+融资多年，比亚迪还在扩张。</div>
+    <div style="margin-bottom:3px;font-size:14px;font-weight:700;text-align:center">📊 ROE（净资产收益率）</div>
+    <div class="bar"><div class="bnm" style="color:var(--byd);font-weight:800">比亚迪</div><div class="bwrap"><div class="bfill" style="width:100%;background:var(--byd)"></div></div><div class="bval" style="color:var(--byd)">12.61%</div></div>
+    <div class="bar" style="margin-bottom:4px"><div class="bnm" style="color:var(--tsla);font-weight:800">特斯拉</div><div class="bwrap"><div class="bfill" style="width:37%;background:var(--tsla)"></div></div><div class="bval" style="color:var(--tsla)">4.62%</div></div>
+    <div style="font-size:12.5px;color:var(--sub);text-align:center;margin-bottom:8px">比亚迪ROE是特斯拉的2.7倍——但拆开看，<b>比亚迪ROE的高几乎全靠杠杆（权益乘数3.42 vs 1.67），不是经营效率</b>。若把杠杆降到特斯拉水平，ROE约降到6.2%。</div>
+    <div class="core-line" style="margin-bottom:14px;background:#f0f4ff;border-left-color:var(--tsla)"><span class="icon">🎯</span><span class="text" style="color:#1a3a6b">PM视角：净资产差2倍，不是因为特斯拉更会赚钱——汽车分部净利率比亚迪4.60%高于特斯拉4.00%。差的是发展阶段：特斯拉工厂高峰已过、利润开始堆积；比亚迪还在全球建厂、利润全砸回去了。</span></div>
+    <div class="core-line" style="margin-bottom:14px;background:#f0f4ff;border-left-color:var(--byd)"><span class="icon">🎯</span><span class="text" style="color:#8b4513">PM视角：比亚迪ROE 12.61% vs 特斯拉 4.62%，高了2.7倍——<b>但拆开看，ROE的高几乎全靠杠杆（权益乘数 3.42 vs 1.67），不是经营效率。</b>若把杠杆降到特斯拉水平，ROE约降到6.2%。高负债≠高风险，但不等于高本事。</span></div>
+
+    <div style="margin:6px 0 8px;font-size:12.5px;font-weight:800;color:var(--gold);letter-spacing:2px;text-align:center;border-top:2px solid var(--border);padding-top:8px">④ 现金流 —— 钱去哪了</div>
+    <div style="margin-bottom:3px;font-size:14px;font-weight:700;text-align:center">💵 货币资金</div>
+    <div class="bar"><div class="bnm" style="color:var(--byd);font-weight:800">比亚迪</div><div class="bwrap"><div class="bfill" style="width:25%;background:var(--byd)"></div></div><div class="bval" style="color:var(--byd)">754亿</div></div>
+    <div class="bar" style="margin-bottom:4px"><div class="bnm" style="color:var(--tsla);font-weight:800">特斯拉</div><div class="bwrap"><div class="bfill" style="width:100%;background:var(--tsla)"></div></div><div class="bval" style="color:var(--tsla)">3,001亿</div></div>
+    <div style="font-size:12.5px;color:var(--sub);text-align:center;margin-bottom:14px">特斯拉现金是比亚迪 4 倍——赚差不多，但赚来的钱留住没有，看完账上看流水 ↓</div>
+    <div style="margin-bottom:3px;font-size:14px;font-weight:700;text-align:center">💧 经营现金流</div>
+    <div class="bar"><div class="bnm" style="color:var(--byd);font-weight:800">比亚迪</div><div class="bwrap"><div class="bfill" style="width:59%;background:var(--byd)"></div></div><div class="bval" style="color:var(--byd)">591亿</div></div>
+    <div class="bar" style="margin-bottom:4px"><div class="bnm" style="color:var(--tsla);font-weight:800">特斯拉</div><div class="bwrap"><div class="bfill" style="width:100%;background:var(--tsla)"></div></div><div class="bval" style="color:var(--tsla)">1,004亿</div></div>
+    <div style="font-size:12.5px;color:var(--sub);text-align:center;margin-bottom:14px">含金量（÷净利润）1.81倍 vs 3.89倍——每赚1块，特斯拉真进账3.89块。经营流入这么多——钱砸哪了？↓</div>
+
+    <!-- 资本支出（移到研发前面）-->
+    <div style="margin-bottom:3px;font-size:14px;font-weight:700;text-align:center">🔧 资本支出 Capex（扩产/建厂）</div>
+    <div class="bar"><div class="bnm" style="color:var(--byd);font-weight:800">比亚迪</div><div class="bwrap"><div class="bfill" style="width:100%;background:var(--byd)"></div></div><div class="bval" style="color:var(--byd)">1,568亿</div></div>
+    <div class="bar" style="margin-bottom:4px"><div class="bnm" style="color:var(--tsla);font-weight:800">特斯拉</div><div class="bwrap"><div class="bfill" style="width:37%;background:var(--tsla)"></div></div><div class="bval" style="color:var(--tsla)">581亿</div></div>
+    <div style="font-size:12.5px;color:var(--sub);text-align:center;margin-bottom:14px">比亚迪是特斯拉的 2.7 倍——<b>全球建厂、扩产能，砸下去的都是真金白银</b>。经营流入这么多——钱砸哪了？↓</div>
+
+    <!-- 研发对比（嵌在经营现金流后面）-->
+    <div style="max-width:620px;margin:0 auto 10px;width:100%">
+      <div style="margin-bottom:3px;font-size:14px;font-weight:700;text-align:center">🔬 研发投入（2025）</div>
+      <div class="bar"><div class="bnm" style="color:var(--byd);font-weight:800">比亚迪</div><div class="bwrap"><div class="bfill" style="width:100%;background:var(--byd)"></div></div><div class="bval" style="color:var(--byd)">634亿</div></div>
+      <div class="bar" style="margin-bottom:4px"><div class="bnm" style="color:var(--tsla);font-weight:800">特斯拉</div><div class="bwrap"><div class="bfill" style="width:69%;background:var(--tsla)"></div></div><div class="bval" style="color:var(--tsla)">437亿</div></div>
+      <div style="font-size:12.5px;color:var(--sub);text-align:center;margin-bottom:10px">绝对值比亚迪多砸200亿——但投向/记账口径完全不同 ↓</div>
+    </div>
+
+    <div style="display:flex;gap:14px;max-width:820px;margin:0 auto 10px;flex-wrap:wrap">
+      <div style="flex:1;min-width:280px;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--byd);border-radius:12px;padding:14px 16px">
+        <div style="font-weight:700;color:var(--byd);margin-bottom:6px;font-size:14px">比亚迪 · 砸"现在"（硬件）</div>
+        <div style="font-size:13.5px;color:#444;line-height:1.9">· 刀片电池 / 动力电池<br>· DM 混动系统<br>· IGBT / SiC 车规芯片<br>→ 投下去，受益的是几百款在产车型</div>
+      </div>
+      <div style="flex:1;min-width:280px;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--tsla);border-radius:12px;padding:14px 16px">
+        <div style="font-weight:700;color:var(--tsla);margin-bottom:6px;font-size:14px">特斯拉 · 砸"未来"（软件/AI）</div>
+        <div style="font-size:13.5px;color:#444;line-height:1.9">· FSD 全自动驾驶 / Robotaxi<br>· Optimus 人形机器人<br>· Dojo 超算 / xAI<br>→ 大部分<b>还没营收</b>，纯在研发费里烧</div>
+      </div>
+    </div>
+
+    <div style="font-size:12.5px;color:var(--sub);text-align:center;margin:10px 0 14px">扩产砸完了、研发也砸完了——减掉这些，自由现金流还剩多少？↓</div>
+
+    <div style="margin-bottom:3px;font-size:14px;font-weight:700;text-align:center">💰 自由现金流（经营 − Capex）</div>
+    <div class="bar"><div class="bnm" style="color:var(--byd);font-weight:800">比亚迪</div><div class="bwrap"><div class="bfill" style="width:100%;background:var(--warn)"></div></div><div class="bval" style="color:var(--warn)">−977亿</div></div>
+    <div class="bar" style="margin-bottom:4px"><div class="bnm" style="color:var(--tsla);font-weight:800">特斯拉</div><div class="bwrap"><div class="bfill" style="width:43%;background:var(--ok)"></div></div><div class="bval" style="color:var(--ok)">+424亿</div></div>
+    <div style="font-size:12.5px;color:var(--sub);text-align:center;margin-bottom:8px">一个烧钱扩张（Capex 1,568亿）、一个赚钱有余（581亿）——<b>这是整个对比里最本质的差异。</b></div>
+    <div class="core-line" style="margin-bottom:18px;background:#fff5f5;border-left-color:var(--warn)"><span class="icon">🎯</span><span class="text" style="color:#8b0000">PM视角：比亚迪一年砸 1,568亿建厂，经营现金流只能覆盖 38%，差额靠融资补——<b>要问的不是"ROE多高"，而是"新砸下去的这些厂，回报率是多少？会不会扩张过头变产能过剩？"</b>特斯拉 Capex 降到 581亿，钱转投 FSD/Optimus——<b>这些投入极不确定，是在为"期权"续费。</b>一个在赌规模、一个在赌未来，两个都押了巨大的注——只是赌的东西不同。</span></div>
+
+    <div class="core-line" style="margin:14px 0 18px"><span class="icon">🔑</span><span class="text">四块全摆出来，画像很清楚：<b>比亚迪 = 人海+重资产+高杠杆+烧钱扩张的"制造巨人"；特斯拉 = 人少+高自动化+现金充裕的"科技公司"。</b>一个在烧钱扩张、一个在赚钱等待。</span></div>
+
+    <div style="margin:6px 0 8px;font-size:12.5px;font-weight:800;color:var(--gold);letter-spacing:2px;text-align:center;border-top:2px solid var(--border);padding-top:8px">⑤ 回到估值 —— PE 30 vs 372，差12倍</div>
+    <div style="margin-bottom:3px;font-size:14px;font-weight:700;text-align:center">📈 市盈率 PE</div>
+    <div class="bar"><div class="bnm" style="color:var(--byd);font-weight:800">比亚迪</div><div class="bwrap"><div class="bfill" style="width:8%;background:var(--byd)"></div></div><div class="bval" style="color:var(--byd)">30</div></div>
+    <div class="bar" style="margin-bottom:10px"><div class="bnm" style="color:var(--tsla);font-weight:800">特斯拉</div><div class="bwrap"><div class="bfill" style="width:100%;background:var(--tsla)"></div></div><div class="bval" style="color:var(--tsla)">372</div></div>
+
+    <div style="display:flex;gap:18px;max-width:820px;margin:0 auto 14px;flex-wrap:wrap">
+      <div style="flex:1;min-width:280px;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--byd);border-radius:12px;padding:16px 18px">
+        <div style="font-weight:800;color:var(--byd);font-size:15px;margin-bottom:8px">市场给比亚迪定价——<br>定的就是财报上的东西</div>
+        <div style="font-size:13.5px;color:#444;line-height:1.9">· 460万辆销量<br>· 70万人（纯汽车）堆起来的规模<br>· 8,040亿营收、4%净利率<br>· 海外建厂、全球扩张<br>→ <b>定价锚：制造业</b></div>
+        <div style="margin-top:10px;padding-top:10px;border-top:1px dashed var(--border);text-align:center"><span style="font-size:18px;font-weight:800;color:var(--byd)">PE 30</span><span style="font-size:12px;color:var(--sub);margin-left:8px">PB 3.6</span></div>
+      </div>
+      <div style="flex:1;min-width:280px;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--tsla);border-radius:12px;padding:16px 18px">
+        <div style="font-weight:800;color:var(--tsla);font-size:15px;margin-bottom:8px">市场给特斯拉定价——<br>定的不是160万辆，是这些</div>
+        <div style="font-size:13.5px;color:#444;line-height:1.9">· FSD 全自动驾驶<br>· Optimus 人形机器人<br>· Robotaxi 出行网络<br>· Dojo 超算 / xAI<br>→ <b>这些，财报里全没收入</b></div>
+        <div style="margin-top:10px;padding-top:10px;border-top:1px dashed var(--border);text-align:center"><span style="font-size:18px;font-weight:800;color:var(--tsla)">PE 372</span><span style="font-size:12px;color:var(--sub);margin-left:8px">PB 18.15</span></div>
+      </div>
+    </div>
+
+    <div class="insight-box" style="margin-bottom:14px">
+      <div class="q">💡 差距在这：不是公司差12倍，是市场在买两种东西</div>
+      <div class="a"><b>比亚迪的估值锚：</b>460万辆车、70万人（纯汽车）堆出的规模、8040亿营收、4%净利率、-977亿自由现金流——<b>买的是确定的制造能力和扩张预期。</b><br><b>特斯拉的估值锚：</b>FSD、机器人、AI、Robotaxi——<b>买的是一个不确定的远期期权。</b><br>所以你不是在比两家车企——你是在比<strong>一个确定的现金流，和一个不确定的未来</strong>。</div>
+    </div>
+
+    <div style="max-width:760px;margin:0 auto 14px;background:linear-gradient(135deg,#1a1a2e,#2c2c4a);color:#fff;border-radius:16px;padding:24px 28px;text-align:center">
+      <div style="font-size:13px;letter-spacing:2px;color:var(--gold);font-weight:700;margin-bottom:10px">PM 的元问题 —— 也是你的</div>
+      <div style="font-size:20px;font-weight:800;line-height:1.6">"市场在每家身上，定价了<em style="color:var(--gold);font-style:normal">什么预期</em>？<br>我和市场的<em style="color:var(--gold);font-style:normal">分歧</em>在哪？"</div>
+      <div style="font-size:14px;opacity:.85;margin-top:14px;line-height:1.7">投资赚的从来不是"好公司"的钱，是"<b>市场把预期定错了</b>"的钱。<br>比亚迪被当成"普通制造业"，是不是低估了它的全球化？<br>特斯拉372倍里隐含的FSD成功概率，是高于还是低于真实概率？</div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- P6 第二档 -->
+<section class="page">
+  <span class="tier t2">盈利能力 · 毛利率</span>
+  <div class="page-title sm">先看特斯拉：<br>"汽车毛利率"能一层层剥出来</div>
+
+  <div style="font-size:13.5px;color:var(--sub);text-align:center;max-width:760px;margin:0 auto 6px">特斯拉这个"汽车毛利率"到底怎么来的——<b style="color:var(--text)">从全公司往下，一层层剥</b>：</div>
+  <div class="lad"><div class="lstep">全公司（车+服务+能源）</div><div class="lbarwrap"><div class="lbar" style="width:90%"></div></div><div class="lval">18.0%</div></div>
+  <div class="ladnote">↓ 剥掉「能源」（储能/光伏，自身毛利 29.8% 偏高 → 数字往下走）</div>
+  <div class="lad"><div class="lstep">汽车 + 服务</div><div class="lbarwrap"><div class="lbar" style="width:81%"></div></div><div class="lval">16.2%</div></div>
+  <div class="ladnote">↓ 剥掉「服务」（超充/二手/配件，自身毛利 7.4% 偏低 → 数字往上走）</div>
+  <div class="lad"><div class="lstep" style="color:var(--tsla);font-weight:700">纯汽车 · 含碳积分 ← 本片用这个</div><div class="lbarwrap"><div class="lbar" style="width:89%"></div></div><div class="lval">17.8%</div></div>
+  <div class="ladnote">↓ 剥掉「碳积分」（$1,993M，近零成本 → 数字往下走）</div>
+  <div class="lad"><div class="lstep">纯车 · 造车本身</div><div class="lbarwrap"><div class="lbar" style="width:76%;opacity:.55"></div></div><div class="lval">15.3%</div></div>
+
+  <div style="font-size:13.5px;color:var(--sub);text-align:center;max-width:760px;margin:13px auto 4px">可即便都取"纯车口径"，两家篮子里<b style="color:var(--text)">装的东西还是不一样</b>：</div>
+  <table class="mtx">
+    <tr><th style="text-align:left">这个毛利率里装了什么</th><th class="b">比亚迪 20.48%</th><th class="t">特斯拉 17.8%</th></tr>
+    <tr><td>整车销售</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+    <tr><td>汽车租赁</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+    <tr><td>碳积分</td><td class="mid">几乎没有</td><td class="yes">✓ 含</td></tr>
+    <tr><td>动力电池外售</td><td class="yes">✓ 含</td><td class="no">✗</td></tr>
+    <tr><td>储能 / 光伏</td><td class="yes">✓ 含</td><td class="no">✗ 单列在能源</td></tr>
+    <tr><td>云轨 / 半导体</td><td class="yes">✓ 含</td><td class="no">✗</td></tr>
+  </table>
+  <div class="core-line" style="margin-top:10px"><span class="icon">🧺</span><span class="text">比亚迪的"篮子"里多塞了电池、储能、云轨；特斯拉这 17.8% 是干干净净的车。装的东西不一样，20.48% 和 17.8% 根本不在一条起跑线上——谁也别拿它定"造车谁更赚"。</span></div>
+  <div class="page-bridge">那比亚迪呢？它能不能也这么拆？↓</div>
+</section>
+
+<!-- P6.6 拆解比亚迪毛利率 -->
+<section class="page">
+  <span class="tier t2">盈利 · 比亚迪毛利</span>
+  <div class="page-title sm">再看比亚迪：<br>纯造车毛利，年报根本没披露</div>
+
+  <div style="font-size:13.5px;color:var(--sub);text-align:center;max-width:760px;margin:0 auto 8px">特斯拉能从全公司 18% 一路剥到纯车 15.3%；轮到比亚迪——</div>
+
+  <div class="lad"><div class="lstep">汽车及相关产品（大类）</div><div class="lbarwrap"><div class="lbar" style="width:100%;background:var(--byd)"></div></div><div class="lval" style="color:var(--byd)">20.48%</div></div>
+  <div class="ladnote" style="color:var(--warn)">↓ 想再往下拆"纯整车毛利"？比亚迪没披露乘用车成本——剥不动 ✋</div>
+  <div class="lad" style="opacity:.45"><div class="lstep">纯整车毛利率</div><div class="lbarwrap"><div class="lbar" style="width:32%;background:#b9c0cf"></div></div><div class="lval" style="color:var(--sub)">？</div></div>
+
+  <div style="font-size:13.5px;color:var(--sub);text-align:center;max-width:760px;margin:13px auto 4px">比亚迪披露的毛利率，<b style="color:var(--text)">最细只到两个大类</b>，再往下就没有了：</div>
+  <table class="mtx">
+    <tr><th style="text-align:left">比亚迪的毛利率，最细到这一层</th><th class="b">毛利率</th><th>能再往下拆吗</th></tr>
+    <tr><td>汽车及相关产品<br><span style="font-size:11px;color:var(--sub)">含整车+电池外售+储能+云轨+半导体</span></td><td class="b" style="font-weight:800;color:var(--byd)">20.48%</td><td class="no">✗ 没单列成本</td></tr>
+    <tr><td>手机部件、组装<br><span style="font-size:11px;color:var(--sub)">≈ 比亚迪电子 00285.HK</span></td><td style="font-weight:800">6.29%</td><td class="yes">✓ 它本就独立上市</td></tr>
+  </table>
+
+  <div class="core-line" style="margin-top:10px"><span class="icon">🔒</span><span class="text">这就是两家最大的不对称：特斯拉把汽车分部的成本单列了，<b>纯车毛利能算到 15.3%</b>；比亚迪把整车、电池、储能全打包，<b>纯造车到底赚多少，年报根本没给数</b>。</span></div>
+  <div class="insight-box" style="margin-top:10px"><div class="q">🔍 那"纯造车毛利"就真没法知道了吗？</div><div class="a">年报口径只到大类、没单列纯整车成本，所以<b>官方数据算不出</b>。但这不等于无解——<b>券商研报、专门"拆车"测算 BOM（物料成本）的第三方机构，是能把单车成本估出来的</b>。只是这些都是<b>外部估算、非官方、口径各异、有误差</b>。<b>记住：报表没披露 ≠ 无法知道，只是得换个地方找、并且接受它是"估的"。</b></div></div>
+  <div class="page-bridge">盈利说完了 → 再深挖 ROE，最容易被表面数字骗 ↓</div>
+</section>
+
+
+<!-- ROE-1 钩子 -->
+<section class="page">
+  <div class="page-tag">深挖 · ROE 与杠杆</div>
+  <div class="page-title sm">比亚迪 ROE 是特斯拉的<br><span style="color:var(--byd)">2.7 倍</span>——是它更会赚钱吗？</div>
+  <div class="card-row" style="margin-top:6px">
+    <div class="data-card byd"><div class="label">比亚迪 ROE</div><div class="value" style="color:var(--byd)">12.61%</div><div class="note">净资产收益率</div></div>
+    <div class="data-card tsla"><div class="label">特斯拉 ROE</div><div class="value" style="color:var(--tsla)">4.62%</div><div class="note">净资产收益率</div></div>
+  </div>
+  <div class="core-line" style="margin-top:22px"><span class="icon">🤔</span><span class="text">差 2.7 倍，看起来比亚迪碾压。把它拆开，结论可能跟你想的相反。</span></div>
+  <div class="page-bridge">用杜邦公式，把 ROE 拆成三块 ↓</div>
+</section>
+
+<!-- ROE-2 杜邦 -->
+<section class="page">
+  <div class="page-tag">杜邦拆解</div>
+  <div class="page-title sm">ROE = 净利率 × 周转率 × 杠杆<br>差距，几乎全在最后一项</div>
+  <div class="dupont">
+    <div class="dpr b">
+      <span class="nm">比亚迪</span>
+      <div class="box"><div class="bl">净利率</div><div class="bv">4.06%</div></div><span class="op">×</span>
+      <div class="box"><div class="bl">总资产周转</div><div class="bv">0.91</div></div><span class="op">×</span>
+      <div class="box key"><div class="bl">权益乘数</div><div class="bv" style="color:var(--byd)">3.42</div></div><span class="op">=</span>
+      <div class="box res b"><div class="bl">ROE</div><div class="bv">12.61%</div></div>
+    </div>
+    <div class="dpr t">
+      <span class="nm">特斯拉</span>
+      <div class="box"><div class="bl">净利率</div><div class="bv">4.00%</div></div><span class="op">×</span>
+      <div class="box"><div class="bl">总资产周转</div><div class="bv">0.69</div></div><span class="op">×</span>
+      <div class="box keyt"><div class="bl">权益乘数</div><div class="bv" style="color:var(--tsla)">1.67</div></div><span class="op">=</span>
+      <div class="box res t"><div class="bl">ROE</div><div class="bv">4.62%</div></div>
+    </div>
+  </div>
+  <div class="insight-box">
+    <div class="q">🔍 一项一项看，真相出来了</div>
+    <div class="a"><b>净利率：几乎一样</b>（4.06% vs 4.00%）。<b>周转率：比亚迪略胜</b>（0.91 vs 0.69）。<b>权益乘数（杠杆）：3.42 vs 1.67，差一倍多</b>——<b style="color:var(--byd)">ROE 那 2.7 倍的差距，几乎全是这一项撑出来的。</b>不是比亚迪更会赚钱，是它用了更高的杠杆。</div>
+  </div>
+  <div class="page-bridge">杠杆这么高 → 那它危险吗？↓</div>
+</section>
+
+<!-- ROE-3 杠杆危险吗 -->
+<section class="page">
+  <div class="page-tag">观众一定会问</div>
+  <div class="page-title sm">杠杆 3.42 倍——<br>那比亚迪是不是很危险？</div>
+  <div class="page-subtitle">关键不是杠杆多高，是这杠杆"欠的是谁的钱"</div>
+  <div class="card-row">
+    <div class="data-card byd"><div class="label">应付账款（无息·占供应商的钱）</div><div class="value" style="color:var(--byd);font-size:30px">2,092亿</div><div class="note">经营负债，利息为零</div></div>
+    <div class="data-card byd"><div class="label">有息负债（真欠银行的）</div><div class="value" style="font-size:30px">1,245亿</div><div class="note">仅占总负债的一小截</div></div>
+  </div>
+  <div class="insight-box">
+    <div class="q">🔍 经营杠杆 ≠ 金融杠杆</div>
+    <div class="a">比亚迪的高杠杆，<b>大头是应付账款（2,092 亿）——占用供应商的钱、不付利息</b>，是"规模大、供应商离不开我"的<b>议价能力</b>；真正欠银行、要还利息的有息负债只有 1,245 亿。<br>所以这 3.42 倍杠杆，<b>高，但没有"高负债"听起来那么危险</b>——它不是借钱赌博，是拿供应链的钱在转。</div>
+  </div>
+  <div class="page-bridge">那不靠杠杆，比亚迪 ROE 还剩多少？↓</div>
+</section>
+
+<!-- ROE-4 反事实 -->
+<section class="page">
+  <div class="page-tag">做个还原实验</div>
+  <div class="page-title sm">把杠杆拉到和特斯拉一样<br>比亚迪 ROE 会掉到多少？</div>
+  <div class="bar"><div class="bnm">比亚迪（实际，杠杆3.42）</div><div class="bwrap"><div class="bfill" style="width:84%;background:var(--byd)"></div></div><div class="bval" style="color:var(--byd)">12.61%</div></div>
+  <div class="bar"><div class="bnm">比亚迪（假设降到杠杆1.67）</div><div class="bwrap"><div class="bfill" style="width:41%;background:#f0a98e"></div></div><div class="bval" style="color:var(--byd)">≈6.2%</div></div>
+  <div class="bar"><div class="bnm">特斯拉（实际，杠杆1.67）</div><div class="bwrap"><div class="bfill" style="width:31%;background:var(--tsla)"></div></div><div class="bval" style="color:var(--tsla)">4.62%</div></div>
+  <div class="insight-box">
+    <div class="q">🔍 12.61% 里，多少是真本事？</div>
+    <div class="a">把比亚迪杠杆按到特斯拉水平（1.67），ROE 会从 12.61% 掉到 <b>约 6.2%</b>——仍高于特斯拉 4.6%。<b>这剩下的约 1.3 倍，才是它真实的效率优势（更快的资产周转）。</b>所以 2.7 倍的表面差距里，<b>大约一半是杠杆"放大镜"，另一半才是真功夫。</b></div>
+  </div>
+  <div class="page-bridge">那特斯拉 ROE 才 4.6%，是它差吗？↓</div>
+</section>
+
+<!-- ROE-5 特斯拉为什么低 -->
+<section class="page">
+  <div class="page-tag">另一个追问</div>
+  <div class="page-title sm">特斯拉 ROE 只有 4.6%——<br>是它不会赚钱吗？</div>
+  <div class="insight-box" style="margin-top:0">
+    <div class="q">🔍 不是差，是"选择" + "估值后遗症"</div>
+    <div class="a"><b>① 主动低杠杆：</b>手里趴着约 <b>3,000 亿现金</b>没用足，负债率才 39.87%。不是借不到钱，是不想加杠杆——安全，但 ROE 自然被压低。<br><b>② 分母被撑大：</b>ROE = 净利 ÷ <b>净资产</b>。特斯拉常年高估值融资，净资产高达 5,594 亿（比亚迪只有 2,586 亿）。分母大，ROE 就显得低。<br>所以低 ROE 是它"保守 + 高估值"的结果，不等于经营不行。</div>
+  </div>
+  <div class="page-bridge">先别急着下结论 → 看一眼最新一季 ↓</div>
+</section>
+
+<!-- ROE-5.5 Q1 趋势 -->
+<section class="page">
+  <div class="page-tag">别只看年报快照</div>
+  <div class="page-title sm">但 2026 一季度——<br>故事正在<span style="color:var(--warn)">反转</span></div>
+  <div class="card-row">
+    <div class="data-card byd"><div class="label">比亚迪 2026Q1 归母净利</div><div class="value" style="color:var(--byd)">40.9亿</div><div class="note" style="color:var(--warn)">同比 −55.4% · 营收 −11.8%</div></div>
+    <div class="data-card tsla"><div class="label">特斯拉 2026Q1 净利</div><div class="value" style="color:var(--tsla)">$477M</div><div class="note" style="color:var(--ok)">同比 +16.6% · 营收 +16%</div></div>
+  </div>
+  <div class="insight-box">
+    <div class="q">🔍 那个 2.7 倍的 ROE 优势，正在缩水</div>
+    <div class="a">FY2025 的 12.61% vs 4.62% 是"<b>过去式</b>"。进入 2026 第一季：<b>比亚迪净利腰斩（−55%）</b>，特斯拉反而<b>回升（+17%）</b>。把 Q1 年化，比亚迪 ROE 从 12.6% 滑到约 <b>6.5%</b>，特斯拉升到约 <b>2.3%</b>——<b style="color:var(--text)">优势在快速收窄。ROE 不能只看年报快照，得看趋势。</b></div>
+  </div>
+  <div class="annot">季度 ROE = Q1 净利 ÷ 期末净资产 再简单 ×4 年化，仅看趋势方向，非精确值。</div>
+  <div class="page-bridge">所以这块"砖"，砌的是哪座"楼"？↓</div>
+</section>
+
+<!-- ROE-6 PM 收尾 -->
+<section class="page">
+  <div class="page-tag">PM 视角 · 这块砖砌哪座楼</div>
+  <div class="page-title sm">ROE 能比大小，<br>但"高 ROE 的含义"完全不同</div>
+  <div class="core-line"><span class="icon">🏦</span><span class="text">比亚迪：用别人的钱（无息占款）把 ROE 做到 12.61%，是制造业的极致玩法——高效，但依赖规模与议价权。特斯拉：守着现金、低杠杆，ROE 只有 4.62%——安全，但资本没榨干。</span></div>
+  <div class="insight-box" style="margin-top:8px">
+    <div class="q">🧱 它支撑的判断（楼）：财务韧性</div>
+    <div class="a">同样一个"12.61% vs 4.62%"，PM 读出的不是"谁更会赚钱"，而是<b>两种完全不同的财务体质</b>：一个把杠杆玩到极致、跑得快但绷得紧；一个躺在现金上、慢但稳。<br><b>结论：ROE 能比大小，但不能直接说"比亚迪强 2.7 倍"——拆开才知道，一半是杠杆放大，一半才是真效率，而且这优势正被 Q1 的利润下滑侵蚀。</b></div>
+  </div>
+  <div class="core-line" style="margin-top:16px"><span class="icon">💡</span><span class="text">看 ROE 永远别只看那个数多大——<b>要拆开问一句：它是怎么来的？</b>这一问，就是普通人和分析师的分水岭。</span></div>
+  <div class="page-bridge">拆解上市公司 · 有二财经</div>
+</section>
+</section>
+
+<!-- P11 结语 --><section class="page">  <div class="page-tag">结语</div>  <div class="annot">    数据来源：比亚迪 2025 年报（分部附注：汽车及相关分部 6,483.93亿/5,156.03亿→20.48%；研发投入634.41亿、资本化率8.61%）、特斯拉 2025 10-K（汽车分部收入$69,526M，包括车销售$65,821M+租赁$1,712M+碳积分$1,993M；汽车毛利$12,361M/$69,526M=17.8%，剔碳积分≈15.3%；研发$6,411M；总营收$94,827M；净利$3,785M）。汇率 6.8109（2026.6.15）。本内容仅作教育研究用途，不构成任何投资建议。  </div>  <div class="page-bridge">拆解上市公司 · 有二财经</div></section>
+
+</body>
+</html>

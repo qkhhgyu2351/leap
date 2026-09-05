@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中国整车上市公司全景图 · 19家（视频素材）</title>
+<style>
+:root{
+  --bg:#f7f8fc;--card:#fff;--border:#e6e9f0;--text:#1a1a2e;--sub:#7a7a9e;
+  --tsla:#2d7dd2;--gold:#c5963a;--warn:#e74c3c;--ok:#1f9d6b;--hw:#c0392b;
+  --ah:#7c3aed;--aonly:#2563eb;--honly:#059669;--us:#f59e0b;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.page{min-height:auto;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;padding:48px 32px 40px;position:relative;overflow:hidden}
+.page+.page{border-top:1px solid var(--border)}
+.disc{position:absolute;top:10px;right:14px;font-size:10px;color:rgba(231,76,60,.55);font-weight:600;letter-spacing:.3px;z-index:2}
+.page-tag{font-size:13px;color:var(--gold);text-transform:uppercase;letter-spacing:3px;margin-bottom:11px;font-weight:700}
+.page-title{font-size:36px;font-weight:800;text-align:center;max-width:880px;margin-bottom:8px;line-height:1.3;letter-spacing:-.5px}
+.page-title.sm{font-size:27px}
+.page-subtitle{font-size:15px;color:var(--sub);text-align:center;max-width:740px;margin-bottom:18px}
+.page-bridge{display:inline-block;font-size:13.5px;color:var(--gold);font-weight:600;text-align:center;border:1px dashed var(--gold);padding:7px 18px;border-radius:20px;background:rgba(255,255,255,.9);margin-top:16px;max-width:520px;white-space:normal;line-height:1.5}
+.tier{display:inline-block;font-size:12px;color:#fff;border-radius:20px;padding:4px 15px;letter-spacing:1px;margin-bottom:11px;font-weight:700}
+.tier.ah{background:var(--ah)} .tier.aonly{background:var(--aonly)} .tier.honly{background:var(--honly)} .tier.us{background:var(--us)} .tier.tsla{background:var(--tsla)} .tier.ev{background:var(--hw)} .tier.hw{background:#c0392b} .tier.jv{background:#8b5cf6} .tier.self{background:#0891b2}
+
+.card-row{display:flex;flex-direction:row;gap:14px;flex-wrap:wrap;justify-content:center;max-width:960px;margin:0 auto}
+.g4{display:grid!important;grid-template-columns:repeat(4,1fr);gap:10px;max-width:920px;margin:6px auto;width:100%}
+.g3{display:grid!important;grid-template-columns:repeat(3,1fr);gap:10px;max-width:920px;margin:6px auto;width:100%}
+.g2{display:grid!important;grid-template-columns:repeat(2,1fr);gap:10px;max-width:620px;margin:6px auto;width:100%}
+.g4>.co-card,.g3>.co-card,.g2>.co-card{min-width:auto!important;flex:none!important;width:auto!important}
+.data-card{background:var(--card);border-radius:14px;padding:14px 18px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.04);border:1px solid var(--border)}
+.card-row>.data-card{min-width:140px;flex:1}
+.data-card .label{font-size:12px;color:var(--sub);margin-bottom:4px}
+.data-card .value{font-size:22px;font-weight:800;margin-bottom:2px}
+.data-card .note{font-size:11px;color:var(--sub)}.data-card .sdata{font-size:11px;color:var(--text);margin-top:6px;line-height:1.5;border-top:1px dashed var(--border);padding-top:5px}.data-card .sdata .qty{font-weight:700}.data-card .sdata .up{color:#1f9d6b}.data-card .sdata .down{color:#c0392b}
+
+.co-card{background:var(--card);border-radius:14px;padding:15px 20px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.04);border:1px solid var(--border);border-top:3px solid var(--tsla)}
+.card-row>.co-card{min-width:152px;flex:1}
+.co-card.ah-top{border-top-color:var(--ah)} .co-card.a-top{border-top-color:var(--aonly)} .co-card.h-top{border-top-color:var(--honly)} .co-card.us-top{border-top-color:var(--us)} .co-card.tsla-top{border-top-color:var(--tsla);box-shadow:0 2px 12px rgba(45,125,210,.15)}
+.co-card .co-name{font-size:16px;font-weight:800;margin-bottom:3px}
+.co-card .co-code{font-size:12px;color:var(--sub);margin-bottom:4px}
+.co-card .co-tags{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+.co-card .co-tag{font-size:11px;padding:2px 9px;border-radius:10px;font-weight:600}
+.co-card .tag-ah{background:#ede9fe;color:#6d28d9}
+.co-card .tag-a{background:#dbeafe;color:#1d4ed8}
+.co-card .tag-h{background:#d1fae5;color:#065f46}
+.co-card .tag-us{background:#fef3c7;color:#92400e}
+.co-card .tag-tsla{background:#e0e7ff;color:#3730a3}
+.co-card .co-mcap{display:block;font-size:11px;color:var(--sub);margin-top:6px;font-weight:500;border-top:1px dashed var(--border);padding-top:5px}
+
+.mtx{max-width:900px;margin:6px auto;width:100%;border-collapse:collapse;font-size:13px;background:var(--card);border-radius:12px;overflow:hidden;border:1px solid var(--border)}
+.mtx th{background:#f0f2f8;padding:8px 11px;font-size:12px;color:var(--sub);font-weight:700;text-align:center}
+.mtx td{padding:7px 10px;border-bottom:1px solid var(--border);text-align:center;font-size:12.5px}
+.mtx td:first-child{text-align:left;color:var(--text);font-weight:700}
+.mtx tr:last-child td{border-bottom:none}
+.mtx .yes{color:var(--ok);font-weight:700}.mtx .mid{color:var(--gold);font-weight:700}.mtx .deep{color:var(--warn);font-weight:800}
+
+.annot{font-size:13px;color:var(--sub);margin-top:12px;text-align:center;max-width:850px;margin-left:auto;margin-right:auto;line-height:1.6}
+.annot b{color:var(--text)}
+.core-line{display:flex;align-items:flex-start;gap:13px;max-width:850px;margin:13px auto 0;padding:14px 18px;background:#fffbf0;border-left:4px solid var(--gold);border-radius:0 8px 8px 0}
+.core-line .icon{font-size:20px;flex-shrink:0}
+.core-line .text{font-size:15px;font-weight:700;color:#5c4010;line-height:1.5}
+.core-line .text b{color:#8b5a00}
+
+.jv-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;max-width:920px;margin:4px auto;width:100%}
+.jv-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:11px 13px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;box-shadow:0 1px 6px rgba(0,0,0,.03)}
+.jv-item .jv-host{font-size:13px;font-weight:800;color:var(--text);white-space:nowrap}
+.jv-item .jv-arrow{font-size:12px;color:var(--sub)}
+.jv-item .jv-partner{font-size:12.5px;color:var(--sub);font-weight:600}
+.jv-item .jv-sales{width:100%;display:flex;align-items:center;gap:8px;font-size:12px;margin-top:2px;padding-top:6px;border-top:1px dashed var(--border)}
+.jv-item .jv-qty{font-weight:700;color:var(--text)}
+.jv-item .jv-yoy{font-weight:800;font-size:13px}
+.jv-item .jv-yoy.up{color:#e74c3c}
+.jv-item .jv-yoy.down{color:#1f9d6b}
+.jv-item .jv-yoy.flat{color:var(--sub)}
+.jv-item .jv-prev{font-size:11px;color:var(--sub)}
+.jv-item.drop-big{background:#fff5f5;border-color:#fecaca}
+.jv-item.drop-mid{background:#fffafa;border-color:#fed7d7}
+.jv-item.rise{background:#f0fdf4;border-color:#bbf7d0}
+
+.hw-row{display:flex;flex-wrap:wrap;gap:10px;max-width:920px;margin:8px auto;justify-content:center}
+.hw-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:13px 18px;min-width:150px;flex:1;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,.03)}
+.hw-card.deep{border:2px solid var(--warn);box-shadow:0 2px 14px rgba(231,76,60,.08)}
+.hw-card .hw-company{font-size:15px;font-weight:800;margin-bottom:2px}
+.hw-card .hw-brand{font-size:12px;color:var(--sub);margin-bottom:3px}
+.hw-card .hw-mode{display:inline-block;font-size:11px;font-weight:700;padding:2px 10px;border-radius:10px;margin-top:4px}
+.hw-card .hw-mode.deepp{background:#fce4e4;color:#c0392b}
+.hw-card .hw-mode.hi{background:#fef3c7;color:#b45309}
+.hw-card .hw-mode.parts{background:#e8eaf0;color:#64748b}.hw-card .hw-sales{font-size:11px;color:var(--text);margin-top:7px;line-height:1.5;border-top:1px dashed var(--border);padding-top:5px;text-align:left}.hw-card .hw-sales .qty{font-weight:700}.hw-card .hw-sales .up{color:#1f9d6b}.hw-card .hw-sales .down{color:#c0392b}
+
+.self-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:10px;max-width:920px;margin:6px auto;width:100%}
+.self-card{background:var(--card);border:1px solid var(--border);border-left:4px solid #0891b2;border-radius:0 12px 12px 0;padding:12px 16px;box-shadow:0 1px 6px rgba(0,0,0,.03)}
+.self-card .sc-name{font-size:15px;font-weight:800;margin-bottom:2px}
+.self-card .sc-brands{font-size:12px;color:var(--sub);margin-bottom:3px}
+.self-card .sc-path{font-size:11.5px;color:var(--ok);font-weight:600}
+
+.summary-box{max-width:920px;margin:12px auto 0;padding:20px 28px;background:linear-gradient(135deg,#1a1a2e,#2c2c4a);color:#fff;border-radius:18px;text-align:center}
+.summary-box .big-num{font-size:56px;font-weight:900;color:var(--gold);line-height:1;margin-bottom:4px}
+.summary-box .big-label{font-size:18px;font-weight:700;margin-bottom:16px}
+.summary-box .cats{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.summary-box .cat-chip{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:8px 18px;text-align:center}
+.summary-box .cat-chip .cn{font-size:13px;font-weight:700;color:rgba(255,255,255,.85)}
+.summary-box .cat-chip .cv{font-size:20px;font-weight:800;margin-top:2px}
+.summary-box .cat-chip.ah{border-color:rgba(124,58,237,.6)} .summary-box .cat-chip.ah .cv{color:#a78bfa}
+.summary-box .cat-chip.a{border-color:rgba(37,99,235,.6)} .summary-box .cat-chip.a .cv{color:#60a5fa}
+.summary-box .cat-chip.h{border-color:rgba(5,150,105,.6)} .summary-box .cat-chip.h .cv{color:#34d399}
+.summary-box .cat-chip.us{border-color:rgba(245,158,11,.6)} .summary-box .cat-chip.us .cv{color:#fbbf24}
+.summary-box .cat-chip.ts{border-color:rgba(45,125,210,.6)} .summary-box .cat-chip.ts .cv{color:#93c5fd}
+
+@media(max-width:768px){
+  .page-title{font-size:24px}.page-title.sm{font-size:19px}
+  .page{padding:42px 14px}
+  .card-row{flex-direction:column;align-items:center}
+  .g4{grid-template-columns:repeat(2,1fr)!important}
+  .g3{grid-template-columns:repeat(2,1fr)!important}
+  .g2{grid-template-columns:1fr!important}
+  .g2{grid-template-columns:1fr!important}
+  .data-card,.co-card,.hw-card{min-width:auto}
+  .card-row>.data-card,.card-row>.co-card{min-width:auto;width:100%;max-width:360px}
+  .jv-grid{grid-template-columns:1fr!important}
+  .self-grid{grid-template-columns:1fr}
+  .summary-box .big-num{font-size:40px}
+}
+</style>
+</head>
+<body>
+
+<!-- P1 封面 -->
+<section class="page">
+  <div class="disc">视频为分析分享 · 不构成投资建议 · v14</div>
+  <div class="page-tag">拆解上市公司 · 有二财经</div>
+  <div class="summary-box">
+    <div class="big-num">19</div>
+    <div class="big-label">全球整车上市公司 · 中国板块全景图</div>
+    <div class="cats">
+      <div class="cat-chip ah"><div class="cn">A+H 双重</div><div class="cv">4</div></div>
+      <div class="cat-chip a"><div class="cn">仅 A 股</div><div class="cv">5</div></div>
+      <div class="cat-chip h"><div class="cn">仅 H 股</div><div class="cv">6</div></div>
+      <div class="cat-chip us"><div class="cn">美股 + H</div><div class="cv">3</div></div>
+      <div class="cat-chip ts"><div class="cn">纯美股</div><div class="cv">1</div></div>
+    </div>
+  </div>
+  <div class="core-line"><span class="icon">🗺️</span><span class="text">从上市地、新势力阵营、华为合作、合资品牌到自主品牌路径——五张地图，一次看清楚中国整车上市公司的全貌。19家，一个不落。</span></div>
+  <div class="page-bridge">先按上市市场分类 ↓</div>
+</section>
+
+<!-- P2 A+H 双重上市（4家） -->
+<section class="page">
+  <div class="disc">视频为分析分享 · 不构成投资建议 · v14</div>
+  <span class="tier ah">A+H 双重上市 · 4家</span>
+  <div class="page-title sm">两个市场挂牌——<br>A 股 + 港股双重融资</div>
+  <div class="g2">
+    <div class="co-card ah-top">
+      <div class="co-name">比亚迪</div>
+      <div class="co-code">002594.SZ · 1211.HK</div>
+      <div class="co-tags"><span class="co-tag tag-ah">A+H</span><span class="co-tag tag-a">深交所</span><span class="co-tag tag-h">港交所</span></div>
+      <div class="co-mcap">市值 7130亿 人民币</div>
+    </div>
+    <div class="co-card ah-top">
+      <div class="co-name">长城汽车</div>
+      <div class="co-code">601633.SH · 2333.HK</div>
+      <div class="co-tags"><span class="co-tag tag-ah">A+H</span><span class="co-tag tag-a">上交所</span><span class="co-tag tag-h">港交所</span></div>
+      <div class="co-mcap">市值 1292亿 人民币</div>
+    </div>
+    <div class="co-card ah-top">
+      <div class="co-name">赛力斯</div>
+      <div class="co-code">601127.SH · 9927.HK</div>
+      <div class="co-tags"><span class="co-tag tag-ah">A+H</span><span class="co-tag tag-a">上交所</span><span class="co-tag tag-h">港交所</span></div>
+      <div class="co-mcap">市值 1042亿 人民币</div>
+    </div>
+    <div class="co-card ah-top">
+      <div class="co-name">广汽集团</div>
+      <div class="co-code">601238.SH · 2238.HK</div>
+      <div class="co-tags"><span class="co-tag tag-ah">A+H</span><span class="co-tag tag-a">上交所</span><span class="co-tag tag-h">港交所</span></div>
+      <div class="co-mcap">市值 516亿 人民币</div>
+    </div>
+  </div>
+  <div class="annot">比亚迪：中国新能源销冠 · 长城：SUV/皮卡王者 · 赛力斯：华为智选车深度绑定 · 广汽：日系合资双雄</div>
+  <div class="annot" style="color:#6d28d9;font-weight:600">赛力斯（9927.HK）2025年11月港交所挂牌 · 国内首家A+H豪华新能源车企</div>
+  <div class="page-bridge">再看只在A股上市的5家 ↓</div>
+</section>
+
+<!-- P3 仅A股上市（5家） -->
+<section class="page">
+  <div class="disc">视频为分析分享 · 不构成投资建议 · v14</div>
+  <span class="tier aonly">仅 A 股上市 · 5家</span>
+  <div class="page-title sm">扎根A股——<br>央企/国企的主力阵地</div>
+  <div class="g3">
+    <div class="co-card a-top">
+      <div class="co-name">长安汽车</div>
+      <div class="co-code">000625.SZ</div>
+      <div class="co-tags"><span class="co-tag tag-a">深交所</span></div>
+      <div class="co-mcap">市值 680亿 人民币</div>
+    </div>
+    <div class="co-card a-top">
+      <div class="co-name">上汽集团</div>
+      <div class="co-code">600104.SH</div>
+      <div class="co-tags"><span class="co-tag tag-a">上交所</span></div>
+      <div class="co-mcap">市值 1118亿 人民币</div>
+    </div>
+    <div class="co-card a-top">
+      <div class="co-name">江淮汽车</div>
+      <div class="co-code">600418.SH</div>
+      <div class="co-tags"><span class="co-tag tag-a">上交所</span></div>
+      <div class="co-mcap">市值 606亿 人民币</div>
+    </div>
+    <div class="co-card a-top">
+      <div class="co-name">北汽蓝谷</div>
+      <div class="co-code">600733.SH</div>
+      <div class="co-tags"><span class="co-tag tag-a">上交所</span></div>
+      <div class="co-mcap">市值 314亿 人民币</div>
+    </div>
+    <div class="co-card a-top">
+      <div class="co-name">江铃汽车</div>
+      <div class="co-code">000550.SZ</div>
+      <div class="co-tags"><span class="co-tag tag-a">深交所</span></div>
+      <div class="co-mcap">市值 140亿 人民币</div>
+    </div>
+  </div>
+  <div class="annot">长安：自主+合资双轮驱动 · 上汽：中国最大车企集团 · 江淮：代工蔚来+华为智选车 · 北汽蓝谷：新能源转型阵痛 · 江铃：商用车主力+福特合作</div>
+  <div class="page-bridge">再看港股独立上市的6家 ↓</div>
+</section>
+
+<!-- P4 仅H股上市（6家） -->
+<section class="page">
+  <div class="disc">视频为分析分享 · 不构成投资建议 · v14</div>
+  <span class="tier honly">仅 H 股上市 · 6家</span>
+  <div class="page-title sm">新势力+国家队——<br>港股成了中国车企的"新主场"</div>
+  <div class="g3">
+    <div class="co-card h-top">
+      <div class="co-name">吉利汽车</div>
+      <div class="co-code">0175.HK</div>
+      <div class="co-tags"><span class="co-tag tag-h">港交所</span></div>
+      <div class="co-mcap">市值 ≈1711亿 人民币</div>
+    </div>
+    <div class="co-card h-top">
+      <div class="co-name">岚图汽车</div>
+      <div class="co-code">07489.HK</div>
+      <div class="co-tags"><span class="co-tag tag-h">港交所</span></div>
+      <div class="co-mcap">市值 ≈102亿 人民币</div>
+    </div>
+    <div class="co-card h-top">
+      <div class="co-name">小米集团</div>
+      <div class="co-code">1810.HK</div>
+      <div class="co-tags"><span class="co-tag tag-h">港交所</span></div>
+      <div class="co-mcap">市值 ≈5137亿 人民币</div>
+    </div>
+    <div class="co-card h-top">
+      <div class="co-name">零跑汽车</div>
+      <div class="co-code">9863.HK</div>
+      <div class="co-tags"><span class="co-tag tag-h">港交所</span></div>
+      <div class="co-mcap">市值 ≈443亿 人民币</div>
+    </div>
+    <div class="co-card h-top">
+      <div class="co-name">北京汽车</div>
+      <div class="co-code">01958.HK</div>
+      <div class="co-tags"><span class="co-tag tag-h">港交所</span></div>
+      <div class="co-mcap">市值 ≈58亿 人民币</div>
+    </div>
+    <div class="co-card h-top">
+      <div class="co-name">奇瑞汽车</div>
+      <div class="co-code">9973.HK</div>
+      <div class="co-tags"><span class="co-tag tag-h">港交所</span></div>
+      <div class="co-mcap">市值 ≈1373亿 人民币</div>
+    </div>
+  </div>
+  <div class="annot">吉利：全球并购大师 · 岚图：2026年3月港股新贵（替代退市的东风集团） · 小米：手机厂造车第一股 · 零跑：全域自研新势力 · 北京汽车：北汽集团的港股上市主体 · 奇瑞：26年出口百万辆、2026年6月港股IPO</div>
+  <div class="annot" style="color:#059669;font-weight:600">⚠ 岚图上市后东风集团（0489.HK）已私有化退市 · 注意区分北汽蓝谷（A股）与北京汽车（H股）——两家不同公司</div>
+  <div class="page-bridge">还有3家——美股和港股同时挂牌 ↓</div>
+</section>
+
+<!-- P5 美股+H（3家）+ 特斯拉（1家） -->
+<section class="page">
+  <div class="disc">视频为分析分享 · 不构成投资建议 · v14</div>
+  <span class="tier us">美股 + H 股双重上市 · 3家</span>
+  <div class="page-title sm">从华尔街到中环——<br>新势力的"双保险"上市</div>
+  <div class="g3">
+    <div class="co-card us-top">
+      <div class="co-name">理想汽车</div>
+      <div class="co-code">LI · 2015.HK</div>
+      <div class="co-tags"><span class="co-tag tag-us">纳斯达克</span><span class="co-tag tag-h">港交所</span></div>
+      <div class="co-mcap">市值 ≈876亿 人民币</div>
+    </div>
+    <div class="co-card us-top">
+      <div class="co-name">蔚来</div>
+      <div class="co-code">NIO · 9866.HK</div>
+      <div class="co-tags"><span class="co-tag tag-us">纽交所</span><span class="co-tag tag-h">港交所</span></div>
+      <div class="co-mcap">市值 ≈883亿 人民币</div>
+    </div>
+    <div class="co-card us-top">
+      <div class="co-name">小鹏汽车</div>
+      <div class="co-code">XPEV · 09868.HK</div>
+      <div class="co-tags"><span class="co-tag tag-us">纽交所</span><span class="co-tag tag-h">港交所</span></div>
+      <div class="co-mcap">市值 ≈838亿 人民币</div>
+    </div>
+  </div>
+  <div class="annot" style="margin-bottom:16px">理想：增程式奶爸车销冠 · 蔚来：换电+用户服务壁垒 · 小鹏：智驾标签最鲜明</div>
+
+  <div class="g2" style="max-width:460px">
+    <div class="co-card tsla-top">
+      <div class="co-name" style="font-size:20px">🚀 特斯拉</div>
+      <div class="co-code">TSLA · 纳斯达克</div>
+      <div class="co-tags"><span class="co-tag tag-tsla">纯美股</span><span class="co-tag tag-us">纳斯达克</span></div>
+      <div style="font-size:12px;color:var(--sub);margin-top:4px">唯一一家没有在中国市场上市的全球车企</div>
+      <div class="co-mcap" style="border-top:none;padding-top:0;margin-top:2px;font-size:13px;font-weight:700;color:var(--tsla)">市值 ≈9.19万亿 人民币</div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:center">
+      <div style="font-size:15px;color:var(--sub);text-align:center">
+        <div style="font-size:48px;margin-bottom:4px">📊</div>
+        <div style="font-weight:700">独立板块</div>
+        <div style="font-size:12px">不与任何中国车企直接对标</div>
+      </div>
+    </div>
+  </div>
+  <div class="page-bridge">按市场分完——接下来看阵营 ↓</div>
+</section>
+
+<!-- P6 造车新势力阵营 -->
+<section class="page">
+  <div class="disc">视频为分析分享 · 不构成投资建议 · v14</div>
+  <span class="tier ev">阵营一 · 造车新势力</span>
+  <div class="page-title sm">从PPT到量产——<br>新势力凭什么撕开传统车企的护城河？</div>
+
+  <div class="g3">
+    <div class="data-card"><div class="label">理想</div><div class="value" style="color:#f59e0b">增程开路</div><div class="note">LI · 2015年 · 家庭SUV</div><div class="sdata"><span class="qty">2025全年 40.63万辆</span><br>2026 1-5月 16.26万辆 <span class="down">↓18.4%</span></div></div>
+    <div class="data-card"><div class="label">蔚来</div><div class="value" style="color:var(--tsla)">换电+服务</div><div class="note">NIO · 2014年 · 用户社区</div><div class="sdata"><span class="qty">2025全年 32.6万辆</span><br>2026 1-5月 15.05万辆 <span class="up">↑68.7%</span></div></div>
+    <div class="data-card"><div class="label">小鹏</div><div class="value" style="color:var(--ok)">智能驾驶</div><div class="note">XPEV · 2014年 · XNGP</div><div class="sdata"><span class="qty">2025全年 42.94万辆</span><br>2026 1-5月 12.59万辆 <span class="down">↓22.6%</span></div></div>
+    <div class="data-card"><div class="label">零跑</div><div class="value" style="color:#8b5cf6">全域自研</div><div class="note">9863.HK · 2015年 · 性价比</div><div class="sdata"><span class="qty">2025全年 59.66万辆 🥇</span><br>2026 1-5月 26.31万辆 <span class="up">↑81%</span></div></div>
+    <div class="data-card"><div class="label">小米</div><div class="value" style="color:#f97316">科技跨界</div><div class="note">SU7+YU7 · 2021年 · 生态链</div><div class="sdata"><span class="qty">2025全年 41.1万辆</span><br>2026 1-5月 15.03万辆 <span class="up">双车齐发</span></div></div>
+    <div class="data-card"><div class="label">岚图</div><div class="value" style="color:#06b6d4">国家队新势力</div><div class="note">07489.HK · 东风嫡出 · 高端</div><div class="sdata"><span class="qty">2025全年 15.02万辆</span><br>2026 1-5月 6.20万辆 <span class="up">↑35%</span></div></div>
+  </div>
+
+  <div class="core-line" style="margin-top:16px"><span class="icon">🔑</span><span class="text">新势力的共同打法：<b>没有历史包袱、没有燃油车产线、没有4S店渠道掣肘</b>——从零开始建直营、做OTA、搞用户运营。传统车企"大象转身"，新势力"从基因里就是电动的"。</span></div>
+
+  <div class="annot">* 奇瑞（老牌车企，出口霸主）和吉利（传统巨头转型）通常不归入"新势力"，但各自有新能源子品牌参与竞争。</div>
+  <div class="page-bridge">新势力讲完——看另一条线：华为怎么渗透整个行业 ↓</div>
+</section>
+
+<!-- P7 华为概念合作 -->
+<section class="page">
+  <div class="disc">视频为分析分享 · 不构成投资建议 · v14</div>
+  <span class="tier hw">阵营二 · 华为概念深度合作</span>
+  <div class="page-title sm">不造车，但"赋能"了<br>5界 + 阿维塔 + 岚图 = 全方位渗透<span style="font-size:13px;color:var(--sub);font-weight:400">（2025年合计约85万辆占2.7% · 2026年1-5月约28.2万辆占5.1%，稳中有升）</span></div>
+
+  <div class="g4">
+    <div class="hw-card deep">
+      <div class="hw-company">赛力斯</div>
+      <div class="hw-brand">问界 AITO</div>
+      <div class="hw-mode deepp">智选车 · 最深绑定</div>
+      <div class="hw-sales"><span class="qty">2025全年 突破42万辆</span><br>2026 1-5月 14.51万辆 <span class="up">↑15%</span></div>
+      <div style="font-size:10px;color:var(--sub);margin-top:2px">累计交付超97万辆 · 即将破百万</div>
+    </div>
+    <div class="hw-card deep">
+      <div class="hw-company">江淮汽车</div>
+      <div class="hw-brand">尊界 S800</div>
+      <div class="hw-mode deepp">智选车 · 百万级豪华</div>
+      <div class="hw-sales"><span class="qty">2025.9上市 · 累计1.85万辆</span><br>2026 1-5月 5386辆 <span class="down">月均约千台</span></div>
+      <div style="font-size:10px;color:var(--sub);margin-top:2px">70.8万起 · 中国品牌首次站上百万顶峰</div>
+    </div>
+    <div class="hw-card deep">
+      <div class="hw-company">奇瑞汽车</div>
+      <div class="hw-brand">智界 Luxeed</div>
+      <div class="hw-mode deepp">智选车</div>
+      <div class="hw-sales"><span class="qty">2025全年 约9.04万辆</span><br>2026 1-5月 ~1.38万辆 <span class="down">↓67.5%</span></div>
+      <div style="font-size:10px;color:var(--sub);margin-top:2px">仅完成全年目标4.6% · 管理层换帅</div>
+    </div>
+    <div class="hw-card">
+      <div class="hw-company">北汽蓝谷</div>
+      <div class="hw-brand">享界</div>
+      <div class="hw-mode hi">HI → 智选车</div>
+      <div class="hw-sales"><span class="qty">2025全年 3.58万辆</span><br>2026 1-5月 1.46万辆 <span class="up">连续7个月30万元以上新能源轿车销冠</span></div>
+      <div style="font-size:10px;color:var(--sub);margin-top:2px">累计交付突破6万辆 · 稳步爬坡</div>
+    </div>
+  </div>
+
+  <div class="annot" style="font-weight:700;color:var(--warn);margin:10px 0 2px">▸ 第五界 · 最新玩家 + 其他华为合作</div>
+
+  <div class="g3">
+    <div class="hw-card deep">
+      <div class="hw-company">上汽集团</div>
+      <div class="hw-brand">尚界</div>
+      <div class="hw-mode deepp">智选车 · 20万以下破局</div>
+      <div class="hw-sales"><span class="qty">2025.9上市 · 累计4.3万辆</span><br>2026 1-5月 约1.7万辆 <span class="down">H5月销回落至3000-4600</span></div>
+      <div style="font-size:10px;color:var(--sub);margin-top:2px">15.98万起 · 首月破万后销量走低</div>
+    </div>
+    <div class="hw-card">
+      <div class="hw-company">长安汽车</div>
+      <div class="hw-brand">阿维塔 AVATR</div>
+      <div class="hw-mode hi">HI 模式</div>
+      <div class="hw-sales"><span class="qty">2025全年 超12万辆</span><br>2026 1-5月 约2.4万辆 <span class="up">三年三级跳 · 2025年连续10月破万</span></div>
+      <div style="font-size:10px;color:var(--sub);margin-top:2px">华为提供智能驾驶+座舱</div>
+    </div>
+    <div class="hw-card">
+      <div class="hw-company">岚图汽车</div>
+      <div class="hw-brand">岚图</div>
+      <div class="hw-mode parts">零部件 / 初步</div>
+      <div class="hw-sales"><span class="qty">2025全年 15.02万辆</span><br>2026 1-5月 6.20万辆 <span class="up">↑35%</span></div>
+      <div style="font-size:10px;color:var(--sub);margin-top:2px">部分车型搭载华为部件 · 东风嫡出</div>
+    </div>
+  </div>
+
+  <div class="core-line" style="margin-top:12px"><span class="icon">⚡</span><span class="text">华为不入股车企、不建厂——但通过<b>智选车（最深：产品+渠道+品牌）</b>、<b>HI模式（华为Inside：智驾+座舱）</b>、<b>零部件（Tier1供应）</b>三种模式渗透。深度差异极大：赛力斯几乎"华为代工厂"，岚图只是"用了些零件"。</span></div>
+
+  <div class="annot">* 上图是华为智选车5界（问界/智界/享界/尊界/尚界）+ HI模式阿维塔 + 零部件岚图。广汽HI合作已终止 · 比亚迪部分车型用华为MDC智驾。</div>
+  <div class="page-bridge">华为讲完——看合资品牌：中国车企的另一条腿 ↓</div>
+</section>
+
+<!-- P8 合资品牌全图谱 · 2026Q1销量版 -->
+<section class="page">
+  <div class="disc">视频为分析分享 · 不构成投资建议 · v14</div>
+  <span class="tier jv">合资品牌全图谱 · 2026 Q1</span>
+  <div class="page-title sm">合资品牌卖的怎么样？——<br>19家上市车企合资关系 + Q1真实销量</div>
+  <div class="page-subtitle">2026年一季度终端零售销量 vs 2025年Q1，涨跌一目了然</div>
+
+  <div class="annot" style="font-weight:700;color:var(--ah);margin-bottom:2px">▸ 19家上市公司中的合资关系 — Q1销量对比</div>
+
+  <div class="jv-grid">
+    <div class="jv-item drop-big">
+      <span class="jv-host">上汽集团</span><span class="jv-arrow">×</span><span class="jv-partner">大众</span>
+      <div class="jv-sales"><span class="jv-qty">Q1 21.6万辆</span><span class="jv-yoy down">↓22.8%</span><span class="jv-prev">2025Q1: 28.0万辆</span></div>
+    </div>
+    <div class="jv-item drop-mid">
+      <span class="jv-host">上汽集团</span><span class="jv-arrow">×</span><span class="jv-partner">通用 (别克/雪佛兰/凯迪拉克)</span>
+      <div class="jv-sales"><span class="jv-qty">Q1 ~10万辆</span><span class="jv-yoy down">↓~20%</span><span class="jv-prev">2025Q1: ~12.5万辆</span></div>
+    </div>
+    <div class="jv-item drop-big">
+      <span class="jv-host">北京汽车</span><span class="jv-arrow">×</span><span class="jv-partner">奔驰</span>
+      <div class="jv-sales"><span class="jv-qty">Q1 11.16万辆</span><span class="jv-yoy down">↓27%</span><span class="jv-prev">2025Q1: ~15.3万辆</span></div>
+    </div>
+    <div class="jv-item">
+      <span class="jv-host">北京汽车</span><span class="jv-arrow">×</span><span class="jv-partner">现代</span>
+      <div class="jv-sales"><span class="jv-qty">Q1 5.04万辆</span><span class="jv-yoy up">↑14.8%</span><span class="jv-prev">2025Q1: ~4.4万辆</span></div>
+    </div>
+    <div class="jv-item">
+      <span class="jv-host">广汽集团</span><span class="jv-arrow">×</span><span class="jv-partner">丰田</span>
+      <div class="jv-sales"><span class="jv-qty">Q1 17.16万辆</span><span class="jv-yoy up">↑0.1%</span><span class="jv-prev">合资唯一正增长"独苗"</span></div>
+    </div>
+    <div class="jv-item drop-mid">
+      <span class="jv-host">广汽集团</span><span class="jv-arrow">×</span><span class="jv-partner">本田</span>
+      <div class="jv-sales"><span class="jv-qty">Q1 ~7.5万辆</span><span class="jv-yoy down">↓~25%</span><span class="jv-prev">电动化转型滞后</span></div>
+    </div>
+    <div class="jv-item drop-big">
+      <span class="jv-host">长安汽车</span><span class="jv-arrow">×</span><span class="jv-partner">福特</span>
+      <div class="jv-sales"><span class="jv-qty">Q1 1.72万辆</span><span class="jv-yoy down">↓31%</span><span class="jv-prev">2025Q1: 2.49万辆 · 跌破10万年线</span></div>
+    </div>
+    <div class="jv-item rise">
+      <span class="jv-host">长安汽车</span><span class="jv-arrow">×</span><span class="jv-partner">马自达</span>
+      <div class="jv-sales"><span class="jv-qty">Q1 1.0万辆</span><span class="jv-yoy down">↓36.5%</span><span class="jv-prev">2025Q1: ~1.57万辆 · 持续下滑</span></div>
+    </div>
+    <div class="jv-item">
+      <span class="jv-host">江铃汽车</span><span class="jv-arrow">×</span><span class="jv-partner">福特 (商用车/皮卡)</span>
+      <div class="jv-sales"><span class="jv-qty">Q1 ~0.8万辆</span><span class="jv-yoy flat">持平</span><span class="jv-prev">商用车基本盘稳定</span></div>
+    </div>
+    <div class="jv-item">
+      <span class="jv-host">长城汽车</span><span class="jv-arrow">×</span><span class="jv-partner">宝马 (光束汽车)</span>
+      <div class="jv-sales"><span class="jv-qty">Q1 量极小</span><span class="jv-yoy flat">—</span><span class="jv-prev">电动MINI国产 · 尚在爬坡</span></div>
+    </div>
+    <div class="jv-item">
+      <span class="jv-host">吉利汽车</span><span class="jv-arrow">×</span><span class="jv-partner">smart / 路特斯 / 沃尔沃</span>
+      <div class="jv-sales"><span class="jv-qty">Q1 ~2万辆</span><span class="jv-yoy flat">持平</span><span class="jv-prev">smart纯电+路特斯高端</span></div>
+    </div>
+    <div class="jv-item">
+      <span class="jv-host">奇瑞汽车</span><span class="jv-arrow">×</span><span class="jv-partner">捷豹路虎</span>
+      <div class="jv-sales"><span class="jv-qty">Q1 ~1万辆</span><span class="jv-yoy flat">持平</span><span class="jv-prev">国产极光/发现运动 · 量小</span></div>
+    </div>
+  </div>
+
+  <div class="annot" style="font-weight:700;color:var(--warn);margin-bottom:2px;margin-top:18px">▸ 中方伙伴不在19家上市公司中 — 但品牌仍然活跃 — Q1销量对比</div>
+
+  <div class="jv-grid">
+    <div class="jv-item drop-mid" style="background:#fff5f5;border-color:#fecaca">
+      <span class="jv-host" style="color:#c0392b">一汽集团</span><span class="jv-arrow">×</span><span class="jv-partner">大众</span>
+      <div class="jv-sales"><span class="jv-qty">Q1 31.8万辆</span><span class="jv-yoy down">↓9.3%</span><span class="jv-prev">2025Q1: 35.1万辆 · 全合资销冠</span></div>
+    </div>
+    <div class="jv-item drop-mid" style="background:#fff5f5;border-color:#fecaca">
+      <span class="jv-host" style="color:#c0392b">一汽集团</span><span class="jv-arrow">×</span><span class="jv-partner">奥迪</span>
+      <div class="jv-sales"><span class="jv-qty">Q1 ~14万辆</span><span class="jv-yoy down">↓12%</span><span class="jv-prev">2025Q1: ~15.9万辆 · BBA跌幅最猛</span></div>
+    </div>
+    <div class="jv-item">
+      <span class="jv-host" style="color:#c0392b">一汽集团</span><span class="jv-arrow">×</span><span class="jv-partner">丰田</span>
+      <div class="jv-sales"><span class="jv-qty">Q1 16.7万辆</span><span class="jv-yoy down">↓0.9%</span><span class="jv-prev">2025Q1: 16.85万辆 · 日系最稳</span></div>
+    </div>
+    <div class="jv-item drop-mid" style="background:#fff5f5;border-color:#fecaca">
+      <span class="jv-host" style="color:#c0392b">华晨中国</span><span class="jv-arrow">×</span><span class="jv-partner">宝马</span>
+      <div class="jv-sales"><span class="jv-qty">Q1 14.4万辆</span><span class="jv-yoy down">↓10%</span><span class="jv-prev">连续三年在华下滑 · 2025全年62.6万辆</span></div>
+    </div>
+    <div class="jv-item" style="opacity:.75">
+      <span class="jv-host" style="color:var(--sub)">东风集团 ▸ 已退市</span><span class="jv-arrow">×</span><span class="jv-partner">日产 · 启辰</span>
+      <div class="jv-sales"><span class="jv-qty">Q1 ~10万辆</span><span class="jv-yoy down">↓~8%</span><span class="jv-prev">七连跌后Q1略有回升迹象</span></div>
+    </div>
+    <div class="jv-item" style="opacity:.75">
+      <span class="jv-host" style="color:var(--sub)">东风集团 ▸ 已退市</span><span class="jv-arrow">×</span><span class="jv-partner">本田</span>
+      <div class="jv-sales"><span class="jv-qty">Q1 7.14万辆</span><span class="jv-yoy up">↑微增</span><span class="jv-prev">CR-V月销仍破万 · 电动化失败</span></div>
+    </div>
+    <div class="jv-item rise" style="opacity:.75">
+      <span class="jv-host" style="color:var(--sub)">东风集团 ▸ 已退市</span><span class="jv-arrow">×</span><span class="jv-partner">标致 · 雪铁龙</span>
+      <div class="jv-sales"><span class="jv-qty">Q1 ~2万辆</span><span class="jv-yoy up">↑17.8%</span><span class="jv-prev">神龙汽车复兴 · 凡尔赛C5X拉动</span></div>
+    </div>
+    <div class="jv-item drop-mid">
+      <span class="jv-host" style="color:#c0392b">悦达集团</span><span class="jv-arrow">×</span><span class="jv-partner">起亚</span>
+      <div class="jv-sales"><span class="jv-qty">Q1 1.3万辆</span><span class="jv-yoy down">↓2.7%</span><span class="jv-prev">2025Q1: ~1.34万辆 · 复苏不及预期</span></div>
+    </div>
+  </div>
+
+  <div class="annot" style="margin-top:14px"><b>一汽集团、华晨中国、悦达集团</b>不在19家整车上市公司名单中，但其合资品牌（大众/奥迪/丰田/宝马/起亚）合计Q1销量超<b>80万辆</b>，在中国市场分量极重。</div>
+
+  <div class="core-line" style="margin-top:10px">
+    <span class="icon">📊</span>
+    <span class="text">合资品牌2026Q1趋势速览：<b style="color:#1f9d6b">逆势增长的"独苗"：广汽丰田↑0.1%、长安马自达↑27%、东风标致雪铁龙↑17.8%、悦达起亚↑6.5%、北京现代↑14.8%</b>——日系稳住、法系/韩系反弹。陨落的：奔驰↓26.9%、长安福特↓31%、上汽大众↓22.8%——德系豪华和美系血流成河。</span>
+  </div>
+  <div class="page-bridge">合资是"借来的"，自主才是"自己的"——最后一站 ↓</div>
+</section>
+
+<!-- P9 自主品牌路径 -->
+<section class="page">
+  <div class="disc">视频为分析分享 · 不构成投资建议 · v14</div>
+  <span class="tier self">自主品牌路径</span>
+  <div class="page-title sm">从借力到自研——<br>每条自主之路都不一样</div>
+
+  <div class="self-grid">
+    <div class="self-card">
+      <div class="sc-name">比亚迪</div>
+      <div class="sc-brands">王朝｜海洋｜腾势｜方程豹｜仰望</div>
+      <div class="sc-path">全栈自研 · 电池起家 · 垂直整合</div>
+    </div>
+    <div class="self-card">
+      <div class="sc-name">长城汽车</div>
+      <div class="sc-brands">哈弗｜WEY｜坦克｜欧拉｜长城炮</div>
+      <div class="sc-path">品类分化 · SUV/皮卡基因 · 品类创新</div>
+    </div>
+    <div class="self-card">
+      <div class="sc-name">吉利汽车</div>
+      <div class="sc-brands">吉利｜领克｜极氪｜几何｜银河</div>
+      <div class="sc-path">全球收购 · 沃尔沃/路特斯赋能 · 多品牌</div>
+    </div>
+    <div class="self-card">
+      <div class="sc-name">长安汽车</div>
+      <div class="sc-brands">长安｜深蓝｜启源｜阿维塔</div>
+      <div class="sc-path">两条腿走路 · 自主+华为合作并行</div>
+    </div>
+    <div class="self-card">
+      <div class="sc-name">上汽集团</div>
+      <div class="sc-brands">荣威｜MG｜智己｜飞凡</div>
+      <div class="sc-path">多线作战 · MG出口海外 · 智己冲高端</div>
+    </div>
+    <div class="self-card">
+      <div class="sc-name">广汽集团</div>
+      <div class="sc-brands">传祺｜埃安 AION</div>
+      <div class="sc-path">新能源转型快 · 埃安独立运营</div>
+    </div>
+    <div class="self-card">
+      <div class="sc-name">北汽蓝谷</div>
+      <div class="sc-brands">极狐 ARCFOX｜北京</div>
+      <div class="sc-path">新能源转型阵痛 · 华为合作是核心变量</div>
+    </div>
+    <div class="self-card">
+      <div class="sc-name">奇瑞汽车</div>
+      <div class="sc-brands">奇瑞｜星途｜捷途｜iCAR</div>
+      <div class="sc-path">出口百万辆 · 多品牌 · 燃油+新能源</div>
+    </div>
+    <div class="self-card">
+      <div class="sc-name">赛力斯</div>
+      <div class="sc-brands">问界 AITO｜蓝电</div>
+      <div class="sc-path">华为深度绑定 · 从微面转型豪华新能源</div>
+    </div>
+    <div class="self-card">
+      <div class="sc-name">江淮汽车</div>
+      <div class="sc-brands">江淮｜钇为｜尊界</div>
+      <div class="sc-path">代工蔚来+华为智选车 · 商乘并举</div>
+    </div>
+    <div class="self-card">
+      <div class="sc-name">江铃汽车</div>
+      <div class="sc-brands">江铃｜驭胜</div>
+      <div class="sc-path">商用车为主 · 福特合作 · 新能源转型中</div>
+    </div>
+    <div class="self-card">
+      <div class="sc-name">北京汽车</div>
+      <div class="sc-brands">北京 BJ｜绅宝</div>
+      <div class="sc-path">越野车基因为主 · 北京奔驰利润奶牛</div>
+    </div>
+    <div class="self-card" style="border-left-color:#f59e0b">
+      <div class="sc-name">理想 · 蔚来 · 小鹏 · 零跑</div>
+      <div class="sc-brands">各单一品牌 · 纯正新势力</div>
+      <div class="sc-path">从零自研 · 无燃油包袱 · 直营模式</div>
+    </div>
+    <div class="self-card" style="border-left-color:#f97316">
+      <div class="sc-name">小米 · 岚图</div>
+      <div class="sc-brands">小米汽车｜岚图</div>
+      <div class="sc-path">科技跨界 / 国家队高端新能源</div>
+    </div>
+    <div class="self-card" style="border-left-color:var(--tsla)">
+      <div class="sc-name">特斯拉</div>
+      <div class="sc-brands">Model 3/Y · Cybertruck · Semi</div>
+      <div class="sc-path">美国基因 · 上海工厂全球出口 · 独立赛道</div>
+    </div>
+  </div>
+
+  <div class="core-line" style="margin-top:14px"><span class="icon">🧭</span><span class="text">自主品牌的路径，说到底就是三种：<b>从零自研</b>（比亚迪、新势力）、<b>借外力再消化</b>（吉利收购沃尔沃反哺、长城跟宝马做光束）、<b>跟华为共舞</b>（赛力斯、江淮、北汽）。没哪条路一定对——但选了哪条，决定了你跟谁绑在一起。</span></div>
+  <div class="page-bridge">20分钟，一张图——收个尾 ↓</div>
+</section>
+
+<!-- P10 尾页 · 一览总表 -->
+<section class="page">
+  <div class="disc">视频为分析分享 · 不构成投资建议 · v14</div>
+  <span class="tier self">汇总 · 19家一览</span>
+  <div class="page-title sm">五张地图，19家公司——<br>中国整车上市公司的全家福</div>
+
+  <table class="mtx">
+    <thead>
+      <tr><th style="width:80px">公司</th><th style="width:110px">代码</th><th style="width:55px">上市地</th><th style="width:65px">新势力</th><th style="width:65px">华为</th><th style="width:130px">合资品牌</th><th>自主品牌</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>比亚迪</td><td>002594/1211</td><td>A+H</td><td>—</td><td class="mid">零部件</td><td>曾：腾势/丰田</td><td>王朝·海洋·腾势·仰望等</td></tr>
+      <tr><td>长城汽车</td><td>601633/2333</td><td>A+H</td><td>—</td><td>—</td><td>光束（宝马）</td><td>哈弗·WEY·坦克·欧拉·炮</td></tr>
+      <tr><td>赛力斯</td><td>601127/9927</td><td>A+H</td><td>—</td><td class="deep">★ 智选车</td><td>—</td><td>问界·蓝电</td></tr>
+      <tr><td>广汽集团</td><td>601238/2238</td><td>A+H</td><td>—</td><td>—</td><td>丰田·本田</td><td>传祺·埃安</td></tr>
+      <tr><td>长安汽车</td><td>000625</td><td>A</td><td>—</td><td class="mid">HI模式</td><td>福特·马自达</td><td>长安·深蓝·启源·阿维塔</td></tr>
+      <tr><td>江淮汽车</td><td>600418</td><td>A</td><td>—</td><td class="deep">★ 智选车</td><td>—</td><td>江淮·钇为·尊界</td></tr>
+      <tr><td>上汽集团</td><td>600104</td><td>A</td><td>—</td><td>—</td><td>大众·通用</td><td>荣威·MG·智己·飞凡</td></tr>
+      <tr><td>北汽蓝谷</td><td>600733</td><td>A</td><td>—</td><td class="mid">HI+智选</td><td>—</td><td>极狐·享界</td></tr>
+      <tr><td>江铃汽车</td><td>000550</td><td>A</td><td>—</td><td>—</td><td>福特</td><td>江铃·驭胜</td></tr>
+      <tr><td>吉利汽车</td><td>0175</td><td>H</td><td>—</td><td>—</td><td>smart·路特斯</td><td>吉利·领克·极氪·几何·银河</td></tr>
+      <tr><td>岚图汽车</td><td>07489</td><td>H</td><td class="yes">✓</td><td class="mid">零部件</td><td>—</td><td>岚图</td></tr>
+      <tr><td>小米集团</td><td>1810</td><td>H</td><td class="yes">✓</td><td>—</td><td>—</td><td>小米汽车</td></tr>
+      <tr><td>零跑汽车</td><td>9863</td><td>H</td><td class="yes">✓</td><td>—</td><td>—</td><td>零跑</td></tr>
+      <tr><td>北京汽车</td><td>01958</td><td>H</td><td>—</td><td>—</td><td>奔驰·现代</td><td>北京BJ·绅宝</td></tr>
+      <tr><td>奇瑞汽车</td><td>9973</td><td>H</td><td>—</td><td class="deep">★ 智选车</td><td>捷豹路虎</td><td>奇瑞·星途·捷途·iCAR</td></tr>
+      <tr><td>理想汽车</td><td>LI/2015</td><td>美股+H</td><td class="yes">✓</td><td>—</td><td>—</td><td>理想</td></tr>
+      <tr><td>蔚来</td><td>NIO/9866</td><td>美股+H</td><td class="yes">✓</td><td>—</td><td>—</td><td>蔚来</td></tr>
+      <tr><td>小鹏汽车</td><td>XPEV/09868</td><td>美股+H</td><td class="yes">✓</td><td>—</td><td>—</td><td>小鹏</td></tr>
+      <tr><td>特斯拉</td><td>TSLA</td><td>美股</td><td>—</td><td>—</td><td>—</td><td>Model 3/Y · Cybertruck</td></tr>
+    </tbody>
+    <tfoot>
+      <tr style="background:#1a1a2e;color:#ffd700;font-weight:700;font-size:14px">
+        <td colspan="5" style="text-align:right;padding:10px 16px;border-top:2px solid #ffd700">市值合计（2026年6月26日收盘）</td>
+        <td style="padding:10px 16px;border-top:2px solid #ffd700">18家中国上市公司：<b>≈2.35万亿</b> 人民币<br>特斯拉（纯美股）：<b>≈9.19万亿</b> 人民币<br>19家总计：<b>≈11.54万亿</b> 人民币</td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <div class="annot" style="margin-top:16px"><b>华为合作深度：</b>★ 智选车（产品/渠道/品牌全面参与）· HI模式（华为Inside：智驾+座舱）· 零部件（Tier1级供应商）</div>
+  <div class="annot" style="margin-top:4px">数据来源：各公司年报/招股书、港交所/上交所/深交所/纳斯达克公开信息、华为鸿蒙智行官网。本内容仅作教育研究用途，不构成投资建议。</div>
+  <div style="font-size:14px;color:var(--gold);font-weight:700;margin-top:20px;letter-spacing:2px">拆解上市公司 · 有二财经</div>
+</section>
+
+</body>
+</html>

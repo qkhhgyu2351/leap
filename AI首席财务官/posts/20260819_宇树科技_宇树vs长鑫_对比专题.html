@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>宇树科技 vs 长鑫科技 · 对比专题</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    background:#f5f7fa; color:#1a2533; padding:28px 18px 60px; line-height:1.55;
+  }
+  .wrap { max-width:960px; margin:0 auto; }
+  .head { text-align:center; margin-bottom:18px; }
+  .head h1 { font-size:30px; font-weight:800; letter-spacing:1px; color:#1a2533; }
+  .head .sub { font-size:14px; color:#7f8c8d; margin-top:8px; }
+  .head .sub b { color:#b8860b; }
+
+  .nav { display:flex; justify-content:center; flex-wrap:wrap; gap:10px; margin:0 0 26px; }
+  .nav a {
+    text-decoration:none; font-size:13px; font-weight:700; color:#5a6470;
+    background:#fff; border:1px solid #e3e7ee; border-radius:20px; padding:7px 16px;
+    box-shadow:0 1px 4px rgba(0,0,0,.04);
+  }
+  .nav a:hover { border-color:#b8860b; color:#b8860b; }
+
+  .section { background:#fff; border-radius:16px; padding:24px 22px; margin-bottom:22px;
+             box-shadow:0 2px 12px rgba(0,0,0,.05); }
+  .section > h2 { font-size:21px; font-weight:800; color:#1a2533; margin-bottom:4px;
+                  padding-left:12px; border-left:5px solid #b8860b; }
+  .section > .ssub { font-size:13px; color:#95a5a6; margin:0 0 18px 12px; }
+
+  /* —— 热度对比（双栏卡片） —— */
+  .cards { display:flex; gap:16px; }
+  .card { flex:1; background:#fff; border-radius:14px; padding:18px 16px;
+          box-shadow:0 2px 10px rgba(0,0,0,.06); border-top:4px solid #c0c0c0; }
+  .card.cx { border-top-color:#8a8f98; }
+  .card.ys { border-top-color:#c0392b; }
+  .card h3 { font-size:20px; text-align:center; font-weight:800; }
+  .card .code { text-align:center; font-size:13px; color:#95a5a6; margin:2px 0 14px; }
+  .card.cx h3 { color:#5a6470; }
+  .card.ys h3 { color:#c0392b; }
+  .row { display:flex; justify-content:space-between; align-items:baseline;
+         padding:11px 4px; border-bottom:1px dashed #e8ebef; }
+  .row:last-child { border-bottom:none; }
+  .row .k { font-size:13px; color:#7f8c8d; }
+  .row .v { font-size:19px; font-weight:800; color:#1a2533; text-align:right; }
+  .row .v small { font-size:12px; font-weight:600; color:#95a5a6; }
+  .ratio { background:#fff; border-radius:14px; padding:20px 18px; margin-top:18px;
+           box-shadow:0 2px 10px rgba(0,0,0,.06); border-left:5px solid #b8860b; }
+  .ratio .t { font-size:14px; color:#7f8c8d; margin-bottom:12px; font-weight:600; }
+  .pill { display:inline-block; background:#fdf6e3; color:#b8860b; border:1px solid #f0e0b0;
+          border-radius:20px; padding:6px 14px; font-size:15px; font-weight:800; margin:0 6px 8px 0; }
+  .pill.hot { background:#fdecea; color:#c0392b; border-color:#f3c5bf; }
+  .note { font-size:12.5px; color:#95a5a6; margin-top:14px; line-height:1.6; }
+  .note b { color:#c0392b; }
+
+  /* —— IPO 流程时间轴（双列） —— */
+  .legend { display:flex; justify-content:center; gap:18px; margin:6px 0 20px; font-size:12.5px; color:#555; flex-wrap:wrap; }
+  .legend span { display:inline-flex; align-items:center; gap:5px; }
+  .dot { width:11px; height:11px; border-radius:50%; display:inline-block; }
+  .dot.done { background:#c0392b; }
+  .dot.now { background:#fff; border:3px solid #b8860b; }
+  .dot.todo { background:#b8860b; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+  .col h3 { font-size:17px; font-weight:800; padding:10px 14px; border-radius:10px 10px 0 0; color:#fff; }
+  .col.cx h3 { background:#c0392b; }
+  .col.yt h3 { background:#b8860b; }
+  .col .meta { font-size:12px; color:#666; padding:6px 14px 0; }
+  .track { background:#fff; border-radius:0 0 10px 10px; padding:8px 0 14px; }
+  .node { position:relative; padding:11px 16px 11px 34px; border-left:3px solid #e3e7ee; margin:2px 14px; }
+  .node::before { content:""; position:absolute; left:-8px; top:16px; width:13px; height:13px;
+                  border-radius:50%; background:#c0392b; border:2px solid #fff; box-shadow:0 0 0 1px #c0392b; }
+  .col.yt .node::before { background:#b8860b; box-shadow:0 0 0 1px #b8860b; }
+  .node.now { background:#fff8e8; border-left-color:#b8860b; border-radius:8px; }
+  .node.now::before { background:#fff; box-shadow:0 0 0 2px #b8860b; }
+  .node.future::before { background:#b8860b; box-shadow:0 0 0 1px #b8860b; }
+  .node .date { font-size:12px; font-weight:700; color:#b8860b; letter-spacing:.3px; }
+  .col.cx .node .date { color:#c0392b; }
+  .node .ev { font-size:14px; font-weight:700; margin:2px 0; }
+  .node .file { font-size:11.5px; color:#777; line-height:1.4; }
+  .callout { margin:22px 0 6px; background:#fff; border:1px solid #e3e7ee; border-left:4px solid #b8860b;
+             border-radius:8px; padding:14px 18px; }
+  .callout h4 { font-size:15px; color:#b8860b; margin-bottom:6px; }
+  .callout p { font-size:13px; color:#444; }
+  .callout b { color:#1a1a1a; }
+  .remaining { margin-top:16px; }
+  .remaining h4 { font-size:15px; color:#b8860b; margin:0 0 10px; }
+  .rgrid { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; }
+  .rcard { background:#fff; border:1px solid #f0d9a8; border-top:4px solid #b8860b;
+           border-radius:8px; padding:10px 8px; text-align:center; }
+  .rcard.done { border-top-color:#c0392b; }
+  .rcard.now { background:#fff8e8; border-top-color:#b8860b; border-width:1px 1px 1px 3px; }
+  .rcard .d { font-size:13px; font-weight:800; color:#b8860b; }
+  .rcard.done .d { color:#c0392b; }
+  .rcard .t { font-size:12px; font-weight:700; margin:4px 0 2px; }
+  .rcard .n { font-size:10.5px; color:#888; }
+
+  /* —— 横评表 —— */
+  table.cmp { width:100%; border-collapse:collapse; margin-top:6px; font-size:14px; }
+  table.cmp th { background:#b8860b; color:#fff; padding:10px 12px; font-weight:700; text-align:center; }
+  table.cmp th:first-child { text-align:left; }
+  table.cmp td { border:1px solid #e3e8ef; padding:9px 11px; text-align:center; }
+  table.cmp td:first-child { text-align:left; font-weight:600; color:#5b6675; white-space:nowrap; }
+  table.cmp tr:nth-child(even) td { background:#fafbfc; }
+  table.cmp td b { color:#b8860b; font-variant-numeric:tabular-nums; }
+  table.cmp td.win b { color:#c0392b; }
+  .kw { font-size:15px; color:#5b6675; line-height:1.75; margin-top:14px; }
+  .kw b { color:#1a1a1a; }
+  .kw .hl { color:#b8860b; font-weight:700; }
+
+  .foot { font-size:11.5px; color:#999; margin-top:18px; text-align:center; line-height:1.6; }
+
+  @media (max-width:680px){ .cards{flex-direction:column;} .grid{grid-template-columns:1fr;} .rgrid{grid-template-columns:repeat(2,1fr);} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="head">
+    <h1>宇树科技 vs 长鑫科技 · 对比专题</h1>
+    <div class="sub">申购热度 · IPO 全流程 · 战配结构 · 基本面财务 · 双案例全景（数据逐字来自披露文件）</div>
+  </div>
+
+  <div class="nav">
+    <a href="#hot">① 申购热度对比</a>
+    <a href="#flow">② IPO 全流程时间轴</a>
+    <a href="#cmp">③ 全流程横评</a>
+    <a href="#strat">④ 战配结构对比</a>
+    <a href="#fin">⑤ 基本面财务对比</a>
+  </div>
+
+  <!-- ① 申购热度对比 -->
+  <div class="section" id="hot">
+    <h2>宇树 vs 长鑫 · IPO 热度对比</h2>
+    <div class="ssub">谁更烫手？白纸黑字看中签率公告（2026年科创板双标杆）</div>
+
+    <div class="cards">
+      <div class="card cx">
+        <h3>长鑫科技</h3>
+        <div class="code">688825 · DRAM 龙头</div>
+        <div class="row"><span class="k">发行价</span><span class="v">8.66 <small>元</small></span></div>
+        <div class="row"><span class="k">募资规模</span><span class="v">579 <small>亿</small></span></div>
+        <div class="row"><span class="k">网上申购户数</span><span class="v">943 <small>万户</small></span></div>
+        <div class="row"><span class="k">网上申购倍数</span><span class="v">244 <small>倍</small></span></div>
+        <div class="row"><span class="k">最终中签率</span><span class="v">0.47%</span></div>
+        <div class="row"><span class="k">网上冻结资金*</span><span class="v">7.07 <small>万亿</small></span></div>
+        <div class="row"><span class="k">网下机构资金*</span><span class="v">10.72 <small>万亿</small></span></div>
+      </div>
+
+      <div class="card ys">
+        <h3>宇树科技</h3>
+        <div class="code">688836 · 人形机器人第一股</div>
+        <div class="row"><span class="k">发行价</span><span class="v">150.80 <small>元</small></span></div>
+        <div class="row"><span class="k">募资规模</span><span class="v">61 <small>亿</small></span></div>
+        <div class="row"><span class="k">网上申购户数</span><span class="v">978 <small>万户</small></span></div>
+        <div class="row"><span class="k">网上申购倍数</span><span class="v">8,289 <small>倍</small></span></div>
+        <div class="row"><span class="k">最终中签率</span><span class="v" style="color:#c0392b">0.018%</span></div>
+        <div class="row"><span class="k">网上冻结资金*</span><span class="v">8.09 <small>万亿</small></span></div>
+        <div class="row"><span class="k">网下机构资金*</span><span class="v">10.22 <small>万亿</small></span></div>
+      </div>
+    </div>
+
+    <div class="ratio">
+      <div class="t">宇树热度，到底高过多少？</div>
+      <span class="pill hot">中签率 = 长鑫 1/26</span>
+      <span class="pill hot">申购倍数 34 倍</span>
+      <span class="pill">户数多 4%</span>
+      <span class="pill">网上冻结资金多 14%</span>
+      <span class="pill">募资仅 1/9.5</span>
+      <div class="note">
+        点睛：宇树发行价（150.80元）是长鑫（8.66元）的 <b>17 倍</b>——机构拿差不多的 10 万亿，
+        在长鑫买到 1.24 万亿股、在宇树只买到 678 亿股（差 18 倍）。<br>
+        <b>宇树用长鑫 1/10 的募资盘子，在同样的零售资金下把中签率碾到长鑫的 1/26——但真实多出来的，是网上冻结资金 +14%、申购户数 +4%，并非"火了 26 倍"。</b><br>
+        *冻结/网下资金 = 有效申购股数 × 发行价（测算值，公告披露股数）。
+      </div>
+    </div>
+  </div>
+
+  <!-- ② IPO 全流程时间轴 -->
+  <div class="section" id="flow">
+    <h2>长鑫科技 vs 宇树科技 · IPO 全流程对比</h2>
+    <div class="ssub">同为科创板「预先审阅」机制标杆 · 长鑫（688825）已走完，宇树（688836）申购缴款已完成、待上市</div>
+
+    <div class="legend">
+      <span><i class="dot done"></i>长鑫：已完成节点</span>
+      <span><i class="dot now"></i>宇树：当前位置（待上市）</span>
+      <span><i class="dot todo"></i>宇树：待走节点</span>
+    </div>
+
+    <div class="grid">
+      <!-- 长鑫 -->
+      <div class="col cx">
+        <h3>长鑫科技（688825）</h3>
+        <div class="meta">募资约 579 亿（绿鞋前）· 2025-12-30 受理 · 全程 165 天</div>
+        <div class="track">
+          <div class="node"><div class="date">2025-12-30</div><div class="ev">受理（预先审阅首单）</div><div class="file">申报稿：招股书/保荐书/审计报告/法律意见书</div></div>
+          <div class="node"><div class="date">2026-05-20</div><div class="ev">上会稿 + 问询回复</div><div class="file">首轮/二轮预先审阅问询回复、落实函</div></div>
+          <div class="node"><div class="date">2026-05-27</div><div class="ev">上市委过会 + 提交注册</div><div class="file">第27次审议会议结果公告</div></div>
+          <div class="node"><div class="date">2026-06-02</div><div class="ev">注册稿（注册提交申报稿）</div><div class="file">长鑫注册稿.pdf</div></div>
+          <div class="node"><div class="date">2026-06-12</div><div class="ev">注册生效</div><div class="file">证监会批复（批复日 6/5）</div></div>
+          <div class="node"><div class="date">2026-07-09</div><div class="ev">发行启动</div><div class="file">招股意向书+附录、发行安排及初步询价公告、提示性公告</div></div>
+          <div class="node"><div class="date">2026-07-14</div><div class="ev">网上路演公告</div><div class="file">—</div></div>
+          <div class="node"><div class="date">2026-07-15</div><div class="ev">发行公告 + 战略配售核查</div><div class="file">发行公告、战配专项核查报告+法律意见书、投资风险特别公告</div></div>
+          <div class="node"><div class="date">2026-07-16</div><div class="ev">网上申购（T日）+ 中签率</div><div class="file">网上发行申购情况及中签率公告</div></div>
+          <div class="node"><div class="date">2026-07-19</div><div class="ev">网下配售 + 网上中签结果</div><div class="file">网下初步配售结果及网上中签结果公告</div></div>
+          <div class="node"><div class="date">2026-07-21</div><div class="ev">发行结果公告（7/22披露）</div><div class="file">发行结果公告</div></div>
+          <div class="node"><div class="date">2026-07-22</div><div class="ev">招股说明书正式版</div><div class="file">招股说明书提示性公告 + 招股说明书（终稿）</div></div>
+          <div class="node"><div class="date">2026-07-24</div><div class="ev">上市公告书</div><div class="file">上市公告书 + 提示性公告 + 公司章程（公告 7/27 上市）</div></div>
+          <div class="node"><div class="date">2026-07-27</div><div class="ev">🔔 敲钟上市（首日挂牌）</div><div class="file">正式在科创板挂牌交易（真实敲钟日）</div></div>
+        </div>
+      </div>
+
+      <!-- 宇树 -->
+      <div class="col yt">
+        <h3>宇树科技（688836）</h3>
+        <div class="meta">实际募资 ≈ 61 亿（募投项目预计使用 42.02 亿）· 2026-03-20 受理 · 科创板最快过会</div>
+        <div class="track">
+          <div class="node"><div class="date">2026-03-20</div><div class="ev">受理（预先审阅）</div><div class="file">申报稿</div></div>
+          <div class="node"><div class="date">2026-05-25</div><div class="ev">上会稿</div><div class="file">招股书上会稿</div></div>
+          <div class="node"><div class="date">2026-06-01</div><div class="ev">上市委过会</div><div class="file">审议会议结果公告</div></div>
+          <div class="node"><div class="date">2026-06-02</div><div class="ev">提交注册</div><div class="file">—</div></div>
+          <div class="node"><div class="date">2026-07-02</div><div class="ev">注册生效</div><div class="file">证监会批复（证监许可〔2026〕1612号）</div></div>
+          <div class="node"><div class="date">2026-07-31</div><div class="ev">发行启动</div><div class="file">招股意向书+附录、发行安排及初步询价公告、提示性公告</div></div>
+          <div class="node"><div class="date">2026-08-05</div><div class="ev">初步询价（定发行价）</div><div class="file">询价结果（发行价 150.80 元）</div></div>
+          <div class="node"><div class="date">2026-08-07</div><div class="ev">发行公告 + 发行价刊登</div><div class="file">发行公告（T-1）</div></div>
+          <div class="node"><div class="date">2026-08-10</div><div class="ev">网上+网下申购（T日）</div><div class="file">申购情况及中签率公告</div></div>
+          <div class="node"><div class="date">2026-08-11</div><div class="ev">网上中签率公告</div><div class="file">最终中签率 0.01809759%</div></div>
+          <div class="node"><div class="date">2026-08-12</div><div class="ev">缴款（T+2）+ 网下配售/网上中签结果</div><div class="file">网下初步配售结果及网上中签结果公告</div></div>
+          <div class="node future"><div class="date">预计 2026-08-13</div><div class="ev">发行结果公告</div><div class="file">含弃购/整体认购汇总（待披露）</div></div>
+          <div class="node now"><div class="date">预计 2026-08-19</div><div class="ev">🔔 上市（当前位置：待挂牌）</div><div class="file">招股说明书正式版 + 上市公告书</div></div>
+          <div class="node future"><div class="date">上市后</div><div class="ev">锁定期解禁</div><div class="file">12个月（2027-08）/ 36个月（2029-08）等</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <h4>核心判断</h4>
+      <p>宇树<b>当前所在位置 = 长鑫 7 月 19 日（缴款完成、待上市）</b>：注册已生效、发行价已定（150.80 元）、申购缴款已全部走完，正卡在「发行结果公告 → 上市」最后一公里。两家走的是<b>同一条科创板 IPO 流水线</b>，宇树比长鑫整体晚约 1 个月。长鑫从申购（7/16）到上市（7/27）隔 <b>7 个交易日</b>，按此节奏宇树预计 <b>8 月 19 日前后挂牌（≈ 长鑫 7/27）</b>。差异只在规模：长鑫募资约 579 亿、宇树 61 亿，量级差近 10 倍，所以宇树的打新热度与首日博弈会集中得多。</p>
+    </div>
+
+    <div class="remaining">
+      <h4>宇树科技 · 申购缴款已全部完成，仅待上市</h4>
+      <div class="rgrid">
+        <div class="rcard done"><div class="d">8/5</div><div class="t">✅ 初步询价</div><div class="n">机构报价定发行价</div></div>
+        <div class="rcard done"><div class="d">8/7</div><div class="t">✅ 发行价</div><div class="n">150.80 元（T-1）</div></div>
+        <div class="rcard done"><div class="d">8/10</div><div class="t">✅ 申购日</div><div class="n">网上+网下（T日）</div></div>
+        <div class="rcard done"><div class="d">8/12</div><div class="t">✅ 缴款日</div><div class="n">中签缴款（T+2）</div></div>
+        <div class="rcard now"><div class="d">约8/19</div><div class="t">⏳ 上市</div><div class="n">挂牌科创板</div></div>
+      </div>
+    </div>
+
+    <div class="foot">数据来源：上交所/证监会披露文件、巨潮网，及工作区本地存档（长鑫、宇树 IPO 文件夹）。<br>以上为已披露流程梳理，不构成投资建议；发行价、上市日期以正式公告为准。</div>
+  </div>
+
+  <!-- ③ 全流程横评 -->
+  <div class="section" id="cmp">
+    <h2>长鑫科技 vs 宇树科技 · IPO 全流程横评</h2>
+    <div class="ssub">双案例对照，锚价 / 节奏 / 热度一目了然</div>
+
+    <table class="cmp">
+      <tr>
+        <th>环节</th><th>长鑫科技</th><th>宇树科技</th><th>差异解读</th>
+      </tr>
+      <tr>
+        <td>受理 → 过会</td>
+        <td><b>148 天</b>（12/30 受理 → 5/27 过会）</td>
+        <td class="win"><b>73 天</b>（3/20 受理 → 6/1 过会）</td>
+        <td>宇树 2026 年科创板最快，期间还顶着现场检查</td>
+      </tr>
+      <tr>
+        <td>锚价（拟募资÷股数）</td>
+        <td><b>4.41 元</b>（295 亿 ÷ 66.88 亿股）</td>
+        <td class="win"><b>103.89 元</b>（42.02 亿 ÷ 4044.64 万股）</td>
+        <td>锚价 = 招股书拟募资口径，非最终价</td>
+      </tr>
+      <tr>
+        <td>发行价</td>
+        <td><b>8.66 元</b></td>
+        <td class="win"><b>150.80 元</b></td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>锚价 → 发行价溢价</td>
+        <td><b>1.96 倍</b>（4.41 → 8.66）</td>
+        <td class="win"><b>1.45 倍</b>（103.89 → 150.80）</td>
+        <td>长鑫溢价更猛；宇树发行价贴近机构报价中枢</td>
+      </tr>
+      <tr>
+        <td>募资规模（发行价口径）</td>
+        <td><b>579 亿</b>（66.88 亿股 × 8.66 元）</td>
+        <td class="win"><b>≈ 61 亿</b>（4044.64 万股 × 150.80 元）</td>
+        <td>宇树盘子只有长鑫的约 1/10 —— 申购倍数悬殊的直接原因</td>
+      </tr>
+      <tr>
+        <td>网下有效申购倍数</td>
+        <td>约 <b>475 倍</b>（≈11 万亿意向）</td>
+        <td class="win"><b>2,618.30 倍</b>（≈10.2 万亿意向）</td>
+        <td>资金量级相近，盘子小 → 倍数被放大近 6 倍</td>
+      </tr>
+      <tr>
+        <td>发行市盈率（官方口径）</td>
+        <td><b>308.92 倍</b>（摊薄）</td>
+        <td class="win"><b>219.23 倍</b></td>
+        <td>均为「归母孰低」口径，绝对高位</td>
+      </tr>
+      <tr>
+        <td>T 日 → 上市</td>
+        <td><b>7 个交易日</b>（7/16 → 7/27）</td>
+        <td class="win"><b>7 个交易日（估算）</b>（8/10 → 8/19）</td>
+        <td>按长鑫节奏模板外推，宇树预计 8/19 挂牌</td>
+      </tr>
+      <tr>
+        <td>发行后总股本</td>
+        <td><b>668.81 亿股</b></td>
+        <td class="win"><b>≈ 4.04 亿股</b></td>
+        <td>宇树股本小 → 单股绝对价高、流通盘轻</td>
+      </tr>
+    </table>
+    <div class="kw">
+      一句话总结：<b>宇树是「小盘子 + 高倍数 + 快节奏」，长鑫是「大募资 + 温和倍数 + 常规节奏」</b>。2618 倍申购的真相是 10.2 万亿意向资金撞上 39 亿小盘子，不是热度差了 6 倍。
+    </div>
+  </div>
+
+  <!-- ④ 战配结构对比 -->
+  <div class="section" id="strat">
+    <h2>长鑫 vs 宇树 · 战略配售（谁在锁 36 个月）</h2>
+    <div class="ssub">交易价值·长线资金态度：真金白银的背书，比散户中签率更说明问题</div>
+
+    <div class="cards">
+      <div class="card cx">
+        <h3>长鑫科技</h3>
+        <div class="code">战配最终 24.93% · 30 家机构</div>
+        <div class="row"><span class="k">战配比例（最终）</span><span class="v">24.93%</span></div>
+        <div class="row"><span class="k">初始上限</span><span class="v">50.00%</span></div>
+        <div class="row"><span class="k">参与家数</span><span class="v">30 <small>家</small></span></div>
+        <div class="row"><span class="k">锁 12 月</span><span class="v" style="font-size:14px">社保基金（多组合）· 中国人寿等险资 · 国家级基金</span></div>
+        <div class="row"><span class="k">锁 24 月</span><span class="v" style="font-size:14px">保荐跟投（中金财富 · 中信建投投资）</span></div>
+        <div class="row"><span class="k">锁 36 月</span><span class="v" style="font-size:14px">员工资管计划（建投共赢 66 号）</span></div>
+      </div>
+
+      <div class="card ys">
+        <h3>宇树科技</h3>
+        <div class="code">战配 20.00% · 808.93 万股</div>
+        <div class="row"><span class="k">战配比例</span><span class="v">20.00%</span></div>
+        <div class="row"><span class="k">无需回拨</span><span class="v" style="font-size:14px">初始=最终，未向网下回拨</span></div>
+        <div class="row"><span class="k">锁 36 月（产业资本）</span><span class="v" style="font-size:14px;color:#c0392b">DeepSeek 关联（杭州深度求索）2.31%</span></div>
+        <div class="row"><span class="k">锁 12 月（国资）</span><span class="v" style="font-size:13px">社保 · 中石油昆仑 · 南方电网 · 电信天翼 · 腾讯系启善</span></div>
+        <div class="row"><span class="k">锁 24 月</span><span class="v" style="font-size:14px">保荐跟投（中信证券投资）2.00%</span></div>
+        <div class="row"><span class="k">锁 36 月</span><span class="v" style="font-size:14px">员工资管计划（宇树科技员工 1 号）</span></div>
+      </div>
+    </div>
+
+    <div class="ratio">
+      <div class="t">战配对比 · 一句话</div>
+      <span class="pill">都是长线资金真金白银背书</span>
+      <span class="pill hot">最长锁定期均 36 个月</span>
+      <span class="pill">CXMT：险资 + 社保 + 国家队压舱</span>
+      <span class="pill hot">宇树：多 DeepSeek 产业资本 + 一票央企</span>
+      <div class="note">
+        点睛：散户抢破头的中签率，其实掩盖了更硬的信号——<b>长鑫由社保、中国人寿等险资国家队压舱（确定性 / 国之重器），宇树则多了 DeepSeek 这种产业资本 + 中石油 / 南方电网 / 电信 / 腾讯系一票央企站台，且核心战投自愿锁 36 个月</b>。锁定期越长，越说明长线资金看好陪跑。<br>
+        两者差异折射题材属性：CXMT 是 DRAM 周期反转的"压舱石"，宇树是人形机器人渗透爆发的"成长票"。
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑤ 基本面财务对比 -->
+  <div class="section" id="fin">
+    <h2>长鑫 vs 宇树 · 基本面财务对比（本身价值）</h2>
+    <div class="ssub">同一赛道的两种成长：巨无霸周期反转 vs 小而猛高毛利</div>
+
+    <h3 style="font-size:16px;margin:6px 0 4px;color:#5b6675">营收与毛利率三年走势</h3>
+    <table class="cmp">
+      <tr><th>年份</th><th>长鑫营收</th><th>宇树营收</th><th>长鑫毛利率</th><th>宇树毛利率</th></tr>
+      <tr><td>2023</td><td>90.87 亿</td><td>1.59 亿</td><td>-1.9%</td><td>44.2%</td></tr>
+      <tr><td>2024</td><td>241.78 亿</td><td>3.93 亿</td><td>5.6%</td><td>56.7%</td></tr>
+      <tr class="win"><td>2025</td><td><b>617.99 亿</b></td><td><b>16.99 亿</b></td><td><b>41.0%</b></td><td><b>60.1%</b></td></tr>
+    </table>
+
+    <h3 style="font-size:16px;margin:18px 0 4px;color:#5b6675">盈利与研发投入</h3>
+    <table class="cmp">
+      <tr><th>指标</th><th>长鑫科技</th><th>宇树科技</th><th>差异解读</th></tr>
+      <tr>
+        <td>2025 营收</td>
+        <td><b>618 亿</b></td>
+        <td class="win"><b>17 亿</b></td>
+        <td>规模差近 36 倍，不同量级</td>
+      </tr>
+      <tr>
+        <td>2025 归母净利</td>
+        <td><b>+18.75 亿</b>（首盈）</td>
+        <td class="win"><b>+2.78 亿</b></td>
+        <td>长鑫 2025 首次扭亏；宇树已盈利</td>
+      </tr>
+      <tr>
+        <td>2025 扣非净利</td>
+        <td>—</td>
+        <td class="win"><b>+5.91 亿</b></td>
+        <td>宇树扣非远高于归母（含股份支付）</td>
+      </tr>
+      <tr>
+        <td>2023-2024 归母</td>
+        <td><b>-163 亿 / -71 亿</b>（连亏两年）</td>
+        <td class="win"><b>-0.11 亿 / +0.95 亿</b></td>
+        <td>长鑫重资产爬坡期巨亏；宇树早盈</td>
+      </tr>
+      <tr>
+        <td>2025 毛利率</td>
+        <td><b>41.0%</b></td>
+        <td class="win"><b>60.1%</b></td>
+        <td>长鑫从负转正；宇树高且稳</td>
+      </tr>
+      <tr>
+        <td>研发费用 2025</td>
+        <td><b>95.93 亿</b></td>
+        <td>—</td>
+        <td>长鑫重研发投入（DRAM 制程）</td>
+      </tr>
+      <tr>
+        <td>营收 3 年 CAGR</td>
+        <td><b>≈161%</b></td>
+        <td class="win"><b>≈227%</b></td>
+        <td>两者均超高成长</td>
+      </tr>
+    </table>
+
+    <div class="kw">
+      一句话总结：<b>长鑫是"巨无霸 + 周期反转"</b>——营收 600 亿级、2025 年首次归母转正、毛利率从负爬到 41%，典型重资产 DRAM 上行周期拐点；<b>宇树是"小而猛 + 高毛利"</b>——营收 17 亿但 3 年 CAGR 227%、毛利率 60%、已盈利（扣非 5.91 亿），处人形机器人渗透率爆发早期。规模与盈利质量阶段完全不同，但都站在各自赛道的高成长窗口。
+    </div>
+    <div class="foot">财务数据来源：长鑫科技 2025 年审计报告及财务报表、宇树科技招股意向书（2026-07-31）。营收取营业总收入，毛利率 =（营收 − 营业成本）/ 营收。以上为已披露数据梳理，不构成投资建议。</div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>特斯拉到底是做什么的 · 一条看懂这家公司（视频素材）</title>
+<style>
+:root{
+  --bg:#f7f8fc;--card:#fff;--border:#e6e9f0;--text:#1a1a2e;--sub:#7a7a9e;
+  --byd:#e85d3a;--tsla:#2d7dd2;--gold:#c5963a;--warn:#e74c3c;--ok:#1f9d6b;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.page{min-height:auto;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;padding:48px 32px 40px;position:relative;overflow:hidden}
+.page+.page{border-top:1px solid var(--border)}
+.page-tag{font-size:13px;color:var(--gold);text-transform:uppercase;letter-spacing:3px;margin-bottom:11px;font-weight:700}
+.tier{display:inline-block;font-size:12px;color:#fff;border-radius:20px;padding:4px 15px;letter-spacing:1px;margin-bottom:11px;font-weight:700}
+.tier.t1{background:var(--ok)} .tier.t2{background:var(--gold)} .tier.t3{background:var(--tsla)} .tier.t4{background:var(--warn)}
+.kk{font-size:12px;color:var(--sub);font-weight:700;letter-spacing:1px;margin-bottom:6px}
+.page-title{font-size:36px;font-weight:800;text-align:center;max-width:880px;margin-bottom:8px;line-height:1.3;letter-spacing:-.5px}
+.page-title.sm{font-size:27px}
+.page-subtitle{font-size:15px;color:var(--sub);text-align:center;max-width:740px;margin-bottom:18px}
+.core-line{display:flex;align-items:flex-start;gap:13px;max-width:850px;margin:13px auto 0;padding:14px 18px;background:#fffbf0;border-left:4px solid var(--gold);border-radius:0 8px 8px 0}
+.core-line .icon{font-size:20px;flex-shrink:0}
+.core-line .text{font-size:15.5px;font-weight:700;color:#5c4010;line-height:1.5}
+.why{max-width:850px;margin:10px auto 0;font-size:13.5px;color:var(--sub);text-align:center;line-height:1.55}
+.why b{color:var(--tsla)}
+.page-bridge{display:inline-block;font-size:13.5px;color:var(--gold);font-weight:600;text-align:center;border:1px dashed var(--gold);padding:7px 18px;border-radius:20px;background:rgba(255,255,255,.9);margin-top:16px;max-width:520px;white-space:normal;line-height:1.5}
+.disc{position:absolute;top:10px;right:14px;font-size:10px;color:rgba(231,76,60,.55);font-weight:600;letter-spacing:.3px;z-index:2}
+
+.stack{display:flex;max-width:820px;margin:8px auto 6px;height:50px;border-radius:10px;overflow:hidden;border:1px solid var(--border)}
+.stack .seg{display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:15px;flex-direction:column;line-height:1.15}
+.stack .seg small{font-size:11px;font-weight:600;opacity:.9}
+.leg{display:flex;gap:15px;justify-content:center;flex-wrap:wrap;max-width:820px;margin:6px auto 0;font-size:12.5px;color:var(--sub)}
+.leg i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:middle}
+
+.mtx{max-width:800px;margin:6px auto;width:100%;border-collapse:collapse;font-size:13px;background:var(--card);border-radius:12px;overflow:hidden;border:1px solid var(--border)}
+.mtx th{background:#f0f2f8;padding:8px 11px;font-size:12px;color:var(--sub);font-weight:700;text-align:center}
+.mtx td{padding:8px 11px;border-bottom:1px solid var(--border);text-align:center}
+.mtx td:first-child{text-align:left;color:var(--text);font-weight:700}
+.mtx tr:last-child td{border-bottom:none}
+.mtx .yes{color:var(--ok);font-weight:800}.mtx .no{color:var(--warn);font-weight:800}.mtx .mid{color:var(--gold);font-weight:800}
+
+.flow{display:flex;align-items:stretch;gap:9px;max-width:840px;margin:8px auto;flex-wrap:wrap;justify-content:center}
+.fb{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:13px 15px;flex:1;min-width:150px;box-shadow:0 1px 8px rgba(0,0,0,.03)}
+.fb .ft{font-size:13.5px;font-weight:800;margin-bottom:4px;color:var(--tsla)}
+.fb .fd{font-size:12px;color:var(--sub);line-height:1.45}
+.fb.green .ft{color:var(--ok)} .fb.warn .ft{color:var(--warn)}
+.arrow{display:flex;align-items:center;font-size:20px;color:var(--gold);font-weight:800}
+@media(max-width:768px){.arrow{transform:rotate(90deg)}}
+
+.card-row{display:flex;flex-direction:row;gap:14px;flex-wrap:nowrap;justify-content:center;max-width:960px;margin:0 auto}
+.data-card{background:var(--card);border-radius:14px;padding:16px 20px;min-width:160px;flex:1;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.04);border:1px solid var(--border)}
+.data-card .label{font-size:12px;color:var(--sub);margin-bottom:5px}
+.data-card .value{font-size:23px;font-weight:800;margin-bottom:3px}
+.data-card .note{font-size:11.5px;color:var(--sub)}
+
+.trio{display:flex;flex-direction:row;gap:13px;max-width:880px;margin:0 auto;flex-wrap:nowrap;justify-content:center}
+.tcard{background:var(--card);border:1px solid var(--border);border-top:3px solid var(--tsla);border-radius:13px;padding:15px 18px;flex:1;min-width:200px;box-shadow:0 2px 10px rgba(0,0,0,.04)}
+.tcard.e{border-top-color:var(--ok)} .tcard.w{border-top-color:var(--warn)}
+.tcard .tt{font-size:16px;font-weight:800;margin-bottom:5px}
+.tcard .td{font-size:13px;color:var(--sub);line-height:1.5}
+.tcard .td b{color:var(--text)}
+
+.insight-box{max-width:850px;margin:13px auto 0;background:var(--card);border-radius:14px;padding:15px 20px;font-size:14px;border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.03)}
+.insight-box .q{color:var(--gold);font-weight:700;margin-bottom:6px}
+.insight-box .a{color:var(--text);line-height:1.65}
+
+.variant{max-width:860px;margin:0 auto;background:linear-gradient(135deg,#1a1a2e,#2c2c4a);color:#fff;border-radius:18px;padding:28px;text-align:center}
+.variant .lab{font-size:13px;letter-spacing:2px;color:var(--gold);font-weight:700;margin-bottom:10px}
+.variant .big{font-size:21px;font-weight:800;line-height:1.55}
+.variant .big em{color:var(--gold);font-style:normal}
+.variant .sm{font-size:14px;opacity:.85;margin-top:13px;line-height:1.6}
+.strip{max-width:850px;margin:14px auto 0;display:flex;gap:10px;flex-wrap:wrap;justify-content:center;font-size:12.5px;color:var(--sub)}
+.strip span{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:5px 13px}
+.annot{font-size:13px;color:var(--sub);margin-top:12px;text-align:center;max-width:850px;margin-left:auto;margin-right:auto;line-height:1.6}
+.car-grid{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;max-width:880px;margin:6px auto 12px}
+.car-card{flex:1;min-width:150px;max-width:168px;background:#fff;border-radius:14px;overflow:hidden;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,.04)}
+.car-card.ok{border:2.5px solid var(--tsla)}
+.car-card.warn{border:1.5px dashed #B4B2A9;opacity:.78}
+.car-card.no{border:1.5px dashed var(--warn);opacity:.72}
+.car-card .car-img{width:100%;height:100px;object-fit:cover;display:block;background:#f5f6fa}
+.car-card .car-name{font-size:15px;font-weight:800;color:var(--text);padding:8px 8px 2px}
+.car-card .car-tag{font-size:12px;color:var(--sub);padding:0 8px 6px}
+.car-card .car-badge{display:inline-block;font-size:12px;font-weight:700;padding:3px 12px;border-radius:10px;margin-bottom:10px}
+.car-card.ok .car-badge{color:var(--ok);background:#DCF0E5}
+.car-card.warn .car-badge{color:var(--gold);background:#FAEEDA}
+.car-card.no .car-badge{color:var(--warn);background:#FCEBEB;border:1px solid #F09595}
+.factory-svg{width:100%;max-width:900px;display:block;margin:10px auto 0}
+.factory-card{border-radius:10px;padding:10px 12px;font-family:'PingFang SC','Microsoft YaHei',sans-serif}
+.factory-card .fn{font-size:14px;font-weight:800;margin-bottom:2px;line-height:1.2}
+.factory-card .fl{font-size:11px;opacity:.75}
+.factory-mexico{border-radius:10px;border:1.5px dashed #B4B2A9;padding:10px 14px;text-align:center;max-width:240px;margin:8px auto 0;font-family:'PingFang SC','Microsoft YaHei',sans-serif;opacity:.75}
+.factory-mexico .fn{font-size:13px;font-weight:700;line-height:1.2}
+.factory-mexico .fl{font-size:11px;opacity:.7}
+@media(max-width:768px){.page-title{font-size:23px}.page-title.sm{font-size:19px}.data-card,.tcard{min-width:auto}.page{padding:42px 14px}.page-bridge{white-space:normal;width:88%}.stack .seg{font-size:11px}.stack .seg small{display:none}.mtx{font-size:11.5px}.car-card{min-width:110px}.factory-svg{max-width:100%}}
+</style>
+</head>
+<body>
+
+<!-- P1 钩子 -->
+<section class="page">
+  <div class="disc">视频为分析分享 · 不构成投资建议</div>
+  <div class="page-tag">拆解上市公司 · 有二财经</div>
+  <div class="page-title">特斯拉,<br>到底是做什么的?</div>
+  <div class="page-subtitle">全球最贵的车企,没有之一</div>
+  <div class="card-row" style="margin:2px auto 0">
+    <div class="data-card"><div class="label">市值</div><div class="value" style="color:var(--tsla)">≈ 1.5 万亿美元</div><div class="note">约 10 万亿人民币</div></div>
+    <div class="data-card"><div class="label">市盈率 PE</div><div class="value" style="color:var(--warn)">≈ 340 倍</div><div class="note">普通车企才 5–10 倍</div></div>
+  </div>
+  <div class="annot" style="margin-top:4px;margin-bottom:0">* 市值 / PE 为 2026 年 6 月市场数据,随股价每日波动</div>
+  <div class="core-line"><span class="icon">🚀</span><span class="text">一个"卖车的",凭什么贵这么多?很多人撇嘴:马斯克不就是会"讲故事"嘛——你看 SpaceX 估值也高上天,都说他靠画饼。可要真<b>只会讲故事</b>,这饼凭什么画了十几年、还越摊越大?<b>把它当"车企",你看错了;把它当"只会吹",你也看错了。</b>跟我从一台车,一圈圈往外拆,重新认识这个巨无霸。</span></div>
+  <div class="page-bridge">先看它今天的钱,都从哪来 ↓</div>
+</section>
+
+<!-- P2 收入版图 -->
+<section class="page">
+  <div class="disc">视频为分析分享 · 不构成投资建议</div>
+  <span class="tier t1">先看全局 · 收入版图 2025</span>
+  <div class="page-title sm">2025 全年营收 ≈ 6,665 亿<br>账面上,七成还是靠卖车</div>
+  <div class="leg" style="gap:22px;margin-bottom:8px">
+    <span><i style="background:#2d7dd2"></i>汽车销售与服务</span>
+    <span><i style="background:#1f9d6b"></i>能源（储能/光伏）</span>
+    <span><i style="background:#c5963a"></i>服务及其他</span>
+  </div>
+  <svg viewBox="0 0 820 425" style="width:100%;max-width:820px;margin-bottom:8px" xmlns="http://www.w3.org/2000/svg">
+    <!-- 汽车 -->
+    <rect x="0" y="0" width="600" height="425" rx="10" fill="#E6EEF8" stroke="#2d7dd2" stroke-width="2"/>
+    <text x="300" y="85" text-anchor="middle" font-size="28" font-weight="800" fill="#1a4f80" font-family="'PingFang SC','Microsoft YaHei',sans-serif">汽车</text>
+    <text x="300" y="142" text-anchor="middle" font-size="50" font-weight="800" fill="#0C447C" font-family="'PingFang SC','Microsoft YaHei',sans-serif">4,887 亿</text>
+    <text x="300" y="178" text-anchor="middle" font-size="16" fill="#2d7dd2" font-family="'PingFang SC','Microsoft YaHei',sans-serif">占总收入 73.3% · 毛利率 17.8%<tspan fill="#a32d2d"> · ↓</tspan></text>
+    <!-- 分隔 -->
+    <line x1="50" y1="202" x2="550" y2="202" stroke="#2d7dd2" stroke-width="0.5" stroke-dasharray="4,4" opacity="0.35"/>
+    <text x="300" y="224" text-anchor="middle" font-size="12" fill="#5a7a9e" font-family="'PingFang SC','Microsoft YaHei',sans-serif">内部构成（含FSD及联网等软件收入，不单独披露）</text>
+    <!-- 整车销售 -->
+    <text x="48" y="256" text-anchor="start" font-size="14" font-weight="700" fill="#1a4f80" font-family="'PingFang SC','Microsoft YaHei',sans-serif">整车销售</text>
+    <rect x="135" y="245" width="320" height="16" rx="4" fill="#fff" opacity="0.5"/>
+    <rect x="135" y="245" width="303" height="16" rx="4" fill="#2d7dd2"/>
+    <text x="470" y="257" text-anchor="start" font-size="13" font-weight="700" fill="#1a4f80" font-family="'PingFang SC','Microsoft YaHei',sans-serif">94.7% · 4,625亿</text>
+    <!-- 碳积分 -->
+    <text x="48" y="288" text-anchor="start" font-size="14" font-weight="700" fill="#1a4f80" font-family="'PingFang SC','Microsoft YaHei',sans-serif">碳积分</text>
+    <rect x="135" y="277" width="320" height="16" rx="4" fill="#fff" opacity="0.5"/>
+    <rect x="135" y="277" width="9" height="16" rx="4" fill="#1f9d6b"/>
+    <text x="470" y="289" text-anchor="start" font-size="13" font-weight="700" fill="#1a4f80" font-family="'PingFang SC','Microsoft YaHei',sans-serif">2.9% · 140亿</text>
+    <!-- 租赁 -->
+    <text x="48" y="320" text-anchor="start" font-size="14" font-weight="700" fill="#1a4f80" font-family="'PingFang SC','Microsoft YaHei',sans-serif">租赁</text>
+    <rect x="135" y="309" width="320" height="16" rx="4" fill="#fff" opacity="0.5"/>
+    <rect x="135" y="309" width="8" height="16" rx="4" fill="#c5963a"/>
+    <text x="470" y="321" text-anchor="start" font-size="13" font-weight="700" fill="#1a4f80" font-family="'PingFang SC','Microsoft YaHei',sans-serif">2.5% · 122亿</text>
+    <!-- 能源 -->
+    <rect x="600" y="0" width="220" height="215" rx="10" fill="#DCF0E5" stroke="#1f9d6b" stroke-width="2"/>
+    <text x="710" y="50" text-anchor="middle" font-size="24" font-weight="800" fill="#156b45" font-family="'PingFang SC','Microsoft YaHei',sans-serif">能源</text>
+    <text x="710" y="92" text-anchor="middle" font-size="34" font-weight="800" fill="#0F6E56" font-family="'PingFang SC','Microsoft YaHei',sans-serif">898 亿</text>
+    <text x="710" y="127" text-anchor="middle" font-size="14" fill="#1f9d6b" font-family="'PingFang SC','Microsoft YaHei',sans-serif">占 13.5% · 毛利 29.8%</text>
+    <text x="710" y="153" text-anchor="middle" font-size="14" fill="#1D9E75" font-family="'PingFang SC','Microsoft YaHei',sans-serif">同比 ↑27%</text>
+    <text x="710" y="183" text-anchor="middle" font-size="12" fill="#5a8a6e" font-family="'PingFang SC','Microsoft YaHei',sans-serif">Megapack / Powerwall / 光伏</text>
+    <!-- 服务及其他 -->
+    <rect x="600" y="215" width="220" height="210" rx="10" fill="#FAF0E0" stroke="#c5963a" stroke-width="2"/>
+    <text x="710" y="264" text-anchor="middle" font-size="22" font-weight="800" fill="#9a7328" font-family="'PingFang SC','Microsoft YaHei',sans-serif">服务及其他</text>
+    <text x="710" y="306" text-anchor="middle" font-size="34" font-weight="800" fill="#854F0B" font-family="'PingFang SC','Microsoft YaHei',sans-serif">881 亿</text>
+    <text x="710" y="341" text-anchor="middle" font-size="14" fill="#c5963a" font-family="'PingFang SC','Microsoft YaHei',sans-serif">占 13.2% · 毛利 8.6%</text>
+    <text x="710" y="367" text-anchor="middle" font-size="14" fill="#BA7517" font-family="'PingFang SC','Microsoft YaHei',sans-serif">同比 ↑19%</text>
+    <text x="710" y="395" text-anchor="middle" font-size="12" fill="#9a8a5a" font-family="'PingFang SC','Microsoft YaHei',sans-serif">充电 / 保险 / 二手车 / 零件</text>
+  </svg>
+  <div class="annot" style="margin-top:0;margin-bottom:4px">* 能源：Megapack大型储能、Powerwall家用储能、太阳能光伏系统</div>
+  <div class="annot" style="margin-top:0;margin-bottom:12px">* 服务及其他：付费超充、二手车销售、特斯拉保险、碰撞维修、零件销售、品牌周边</div>
+  <div class="leg" style="gap:6px;margin-bottom:4px">
+    <span style="font-size:12.5px;color:var(--sub);font-weight:700">钱从哪来（按销售目的地）<span style="font-size:11px;font-weight:400;color:#999;margin-left:4px">· 2025年数据</span></span>
+  </div>
+  <div style="max-width:820px;width:100%;margin:0 auto 8px;border-top:1px dashed var(--border);padding-top:12px">
+    <div style="display:flex;align-items:center;margin-bottom:4px">
+      <span style="width:52px;font-size:13px;font-weight:700;color:var(--text);text-align:right;margin-right:10px">美国</span>
+      <div style="flex:1;height:30px;background:#e9ecf2;border-radius:5px;position:relative;overflow:hidden">
+        <div style="width:50.32%;height:100%;background:var(--tsla);border-radius:5px"></div>
+        <span style="position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:13px;font-weight:700;color:var(--tsla);font-family:'PingFang SC','Microsoft YaHei',sans-serif;pointer-events:none;white-space:nowrap">50.32% · 约3,354亿 · 5座工厂</span>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;margin-bottom:4px">
+      <span style="width:52px;font-size:13px;font-weight:700;color:var(--text);text-align:right;margin-right:10px">其他</span>
+      <div style="flex:1;height:30px;background:#e9ecf2;border-radius:5px;position:relative;overflow:hidden">
+        <div style="width:30.60%;height:100%;background:var(--gold);border-radius:5px"></div>
+        <span style="position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:13px;font-weight:700;color:var(--gold);font-family:'PingFang SC','Microsoft YaHei',sans-serif;pointer-events:none;white-space:nowrap">30.60% · 约2,040亿 · 柏林厂年产50万辆</span>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;margin-bottom:4px">
+      <span style="width:52px;font-size:13px;font-weight:700;color:var(--text);text-align:right;margin-right:10px">中国</span>
+      <div style="flex:1;height:30px;background:#e9ecf2;border-radius:5px;position:relative;overflow:hidden">
+        <div style="width:22.08%;height:100%;background:var(--ok);border-radius:5px"></div>
+        <span style="position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:13px;font-weight:700;color:var(--ok);font-family:'PingFang SC','Microsoft YaHei',sans-serif;pointer-events:none;white-space:nowrap">22.08% · 约1,472亿 · 2座</span>
+      </div>
+    </div>
+  </div>
+  <div class="annot" style="margin-bottom:4px">* 地理收入按<b>客户所在地</b>（即车/储能卖到了哪里）划分，不是工厂在哪就算哪的收入。上海工厂造了 85 万辆，但卖给中国客户的只有 62.6 万辆——其余出口到了欧洲、亚太，算入「其他」地区。上海储能工厂的产品同理，卖给中国客户才算中国收入。所以中国地区收入（1,472 亿）≈ 62.6 万辆车的收入 + 卖给中国客户的储能/服务收入。</div>
+  <div class="page-bridge">看完钱从哪来,再看看它从哪造出来 ↓</div>
+</section>
+
+<!-- P3 制造版图 -->
+<section class="page">
+  <div class="disc">视频为分析分享 · 不构成投资建议</div>
+  <span class="tier t2">全局 · 制造版图</span>
+  <div class="page-title sm">钱从哪造出来的?<br>全球 8 座工厂,横跨美、中、德</div>
+  <svg class="factory-svg" viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg">
+
+    <!-- 顶部：收入地区参考条 -->
+    <rect x="10" y="16" width="438" height="24" rx="5" fill="#378ADD" opacity=".15"/>
+    <rect x="10" y="16" width="438" height="24" rx="5" fill="none" stroke="#378ADD" stroke-width="1.2"/>
+    <text x="229" y="32" text-anchor="middle" font-size="12" fill="#378ADD" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-weight="700">🇺🇸 美国 · 5 座工厂</text>
+
+    <rect x="464" y="16" width="194" height="24" rx="5" fill="#C5963A" opacity=".12"/>
+    <rect x="464" y="16" width="194" height="24" rx="5" fill="none" stroke="#C5963A" stroke-width="1.2"/>
+    <text x="561" y="32" text-anchor="middle" font-size="12" fill="#C5963A" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-weight="700">🇪🇺 欧洲 · 1 座</text>
+
+    <rect x="674" y="16" width="216" height="24" rx="5" fill="#1F9D6B" opacity=".12"/>
+    <rect x="674" y="16" width="216" height="24" rx="5" fill="none" stroke="#1F9D6B" stroke-width="1.2"/>
+    <text x="782" y="32" text-anchor="middle" font-size="12" fill="#1F9D6B" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-weight="700">🇨🇳 中国 · 2 座</text>
+
+    <!-- 连接线：条→卡片 -->
+    <line x1="229" y1="40" x2="229" y2="60" stroke="#378ADD" stroke-width="1" stroke-dasharray="3,3"/>
+    <line x1="561" y1="40" x2="561" y2="60" stroke="#C5963A" stroke-width="1" stroke-dasharray="3,3"/>
+    <line x1="782" y1="40" x2="782" y2="60" stroke="#1F9D6B" stroke-width="1" stroke-dasharray="3,3"/>
+
+    <!-- ===== 美国列 · 5张卡片 ===== -->
+    <!-- 卡片1: Fremont -->
+    <rect x="10" y="62" width="438" height="68" rx="10" fill="#EEF3FB" stroke="#378ADD" stroke-width="1.5"/>
+    <circle cx="36" cy="96" r="10" fill="#378ADD" opacity=".15"/>
+    <text x="36" y="100" text-anchor="middle" font-size="12" fill="#378ADD">1</text>
+    <text x="56" y="86" font-size="15" font-weight="800" fill="#1A3A60" font-family="'PingFang SC','Microsoft YaHei',sans-serif">Fremont Factory</text>
+    <text x="56" y="106" font-size="12" fill="#6E8AAA" font-family="'PingFang SC','Microsoft YaHei',sans-serif">加州·弗里蒙特 — 整车 S/3/X/Y · 正转型 Optimus 产线</text>
+    <text x="430" y="85" text-anchor="end" font-size="10" fill="#378ADD" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-weight="600">年产 65 万辆</text>
+
+    <!-- 卡片2: Giga Texas -->
+    <rect x="10" y="138" width="438" height="68" rx="10" fill="#EEF3FB" stroke="#378ADD" stroke-width="1.5"/>
+    <circle cx="36" cy="172" r="10" fill="#378ADD" opacity=".15"/>
+    <text x="36" y="176" text-anchor="middle" font-size="12" fill="#378ADD">2</text>
+    <text x="56" y="162" font-size="15" font-weight="800" fill="#1A3A60" font-family="'PingFang SC','Microsoft YaHei',sans-serif">Giga Texas</text>
+    <text x="56" y="182" font-size="12" fill="#6E8AAA" font-family="'PingFang SC','Microsoft YaHei',sans-serif">德州·奥斯汀 — 整车 Y/Cybertruck · HQ · Cortex AI 超算中心</text>
+    <text x="430" y="161" text-anchor="end" font-size="10" fill="#378ADD" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-weight="600">年产 37.5 万辆</text>
+
+    <!-- 卡片3: Giga Nevada -->
+    <rect x="10" y="214" width="438" height="68" rx="10" fill="#EEF3FB" stroke="#378ADD" stroke-width="1.5"/>
+    <circle cx="36" cy="248" r="10" fill="#378ADD" opacity=".15"/>
+    <text x="36" y="252" text-anchor="middle" font-size="12" fill="#378ADD">3</text>
+    <text x="56" y="238" font-size="15" font-weight="800" fill="#1A3A60" font-family="'PingFang SC','Microsoft YaHei',sans-serif">Giga Nevada</text>
+    <text x="56" y="258" font-size="12" fill="#6E8AAA" font-family="'PingFang SC','Microsoft YaHei',sans-serif">内华达州 — 4680 电池 · 动力总成 · 零部件</text>
+    <text x="430" y="237" text-anchor="end" font-size="10" fill="#6E8AAA" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-weight="600">4680电池核心基地</text>
+
+    <!-- 卡片4: Lathrop Megafactory -->
+    <rect x="10" y="290" width="438" height="68" rx="10" fill="#EEF3FB" stroke="#378ADD" stroke-width="1.5"/>
+    <circle cx="36" cy="324" r="10" fill="#378ADD" opacity=".15"/>
+    <text x="36" y="328" text-anchor="middle" font-size="12" fill="#378ADD">4</text>
+    <text x="56" y="314" font-size="15" font-weight="800" fill="#1A3A60" font-family="'PingFang SC','Microsoft YaHei',sans-serif">Lathrop Megafactory</text>
+    <text x="56" y="334" font-size="12" fill="#6E8AAA" font-family="'PingFang SC','Microsoft YaHei',sans-serif">加州·拉斯罗普 — Megapack 大型储能系统</text>
+    <text x="430" y="313" text-anchor="end" font-size="10" fill="#378ADD" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-weight="600">年产 40 GWh</text>
+
+    <!-- 卡片5: Giga New York -->
+    <rect x="10" y="366" width="438" height="68" rx="10" fill="#EEF3FB" stroke="#378ADD" stroke-width="1.5"/>
+    <circle cx="36" cy="400" r="10" fill="#378ADD" opacity=".15"/>
+    <text x="36" y="404" text-anchor="middle" font-size="12" fill="#378ADD">5</text>
+    <text x="56" y="390" font-size="15" font-weight="800" fill="#1A3A60" font-family="'PingFang SC','Microsoft YaHei',sans-serif">Giga New York</text>
+    <text x="56" y="410" font-size="12" fill="#6E8AAA" font-family="'PingFang SC','Microsoft YaHei',sans-serif">纽约州·布法罗 — 太阳能光伏 · 超充设备</text>
+
+    <!-- ===== 欧洲列 · 1张卡片 ===== -->
+    <rect x="464" y="62" width="194" height="68" rx="10" fill="#FDF8EF" stroke="#C5963A" stroke-width="1.5"/>
+    <circle cx="490" cy="96" r="10" fill="#C5963A" opacity=".15"/>
+    <text x="490" y="100" text-anchor="middle" font-size="12" fill="#C5963A">6</text>
+    <text x="500" y="86" font-size="14" font-weight="800" fill="#5C4010" font-family="'PingFang SC','Microsoft YaHei',sans-serif">Giga Berlin</text>
+    <text x="500" y="106" font-size="11" fill="#A88C50" font-family="'PingFang SC','Microsoft YaHei',sans-serif">德国·柏林 · Model Y</text>
+    <text x="648" y="83" text-anchor="end" font-size="10" fill="#C5963A" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-weight="700">年产 50 万辆</text>
+
+    <!-- ===== 中国列 · 2张卡片 ===== -->
+    <!-- 卡片7: Giga Shanghai -->
+    <rect x="674" y="62" width="216" height="68" rx="10" fill="#EBF7F0" stroke="#1F9D6B" stroke-width="1.5"/>
+    <circle cx="700" cy="96" r="10" fill="#1F9D6B" opacity=".15"/>
+    <text x="700" y="100" text-anchor="middle" font-size="12" fill="#1F9D6B">7</text>
+    <text x="710" y="86" font-size="14" font-weight="800" fill="#0F4C30" font-family="'PingFang SC','Microsoft YaHei',sans-serif">Giga Shanghai</text>
+    <text x="710" y="106" font-size="11" fill="#4A8A65" font-family="'PingFang SC','Microsoft YaHei',sans-serif">整车 Model 3/Y · 全球出口枢纽</text>
+    <text x="870" y="83" text-anchor="end" font-size="10" fill="#1F9D6B" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-weight="700">年产 95 万辆</text>
+
+    <!-- 卡片8: 上海 Megafactory -->
+    <rect x="674" y="138" width="216" height="68" rx="10" fill="#EBF7F0" stroke="#1F9D6B" stroke-width="1.5"/>
+    <circle cx="700" cy="172" r="10" fill="#1F9D6B" opacity=".15"/>
+    <text x="700" y="176" text-anchor="middle" font-size="12" fill="#1F9D6B">8</text>
+    <text x="710" y="162" font-size="14" font-weight="800" fill="#0F4C30" font-family="'PingFang SC','Microsoft YaHei',sans-serif">Shanghai Megafactory</text>
+    <text x="710" y="182" font-size="11" fill="#4A8A65" font-family="'PingFang SC','Microsoft YaHei',sans-serif">Megapack 储能 · 2025年2月投产</text>
+
+    <!-- ===== 底部：墨西哥（暂停） ===== -->
+    <rect x="610" y="370" width="280" height="52" rx="12" fill="#FFF" stroke="#B4B2A9" stroke-width="1.5" stroke-dasharray="6,3"/>
+    <text x="750" y="394" text-anchor="middle" font-size="14" font-weight="700" fill="#B4B2A9" font-family="'PingFang SC','Microsoft YaHei',sans-serif">Giga Mexico</text>
+    <text x="750" y="412" text-anchor="middle" font-size="11" fill="#B4B2A9" font-family="'PingFang SC','Microsoft YaHei',sans-serif">墨西哥·蒙特雷 · 已获许可 · ⏸ 暂停</text>
+    <text x="610" y="360" font-size="10" fill="#B4B2A9" font-family="'PingFang SC','Microsoft YaHei',sans-serif">未来</text>
+
+    <!-- 分隔线 -->
+    <line x1="464" y1="220" x2="464" y2="360" stroke="#E0DED5" stroke-width="1" stroke-dasharray="2,4"/>
+    <line x1="674" y1="220" x2="674" y2="360" stroke="#E0DED5" stroke-width="1" stroke-dasharray="2,4"/>
+
+    <!-- 底部总结 -->
+    <text x="450" y="462" text-anchor="middle" font-size="13" fill="#7A7A9E" font-family="'PingFang SC','Microsoft YaHei',sans-serif">美国做全品类 · 中国做规模+出口 · 欧洲做本地化</text>
+  </svg>
+
+  <div class="why" style="margin-top:4px">为什么工厂布局比车型更重要?因为<b>产能分配</b>决定了你在不同国家能买到什么——这就是为什么美国有 Cybertruck,中国只有 Model 3/Y。</div>
+  <div class="page-bridge">讲完工厂,来拆它目前产生收入的三块业务里最大的一块——汽车 ↓</div>
+</section>
+
+<!-- P4 汽车板块·构成 -->
+<section class="page">
+  <div class="disc">视频为分析分享 · 不构成投资建议</div>
+  <span class="tier t3">第一块 73% · 汽车板块里面装了什么</span>
+  <svg viewBox="0 0 820 300" style="width:100%;max-width:820px;margin-bottom:8px" xmlns="http://www.w3.org/2000/svg">
+    <!-- 整车销售：左侧大块 -->
+    <rect x="0" y="0" width="590" height="300" rx="10" fill="#E6EEF8" stroke="#2d7dd2" stroke-width="2"/>
+    <text x="295" y="62" text-anchor="middle" font-size="26" font-weight="800" fill="#1a4f80" font-family="'PingFang SC','Microsoft YaHei',sans-serif">整车销售</text>
+    <text x="295" y="124" text-anchor="middle" font-size="52" font-weight="800" fill="#0C447C" font-family="'PingFang SC','Microsoft YaHei',sans-serif">4,625 亿</text>
+    <text x="295" y="160" text-anchor="middle" font-size="16" fill="#2d7dd2" font-weight="700" font-family="'PingFang SC','Microsoft YaHei',sans-serif">占汽车收入 94.7%</text>
+    <!-- 分隔线 -->
+    <line x1="80" y1="182" x2="510" y2="182" stroke="#2d7dd2" stroke-width="0.5" stroke-dasharray="4,4" opacity="0.35"/>
+    <text x="295" y="208" text-anchor="middle" font-size="18" fill="#1a4f80" font-weight="700" font-family="'PingFang SC','Microsoft YaHei',sans-serif">⚡ FSD 软件的线就藏在这里、不单列</text>
+    <text x="295" y="236" text-anchor="middle" font-size="13" fill="#6E8AAA" font-family="'PingFang SC','Microsoft YaHei',sans-serif">自动辅助驾驶 / 联网功能等软件订阅收入</text>
+    <text x="295" y="270" text-anchor="middle" font-size="12" fill="#8A9ABA" font-family="'PingFang SC','Microsoft YaHei',sans-serif">按 ASC 606 准则计入整车销售 · 无法从财报直接拆出</text>
+
+    <!-- 碳积分：右上 -->
+    <rect x="590" y="0" width="230" height="150" rx="10" fill="#FCEBEB" stroke="#E74C3C" stroke-width="1.8"/>
+    <text x="705" y="45" text-anchor="middle" font-size="21" font-weight="800" fill="#8B1A1A" font-family="'PingFang SC','Microsoft YaHei',sans-serif">碳积分</text>
+    <text x="705" y="88" text-anchor="middle" font-size="34" font-weight="800" fill="#A32D2D" font-family="'PingFang SC','Microsoft YaHei',sans-serif">140 亿</text>
+    <text x="705" y="120" text-anchor="middle" font-size="14" fill="#C0392B" font-family="'PingFang SC','Microsoft YaHei',sans-serif">占汽车 2.9% · 毛利≈100%</text>
+
+    <!-- 租赁：右下 -->
+    <rect x="590" y="150" width="230" height="150" rx="10" fill="#E8EEF4" stroke="#8EA4C0" stroke-width="1.8"/>
+    <text x="705" y="195" text-anchor="middle" font-size="21" font-weight="800" fill="#3D4F6A" font-family="'PingFang SC','Microsoft YaHei',sans-serif">汽车租赁</text>
+    <text x="705" y="238" text-anchor="middle" font-size="34" font-weight="800" fill="#556B8A" font-family="'PingFang SC','Microsoft YaHei',sans-serif">122 亿</text>
+    <text x="705" y="270" text-anchor="middle" font-size="14" fill="#6E8AAA" font-family="'PingFang SC','Microsoft YaHei',sans-serif">占汽车 2.5%</text>
+  </svg>
+  <div class="annot" style="margin-top:0;margin-bottom:12px">* 整车销售含 FSD（全自动驾驶）及联网功能等软件订阅收入，按 ASC 606 会计准则计入车辆销售收入，不单独列示。</div>
+
+  <div class="page-bridge">那这 4,625 亿的"整车销售",到底是哪几款车在卖? ↓</div>
+</section>
+
+<!-- P5 汽车·车型 -->
+<section class="page">
+  <div class="disc">视频为分析分享 · 不构成投资建议</div>
+  <span class="tier t3">汽车板块 · 整车销售的是哪几款</span>
+  <div class="page-title sm">全球五款乘用车,<br>卖了 164 万辆</div>
+  <div class="car-grid">
+    <div class="car-card ok">
+      <img class="car-img" src="images/model3.jpg" alt="Model 3">
+      <div class="car-name">Model 3</div>
+      <div class="car-tag">主力轿车</div>
+    </div>
+    <div class="car-card ok">
+      <img class="car-img" src="images/modely.jpg" alt="Model Y">
+      <div class="car-name">Model Y</div>
+      <div class="car-tag">主力 SUV · 销量担当</div>
+    </div>
+    <div class="car-card warn">
+      <img class="car-img" src="images/models.jpg" alt="Model S">
+      <div class="car-name">Model S</div>
+      <div class="car-tag">高端旗舰 · 已停产</div>
+    </div>
+    <div class="car-card warn">
+      <img class="car-img" src="images/modelx.jpg" alt="Model X">
+      <div class="car-name">Model X</div>
+      <div class="car-tag">高端 SUV · 已停产</div>
+    </div>
+    <div class="car-card no">
+      <img class="car-img" src="images/cybertruck.jpg" alt="Cybertruck">
+      <div class="car-name">Cybertruck</div>
+      <div class="car-tag">电动皮卡 · 交付量极低</div>
+    </div>
+  </div>
+  <div class="annot" style="margin-bottom:4px">* Model S / X：2026 年初马斯克宣布全球停产，现存为库存车及二手车。</div>
+  <div class="annot" style="margin-bottom:12px">* Cybertruck：2023 年末开启交付，但因设计/法规问题交付量极低，2025 年全年仅交付约 3.5 万辆。</div>
+  <div class="card-row" style="margin:8px auto">
+    <div class="data-card"><div class="label">2025 全球交付</div><div class="value" style="color:var(--tsla)">164 万辆</div><div class="note">同比 ↓ 约 8%</div></div>
+    <div class="data-card"><div class="label">上海工厂交付</div><div class="value" style="color:var(--ok)">85.1 万辆</div><div class="note">占全球 52% · 全球出口枢纽</div></div>
+    <div class="data-card"><div class="label">中国本土销量</div><div class="value" style="color:var(--warn)">62.6 万辆</div><div class="note">乘联会零售口径 · 同比在下滑</div></div>
+  </div>
+  <div class="annot" style="margin-top:6px;margin-bottom:12px">* 上海工厂造了 85.1 万辆，中国本土只卖了 62.6 万——差的 22.5 万辆，全出口到了欧洲、亚太等全球市场。上海超级工厂，本质是特斯拉的<b>全球出口基地</b>。</div>
+  <div class="page-bridge">这些车里藏着一个马斯克说过的秘密——硬件可以不赚钱,真正靠的是 ↓</div>
+</section>
+
+<!-- P6 汽车板块·软件 FSD -->
+<section class="page">
+  <div class="disc">视频为分析分享 · 不构成投资建议</div>
+  <span class="tier t3">汽车板块 · 藏在 4,625 亿里的 FSD</span>
+  <div class="page-title sm">马斯克说过:"卖车可以不赚钱"<br>——因为车只是载体，服务才是利润</div>
+
+  <!-- 3 个关键数据：横排 -->
+  <div class="card-row" style="margin-bottom:12px">
+    <div class="data-card"><div class="label">FSD 付费用户</div><div class="value" style="color:var(--tsla)">≈ 110 万</div><div class="note">特斯拉 Q4 2025 财报首次披露</div></div>
+    <div class="data-card"><div class="label">买断 / 月订阅价</div><div class="value" style="color:var(--tsla)">$8,000 / $99</div><div class="note">买断制 2026.1 取消 · 全面转订阅</div></div>
+    <div class="data-card"><div class="label">FSD 年收入（估算）</div><div class="value" style="color:var(--tsla)">≈ 92 亿</div><div class="note">订阅+买断摊销 · 行业报告估算</div></div>
+  </div>
+
+  <!-- 瀑布图：毛利拆解 -->
+  <svg viewBox="0 0 820 332" style="width:100%;max-width:820px;margin-bottom:8px" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="0" width="820" height="332" rx="12" fill="#FAFBFD" stroke="#E6E9F0" stroke-width="1"/>
+    <text x="410" y="28" text-anchor="middle" font-size="14" fill="#7A7A9E" font-weight="700" font-family="'PingFang SC','Microsoft YaHei',sans-serif">🧮 按 10-K 一层层往下剥：剥到"裸车硬件"还剩多少毛利？</text>
+
+    <!-- 第一行：汽车板块总毛利 -->
+    <text x="40" y="64" text-anchor="start" font-size="14" font-weight="800" fill="#1A1A2E" font-family="'PingFang SC','Microsoft YaHei',sans-serif">汽车板块总毛利</text>
+    <rect x="300" y="46" width="420" height="28" rx="6" fill="#2D7DD2"/>
+    <text x="510" y="65" text-anchor="middle" font-size="14" font-weight="800" fill="#FFF" font-family="'PingFang SC','Microsoft YaHei',sans-serif">868 亿 · 17.8%</text>
+    <text x="726" y="65" text-anchor="start" font-size="11" fill="#2D7DD2" font-weight="700" font-family="'PingFang SC','Microsoft YaHei',sans-serif">整车+租赁+碳积分</text>
+
+    <!-- 第二行：减租赁 -->
+    <text x="40" y="109" text-anchor="start" font-size="13" font-weight="700" fill="#7A7A9E" font-family="'PingFang SC','Microsoft YaHei',sans-serif">减：租赁</text>
+    <rect x="300" y="93" width="27" height="24" rx="5" fill="#9aa3b8"/>
+    <text x="336" y="110" text-anchor="start" font-size="12" font-weight="700" fill="#7A7A9E" font-family="'PingFang SC','Microsoft YaHei',sans-serif">57 亿</text>
+    <text x="380" y="110" text-anchor="start" font-size="10.5" fill="#999" font-family="'PingFang SC','Microsoft YaHei',sans-serif">· 毛利率47.5%</text>
+    <text x="600" y="110" text-anchor="start" font-size="13" fill="#C5963A" font-weight="700" font-family="'PingFang SC','Microsoft YaHei',sans-serif">→ 剩 811 亿 · 毛利率 ≈ 17%</text>
+
+    <!-- 第三行：减碳积分 → 整车销售毛利（里程碑） -->
+    <text x="40" y="154" text-anchor="start" font-size="13" font-weight="700" fill="#A32D2D" font-family="'PingFang SC','Microsoft YaHei',sans-serif">减：碳积分</text>
+    <rect x="300" y="138" width="68" height="24" rx="5" fill="#E74C3C"/>
+    <text x="334" y="155" text-anchor="middle" font-size="12" font-weight="800" fill="#FFF" font-family="'PingFang SC','Microsoft YaHei',sans-serif">140 亿</text>
+    <text x="377" y="155" text-anchor="start" font-size="11" fill="#E74C3C" font-family="'PingFang SC','Microsoft YaHei',sans-serif">毛利≈100%</text>
+    <rect x="470" y="138" width="276" height="26" rx="6" fill="#FFF4E0" stroke="#C5963A" stroke-width="1.5"/>
+    <text x="608" y="156" text-anchor="middle" font-size="13" font-weight="800" fill="#9a6a10" font-family="'PingFang SC','Microsoft YaHei',sans-serif">= 整车销售毛利 671 亿 · 14.5%</text>
+
+    <!-- 分隔线 -->
+    <line x1="40" y1="180" x2="760" y2="180" stroke="#E6E9F0" stroke-width="1" stroke-dasharray="3,3"/>
+    <text x="40" y="176" text-anchor="start" font-size="10" fill="#A0A0C0" font-family="'PingFang SC','Microsoft YaHei',sans-serif">↓ 再估着剔掉藏在车价里的 FSD 软件</text>
+
+    <!-- 第四行：减FSD -->
+    <text x="40" y="212" text-anchor="start" font-size="13" font-weight="700" fill="#1A4F80" font-family="'PingFang SC','Microsoft YaHei',sans-serif">减：FSD（估）</text>
+    <rect x="300" y="196" width="46" height="24" rx="5" fill="#1A4F80"/>
+    <text x="323" y="213" text-anchor="middle" font-size="12" font-weight="800" fill="#FFF" font-family="'PingFang SC','Microsoft YaHei',sans-serif">92 亿</text>
+    <text x="356" y="213" text-anchor="start" font-size="11" fill="#1A4F80" font-family="'PingFang SC','Microsoft YaHei',sans-serif">软件 · 毛利≈100%</text>
+    <text x="600" y="213" text-anchor="start" font-size="13" fill="#C5963A" font-weight="700" font-family="'PingFang SC','Microsoft YaHei',sans-serif">→ 剩 579 亿</text>
+
+    <!-- 第五行：裸车硬件毛利 -->
+    <text x="40" y="258" text-anchor="start" font-size="14" font-weight="800" fill="#0C447C" font-family="'PingFang SC','Microsoft YaHei',sans-serif">≈ 裸车硬件毛利</text>
+    <rect x="300" y="240" width="279" height="30" rx="6" fill="#A8C8E8"/>
+    <text x="439" y="260" text-anchor="middle" font-size="14" font-weight="800" fill="#0C447C" font-family="'PingFang SC','Microsoft YaHei',sans-serif">≈ 579 亿 · 毛利率 ≈ 13%</text>
+    <text x="592" y="260" text-anchor="start" font-size="12" fill="#7A7A9E" font-weight="700" font-family="'PingFang SC','Microsoft YaHei',sans-serif">vs 整车销售 14.5%</text>
+
+    <!-- 底部说明 -->
+    <text x="410" y="300" text-anchor="middle" font-size="11" fill="#A0A0C0" font-family="'PingFang SC','Microsoft YaHei',sans-serif">* 按特斯拉 2025 年 10-K 折算(汇率7.0288)：汽车板块毛利 868亿/17.8%、租赁 57亿、碳积分 140亿、整车销售 671亿/14.5%。</text>
+    <text x="410" y="318" text-anchor="middle" font-size="11" fill="#A0A0C0" font-family="'PingFang SC','Microsoft YaHei',sans-serif">FSD 收入与用户系外部估算、公司未单列；裸车毛利为剔除 FSD 后的估算值,与实际存在偏差。</text>
+  </svg>
+
+  <!-- 洞察 -->
+  <div class="core-line"><span class="icon">💡</span><span class="text">一层层剥完就清楚了：汽车板块整体毛利 17.8%,里头垫着<b>碳积分(140 亿、近 100% 毛利)</b>;剥掉后,真正"卖整车"的毛利只有 <b>14.5%</b>;再把藏在车价里的 <b>FSD(约 92 亿)</b>估着剔掉,<b>裸车硬件大概只剩 13 个点</b>。一个 340 倍 PE 的公司,造车本身就赚十几个点。马斯克说"卖车可以不赚钱"不是开玩笑——<b>车只是载体</b>:先卖车铺量、圈住用户,再靠软件、碳积分、充电这些一层层赚。<b>赚的不是造车的钱,是"车这个平台上跑的服务"的钱。</b></span></div>
+
+  <div class="page-bridge">FSD 讲完了。汽车板块里还剩一样"零成本"的生意 ↓</div>
+</section>
+
+<!-- P7 汽车板块·碳积分 -->
+<section class="page">
+  <div class="disc">视频为分析分享 · 不构成投资建议</div>
+  <span class="tier t2">汽车板块 · 碳积分</span>
+  <div class="page-title sm">零成本赚的 140 亿,<br>但靠政策——说没就没</div>
+
+  <svg viewBox="0 0 820 360" style="width:100%;max-width:820px;margin-bottom:6px" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="0" width="820" height="360" rx="14" fill="#FAFBFD" stroke="#E6E9F0" stroke-width="1"/>
+    <text x="410" y="32" text-anchor="middle" font-size="15" fill="#7A7A9E" font-weight="700" font-family="'PingFang SC','Microsoft YaHei',sans-serif">碳积分到底是个什么生意？</text>
+
+    <!-- 左侧：传统车企 -->
+    <rect x="18" y="50" width="260" height="155" rx="12" fill="#FDF6F6" stroke="#E0A0A0" stroke-width="1.5"/>
+    <text x="148" y="82" text-anchor="middle" font-size="18" font-weight="800" fill="#8B1A1A" font-family="'PingFang SC','Microsoft YaHei',sans-serif">🏭 传统车企</text>
+    <text x="148" y="108" text-anchor="middle" font-size="13" fill="#A04040" font-family="'PingFang SC','Microsoft YaHei',sans-serif">福特 · 通用 · Stellantis</text>
+    <text x="148" y="128" text-anchor="middle" font-size="13" fill="#A04040" font-family="'PingFang SC','Microsoft YaHei',sans-serif">丰田 · 奔驰</text>
+    <line x1="48" y1="142" x2="248" y2="142" stroke="#E0A0A0" stroke-width="0.5" stroke-dasharray="3,3"/>
+    <text x="148" y="165" text-anchor="middle" font-size="14" font-weight="800" fill="#C0392B" font-family="'PingFang SC','Microsoft YaHei',sans-serif">卖油车 → 扣积分 → 不够用</text>
+    <text x="148" y="190" text-anchor="middle" font-size="12" fill="#C06060" font-family="'PingFang SC','Microsoft YaHei',sans-serif">要么交罚款 · 要么买积分</text>
+
+    <!-- 右侧：特斯拉 -->
+    <rect x="542" y="50" width="260" height="155" rx="12" fill="#E6EEF8" stroke="#2D7DD2" stroke-width="1.5"/>
+    <text x="672" y="82" text-anchor="middle" font-size="18" font-weight="800" fill="#1A4F80" font-family="'PingFang SC','Microsoft YaHei',sans-serif">⚡ 特斯拉</text>
+    <text x="672" y="108" text-anchor="middle" font-size="13" fill="#3A6A9E" font-family="'PingFang SC','Microsoft YaHei',sans-serif">只造电车 · 不产生排放</text>
+    <line x1="572" y1="142" x2="772" y2="142" stroke="#A0C0E0" stroke-width="0.5" stroke-dasharray="3,3"/>
+    <text x="672" y="165" text-anchor="middle" font-size="14" font-weight="800" fill="#2D7DD2" font-family="'PingFang SC','Microsoft YaHei',sans-serif">卖电车 → 攒积分 → 用不完</text>
+    <text x="672" y="190" text-anchor="middle" font-size="12" fill="#5A8ABE" font-family="'PingFang SC','Microsoft YaHei',sans-serif">积分太多 → 卖出去</text>
+
+    <!-- 箭头定义 -->
+    <defs>
+      <marker id="arrowRed" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+        <polygon points="0 0, 10 3.5, 0 7" fill="#E74C3C"/>
+      </marker>
+      <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+        <polygon points="0 0, 10 3.5, 0 7" fill="#1F9D6B"/>
+      </marker>
+    </defs>
+
+    <!-- 上方：传统车企买积分 -->
+    <line x1="278" y1="90" x2="542" y2="90" stroke="#E74C3C" stroke-width="2.5" marker-end="url(#arrowRed)"/>
+    <rect x="340" y="72" width="140" height="36" rx="18" fill="#FFF" stroke="#E74C3C" stroke-width="1.5"/>
+    <text x="410" y="88" text-anchor="middle" font-size="14" font-weight="800" fill="#E74C3C" font-family="'PingFang SC','Microsoft YaHei',sans-serif">买积分 💰</text>
+    <text x="410" y="104" text-anchor="middle" font-size="12" fill="#E74C3C" font-family="'PingFang SC','Microsoft YaHei',sans-serif">比交罚款便宜</text>
+
+    <!-- 下方：钱流回特斯拉 -->
+    <line x1="542" y1="150" x2="278" y2="150" stroke="#1F9D6B" stroke-width="3" marker-end="url(#arrowGreen)"/>
+    <rect x="340" y="158" width="140" height="36" rx="18" fill="#DCF0E5" stroke="#1F9D6B" stroke-width="1.5"/>
+    <text x="410" y="174" text-anchor="middle" font-size="14" font-weight="800" fill="#1F9D6B" font-family="'PingFang SC','Microsoft YaHei',sans-serif">140 亿 ↑</text>
+    <text x="410" y="190" text-anchor="middle" font-size="12" fill="#1F9D6B" font-family="'PingFang SC','Microsoft YaHei',sans-serif">零成本 · 毛利≈100%</text>
+
+    <!-- 底部风险 -->
+    <line x1="40" y1="226" x2="780" y2="226" stroke="#E6E9F0" stroke-width="1" stroke-dasharray="3,3"/>
+    <rect x="40" y="240" width="740" height="48" rx="10" fill="#FDF6F6" stroke="#F0C0C0" stroke-width="1"/>
+    <text x="70" y="262" text-anchor="start" font-size="13" font-weight="700" fill="#8B1A1A" font-family="'PingFang SC','Microsoft YaHei',sans-serif">2025 碳积分收入 140 亿 · 同比 −28% · 毛利≈100%</text>
+    <text x="70" y="280" text-anchor="start" font-size="12" fill="#A04040" font-family="'PingFang SC','Microsoft YaHei',sans-serif">⚠ 美国 OBBBA 法案已开始限制 · 传统车企全转电车就归零 · 政策一变就消失</text>
+
+    <text x="410" y="318" text-anchor="middle" font-size="12" fill="#A0A0C0" font-family="'PingFang SC','Microsoft YaHei',sans-serif">美/欧/加州法规：卖油车扣分 · 卖电车攒分 · 不够的交罚款或买积分</text>
+    <text x="410" y="342" text-anchor="middle" font-size="12" fill="#C0A0A0" font-family="'PingFang SC','Microsoft YaHei',sans-serif">这不是政府补贴，是传统车企在替自己"赎罪" —— 政策红利，不是长久饭碗</text>
+  </svg>
+
+  <div class="page-bridge">汽车这一大块讲完了。看第二块,涨得最快、但最少被聊到的一块:能源 ↓</div>
+</section>
+
+<!-- P8 能源 -->
+<section class="page">
+  <div class="disc">视频为分析分享 · 不构成投资建议</div>
+  <span class="tier t1">第二块 13.5% · 能源</span>
+  <div class="page-title sm">被当"副业"13 年,<br>其实是 2025 最猛的增长引擎</div>
+
+  <svg viewBox="0 0 820 370" style="width:100%;max-width:820px;margin-bottom:8px" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="0" width="820" height="370" rx="14" fill="#FAFBFD" stroke="#E6E9F0" stroke-width="1"/>
+    <text x="410" y="32" text-anchor="middle" font-size="15" fill="#7A7A9E" font-weight="700" font-family="'PingFang SC','Microsoft YaHei',sans-serif">能源业务到底是什么？谁在买？怎么赚钱？</text>
+
+    <!-- 顶部数据条 -->
+    <rect x="40" y="48" width="740" height="32" rx="8" fill="#DCF0E5" stroke="#1F9D6B" stroke-width="1.2"/>
+    <text x="410" y="69" text-anchor="middle" font-size="14" font-weight="800" fill="#0F6E56" font-family="'PingFang SC','Microsoft YaHei',sans-serif">2025 能源收入 898 亿 · 毛利率 29.8% · 同比 ↑27%（造车约 17.8%）</text>
+
+    <!-- 三个产品分支 -->
+    <!-- Megapack -->
+    <rect x="30" y="98" width="240" height="54" rx="10" fill="#EBF7F0" stroke="#1F9D6B" stroke-width="2"/>
+    <text x="150" y="120" text-anchor="middle" font-size="16" font-weight="800" fill="#0F6E56" font-family="'PingFang SC','Microsoft YaHei',sans-serif">🔋 Megapack</text>
+    <text x="150" y="141" text-anchor="middle" font-size="12" fill="#4A8A65" font-family="'PingFang SC','Microsoft YaHei',sans-serif">电网级储能柜 · 增长最猛</text>
+
+    <!-- Powerwall -->
+    <rect x="290" y="98" width="240" height="54" rx="10" fill="#EBF7F0" stroke="#1F9D6B" stroke-width="2"/>
+    <text x="410" y="120" text-anchor="middle" font-size="16" font-weight="800" fill="#0F6E56" font-family="'PingFang SC','Microsoft YaHei',sans-serif">🏠 Powerwall</text>
+    <text x="410" y="141" text-anchor="middle" font-size="12" fill="#4A8A65" font-family="'PingFang SC','Microsoft YaHei',sans-serif">家用储能 · 累计 100 万+ 套</text>
+
+    <!-- Solar -->
+    <rect x="550" y="98" width="240" height="54" rx="10" fill="#EBF7F0" stroke="#1F9D6B" stroke-width="2"/>
+    <text x="670" y="120" text-anchor="middle" font-size="16" font-weight="800" fill="#0F6E56" font-family="'PingFang SC','Microsoft YaHei',sans-serif">☀️ Solar Roof</text>
+    <text x="670" y="141" text-anchor="middle" font-size="12" fill="#4A8A65" font-family="'PingFang SC','Microsoft YaHei',sans-serif">太阳能屋顶 · 自主发电</text>
+
+    <!-- 箭头：产品→客户 -->
+    <line x1="150" y1="152" x2="150" y2="180" stroke="#1F9D6B" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <line x1="410" y1="152" x2="410" y2="180" stroke="#1F9D6B" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <line x1="670" y1="152" x2="670" y2="180" stroke="#1F9D6B" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+    <!-- 三大客户群 -->
+    <rect x="30" y="182" width="240" height="70" rx="10" fill="#E6EEF8" stroke="#2D7DD2" stroke-width="1.5"/>
+    <text x="150" y="205" text-anchor="middle" font-size="14" font-weight="800" fill="#1A3A60" font-family="'PingFang SC','Microsoft YaHei',sans-serif">电网公司</text>
+    <text x="150" y="226" text-anchor="middle" font-size="11" fill="#5A7A9E" font-family="'PingFang SC','Microsoft YaHei',sans-serif">美国/澳洲/英国 · 削峰填谷</text>
+    <text x="150" y="244" text-anchor="middle" font-size="11" fill="#5A7A9E" font-family="'PingFang SC','Microsoft YaHei',sans-serif">风光电间歇，必须配储能</text>
+
+    <rect x="290" y="182" width="240" height="70" rx="10" fill="#FFF3E0" stroke="#C5963A" stroke-width="1.5"/>
+    <text x="410" y="205" text-anchor="middle" font-size="14" font-weight="800" fill="#5C4010" font-family="'PingFang SC','Microsoft YaHei',sans-serif">AI 数据中心</text>
+    <text x="410" y="226" text-anchor="middle" font-size="11" fill="#9A7A30" font-family="'PingFang SC','Microsoft YaHei',sans-serif">亚马逊·微软·xAI·字节</text>
+    <text x="410" y="244" text-anchor="middle" font-size="11" fill="#9A7A30" font-family="'PingFang SC','Microsoft YaHei',sans-serif">7×24 不掉电，订单排到 2027</text>
+
+    <rect x="550" y="182" width="240" height="70" rx="10" fill="#F3F2F8" stroke="#8EA4C0" stroke-width="1.5"/>
+    <text x="670" y="205" text-anchor="middle" font-size="14" font-weight="800" fill="#3D4F6A" font-family="'PingFang SC','Microsoft YaHei',sans-serif">家庭用户</text>
+    <text x="670" y="226" text-anchor="middle" font-size="11" fill="#7A8AAA" font-family="'PingFang SC','Microsoft YaHei',sans-serif">白天存 · 晚上用 · 停电也能顶</text>
+    <text x="670" y="244" text-anchor="middle" font-size="11" fill="#7A8AAA" font-family="'PingFang SC','Microsoft YaHei',sans-serif">增速不如 B 端</text>
+
+    <!-- 底部洞察 -->
+    <line x1="40" y1="272" x2="780" y2="272" stroke="#E6E9F0" stroke-width="1" stroke-dasharray="3,3"/>
+    <rect x="40" y="284" width="740" height="68" rx="10" fill="#F0FFF8" stroke="#A0D8C0" stroke-width="1"/>
+    <text x="410" y="308" text-anchor="middle" font-size="14" font-weight="800" fill="#0F6E56" font-family="'PingFang SC','Microsoft YaHei',sans-serif">💡 为什么是 AI 时代的"卖水人"？</text>
+    <text x="410" y="330" text-anchor="middle" font-size="12" fill="#4A8A65" font-family="'PingFang SC','Microsoft YaHei',sans-serif">AI 越火 → 数据中心越多 → 用电越猛 → 越需要储能。客户是电网和大企业，不是 C 端。</text>
+    <text x="410" y="346" text-anchor="middle" font-size="12" fill="#4A8A65" font-family="'PingFang SC','Microsoft YaHei',sans-serif">比 FSD 更稳——订单已排到 2027 年，是估值里最被低估的"确定性"。</text>
+  </svg>
+
+  <div class="page-bridge">还有第三块,体量不大、但藏着一道真正的"护城河":服务 ↓</div>
+</section>
+
+<!-- P9 服务及其他 -->
+<section class="page">
+  <div class="disc">视频为分析分享 · 不构成投资建议</div>
+  <span class="tier t1">第三块 13% · 服务及其他</span>
+  <div class="page-title sm">881 亿,被低估的<br>"车主后市场"</div>
+
+  <svg viewBox="0 0 820 370" style="width:100%;max-width:820px;margin-bottom:8px" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="0" width="820" height="370" rx="14" fill="#FAFBFD" stroke="#E6E9F0" stroke-width="1"/>
+    <text x="410" y="32" text-anchor="middle" font-size="15" fill="#7A7A9E" font-weight="700" font-family="'PingFang SC','Microsoft YaHei',sans-serif">特斯拉怎么把车主"圈"在自己的生态里？</text>
+
+    <!-- 顶部数据条 -->
+    <rect x="40" y="46" width="740" height="32" rx="8" fill="#FAF0E0" stroke="#C5963A" stroke-width="1.2"/>
+    <text x="410" y="67" text-anchor="middle" font-size="14" font-weight="800" fill="#854F0B" font-family="'PingFang SC','Microsoft YaHei',sans-serif">2025 服务收入 881 亿 · 毛利率 8.6% · 同比 ↑19%（4S店+加油站+保险公司=它全干了）</text>
+
+    <!-- 闭环圆环 -->
+    <!-- 圆心：(370, 237)，半径 90 -->
+    <!-- 中心文字 -->
+    <text x="370" y="230" text-anchor="middle" font-size="15" font-weight="800" fill="#2D7DD2" font-family="'PingFang SC','Microsoft YaHei',sans-serif">特斯拉</text>
+    <text x="370" y="250" text-anchor="middle" font-size="12" fill="#5A8ABE" font-family="'PingFang SC','Microsoft YaHei',sans-serif">车主生态</text>
+
+    <!-- 环形箭头（用四个弧线段近似的圆角矩形） -->
+    <!-- 上：买车 → 超充（左到右） -->
+    <rect x="210" y="110" width="100" height="44" rx="10" fill="#E6EEF8" stroke="#2D7DD2" stroke-width="1.5"/>
+    <text x="260" y="128" text-anchor="middle" font-size="13" font-weight="800" fill="#1A4F80" font-family="'PingFang SC','Microsoft YaHei',sans-serif">买车</text>
+    <text x="260" y="146" text-anchor="middle" font-size="10" fill="#5A7A9E" font-family="'PingFang SC','Microsoft YaHei',sans-serif">入口</text>
+    <line x1="310" y1="132" x2="410" y2="132" stroke="#2D7DD2" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+
+    <!-- 右：超充 → 保险（上到下） -->
+    <rect x="415" y="110" width="100" height="44" rx="10" fill="#FFF3E0" stroke="#C5963A" stroke-width="1.5"/>
+    <text x="465" y="128" text-anchor="middle" font-size="13" font-weight="800" fill="#5C4010" font-family="'PingFang SC','Microsoft YaHei',sans-serif">超充</text>
+    <text x="465" y="146" text-anchor="middle" font-size="10" fill="#9A7A30" font-family="'PingFang SC','Microsoft YaHei',sans-serif">7,000+ 站</text>
+    <path d="M 465 154 L 465 210" stroke="#C5963A" stroke-width="1.5" fill="none" marker-end="url(#arrowGold)"/>
+
+    <!-- 下：保险 → 维修（右到左） -->
+    <rect x="415" y="316" width="100" height="44" rx="10" fill="#FDF6F6" stroke="#E74C3C" stroke-width="1.5"/>
+    <text x="465" y="334" text-anchor="middle" font-size="13" font-weight="800" fill="#8B1A1A" font-family="'PingFang SC','Microsoft YaHei',sans-serif">保险</text>
+    <text x="465" y="352" text-anchor="middle" font-size="10" fill="#A04040" font-family="'PingFang SC','Microsoft YaHei',sans-serif">UBI · 便宜 20%</text>
+
+    <!-- 左：维修 → 二手车（下到上） -->
+    <rect x="210" y="316" width="100" height="44" rx="10" fill="#EBF7F0" stroke="#1F9D6B" stroke-width="1.5"/>
+    <text x="260" y="334" text-anchor="middle" font-size="13" font-weight="800" fill="#0F6E56" font-family="'PingFang SC','Microsoft YaHei',sans-serif">维修/二手</text>
+    <text x="260" y="352" text-anchor="middle" font-size="10" fill="#4A8A65" font-family="'PingFang SC','Microsoft YaHei',sans-serif">不外流</text>
+
+    <!-- 横向连接 -->
+    <line x1="310" y1="338" x2="415" y2="338" stroke="#E74C3C" stroke-width="1.5" marker-end="url(#arrowRed)"/>
+    <line x1="260" y1="316" x2="260" y2="214" stroke="#1F9D6B" stroke-width="1.5" marker-end="url(#arrowGreen2)"/>
+
+    <!-- 箭头定义 -->
+    <defs>
+      <marker id="arrowBlue" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2D7DD2"/></marker>
+      <marker id="arrowGold" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#C5963A"/></marker>
+      <marker id="arrowRed" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#E74C3C"/></marker>
+      <marker id="arrowGreen2" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#1F9D6B"/></marker>
+    </defs>
+
+    <!-- 闭环环线 -->
+    <path d="M 515 132 L 560 132 L 560 338 L 515 338" stroke="#C5963A" stroke-width="1.5" fill="none" stroke-dasharray="5,3"/>
+    <path d="M 210 132 L 160 132 L 160 338 L 210 338" stroke="#1F9D6B" stroke-width="1.5" fill="none" stroke-dasharray="5,3"/>
+    <path d="M 210 110 L 210 96 L 465 96" stroke="#2D7DD2" stroke-width="1.5" fill="none" stroke-dasharray="5,3"/>
+    <path d="M 465 360 L 465 370 L 260 370 L 260 360" stroke="#E74C3C" stroke-width="1.5" fill="none" stroke-dasharray="5,3"/>
+
+    <!-- 右侧：外部接入 -->
+    <line x1="560" y1="180" x2="650" y2="180" stroke="#2D7DD2" stroke-width="2" stroke-dasharray="6,3"/>
+    <rect x="655" y="146" width="150" height="68" rx="12" fill="#F0F4FF" stroke="#2D7DD2" stroke-width="1.8"/>
+    <text x="730" y="168" text-anchor="middle" font-size="12" font-weight="800" fill="#1A4F80" font-family="'PingFang SC','Microsoft YaHei',sans-serif">外部对手</text>
+    <text x="730" y="186" text-anchor="middle" font-size="11" fill="#5A7A9E" font-family="'PingFang SC','Microsoft YaHei',sans-serif">福特 · 通用 · Rivian</text>
+    <text x="730" y="204" text-anchor="middle" font-size="11" fill="#5A7A9E" font-family="'PingFang SC','Microsoft YaHei',sans-serif">接入超充 · 交"过路费"</text>
+
+    <!-- NACS 国标 -->
+    <rect x="655" y="230" width="150" height="50" rx="10" fill="#DCF0E5" stroke="#1F9D6B" stroke-width="1.5"/>
+    <text x="730" y="252" text-anchor="middle" font-size="12" font-weight="800" fill="#0F6E56" font-family="'PingFang SC','Microsoft YaHei',sans-serif">NACS 北美充电标准</text>
+    <text x="730" y="272" text-anchor="middle" font-size="11" fill="#4A8A65" font-family="'PingFang SC','Microsoft YaHei',sans-serif">已被定为国家标准 → 护城河</text>
+
+    <line x1="650" y1="214" x2="650" y2="255" stroke="#E6E9F0" stroke-width="1"/>
+
+    <!-- 底部洞察 -->
+    <line x1="40" y1="296" x2="210" y2="296" stroke="#E6E9F0" stroke-width="1" stroke-dasharray="3,3"/>
+    <rect x="40" y="300" width="170" height="56" rx="10" fill="#FFF" stroke="#E6E9F0" stroke-width="1"/>
+    <text x="125" y="322" text-anchor="middle" font-size="12" font-weight="700" fill="#7A7A9E" font-family="'PingFang SC','Microsoft YaHei',sans-serif">闭环铁三角</text>
+    <text x="125" y="344" text-anchor="middle" font-size="11" fill="#A0A0C0" font-family="'PingFang SC','Microsoft YaHei',sans-serif">4S店+加油站+保险</text>
+  </svg>
+
+  <div class="strip"><span>它甚至还顺手做了 →</span><span>🍔 Tesla Diner(超充+餐厅+影院)</span><span>👕 品牌周边</span></div>
+
+  <div class="page-bridge">以上三块,都是它今天在赚的钱。那明天呢?↓</div>
+</section>
+
+<!-- P10 财报外的未来 + 机构 -->
+<section class="page">
+  <div class="disc">视频为分析分享 · 不构成投资建议</div>
+  <span class="tier t4">圈外 · 通往未来</span>
+  <div class="page-title sm">还没进收入的"明天"——<br>才是市场真正在买的</div>
+
+  <div class="core-line"><span class="icon">🎲</span><span class="text">这三样现在几乎不赚钱,市场却为它们给了不少估值溢价——你为今天的特斯拉付的价,很大程度上是在为这三个"<b>如果</b>"付钱。</span></div>
+
+  <!-- 三个未来业务 · 卡片展示 -->
+  <div class="trio" style="margin-top:12px">
+    <div class="tcard f"><div class="tt">🚕 Robotaxi / Cybercab</div><div class="td">让车自己当出租车——现在的车变成"<b>会跑的资产</b>"。Cybercab 是没有方向盘的专用车。<div class="note">奥斯汀/旧金山试运营中</div></div></div>
+    <div class="tcard f"><div class="tt">🦾 Optimus</div><div class="td">人形机器人——工厂里的人不用干活了。卖的是"<b>未来的劳动力</b>"。<div class="note">原型阶段 · 小批量测试</div></div></div>
+    <div class="tcard f"><div class="tt">🧠 Dojo 超算 + Terafab</div><div class="td">给 AI 算力和芯片——没有它,上面两个都跑不起来。<div class="note">在建 · 未投产 · 和 SpaceX/xAI 合建</div></div></div>
+  </div>
+
+  <div class="core-line" style="margin-top:12px;background:#f0fff5;border-left-color:var(--ok)"><span class="icon">🐂</span><span class="text" style="color:#0a4a2a"><b>乐观的一方(如摩根士丹利):</b>非常乐观——预期 Robotaxi 车队 2040 年达数百万辆级、人形机器人是数万亿美元级的大市场,押的是"everything works"。</span></div>
+
+  <div class="core-line" style="margin-top:6px;background:#fff5f5;border-left-color:var(--warn)"><span class="icon">🐻</span><span class="text" style="color:#8b0000"><b>谨慎的一方(如高盛):</b>明显谨慎——预计 2027 年真正在跑的 Robotaxi 也就几千辆,远低于马斯克的愿景,<b>执行才是真考验</b>。</span></div>
+  <div class="annot" style="margin-top:8px">* 以上为机构公开观点的引述与对比,仅作分析参考,不代表本片立场、也不构成任何投资建议。</div>
+
+  <div class="page-bridge">把这一圈连起来——特斯拉到底是谁?↓</div>
+</section>
+
+<!-- P11 落点 -->
+<section class="page">
+  <div class="disc">视频为分析分享 · 不构成投资建议</div>
+  <div class="page-tag">结语</div>
+  <div class="variant">
+    <div class="lab">一句话,特斯拉是什么</div>
+    <div class="big">它不只是"车企"——<br>是一家<em>用电动车做入口、卡住"能源 + AI"两条大赛道</em>的公司。<br><span style="font-size:15px;opacity:.92;font-weight:600">车,是它的现金牛,也是它的入场券。</span></div>
+    <div class="sm">账面上七成收入靠卖车;但市场给的天价,买的是软件、能源、机器人、芯片这些"还没兑现的预期"——"今天的收入"和"明天的故事"之间这道缝,就是它估值高到吓人的根源。</div>
+  </div>
+  <div class="core-line" style="margin-top:14px;background:#fff5f5;border-left-color:var(--warn)"><span class="icon">⚠️</span><span class="text" style="color:#8b0000"><b>当然,也得看到软肋:</b>碳积分在缩水(看政策脸色)、汽车毛利在往下走、Robotaxi 和机器人这些"未来"能不能兑现还没准信——<b>这些"预期"一旦落空,高估值随时会回摆。</b>故事讲得好,不等于一定兑现。</span></div>
+  <div class="core-line"><span class="icon">🎯</span><span class="text">其实特斯拉最该被学的,不是车造得多好——是它<b>既讲得出"从车到 AI"这个故事,又真能把这张版图一块块造出来</b>。不管你是创业者、还是比亚迪这样的大公司:<b>光会讲故事,撑不起估值;光埋头做事,又讲不出故事</b>。叙事 + 版图,两样都立得住,你的故事才真的不一样。<br><br>我在拆解包括特斯拉在内的 17 家整车上市公司的财报,感兴趣的,关注我,谢谢。</span></div>
+  <div class="annot">数据来源：特斯拉 2025 年 10-K（总营收 $94,827M；汽车 $69,526M、能源 $12,771M/毛利29.8%、服务 $12,530M；碳积分 $1,993M、同比-28%；8 座主要制造工厂；FSD 收入按 ASC 606 计入汽车板块）。FSD 中国进展、停售 Model S/X、Cybertruck 未获批：新浪/证券时报/汽车之家等公开报道。Robotaxi/Optimus 预估：摩根士丹利、高盛公开研究（前瞻性、不确定性高）。Terafab：Tesla 与 SpaceX/xAI 合建芯片厂，2026 宣布、在建（CNBC 等）。市值约 1.5 万亿美元、PE≈340 为 2026 年 6 月市场数据（随股价波动；companiesmarketcap / financecharts 等）。汇率 7.0288。本内容仅作教育研究用途，不构成任何投资建议。</div>
+  <div class="page-bridge">拆解上市公司 · 有二财经</div>
+</section>
+
+</body>
+</html>

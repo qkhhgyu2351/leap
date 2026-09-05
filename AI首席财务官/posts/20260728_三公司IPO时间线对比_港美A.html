@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>三家公司 IPO 时间线对比 · 长鑫科技 / SpaceX / Momenta</title>
+<style>
+  :root{
+    --bg:#f4f6fa; --card:#ffffff; --ink:#1f2733; --sub:#5b6675; --line:#d8dee8;
+    --cx:#2f6df0;   /* 长鑫科技 蓝 */
+    --sx:#f0972f;   /* SpaceX 橙 */
+    --mt:#8b5cf6;   /* Momenta 紫 */
+    --shadow:0 1px 3px rgba(20,30,50,.08),0 6px 18px rgba(20,30,50,.06);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.55;padding:34px 18px 64px}
+  .wrap{max-width:1180px;margin:0 auto}
+  header{text-align:center;margin-bottom:10px}
+  header h1{font-size:25px;font-weight:800;letter-spacing:.4px}
+  header p{color:var(--sub);font-size:14px;margin-top:7px}
+  .legend{display:flex;justify-content:center;gap:22px;margin:18px 0 26px;flex-wrap:wrap}
+  .legend span{display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--sub)}
+  .legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+  .legend .cx{background:var(--cx)} .legend .sx{background:var(--sx)} .legend .mt{background:var(--mt)}
+
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .col{background:var(--card);border-radius:16px;padding:18px 16px 22px;box-shadow:var(--shadow);border-top:5px solid var(--c)}
+  .col.cx{--c:var(--cx)} .col.sx{--c:var(--sx)} .col.mt{--c:var(--mt)}
+  .col h2{font-size:17px;font-weight:800;display:flex;align-items:center;gap:8px}
+  .col h2 .badge{font-size:11px;font-weight:700;color:#fff;background:var(--c);padding:2px 9px;border-radius:20px}
+  .kpi{display:flex;gap:8px;margin:12px 0 4px;flex-wrap:wrap}
+  .kpi div{flex:1;min-width:88px;background:#f7f9fc;border-radius:10px;padding:8px 10px}
+  .kpi .v{font-size:13.5px;font-weight:800;color:var(--c)}
+  .kpi .l{font-size:11px;color:var(--sub);margin-top:2px}
+
+  .tl{position:relative;padding-left:22px;margin-top:14px}
+  .tl::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:3px;background:var(--line);border-radius:3px}
+  .item{position:relative;margin:0 0 13px}
+  .item::before{content:"";position:absolute;left:-19px;top:6px;width:12px;height:12px;border-radius:50%;
+    background:#fff;border:3px solid var(--c);box-shadow:0 0 0 4px var(--bg)}
+  .item.key::before{background:var(--c);box-shadow:0 0 0 4px var(--bg),0 0 0 7px color-mix(in srgb,var(--c) 25%,transparent)}
+  .node{background:#f7f9fc;border-radius:11px;padding:9px 12px;border-left:4px solid var(--c)}
+  .node.key{background:color-mix(in srgb,var(--c) 9%,#fff)}
+  .date{font-size:12.5px;font-weight:800;color:var(--c)}
+  .ttl{font-size:13.5px;font-weight:700;margin:2px 0 2px}
+  .desc{font-size:12.5px;color:var(--sub);line-height:1.5}
+  .tag{display:inline-block;font-size:10.5px;font-weight:700;color:var(--c);background:color-mix(in srgb,var(--c) 14%,#fff);
+    border-radius:6px;padding:1px 7px;margin-top:5px}
+
+  .foot{margin-top:30px;background:var(--card);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow)}
+  .foot h3{font-size:15px;font-weight:800;margin-bottom:10px}
+  .foot ul{margin:0;padding-left:18px;color:var(--sub);font-size:13px;line-height:1.9}
+  .foot b{color:var(--ink)}
+  .note{margin-top:16px;font-size:11.5px;color:#9aa4b2;text-align:center;line-height:1.7}
+
+  @media(max-width:860px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>三家公司 IPO 时间线对比</h1>
+    <p>同一件事（上市），在三个市场玩法完全不同 · 科创板 / Nasdaq / 港股</p>
+  </header>
+
+  <div class="legend">
+    <span><i class="cx"></i>长鑫科技 · 科创板</span>
+    <span><i class="sx"></i>SpaceX · Nasdaq</span>
+    <span><i class="mt"></i>Momenta · 港股</span>
+  </div>
+
+  <div class="grid">
+
+    <!-- ============ 长鑫科技 ============ -->
+    <div class="col cx">
+      <h2>长鑫科技 <span class="badge">科创板</span></h2>
+      <div class="kpi">
+        <div><div class="v">¥8.66</div><div class="l">发行价/股</div></div>
+        <div><div class="v">≈¥666亿</div><div class="l">募资(绿鞋后)</div></div>
+      </div>
+      <div class="tl">
+        <div class="item"><div class="node"><div class="date">2026-05-27</div><div class="ttl">上市委审议过会</div><div class="desc">上市委2026年第27次审议结果公告。</div></div></div>
+        <div class="item key"><div class="node key"><div class="date">2026-06-12</div><div class="ttl">证监会注册生效</div><div class="desc">证监许可〔2026〕1344号。A股"先批后问"第一道闸落定，路演询价前必须拿到。</div><span class="tag">关键节点</span></div></div>
+        <div class="item"><div class="node"><div class="date">2026-07-09</div><div class="ttl">招股意向书 + 发行安排</div><div class="desc">披露发行结构初稿。</div></div></div>
+        <div class="item"><div class="node"><div class="date">2026-07-13</div><div class="ttl">询价截止</div><div class="desc">14:46:23:135 高价剔除，网下机构询价定锚。</div></div></div>
+        <div class="item"><div class="node"><div class="date">2026-07-14</div><div class="ttl">网下路演 / 询价</div><div class="desc">机构建簿。</div></div></div>
+        <div class="item"><div class="node"><div class="date">2026-07-15</div><div class="ttl">发行公告 + 风险特别公告</div><div class="desc">定价8.66元/股；战配16.67亿股。</div></div></div>
+        <div class="item"><div class="node"><div class="date">2026-07-16</div><div class="ttl">T日 网上申购</div><div class="desc">943万户、244倍、中签率0.47%。</div></div></div>
+        <div class="item"><div class="node"><div class="date">2026-07-17</div><div class="ttl">T+1 摇号抽签</div><div class="desc">中签结果确定。</div></div></div>
+        <div class="item"><div class="node"><div class="date">2026-07-20</div><div class="ttl">T+2 缴款</div><div class="desc">中签认购资金交收。</div></div></div>
+        <div class="item key"><div class="node key"><div class="date">2026-07月下旬</div><div class="ttl">挂牌上市 · 敲钟</div><div class="desc">发行结果公告后择日敲钟。</div><span class="tag">关键节点</span></div></div>
+      </div>
+    </div>
+
+    <!-- ============ SpaceX ============ -->
+    <div class="col sx">
+      <h2>SpaceX <span class="badge">Nasdaq</span></h2>
+      <div class="kpi">
+        <div><div class="v">$135.00</div><div class="l">发行价/股</div></div>
+        <div><div class="v">≈$744亿</div><div class="l">净募资</div></div>
+      </div>
+      <div class="tl">
+        <div class="item"><div class="node"><div class="date">2026-03-30</div><div class="ttl">秘密递交 DRS</div><div class="desc">Draft Registration 保密递表。</div></div></div>
+        <div class="item"><div class="node"><div class="date">2026-05-20</div><div class="ttl">S-1 公开招股书</div><div class="desc">红鲱鱼初稿，封面红字"未生效不构成要约"。</div></div></div>
+        <div class="item"><div class="node"><div class="date">2026-06-01</div><div class="ttl">S-1A 第一次修订</div><div class="desc">仍用"价格区间中点"口径（数值空白）。</div></div></div>
+        <div class="item"><div class="node"><div class="date">2026-06-03</div><div class="ttl">S-1A 第二次修订</div><div class="desc">收口单一固定价 $135.00（反常：常规美股给区间）。</div></div></div>
+        <div class="item"><div class="node"><div class="date">2026-06-04 ~ 06-11</div><div class="ttl">全球路演 · 建簿</div><div class="desc">等待期内边审边问、可路演可建簿，但不能成交。</div></div></div>
+        <div class="item key"><div class="node key"><div class="date">2026-06-11</div><div class="ttl">EFFECT 注册生效</div><div class="desc">SEC 仅确认披露充分，非实质审批。</div><span class="tag">关键节点</span></div></div>
+        <div class="item"><div class="node"><div class="date">2026-06-12</div><div class="ttl">424B4 最终定价</div><div class="desc">定价 $135，发行 555,555,555 股。</div></div></div>
+        <div class="item key"><div class="node key"><div class="date">2026-06-15</div><div class="ttl">交割 + 纳斯达克挂牌</div><div class="desc">人类史最大 IPO 之一。</div><span class="tag">关键节点</span></div></div>
+        <div class="item"><div class="node"><div class="date">2026-06-22 ~ 06-26</div><div class="ttl">高级票据发行</div><div class="desc">上市后债务融资。</div></div></div>
+      </div>
+    </div>
+
+    <!-- ============ Momenta ============ -->
+    <div class="col mt">
+      <h2>Momenta <span class="badge">港股</span></h2>
+      <div class="kpi">
+        <div><div class="v">HK$295.60</div><div class="l">发行价/股</div></div>
+        <div><div class="v">≈HK$67.8亿</div><div class="l">募资(绿鞋后)</div></div>
+      </div>
+      <div class="tl">
+        <div class="item"><div class="node"><div class="date">2026-03</div><div class="ttl">秘密递交 A1</div><div class="desc">转道港股，向港交所秘密提交申请。</div></div></div>
+        <div class="item"><div class="node"><div class="date">2026-06-18</div><div class="ttl">中国证监会境外上市备案</div><div class="desc">境内企业赴港法定前置条件落地。</div></div></div>
+        <div class="item key"><div class="node key"><div class="date">2026-06-23</div><div class="ttl">通过港交所上市聆讯</div><div class="desc">"物理AI第一股"标签生效；委任整体协调人。</div><span class="tag">关键节点</span></div></div>
+        <div class="item"><div class="node"><div class="date">2026-06-25</div><div class="ttl">签署承销协议</div><div class="desc">联席保荐人：中金公司 + 德意志银行。</div></div></div>
+        <div class="item"><div class="node"><div class="date">2026-06-29</div><div class="ttl">招股书 + 全球发售公告</div><div class="desc">招股开始；初始19,938,300股，募资≈58.9亿。</div></div></div>
+        <div class="item"><div class="node"><div class="date">2026-07-03</div><div class="ttl">香港公开发售截止</div><div class="desc">中午12:00申请截止；国际配售同步簿记。</div></div></div>
+        <div class="item"><div class="node"><div class="date">2026-07-07</div><div class="ttl">配发结果 + 稳价公告</div><div class="desc">配售基准与中签结果公布。</div></div></div>
+        <div class="item key"><div class="node key"><div class="date">2026-07-08 09:00</div><div class="ttl">港交所主板挂牌</div><div class="desc">开始买卖；优先股转普通股，净资产转正。</div><span class="tag">关键节点</span></div></div>
+        <div class="item"><div class="node"><div class="date">2026-07-08 ~ 08-02</div><div class="ttl">稳价期（30天）</div><div class="desc">绿鞋15%可行使维稳股价。</div></div></div>
+        <div class="item"><div class="node"><div class="date">2027-01-07</div><div class="ttl">基石/股东首轮解禁</div><div class="desc">6个月锁定期届满（基石含奔驰等）。</div></div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="foot">
+    <h3>节奏差异（同一件事，三家市场速度完全不同）</h3>
+    <ul>
+      <li><b>SpaceX（美股）</b>：公开递表 5/20 → 挂牌 6/15，约 <b>26 天</b>；审核与路演"边审边问"并行，EFFECT 只是披露确认。</li>
+      <li><b>Momenta（港股）</b>：聆讯 6/23 → 挂牌 7/8，仅 <b>15 天</b>；聆讯是实质把关，过后极快进入招股—挂牌。</li>
+      <li><b>长鑫科技（科创板）</b>：注册生效 6/12 → 挂牌 7月下旬，约 <b>40+ 天</b>；A股"先批后问"，拿到批文后仍要走完整询价—申购—缴款链条。</li>
+    </ul>
+  </div>
+
+  <div class="note">
+    数据来源：长鑫科技（发行公告/中签率公告/风险特别公告）、SpaceX（S-1/S-1A/424B4，SEC）、Momenta（聆讯后资料集/招股书/配发公告，港交所披露易）。<br>
+    本图仅供内容创作参考，不构成任何投资建议。
+  </div>
+</div>
+</body>
+</html>

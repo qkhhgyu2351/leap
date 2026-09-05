@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>重新认识吉利汽车 · 有二财经</title>
+<style>
+  :root {
+    --bg: #f5f7fa;
+    --card: #ffffff;
+    --border: rgba(0,0,0,0.07);
+    --text: #1e293b;
+    --sub: #64748b;
+    --blue: #2563eb;
+    --green: #16a34a;
+    --red: #dc2626;
+    --amber: #d97706;
+    --purple: #7c3aed;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.6;
+  }
+  .page {
+    min-height:100vh;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    padding:60px 48px;
+    border-bottom:1px solid var(--border);
+    position:relative;
+    background: var(--bg);
+  }
+  .page:last-child { border-bottom:none; }
+  #page1 { background:linear-gradient(160deg, #eef4ff 0%, #f5f7fa 100%); }
+  #page2 { background:linear-gradient(160deg, #f0f4ff 0%, #f5f7fa 100%); }
+  #page3 { background:linear-gradient(160deg, #faf5ff 0%, #f5f7fa 100%); }
+  #page4 { background:linear-gradient(160deg, #fff7ed 0%, #f5f7fa 100%); }
+  #page5 { background:linear-gradient(160deg, #fef9f0 0%, #f5f7fa 100%); }
+  #page6 { background:linear-gradient(160deg, #f0fdf4 0%, #f5f7fa 100%); }
+  #page7 { background:linear-gradient(160deg, #eff6ff 0%, #f5f7fa 100%); }
+  #page8 { background:linear-gradient(160deg, #f5f3ff 0%, #f5f7fa 100%); }
+
+  .page-num { position:absolute; top:24px; right:32px; font-size:15px; color:#aaa; }
+  .page-kicker {
+    font-size:18px; color:var(--blue); font-weight:600;
+    margin-bottom:14px; text-align:center; letter-spacing:2px;
+  }
+  .page-title {
+    font-size:42px; font-weight:800; text-align:center;
+    margin-bottom:14px; color:var(--text); line-height:1.35; letter-spacing:1px;
+  }
+  .page-sub {
+    font-size:18px; color:var(--sub); text-align:center;
+    margin-bottom:32px; font-weight:500; max-width:840px;
+  }
+  .page-sub strong { color:var(--text); }
+
+  .core-line {
+    background:var(--card); border-left:5px solid var(--blue);
+    padding:20px 30px; font-size:19px; font-weight:700;
+    color:var(--text); margin:0 auto 36px;
+    max-width:840px; width:100%;
+    border-radius:0 14px 14px 0; line-height:1.55; text-align:center;
+    box-shadow:0 2px 12px rgba(0,0,0,0.05);
+  }
+  .core-line .hl { color:var(--blue); }
+  .core-line .hlr { color:var(--red); }
+  .core-line .hlg { color:var(--green); }
+  .core-line .hla { color:var(--amber); }
+
+  .card-row {
+    display:flex; gap:20px; width:100%;
+    max-width:960px; flex-wrap:wrap; justify-content:center;
+  }
+  .data-card {
+    background:var(--card); border:1px solid var(--border);
+    border-radius:16px; padding:32px 26px;
+    min-width:200px; flex:1; text-align:center;
+    box-shadow:0 2px 10px rgba(0,0,0,0.04);
+  }
+  .data-value {
+    font-size:38px; font-weight:800; margin-bottom:8px;
+    line-height:1.2;
+  }
+  .data-value.blue { color:var(--blue); }
+  .data-value.green { color:var(--green); }
+  .data-value.amber { color:var(--amber); }
+  .data-value.purple { color:var(--purple); }
+  .data-label { font-size:13px; color:var(--sub); margin-bottom:6px; font-weight:600; letter-spacing:1px; }
+  .data-sub { font-size:15px; color:var(--text); line-height:1.5; }
+
+  .page-bridge {
+    font-size:16px; color:var(--sub); margin:0 auto 28px;
+    max-width:840px; width:100%; text-align:center;
+    font-weight:500;
+  }
+  .page-note {
+    font-size:13px; color:#94a3b8; text-align:center;
+    margin-top:auto; padding-top:20px;
+  }
+
+  /* P2 reveal */
+  .reveal-box {
+    background:var(--card); border:2px solid var(--blue);
+    border-radius:16px; padding:32px 40px; margin-bottom:32px;
+    max-width:840px; width:100%; text-align:center;
+    box-shadow:0 4px 20px rgba(37,99,235,0.10);
+  }
+  .reveal-label { font-size:16px; color:var(--sub); margin-bottom:8px; }
+  .reveal-name { font-size:52px; font-weight:900; color:var(--blue); letter-spacing:4px; }
+
+  /* Event cards (P3 收购时间线) */
+  .event-card {
+    background:var(--card); border:1px solid var(--border);
+    border-radius:14px; padding:28px 32px; margin-bottom:20px;
+    max-width:840px; width:100%;
+    box-shadow:0 2px 10px rgba(0,0,0,0.04);
+  }
+  .event-header { display:flex; gap:14px; align-items:center; margin-bottom:12px; flex-wrap:wrap; }
+  .event-year {
+    background:var(--blue); color:#fff;
+    font-size:14px; font-weight:700; padding:4px 12px;
+    border-radius:6px; white-space:nowrap;
+  }
+  .event-name { font-size:17px; font-weight:700; color:var(--text); }
+  .event-amount { font-size:14px; color:var(--amber); font-weight:600; margin-left:auto; }
+  .event-body { font-size:15px; color:var(--text); line-height:1.7; }
+  .event-body .kv { color:var(--blue); font-weight:700; }
+  .event-update {
+    margin-top:12px; padding:12px 16px;
+    background:#f8fafc; border-left:4px solid var(--amber);
+    border-radius:0 8px 8px 0; font-size:14px; color:var(--sub); line-height:1.6;
+  }
+  .event-update .kv { color:var(--amber); font-weight:700; }
+
+  .section-label {
+    font-size:15px; font-weight:700; color:var(--blue);
+    margin:20px 0 14px; max-width:840px; width:100%;
+    text-align:center; letter-spacing:1px;
+  }
+
+  /* Timeline (P4 品牌时间线) */
+  .timeline-row {
+    display:flex; gap:16px; max-width:840px; width:100%;
+    flex-wrap:wrap; justify-content:center; margin-bottom:24px;
+  }
+  .tl-step {
+    background:var(--card); border:1px solid var(--border);
+    border-radius:12px; padding:20px 18px; flex:1; min-width:140px;
+    text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.03);
+  }
+  .tly {
+    font-size:20px; font-weight:800; color:var(--blue);
+    margin-bottom:8px;
+  }
+  .tlw { font-size:15px; font-weight:700; color:var(--text); margin-bottom:6px; }
+  .tls { font-size:13px; color:var(--sub); line-height:1.5; }
+
+  .insight-box {
+    background:var(--card); border:1px solid var(--border);
+    border-radius:14px; padding:24px 28px;
+    max-width:840px; width:100%;
+    box-shadow:0 2px 10px rgba(0,0,0,0.04);
+  }
+  .insight-box p { font-size:15px; color:var(--text); line-height:1.7; }
+  .insight-box .hl { color:var(--blue); font-weight:700; }
+  .insight-box .hlr { color:var(--red); font-weight:700; }
+
+  /* KPI table (P5 整合) */
+  .kpi-table {
+    width:100%; max-width:840px; border-collapse:collapse;
+    margin-bottom:20px; font-size:15px;
+  }
+  .kpi-table th {
+    background:var(--blue); color:#fff;
+    padding:12px 16px; text-align:left; font-weight:600;
+  }
+  .kpi-table td { padding:11px 16px; border-bottom:1px solid var(--border); }
+  .kpi-table tr:last-child td { border-bottom:none; }
+  .tag-up { color:var(--green); font-weight:700; }
+  .tag-down { color:var(--red); font-weight:700; }
+
+  /* Note box */
+  .note-box {
+    background:#f8fafc; border:1px solid var(--border);
+    border-radius:10px; padding:16px 20px;
+    max-width:840px; width:100%; font-size:14px; color:var(--sub); line-height:1.6;
+    margin-bottom:20px;
+  }
+  .note-box b { color:var(--text); }
+
+  /* Bar chart (P6 年报) */
+  .bar-chart { max-width:840px; width:100%; margin-bottom:24px; }
+  .bar-row { display:flex; align-items:center; margin-bottom:12px; gap:12px; }
+  .bar-label { width:140px; font-size:14px; color:var(--sub); text-align:right; flex-shrink:0; }
+  .bar-track { flex:1; background:#e2e8f0; border-radius:8px; height:36px; position:relative; overflow:hidden; }
+  .bar-fill {
+    height:100%; border-radius:8px; display:flex; align-items:center;
+    padding-left:14px; font-size:14px; font-weight:700; color:#fff;
+    white-space:nowrap;
+  }
+  .bar-fill.yinhe { background:linear-gradient(90deg, #2563eb, #3b82f6); }
+  .bar-fill.geely { background:linear-gradient(90deg, #16a34a, #22c55e); }
+  .bar-fill.lynk { background:linear-gradient(90deg, #7c3aed, #a78bfa); }
+  .bar-fill.zeekr { background:linear-gradient(90deg, #d97706, #f59e0b); }
+
+  /* Trend row (P7 最新) */
+  .trend-row {
+    display:flex; gap:16px; max-width:840px; width:100%;
+    flex-wrap:wrap; justify-content:center; margin-bottom:20px;
+  }
+  .trend-step {
+    background:var(--card); border:1px solid var(--border);
+    border-radius:12px; padding:20px; flex:1; min-width:180px;
+    text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.03);
+  }
+  .ty { font-size:14px; color:var(--sub); margin-bottom:6px; }
+  .tv { font-size:28px; font-weight:800; }
+
+  /* End tag (P8) */
+  .end-tag {
+    font-size:20px; font-weight:700; color:var(--text);
+    margin-bottom:28px; letter-spacing:1px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════ P1 悬念钩子（纯悬念，不揭晓） ══════════════ -->
+<div class="page" id="page1">
+  <div class="page-num">1 / 8</div>
+
+  <div class="page-title" style="margin-top:60px;">
+    它让旗下一家上市公司<br>
+    上市不到两年就退市了
+  </div>
+  <div class="page-sub" style="margin-bottom:36px;">
+    手上捏着四五个品牌<br>
+    二十年来满世界买买买<br>
+    买过的品牌，比大多数车企拥有的还多
+  </div>
+
+
+  <div class="page-note">本内容不构成投资建议 · 数据来源：吉利汽车公告及公开报道</div>
+</div>
+
+<!-- ══════════════ P2 揭晓 + 数据卡片 ══════════════ -->
+<div class="page" id="page2">
+  <div class="page-num">2 / 8</div>
+
+  <div class="reveal-box">
+    <div class="reveal-label">这家车企，就是</div>
+    <div class="reveal-name">吉利</div>
+  </div>
+
+  <div class="page-sub" style="margin-bottom:28px;">
+    下面八页，从头拆一遍：买 → 用 → 合 → 兑现
+  </div>
+
+  <div class="card-row" style="margin-bottom:28px;">
+    <div class="data-card">
+      <div class="data-value blue">银河 + 吉利 + 领克 + 极氪</div>
+      <div class="data-label">手上四五个品牌</div>
+      <div class="data-sub">银河新能源主力 / 吉利燃油基盘<br>领克中高端 / 极氪高端纯电</div>
+    </div>
+    <div class="data-card">
+      <div class="data-value green">302万辆</div>
+      <div class="data-label">年销量</div>
+      <div class="data-sub">中国第二家年销300万辆的车企</div>
+    </div>
+    <div class="data-card">
+      <div class="data-value amber">20+年</div>
+      <div class="data-label">全球收购史</div>
+      <div class="data-sub">从18亿美元吞沃尔沃<br>到90亿美元入股奔驰</div>
+    </div>
+  </div>
+
+  <div class="core-line">
+    先讲<span class="hl">买</span>和<span class="hl">用</span>——这些品牌和技术，是怎么来的
+  </div>
+</div>
+
+<!-- ══════════════ P3 收购时间线（战略逻辑版） ══════════════ -->
+<div class="page" id="page3">
+  <div class="page-num">3 / 8</div>
+
+  <div class="page-kicker">故事一 · 买，是为了用</div>
+  <div class="page-title">二十年，满世界收</div>
+  <div class="page-sub">吉利和其他中国车企最大的不同：<br><strong>它买来的东西，后来都用什么了</strong></div>
+
+  <!-- 1. 沃尔沃 2010 -->
+  <div class="event-card">
+    <div class="event-header">
+      <span class="event-year">2010</span>
+      <span class="event-name">收购沃尔沃轿车 100% 股权</span>
+      <span class="event-amount">18亿美元 + 9亿运营资金</span>
+    </div>
+    <div class="event-body">
+      2010年3月，吉利以<span class="kv">18亿美元</span>从福特手中收购沃尔沃轿车<span class="kv">100%股权</span>及全部知识产权。当时吉利年营收140多亿人民币，沃尔沃2007年营收106亿美元——"蛇吞象"。
+      <br><br>
+      <b>买来干什么用：</b>不是买个品牌摆在货架上。吉利要的是沃尔沃的<span class="kv">安全技术体系、CMA整车架构、全球供应链管理</span>。今天领克的核心技术底座、银河系列部分车型的平台，根源都在这笔收购。沃尔沃是"买技术"——这是后来所有品牌能打的基础。
+    </div>
+    <div class="event-update">
+      <b>后续变化：</b>吉利已三次减持沃尔沃汽车股份套现超<span class="kv">43亿美元</span>，远超当年27亿美元投入，但仍持有<span class="kv">78.7%股权、96.7%投票权</span>，绝对控股未变。2026年2月沃尔沃因EX30电池召回、2025年营业利润暴跌99%导致股价大跌，吉利反手增持584万股。
+    </div>
+  </div>
+
+  <!-- 2. 宝腾 + 路特斯 2017 -->
+  <div class="event-card">
+    <div class="event-header">
+      <span class="event-year">2017</span>
+      <span class="event-name">收购宝腾 49.9% + 路特斯 51%</span>
+      <span class="event-amount">未单独披露</span>
+    </div>
+    <div class="event-body">
+      2017年6月，吉利收购马来西亚<span class="kv">宝腾汽车49.9%股权</span>和英国<span class="kv">路特斯跑车51%股权</span>。
+      <br><br>
+      <b>买来干什么用：</b>宝腾是马来西亚最大国有车企，拥有东南亚生产基地和完整经销网络——吉利借此<span class="kv">真正落地东南亚</span>，这是所有中国车企里唯一做到深度的。路特斯是英国传奇跑车品牌，收购后独立上市（路特斯科技 LOT，纳斯达克），定位高端纯电和超跑，补齐了吉利在"豪华性能"一端的品牌矩阵。
+    </div>
+  </div>
+
+  <!-- 3. 奔驰 2018 -->
+  <div class="event-card">
+    <div class="event-header">
+      <span class="event-year">2018</span>
+      <span class="event-name">入股戴姆勒（奔驰母公司）</span>
+      <span class="event-amount">约90亿美元</span>
+    </div>
+    <div class="event-body">
+      2018年2月，吉利出资约<span class="kv">90亿美元</span>，收购戴姆勒集团<span class="kv">9.69%</span>有表决权股份，一度成为最大单一股东。
+      <br><br>
+      <b>买来干什么用：</b>不是要控股奔驰，是要<span class="kv">合作</span>。入股的直接成果是2019年<span class="kv">smart品牌合资</span>：吉利与奔驰各持股50%，将smart从燃油微型车全面转型为纯电品牌，由中国制造返销欧洲。这是"买股权换合作"——用资本换一个高端小车的全球合作平台。
+    </div>
+    <div class="event-update">
+      <b>后续变化：</b>2023年出售戴姆勒卡车6.3%股份套现约<span class="kv">15亿欧元</span>。2026年6月美国"外国对手资本"法案生效，中国资本在车企持股合计不得超过15%——北汽9.98% + 吉利9.69% = 19.67%，触发监管红线，双方正在寻求解决方案。
+    </div>
+  </div>
+
+  <!-- 4a. 雷达汽车 2025-2026 -->
+  <div class="event-card">
+    <div class="event-header">
+      <span class="event-year">2025→26</span>
+      <span class="event-name">收购雷达汽车（新能源皮卡）</span>
+      <span class="event-amount">约2.18亿人民币</span>
+    </div>
+    <div class="event-body">
+      2026年5月15日完成交易，合计约<span class="kv">2.18亿人民币</span>收购雷达汽车全部股权及泰国子公司。
+      <br><br>
+      <b>买来干什么用：</b>雷达是<span class="kv">新能源皮卡</span>品牌，2025年全年销量1.304万辆，连续三年居新能源皮卡市占率第一，纯电皮卡市占率最高达98%。收购后将皮卡品类正式纳入吉利产品矩阵——这是吉利在<span class="kv">商用车+户外场景</span>的补充，和其他品牌不重叠。
+    </div>
+  </div>
+
+  <!-- 4b. 西班牙福特工厂 2026.5 -->
+  <div class="event-card">
+    <div class="event-header">
+      <span class="event-year">2026.5</span>
+      <span class="event-name">收购福特西班牙工厂装配线</span>
+      <span class="event-amount">未披露</span>
+    </div>
+    <div class="event-body">
+      2026年5月，吉利收购福特西班牙瓦伦西亚工厂的<span class="kv">Body 3车身装配线</span>。该产线此前生产蒙迪欧、S-Max等车型，目前已闲置。
+      <br><br>
+      <b>买来干什么用：</b>在这条产线上使用自研的<span class="kv">GEA全球智能新能源架构</span>生产紧凑型电动车，精准切入欧洲城市市场。同时<span class="kv">规避欧盟对中国电动车最高45.3%的关税</span>。更值得关注的是，福特可能基于吉利的GEA平台推出合作车型——十六年后，吉利和福特再次同框，但角色换了：2010年是"蛇吞象"的买方，今天是<span class="kv">输出技术标准和制造体系</span>的一方。
+    </div>
+  </div>
+
+  <!-- 4c. 墨西哥竞购 2026.5 -->
+  <div class="event-card">
+    <div class="event-header">
+      <span class="event-year">2026.5</span>
+      <span class="event-name">竞购日产墨西哥COMPAS工厂</span>
+      <span class="event-amount">竞购中</span>
+    </div>
+    <div class="event-body">
+      日产因全球战略收缩，将于2026年关闭位于墨西哥阿瓜斯卡连特斯州的<span class="kv">COMPAS工厂</span>——年产能<span class="kv">23万辆</span>，拥有成熟技术工人和供应链配套。
+      <br><br>
+      <b>买来干什么用：</b>通过墨西哥本地化生产<span class="kv">规避美国25%关税</span>和潜在进口限制，为进入北美市场铺路。最终竞购名单中，<span class="kv">吉利、比亚迪、广汽</span>三家中国车企入围。这是吉利在<span class="kv">"买全球"之后，开始"卖全球"</span>的关键一步——不只是把车卖到海外，而是在海外造、海外卖。
+    </div>
+  </div>
+
+  <div class="page-bridge">买来的品牌和技术，长成了今天手上的五个品牌 ↓</div>
+  <div class="page-note">来源：各年份公司公告、公开报道；沃尔沃三次减持套现数据——多源公开报道互相印证；福特西班牙/雷达/墨西哥——2026年5月多源报道</div>
+</div>
+
+<!-- ══════════════ P4 品牌时间线（战略逻辑版） ══════════════ -->
+<div class="page" id="page4">
+  <div class="page-num">4 / 8</div>
+
+  <div class="page-kicker">故事一 · 买出来的品牌</div>
+  <div class="page-title">五个品牌，各自从哪来</div>
+  <div class="page-sub">每个品牌的出生，都对应一笔收购或一次战略判断<br>问题是：品牌多了之后，开始互相打架</div>
+
+  <div class="timeline-row">
+    <div class="tl-step"><div class="tly">1997</div><div class="tlw">吉利品牌</div><div class="tls">自有基盘<br>燃油经济型<br>后来加入新能源</div></div>
+    <div class="tl-step"><div class="tly">2016</div><div class="tlw">领克</div><div class="tls">沃尔沃CMA架构<br>中高端燃油/混动<br>技术收购的直接成果</div></div>
+    <div class="tl-step"><div class="tly">2019</div><div class="tlw">几何</div><div class="tls">10万级纯电<br>和银河价格带重叠<br>2024年并入银河</div></div>
+    <div class="tl-step"><div class="tly">2021</div><div class="tlw">极氪</div><div class="tls">高端纯电<br>单车均价30万+<br>沃尔沃技术再升级</div></div>
+    <div class="tl-step"><div class="tly">2023</div><div class="tlw">银河系列</div><div class="tls">10-20万新能源主力<br>两年冲到123万辆<br>现在的核心增长引擎</div></div>
+  </div>
+
+  <div class="core-line" style="font-size:18px;">
+    领克和极氪都来自<span class="hl">沃尔沃的技术底座</span>——买技术，用来造品牌
+  </div>
+
+  <div class="insight-box" style="margin-bottom:20px;">
+    <p>
+      问题出在<span class="hl">几何和银河</span>——两个品牌都做10万级纯电，价格带完全重叠。<br>
+      领克和极氪也都做30万级，一个燃油/混动、一个纯电，但渠道和研发是两套。<br>
+      买来的品牌各自长起来了，但<span class="hlr">没协同，反而内耗</span>。这就是2024年启动整合的真实原因。
+    </p>
+  </div>
+
+  <div class="page-bridge">内耗出现，吉利做了一个决定 ↓</div>
+  <div class="page-note">来源：各品牌成立时间与技术来源——公司公告及公开报道</div>
+</div>
+
+<!-- ══════════════ P5 为什么要合 ══════════════ -->
+<div class="page" id="page5">
+  <div class="page-num">5 / 8</div>
+
+  <div class="page-kicker">故事二 · 合，是因为内耗</div>
+  <div class="page-title">一年半，三个品牌体系装进一个上市主体</div>
+  <div class="page-sub">品牌买来了、长起来了，但没协同<br>《台州宣言》之后，三项关键整合在19个月内完成</div>
+
+  <table class="kpi-table" style="margin-bottom:24px;">
+    <tr><th>时间</th><th>动作</th><th>内容</th></tr>
+    <tr><td>2024.9</td><td>《台州宣言》</td><td>战略转向：从品牌扩张到聚焦整合</td></tr>
+    <tr><td>2024</td><td>几何并入银河系列</td><td>10万级纯电并入银河，共用研发和渠道</td></tr>
+    <tr><td>2025.2</td><td>领克并入极氪科技集团</td><td>两套研发、两套渠道打通合并运营</td></tr>
+    <tr><td>2025.5→12</td><td>极氪私有化退市</td><td>2024年5月纽交所上市，2025年12月完成私有化退市</td></tr>
+  </table>
+
+  <div class="core-line">
+    极氪2024年5月纽交所敲钟，2025年12月退市——不到600天
+  </div>
+
+  <div class="note-box">
+    <b>补充：</b>极氪退市后，吉利汽车控股（0175.HK）是旗下唯一在港股上市的主体。沃尔沃汽车（瑞典上市）、路特斯科技（美国上市）在吉利控股集团层面，不在0175.HK里。雷达汽车被收购后也进入0175.HK体内。
+  </div>
+
+  <div class="page-bridge">买和合的故事讲完了。下面看数据 ↓</div>
+  <div class="page-note">来源：极氪退市对价——公司公告及多源公开报道</div>
+</div>
+
+<!-- ══════════════ P6 2025年报 + 四品牌 ══════════════ -->
+<div class="page" id="page6">
+  <div class="page-num">6 / 8</div>
+
+  <div class="page-kicker">数据验证 · 2025年报</div>
+  <div class="page-title">整合后第一份年报：利润增速超收入</div>
+  <div class="page-sub">2025年是《台州宣言》后第一个完整财年<br>买和合的效果，开始体现在利润表上</div>
+
+  <div class="bar-chart">
+    <div class="bar-row">
+      <div class="bar-label">银河系列 · 新能源主力</div>
+      <div class="bar-track"><div class="bar-fill yinhe" style="width:100%;">123.58万辆 · +150%</div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">吉利品牌 · 燃油基盘</div>
+      <div class="bar-track"><div class="bar-fill geely" style="width:83%;">102.67万辆</div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">领克 · 中高端</div>
+      <div class="bar-track"><div class="bar-fill lynk" style="width:31%;">38.56万辆</div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">极氪 · 高端纯电</div>
+      <div class="bar-track"><div class="bar-fill zeekr" style="width:24%;">29.90万辆</div></div>
+    </div>
+  </div>
+
+  <div class="card-row" style="margin-bottom:28px;">
+    <div class="data-card">
+      <div class="data-value green">3,452亿</div>
+      <div class="data-label">营收</div>
+      <div class="data-sub">+25%</div>
+    </div>
+    <div class="data-card">
+      <div class="data-value green">144.1亿</div>
+      <div class="data-label">核心归母净利润</div>
+      <div class="data-sub">+36%</div>
+    </div>
+    <div class="data-card">
+      <div class="data-value blue">682亿</div>
+      <div class="data-label">现金储备</div>
+      <div class="data-sub">+46%</div>
+    </div>
+    <div class="data-card">
+      <div class="data-value amber">16.6%</div>
+      <div class="data-label">毛利率</div>
+      <div class="data-sub">573亿毛利</div>
+    </div>
+  </div>
+
+  <table class="kpi-table">
+    <tr><th>指标</th><th>2025年</th><th>同比</th></tr>
+    <tr><td>总销量</td><td>302.46万辆</td><td class="tag-up">+39%</td></tr>
+    <tr><td>新能源销量</td><td>168.78万辆（占56%）</td><td class="tag-up">+90%</td></tr>
+    <tr><td>营收</td><td>3,452亿</td><td class="tag-up">+25%</td></tr>
+    <tr><td>核心归母净利润</td><td>144.1亿</td><td class="tag-up">+36%</td></tr>
+  </table>
+
+  <div class="insight-box" style="margin-bottom:20px;">
+    <p>
+      利润增速（36%）超过收入增速（25%）——这是<span class="hl">整合红利</span>第一次清晰体现在利润表上。
+      几何并入银河，两套渠道合成一套；领克和极氪研发打通，成本开始摊薄。
+      2025年年报，是"买→合"这条线的<span class="hlg">第一个验证节点</span>。
+    </p>
+  </div>
+
+  <div class="page-bridge">整合的效果在2025年年报里看到了。2026年开年，又有新变化 ↓</div>
+  <div class="page-note">来源：吉利汽车2025年报（经审计）；核心归母净利润剔除汇兑损益等非经营性项目</div>
+</div>
+
+<!-- ══════════════ P7 2026最新动态 ══════════════ -->
+<div class="page" id="page7">
+  <div class="page-num">7 / 8</div>
+
+  <div class="page-kicker">数据验证 · 2026最新</div>
+  <div class="page-title">Q1主业继续涨，出口开始翻倍</div>
+  <div class="page-sub">整合协同持续体现<br>2025年全年出口+1%，2026年4月起连续翻倍——买全球布局的回报开始兑现</div>
+
+  <div class="card-row" style="margin-bottom:20px;">
+    <div class="data-card">
+      <div class="data-value blue">838亿</div>
+      <div class="data-label">Q1营收 · +15%</div>
+      <div class="data-sub">首破800亿</div>
+    </div>
+    <div class="data-card">
+      <div class="data-value green">45.61亿</div>
+      <div class="data-label">Q1核心利润 · +31%</div>
+      <div class="data-sub">剔除汇兑后</div>
+    </div>
+    <div class="data-card">
+      <div class="data-value amber">17.5%</div>
+      <div class="data-label">Q1毛利率</div>
+      <div class="data-sub">+1.1个百分点</div>
+    </div>
+  </div>
+
+  <div style="font-size:19px;font-weight:700;margin:10px 0 14px;text-align:center;color:var(--text);">
+    出口：2025全年+1%，2026年4月起连续翻倍
+  </div>
+
+  <div class="trend-row">
+    <div class="trend-step">
+      <div class="ty">2025全年出口</div>
+      <div class="tv" style="color:var(--sub);">42.01万</div>
+      <div class="ty" style="font-size:14px;color:var(--red);">+1%</div>
+    </div>
+    <div class="trend-step">
+      <div class="ty">2026年4月出口</div>
+      <div class="tv" style="color:var(--green);">8.32万</div>
+      <div class="ty" style="font-size:14px;color:var(--green);">+245%</div>
+    </div>
+    <div class="trend-step">
+      <div class="ty">2026年5月出口</div>
+      <div class="tv" style="color:var(--green);">8.51万</div>
+      <div class="ty" style="font-size:14px;color:var(--green);">+184%</div>
+    </div>
+  </div>
+
+  <table class="kpi-table" style="margin-bottom:20px;">
+    <tr><th>最新</th><th>数据</th></tr>
+    <tr><td>5月总销量</td><td class="tag-up">23.76万辆 · 连续三月增长</td></tr>
+    <tr><td>5月新能源</td><td class="tag-up">13.34万辆 · 占56%</td></tr>
+    <tr><td>1-5月累计</td><td>约118万辆 · 进度34% · 全年目标345万</td></tr>
+  </table>
+
+  <div class="page-note">来源：2026Q1业绩公布（未经审核）、月度销量公告</div>
+</div>
+
+<!-- ══════════════ P8 收尾 ══════════════ -->
+<div class="page" id="page8">
+  <div class="page-num">8 / 8</div>
+
+  <div class="page-kicker">买 → 合 → 兑现</div>
+  <div class="page-title">接下来盯三件事</div>
+  <div class="page-sub">二十年买品牌和技术，一年半完成整合<br>现在到了看结果的阶段</div>
+
+  <div class="card-row" style="margin-bottom:24px;">
+    <div class="data-card">
+      <div class="data-value green">出口</div>
+      <div class="data-label">能否站稳月均8万辆</div>
+      <div class="data-sub">4月+245% / 5月+184%<br>西班牙工厂+墨西哥竞购<br>出海节奏持续加速</div>
+    </div>
+    <div class="data-card">
+      <div class="data-value blue">毛利率</div>
+      <div class="data-label">银河系列能否继续提升</div>
+      <div class="data-sub">10-20万价格带竞争激烈<br>Q1已提升至17.5%</div>
+    </div>
+    <div class="data-card">
+      <div class="data-value amber">345万</div>
+      <div class="data-label">全年销量目标</div>
+      <div class="data-sub">前5月完成34%<br>下半年需要加速</div>
+    </div>
+  </div>
+
+  <div class="end-tag">拆解上市公司，就看有二财经。下期见。</div>
+
+  <div class="page-note" style="margin-top:24px;">
+    数据来源：吉利汽车2025年报（经审计）、2026Q1业绩公布（未经审核）、月度销量公告及多源公开报道<br>
+    本内容不构成投资建议
+  </div>
+</div>
+
+</body>
+</html>

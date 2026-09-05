@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>长城汽车 · 28亿去哪了</title>
+<style>
+  :root {
+    --bg: #f5f6fa;
+    --card: #ffffff;
+    --border: #e2e6ee;
+    --text: #1a1a2e;
+    --sub: #8888a0;
+    --red: #e74c3c;
+    --green: #27ae60;
+    --blue: #2980b9;
+    --gold: #e67e22;
+    --teal: #17a38c;
+    --purple: #7d3c98;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .page {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 56px 48px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    page-break-after: always;
+    background: var(--bg);
+  }
+  .page:last-child { border-bottom: none; }
+  .page-num {
+    position: absolute; top: 24px; right: 32px;
+    font-size: 15px; color: #aaa;
+  }
+  .avatar-space { position: absolute; top: 0; left: 0; width: 300px; height: 180px; }
+
+  .page-kicker {
+    font-size: 19px; color: var(--gold); font-weight: 600;
+    margin-bottom: 14px; text-align: center;
+  }
+  .page-title {
+    font-size: 48px; font-weight: 800; text-align: center;
+    margin-bottom: 14px; letter-spacing: 1px; color: var(--text); line-height: 1.35;
+  }
+  .page-sub {
+    font-size: 22px; color: var(--sub); text-align: center;
+    margin-bottom: 30px; font-weight: 500; max-width: 880px;
+  }
+  .page-sub strong { color: var(--gold); }
+
+  /* ⭐ 核心句 */
+  .core-line {
+    background: linear-gradient(135deg, #fff8f0, #fff);
+    border-left: 5px solid var(--gold);
+    padding: 18px 28px;
+    font-size: 24px; font-weight: 800;
+    color: #2d2d3f;
+    margin: 0 auto 36px;
+    max-width: 880px; width: 100%;
+    border-radius: 0 14px 14px 0;
+    line-height: 1.5;
+    text-align: center;
+  }
+  .core-line .hl { color: var(--gold); font-weight: 800; }
+  .core-line .hlr { color: var(--red); font-weight: 800; }
+  .core-line .hlg { color: var(--green); font-weight: 800; }
+
+  /* 数据卡片 */
+  .card-row {
+    display: flex; gap: 24px; width: 100%;
+    max-width: 1080px; flex-wrap: wrap; justify-content: center;
+  }
+  .data-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 34px 28px;
+    min-width: 220px; flex: 1; text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .data-value { font-size: 54px; font-weight: 800; letter-spacing: -1px; }
+  .data-value.red { color: var(--red); }
+  .data-value.green { color: var(--green); }
+  .data-value.blue { color: var(--blue); }
+  .data-value.gold { color: var(--gold); }
+  .data-value.teal { color: var(--teal); }
+  .data-label { font-size: 19px; color: var(--text); margin-top: 10px; font-weight: 600; }
+  .data-sub { font-size: 15px; color: #999; margin-top: 6px; line-height: 1.6; }
+
+  /* KPI 表格 */
+  .kpi-table {
+    width: 100%; max-width: 1020px; border-collapse: collapse;
+    background: var(--card); border-radius: 12px; overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .kpi-table th {
+    padding: 14px 18px; font-size: 15px; color: var(--sub); text-align: left;
+    border-bottom: 2px solid var(--border); letter-spacing: 1px; background: #fafbfd;
+  }
+  .kpi-table td {
+    padding: 16px 18px; font-size: 18px;
+    border-bottom: 1px solid var(--border); color: var(--text);
+  }
+  .kpi-table tr:last-child td { border-bottom: none; }
+  .tag-up { color: var(--green); font-weight: 700; }
+  .tag-down { color: var(--red); font-weight: 700; }
+
+  /* 底部转场 */
+  .page-bridge {
+    margin-top: 40px; max-width: 880px; width: 100%; text-align: center;
+    font-size: 22px; color: var(--text); font-weight: 700;
+    background: var(--card); border: 2px dashed var(--gold);
+    border-radius: 999px; padding: 16px 40px;
+  }
+
+  /* 洞察框 */
+  .insight-box {
+    background: linear-gradient(135deg, #fff8f0, var(--card));
+    border: 1px solid var(--gold); border-radius: 16px;
+    padding: 30px 40px; max-width: 940px; width: 100%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .insight-title { font-size: 18px; color: var(--gold); font-weight: 700; margin-bottom: 12px; }
+  .insight-text { font-size: 23px; line-height: 1.85; color: #333; }
+  .insight-text .hl { color: var(--gold); font-weight: 700; }
+  .insight-text .hlr { color: var(--red); font-weight: 700; }
+  .insight-text .hlg { color: var(--green); font-weight: 700; }
+
+  /* 步骤标签 */
+  .step-tabs {
+    display: flex; gap: 12px; width: 100%;
+    max-width: 880px; justify-content: center; margin-bottom: 24px;
+  }
+  .step-tab {
+    padding: 10px 24px; border-radius: 999px;
+    font-size: 16px; font-weight: 700; color: var(--sub);
+    background: var(--card); border: 1px solid var(--border);
+  }
+  .step-tab.active { color: #fff; background: var(--gold); border-color: var(--gold); }
+
+  /* 趋势行 */
+  .trend-row { display: flex; gap: 16px; width: 100%; max-width: 920px; justify-content: center; margin-bottom: 30px; }
+  .trend-step {
+    flex: 1; background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px 16px; text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .trend-step .ty { font-size: 16px; color: var(--sub); margin-bottom: 6px; }
+  .trend-step .tv { font-size: 40px; font-weight: 800; }
+
+  .page-note {
+    font-size: 14px; color: #aaa; text-align: center;
+    margin-top: 18px; line-height: 1.7;
+  }
+
+  /* 条形图 */
+  .bar-chart { width: 100%; max-width: 880px; margin: 0 auto 30px; }
+  .bar-row { display: flex; align-items: center; margin-bottom: 16px; }
+  .bar-label {
+    width: 160px; font-size: 16px; text-align: right;
+    padding-right: 14px; flex-shrink: 0; line-height: 1.3; color: var(--text);
+  }
+  .bar-track {
+    flex: 1; height: 40px; background: #eef0f5;
+    border-radius: 6px; overflow: hidden; position: relative;
+  }
+  .bar-fill {
+    height: 100%; border-radius: 6px;
+    display: flex; align-items: center; padding-left: 12px;
+    font-size: 15px; font-weight: 600; color: #fff; white-space: nowrap;
+  }
+  .bar-fill.haval { background: linear-gradient(90deg, #27ae60, #2ecc71); }
+  .bar-fill.tank { background: linear-gradient(90deg, #e67e22, #f39c12); }
+  .bar-fill.pickup { background: linear-gradient(90deg, #2980b9, #5dade2); }
+  .bar-fill.wey { background: linear-gradient(90deg, #7d3c98, #9b59b6); }
+  .bar-fill.ora { background: linear-gradient(90deg, #e74c3c, #f1948a); }
+
+  
+
+</style>
+</head>
+<body>
+
+<!-- ════════════ P1 钩子 ════════════ -->
+<div class="page">
+  <div class="avatar-space"></div>
+  <div class="page-num">1 / 7</div>
+
+  <div class="page-kicker">长城汽车 · 601633</div>
+  <div class="page-title">多卖了9万辆，多收了200亿<br>利润却少了28亿</div>
+  <div class="page-sub">2025年，全行业都在打价格战——<strong>长城是唯一一家没跟的</strong></div>
+
+  <div class="card-row" style="margin-bottom:32px;">
+    <div class="data-card">
+      <div class="data-value green">+9万辆</div>
+      <div class="data-label">卖得更多</div>
+      <div class="data-sub">全年132.4万辆，同比+7.3%</div>
+    </div>
+    <div class="data-card">
+      <div class="data-value gold">+5,600元</div>
+      <div class="data-label">卖得更贵</div>
+      <div class="data-sub">全行业降价它涨价<br>单车均价14.79万</div>
+    </div>
+    <div class="data-card">
+      <div class="data-value red">-28亿</div>
+      <div class="data-label">赚得更少</div>
+      <div class="data-sub">净利润98.65亿，同比-22%<br>月均少赚2亿多</div>
+    </div>
+  </div>
+
+  <div class="core-line">
+    车没少卖，价没少涨——<span class="hlr">28亿去哪了？</span>
+  </div>
+
+  <div class="page-bridge">
+    先看它的赚钱机器长什么样 ↓
+  </div>
+  <div class="page-note">数据来源：长城汽车2025年报（审计数据）</div>
+</div>
+
+<!-- ════════════ P2 赚钱机器 ════════════ -->
+<div class="page">
+  <div class="avatar-space"></div>
+  <div class="page-num">2 / 7</div>
+  <div class="page-kicker">长城靠什么赚钱？</div>
+  <div class="page-title">五个品牌，三个老大</div>
+  <div class="page-sub">不进轿车红海，<strong>只在细分赛道当老大</strong>——宁可少卖，不亏本卖</div>
+
+  <div class="core-line">
+    <span class="hl">哈弗走量</span> · <span class="hl">坦克赚钱</span> · <span class="hl">皮卡守土</span> —— 三根柱子撑着
+  </div>
+
+  <div class="bar-chart">
+    <div class="bar-row">
+      <div class="bar-label">哈弗 · 走量</div>
+      <div class="bar-track"><div class="bar-fill haval" style="width:100%">75.86万辆 · 占57%，经济SUV基本盘</div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">坦克 · 赚钱</div>
+      <div class="bar-track"><div class="bar-fill tank" style="width:31%">23.27万辆 · 20-70万硬派越野</div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">皮卡 · 守土</div>
+      <div class="bar-track"><div class="bar-fill pickup" style="width:24%">18.2万辆 · 连续28年全国第一</div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">魏牌 · 冲高</div>
+      <div class="bar-track"><div class="bar-fill wey" style="width:13%">10.2万辆 · +86%，高端化加速</div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">欧拉 · 纯电</div>
+      <div class="bar-track"><div class="bar-fill ora" style="width:6%">4.83万辆 · 跌24%，纯电短板</div></div>
+    </div>
+  </div>
+
+  <table class="kpi-table" style="margin-bottom:20px;">
+    <tr><th style="width:160px;">关键指标</th><th>2025年数据</th><th>什么意思</th></tr>
+    <tr><td>单车均价</td><td class="tag-up">14.79万（+5,600元）</td><td>全行业降价它涨价，定价权还在</td></tr>
+    <tr><td>20万以上车型</td><td class="tag-up">53.4万辆，占40.3%</td><td>四成销量来自高价车</td></tr>
+    <tr><td>总收入</td><td>2,228亿（国内58.9% / 海外41.1%）</td><td>海外收入915亿，四年翻了三倍</td></tr>
+    <tr><td>毛利率</td><td>18.04%（去年19.51%）</td><td>赚钱机器没坏，但在收窄</td></tr>
+  </table>
+
+  <div class="page-bridge">
+    机器没坏。那28亿去哪了？账上有三笔 ↓
+  </div>
+  <div class="page-note">数据来源：长城汽车2025年报、月度产销快报；皮卡28年第一为长城官方数据</div>
+</div>
+
+<!-- ════════════ P3 第一笔 ════════════ -->
+<div class="page">
+  <div class="avatar-space"></div>
+  <div class="page-num">3 / 7</div>
+
+  <div class="step-tabs">
+    <div class="step-tab active">① 自己花掉的</div>
+    <div class="step-tab">② 海外利润变薄</div>
+    <div class="step-tab">③ 坦克踩了刹车</div>
+  </div>
+
+  <div class="page-title">第一笔：自己花掉的</div>
+  <div class="page-sub">不是亏掉的，是<strong>主动投出去的</strong></div>
+
+  <div class="core-line">
+    销售 + 研发，一年多花了<span class="hl">46亿</span> —— 买未来的钱
+  </div>
+
+  <div class="card-row" style="margin-bottom:24px;">
+    <div class="data-card">
+      <div class="data-value red">112.7亿</div>
+      <div class="data-label">销售费用 +43.9%</div>
+      <div class="data-sub">从"批发给经销商"到"直连用户"<br>建直营店、建体系，一年多花34亿</div>
+    </div>
+    <div class="data-card">
+      <div class="data-value teal">104.3亿</div>
+      <div class="data-label">研发费用 +12.1%</div>
+      <div class="data-sub">连续三年超百亿<br>混动系统、越野平台、智能化</div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <div class="insight-text">
+      费用分两种：<span class="hlr">救命的钱</span>和<span class="hlg">买未来的钱</span>。<br>
+      46亿属于后者。值不值，<span class="hl">期后销量说了算</span>。
+    </div>
+  </div>
+
+  <div class="page-bridge">
+    第一笔，是自己愿意花的。第二笔不一样——是被动丢的 ↓
+  </div>
+  <div class="page-note">来源：销售费用112.7亿、研发费用104.32亿——2025年报</div>
+</div>
+
+<!-- ════════════ P4 第二笔 ════════════ -->
+<div class="page">
+  <div class="avatar-space"></div>
+  <div class="page-num">4 / 7</div>
+
+  <div class="step-tabs">
+    <div class="step-tab">① 自己花掉的</div>
+    <div class="step-tab active">② 海外利润变薄</div>
+    <div class="step-tab">③ 坦克踩了刹车</div>
+  </div>
+
+  <div class="page-title">第二笔：海外不再是利润奶牛</div>
+  <div class="page-sub">车越卖越多，每100块海外收入赚的毛利<strong>三年少了9块</strong></div>
+
+  <div class="core-line">
+    海外毛利率从 <span class="hlg">26%</span> → <span class="hlr">16.7%</span>，从躺着赚变成了拿利润换地盘
+  </div>
+
+  <table class="kpi-table" style="margin-bottom:22px;">
+    <tr><th>年度</th><th>海外毛利率</th><th>国内毛利率</th><th>变化</th></tr>
+    <tr>
+      <td>2023</td>
+      <td class="tag-up">26.01%</td>
+      <td>15.52%</td>
+      <td>俄罗斯红利期，海外是利润奶牛</td>
+    </tr>
+    <tr>
+      <td>2024</td>
+      <td class="tag-down">18.76%</td>
+      <td>—</td>
+      <td>大降7.25个点，开始比国内低</td>
+    </tr>
+    <tr>
+      <td>2025</td>
+      <td class="tag-down">16.70%</td>
+      <td>18.61%</td>
+      <td>连续两年倒挂，跟比亚迪正相反</td>
+    </tr>
+  </table>
+
+  <div class="trend-row" style="margin-top:16px;">
+    <div class="trend-step">
+      <div class="ty">2025海外销量</div>
+      <div class="tv" style="color:var(--green);">50.68万</div>
+      <div class="ty" style="font-size:14px;color:var(--green);">+11.6%，量没问题</div>
+    </div>
+    <div class="trend-step">
+      <div class="ty">2025海外收入</div>
+      <div class="tv" style="color:var(--gold);">914.88亿</div>
+      <div class="ty" style="font-size:14px;">+13.99%，占总收入41%</div>
+    </div>
+    <div class="trend-step">
+      <div class="ty">2026年5月海外占比</div>
+      <div class="tv" style="color:var(--teal);">50.5%</div>
+      <div class="ty" style="font-size:14px;">每两辆长城，一辆卖到国外</div>
+    </div>
+  </div>
+
+  <div class="page-bridge">
+    海外是外患。第三笔是内忧——最赚钱的品牌出事了 ↓
+  </div>
+  <div class="page-note">来源：海外毛利率、收入——2025年报分地区披露（审计数据）；5月海外占比50.5%——产销快报</div>
+</div>
+
+<!-- ════════════ P5 第三笔 ════════════ -->
+<div class="page">
+  <div class="avatar-space"></div>
+  <div class="page-num">5 / 7</div>
+
+  <div class="step-tabs">
+    <div class="step-tab">① 自己花掉的</div>
+    <div class="step-tab">② 海外利润变薄</div>
+    <div class="step-tab active">③ 坦克踩了刹车</div>
+  </div>
+
+  <div class="page-title">第三笔：坦克踩了刹车</div>
+  <div class="page-sub">硬派越野不再是独门生意——<strong>高毛利基本盘松动</strong></div>
+
+  <div class="core-line">
+    坦克<span class="hlr">连续两个月两位数下滑</span>，最贵的品牌掉量，杀伤力是加倍的
+  </div>
+
+  <div class="trend-row">
+    <div class="trend-step">
+      <div class="ty">坦克2025全年增速</div>
+      <div class="tv" style="color:var(--sub);">+0.74%</div>
+      <div class="ty" style="font-size:14px;">23.27万辆<br>从高歌猛进，急刹到原地踏步</div>
+    </div>
+    <div class="trend-step">
+      <div class="ty">2026年4月</div>
+      <div class="tv" style="color:var(--red);">-11.4%</div>
+      <div class="ty" style="font-size:14px;color:var(--red);">不是踏步了，开始倒退</div>
+    </div>
+    <div class="trend-step">
+      <div class="ty">2026年5月</div>
+      <div class="tv" style="color:var(--red);">-18.3%</div>
+      <div class="ty" style="font-size:14px;color:var(--red);">连续两个月两位数下滑</div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <div class="insight-text">
+      以前硬派越野这块地，它一个人吃。<br>
+      现在比亚迪方程豹、奇瑞捷途纵横，带着插混越野杀进来了。<br>
+      <span class="hlg">好消息是魏牌在涨（+86%），但利润贡献还远比不上坦克。</span>
+    </div>
+  </div>
+
+  <div class="page-bridge">
+    三笔去向找齐了。那2026年，长城缓过来没有？看一季报 ↓
+  </div>
+  <div class="page-note">来源：坦克/魏牌/欧拉销量——月度产销快报；分品牌利润公司未单独披露，"最赚钱"为行业共识</div>
+</div>
+
+<!-- ════════════ P6 Q1检验 ════════════ -->
+<div class="page">
+  <div class="avatar-space"></div>
+  <div class="page-num">6 / 7</div>
+  <div class="page-kicker">2026年一季报：净利润-46%，又"腰斩"了</div>
+  <div class="page-title">又少赚一半，<br>是不是不行了？</div>
+  <div class="page-sub">恰恰相反——这次的-46%，<strong>大头是汇率造的假象</strong></div>
+
+  <div class="core-line">
+    去年白捡了<span class="hlg">10个亿</span> — 今年没得捡了 — 光这一项，比Q1利润<span class="hlr">9.45亿</span>还大
+  </div>
+
+  <table class="kpi-table" style="margin-bottom:22px;">
+    <tr><th style="width:120px;">先把假象拆开</th><th style="width:140px;">数字</th><th>人话版</th></tr>
+    <tr>
+      <td>去年一季度</td>
+      <td class="tag-up">白捡10个亿</td>
+      <td>人民币波动，长城手里的外币升值，什么都没干账上多10亿</td>
+    </tr>
+    <tr>
+      <td>今年一季度</td>
+      <td class="tag-down">没得捡了</td>
+      <td>汇率回归平静，这10亿凭空消失</td>
+    </tr>
+  </table>
+
+  <div style="font-size:19px;font-weight:700;margin:24px 0 14px;text-align:center;color:var(--text);">
+    把汇率拿开，看主业本身：
+  </div>
+
+  <table class="kpi-table">
+    <tr><th>主业指标</th><th>Q1 2026</th><th>怎么看</th></tr>
+    <tr><td>营收</td><td class="tag-up">451.09亿 +12.72%</td><td>销量只+4.79%，收入增速快于销量——车卖得更贵了</td></tr>
+    <tr><td>毛利率</td><td class="tag-up">18.45%（+0.6个点）</td><td>每辆车赚的毛利比去年多</td></tr>
+    <tr><td>经营现金流</td><td class="tag-up">+32.71亿</td><td>去年同期-89.80亿——从流出90亿变成流入33亿</td></tr>
+  </table>
+
+  <div class="page-bridge">
+    利润表看着变差，毛利率和现金流其实在变好。回到开头——28亿，值不值？ ↓
+  </div>
+  <div class="page-note">来源：2026年一季报（未经审计）；"白捡10亿"指2025Q1财务费用-10.28亿（汇兑收益）vs 2026Q1 +0.97亿</div>
+</div>
+
+<!-- ════════════ P7 总结 ════════════ -->
+<div class="page">
+  <div class="avatar-space"></div>
+  <div class="page-num">7 / 7</div>
+  <div class="page-kicker">回到开头：28亿去哪了？</div>
+  <div class="page-title">记住这三个数字，<br>你就看懂了长城</div>
+
+  <div class="core-line">
+    28亿不是亏掉的——<span class="hl">46亿</span>主动投进了渠道、研发、品牌
+  </div>
+
+  <div class="card-row" style="margin-bottom:28px;">
+    <div class="data-card">
+      <div class="data-value gold">14.79万</div>
+      <div class="data-label">单车均价，逆势上涨</div>
+      <div class="data-sub">唯一没跟价格战的车企<br>不降价的底气来自细分市场</div>
+    </div>
+    <div class="data-card">
+      <div class="data-value green">46亿</div>
+      <div class="data-label">主动投入，不是亏钱</div>
+      <div class="data-sub">销售+研发多花的钱<br>利润变少，底子变厚</div>
+    </div>
+    <div class="data-card">
+      <div class="data-value red">26%</div>
+      <div class="data-label">年度目标完成进度</div>
+      <div class="data-sub">180万辆目标，1-5月只完成26%<br>花出去的利润值不值，年底见</div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <div class="insight-text">
+      长城是一家<span class="hl">宁可少卖、不亏本卖</span>的公司。<br>
+      2025年的28亿，不是经营恶化的信号——<br>
+      大头是主动投进去的。<br>
+      钱花出去了，效果怎么样？<br>
+      <span class="hl">看下半年的两个数：坦克能不能止跌，180万辆能不能完成。</span>
+    </div>
+  </div>
+
+  <div style="margin-top:36px;font-size:22px;font-weight:700;text-align:center;color:var(--sub);">
+    拆解上市公司，就看有二财经。下期见。
+  </div>
+
+  <div class="page-note" style="margin-top:28px;">
+    数据来源：长城汽车2025年报（审计）、2026Q1季报（未经审计）、月度产销快报<br>
+    180万辆为2026年经营目标（公司年度报告披露）| 本内容不构成投资建议
+  </div>
+</div>
+
+<!-- ════════════ 
+<!-- ==============================
+     补充：源于早期备份稿（v1版图式 / v2问答式），合并保留的独有事实
+     ============================== -->
+<div class="page">
+  <div class="page-num">附</div>
+  <div class="page-kicker">长城汽车 · 补充数据</div>
+  <div class="page-title">备份稿独有事实（合并保留）</div>
+  <div class="page-sub">以下为早期备份稿含、正式版未覆盖的硬信息，供上架前核对</div>
+
+  <table class="kpi-table" style="margin-bottom:22px;">
+    <tr><th style="width:200px;">维度</th><th>备份稿独有事实</th></tr>
+    <tr><td>分红</td><td>2025年度拟10派3.5元，合计约30亿；分红率约30%，利润下滑年仍维持</td></tr>
+    <tr><td>股权结构</td><td>第一大股东（魏建军系）持股近60%，实际控制高度集中；控股股东质押6.17亿股（约占其持股12%）</td></tr>
+    <tr><td>森林生态子公司</td><td>蜂巢能源（电池，已独立融资）、毫末智行（智驾）、仙豆智能（座舱）、精工汽车（线控底盘）、诺博科技、未势能源（氢能全链）</td></tr>
+    <tr><td>品牌</td><td>魏牌（WEY）以魏建军姓氏命名——中国车企独一份</td></tr>
+    <tr><td>回购</td><td>6月5日单日回购H股411.85万股、耗资4,271万港元</td></tr>
+    <tr><td>非经常损益</td><td>4.6亿：政府补助1.9亿 + 公允价值变动2.8亿</td></tr>
+    <tr><td>海外布局</td><td>巴西全工艺工厂2025.8投产；海外170+国、1,400+渠道、累计出口破200万辆</td></tr>
+    <tr><td>新车</td><td>旗舰"长城H10"（30万级，魏建军全网征名）在路上</td></tr>
+  </table>
+
+  <div class="page-note">本页整理自「长城汽车产业版图_v1版图式_资料库.html」「长城汽车产业版图_v2问答式_备份.html」，事实以公司公告/年报为准。</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>造车这么卷，特斯拉靠哪块赚钱 · 验证马斯克（视频素材）</title>
+<style>
+:root{
+  --bg:#f7f8fc;--card:#fff;--border:#e6e9f0;--text:#1a1a2e;--sub:#7a7a9e;
+  --byd:#e85d3a;--byd-l:#fef0ec;--tsla:#2d7dd2;--tsla-l:#edf4fc;
+  --gold:#c5963a;--warn:#e74c3c;--ok:#1f9d6b;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.page{min-height:auto;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;padding:48px 32px 40px;position:relative;overflow:hidden}
+.page+.page{border-top:1px solid var(--border)}
+.page-tag{font-size:13px;color:var(--gold);text-transform:uppercase;letter-spacing:3px;margin-bottom:14px;font-weight:700}
+.tier{display:inline-block;font-size:12px;color:#fff;border-radius:20px;padding:4px 15px;letter-spacing:1px;margin-bottom:14px;font-weight:700}
+.tier.t1{background:var(--ok)} .tier.t2{background:var(--gold)} .tier.t3{background:var(--warn)}
+.page-title{font-size:38px;font-weight:800;text-align:center;max-width:880px;margin-bottom:10px;line-height:1.3;letter-spacing:-.5px}
+.page-title.sm{font-size:29px}
+.page-subtitle{font-size:16px;color:var(--sub);text-align:center;max-width:720px;margin-bottom:30px}
+.core-line{display:flex;align-items:flex-start;gap:14px;max-width:840px;margin:0 auto 28px;padding:16px 20px;background:#fffbf0;border-left:4px solid var(--gold);border-radius:0 8px 8px 0}
+.core-line .icon{font-size:22px;flex-shrink:0}
+.core-line .text{font-size:17px;font-weight:700;color:#5c4010;line-height:1.5}
+.page-bridge{display:inline-block;font-size:13.5px;color:var(--gold);font-weight:600;text-align:center;border:1px dashed var(--gold);padding:7px 18px;border-radius:20px;background:rgba(255,255,255,.9);margin-top:14px;max-width:520px;white-space:normal;line-height:1.5}
+.disc{position:absolute;top:10px;right:14px;font-size:10px;color:rgba(231,76,60,.55);font-weight:600;letter-spacing:.3px;z-index:2}
+.lad{display:flex;align-items:center;gap:12px;max-width:760px;margin:7px auto;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:9px 14px}
+.lad .lstep{font-size:12.5px;color:var(--sub);width:280px;flex:none}
+.lad .lbarwrap{flex:1;height:20px;background:#eef1f7;border-radius:6px;overflow:hidden}
+.lad .lbar{height:100%;border-radius:6px;background:var(--tsla)}
+.lad .lval{width:56px;text-align:right;font-weight:800;font-size:16px;color:var(--tsla)}
+.ladnote{font-size:11.5px;color:var(--gold);text-align:center;margin:1px 0 4px;font-weight:600}
+.insight-box{max-width:840px;margin:18px auto 0;background:var(--card);border-radius:14px;padding:18px 24px;font-size:15px;border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.03)}
+.insight-box .q{color:var(--gold);font-weight:700;margin-bottom:7px}
+.insight-box .a{color:var(--text);line-height:1.7}
+.card-row{display:flex;flex-direction:row;gap:14px;flex-wrap:nowrap;justify-content:center;max-width:960px;margin:0 auto}
+.data-card{background:var(--card);border-radius:14px;padding:16px 18px;min-width:0;flex:1;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.04);border:1px solid var(--border)}
+.data-card .label{font-size:12px;color:var(--sub);margin-bottom:5px}
+.data-card .value{font-size:22px;font-weight:800;margin-bottom:3px}
+.data-card .note{font-size:11.5px;color:var(--sub)}
+.cmt{max-width:820px;margin:6px auto;display:flex;flex-direction:column;gap:10px}
+.cmt .ci{display:flex;gap:14px;align-items:flex-start;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:13px 18px;box-shadow:0 1px 8px rgba(0,0,0,.03)}
+.cmt .ci .cv{font-size:22px;font-weight:800;width:74px;flex:none;text-align:center}
+.cmt .ci .ct{font-size:14px;line-height:1.5}
+.cmt .ci .ct b{color:var(--text)}
+.variant{max-width:860px;margin:0 auto;background:linear-gradient(135deg,#1a1a2e,#2c2c4a);color:#fff;border-radius:18px;padding:32px;text-align:center}
+.variant .lab{font-size:13px;letter-spacing:2px;color:var(--gold);font-weight:700;margin-bottom:12px}
+.variant .big{font-size:23px;font-weight:800;line-height:1.55}
+.variant .big em{color:var(--gold);font-style:normal}
+.variant .sm{font-size:15px;opacity:.85;margin-top:16px;line-height:1.7}
+.annot{font-size:12px;color:var(--sub);margin-top:14px;text-align:center;max-width:840px;margin-left:auto;margin-right:auto;line-height:1.6}
+.mtx{max-width:780px;margin:8px auto;width:100%;border-collapse:collapse;font-size:13.5px;background:var(--card);border-radius:12px;overflow:hidden;border:1px solid var(--border)}
+.mtx th{background:#f0f2f8;padding:9px 12px;font-size:12.5px;color:var(--sub);font-weight:700;text-align:center}
+.mtx td{padding:9px 12px;border-bottom:1px solid var(--border);text-align:center}
+.mtx td:first-child{text-align:left;color:var(--text);font-weight:600}
+.mtx tr:last-child td{border-bottom:none}
+.mtx .yes{color:var(--ok);font-weight:800}.mtx .no{color:var(--warn);font-weight:800}
+@media(max-width:768px){.page-title{font-size:25px}.page-title.sm{font-size:21px}.data-card{min-width:auto}.page{padding:42px 14px}.page-bridge{white-space:normal;width:88%}.mtx{font-size:12px}.lad .lstep{width:160px;font-size:11px}}
+</style>
+</head>
+<body>
+
+<!-- P1 钩子 · 设问 -->
+<section class="page">
+  <div class="disc">视频为分析分享 · 不构成投资建议</div>
+  <div class="page-tag">拆解上市公司 · 有二财经</div>
+  <div class="page-title">马斯克说,<br>卖车可以不赚钱</div>
+  <div class="page-subtitle" style="margin-bottom:14px">马斯克不止一次公开说过——<br><b>2023年4月19日 Q1财报电话会原话：</b><br>"特斯拉在技术上可以<b>以零利润销售</b>，然后在未来通过<b>自动驾驶</b>产生实际巨大经济效益。"<br><span style="font-size:12px;color:#A0A0C0">降价期间又说："推动更高的销量和更大的车队是正确的选择。" 2025年重申："软件和AI服务才是利润。"</span></div>
+  <div class="core-line" style="margin-top:0"><span class="icon">🔍</span><span class="text">他说特斯拉理论上可以零利润卖车——靠后续自动驾驶订阅赚钱。这话是狂言还是有数据支撑？今天把账本一层层拆开验证。</span></div>
+  <div class="page-bridge">拆开看:整车毛利到底多少? 也顺便看看一辆车从你兜里赚多少 ↓</div>
+</section>
+
+
+<!-- P2 剥洋葱 · 裸车硬件毛利 -->
+<section class="page">
+  <div class="disc">视频为分析分享 · 不构成投资建议</div>
+  <span class="tier t2">验证 · 剥洋葱</span>
+  <div class="page-title sm">整车毛利 14.5%,<br>按 10-K 一层层往下剥</div>
+  <svg viewBox="0 0 820 332" style="width:100%;max-width:820px;margin-bottom:8px" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="0" width="820" height="332" rx="12" fill="#FAFBFD" stroke="#E6E9F0" stroke-width="1"/>
+    <text x="410" y="28" text-anchor="middle" font-size="14" fill="#7A7A9E" font-weight="700" font-family="'PingFang SC','Microsoft YaHei',sans-serif">🧮 按 10-K 一层层往下剥：剥到"裸车硬件"还剩多少毛利？</text>
+
+    <!-- 第一行：汽车板块总毛利 -->
+    <text x="40" y="64" text-anchor="start" font-size="14" font-weight="800" fill="#1A1A2E" font-family="'PingFang SC','Microsoft YaHei',sans-serif">汽车板块总毛利（收入≈4,882亿）</text>
+    <rect x="300" y="46" width="420" height="28" rx="6" fill="#2D7DD2"/>
+    <text x="510" y="65" text-anchor="middle" font-size="14" font-weight="800" fill="#FFF" font-family="'PingFang SC','Microsoft YaHei',sans-serif">868 亿 · 17.8%</text>
+    <text x="726" y="65" text-anchor="start" font-size="11" fill="#2D7DD2" font-weight="700" font-family="'PingFang SC','Microsoft YaHei',sans-serif">整车+租赁+碳积分</text>
+
+    <!-- 第二行：减租赁 -->
+    <text x="40" y="109" text-anchor="start" font-size="13" font-weight="700" fill="#7A7A9E" font-family="'PingFang SC','Microsoft YaHei',sans-serif">减：租赁</text>
+    <rect x="300" y="93" width="27" height="24" rx="5" fill="#9aa3b8"/>
+    <text x="336" y="110" text-anchor="start" font-size="12" font-weight="700" fill="#7A7A9E" font-family="'PingFang SC','Microsoft YaHei',sans-serif">57 亿</text>
+    <text x="380" y="110" text-anchor="start" font-size="10.5" fill="#999" font-family="'PingFang SC','Microsoft YaHei',sans-serif">· 毛利率47.5%</text>
+    <text x="600" y="110" text-anchor="start" font-size="13" fill="#C5963A" font-weight="700" font-family="'PingFang SC','Microsoft YaHei',sans-serif">→ 剩 811 亿 · 毛利率 ≈ 17%</text>
+
+    <!-- 第三行：减碳积分 → 整车销售毛利（里程碑） -->
+    <text x="40" y="154" text-anchor="start" font-size="13" font-weight="700" fill="#A32D2D" font-family="'PingFang SC','Microsoft YaHei',sans-serif">减：碳积分</text>
+    <rect x="300" y="138" width="68" height="24" rx="5" fill="#E74C3C"/>
+    <text x="334" y="155" text-anchor="middle" font-size="12" font-weight="800" fill="#FFF" font-family="'PingFang SC','Microsoft YaHei',sans-serif">140 亿</text>
+    <text x="377" y="155" text-anchor="start" font-size="11" fill="#E74C3C" font-family="'PingFang SC','Microsoft YaHei',sans-serif">毛利≈100%</text>
+    <rect x="470" y="138" width="276" height="26" rx="6" fill="#FFF4E0" stroke="#C5963A" stroke-width="1.5"/>
+    <text x="608" y="156" text-anchor="middle" font-size="13" font-weight="800" fill="#9a6a10" font-family="'PingFang SC','Microsoft YaHei',sans-serif">= 整车销售毛利 671 亿 · 14.5%</text>
+
+    <!-- 分隔线 -->
+    <line x1="40" y1="180" x2="760" y2="180" stroke="#E6E9F0" stroke-width="1" stroke-dasharray="3,3"/>
+    <text x="40" y="176" text-anchor="start" font-size="10" fill="#A0A0C0" font-family="'PingFang SC','Microsoft YaHei',sans-serif">↓ 再估着剔掉藏在车价里的 FSD 软件</text>
+
+    <!-- 第四行：减FSD -->
+    <text x="40" y="212" text-anchor="start" font-size="13" font-weight="700" fill="#1A4F80" font-family="'PingFang SC','Microsoft YaHei',sans-serif">减：FSD（估）</text>
+    <rect x="300" y="196" width="46" height="24" rx="5" fill="#1A4F80"/>
+    <text x="323" y="213" text-anchor="middle" font-size="12" font-weight="800" fill="#FFF" font-family="'PingFang SC','Microsoft YaHei',sans-serif">92 亿</text>
+    <text x="356" y="213" text-anchor="start" font-size="11" fill="#1A4F80" font-family="'PingFang SC','Microsoft YaHei',sans-serif">软件 · 毛利≈100%</text>
+    <text x="600" y="213" text-anchor="start" font-size="13" fill="#C5963A" font-weight="700" font-family="'PingFang SC','Microsoft YaHei',sans-serif">→ 剩 579 亿</text>
+
+    <!-- 第五行：裸车硬件毛利 -->
+    <text x="40" y="258" text-anchor="start" font-size="14" font-weight="800" fill="#0C447C" font-family="'PingFang SC','Microsoft YaHei',sans-serif">≈ 裸车硬件毛利</text>
+    <rect x="300" y="240" width="279" height="30" rx="6" fill="#A8C8E8"/>
+    <text x="439" y="260" text-anchor="middle" font-size="14" font-weight="800" fill="#0C447C" font-family="'PingFang SC','Microsoft YaHei',sans-serif">≈ 579 亿 · 毛利率 ≈ 13%</text>
+    <text x="592" y="260" text-anchor="start" font-size="12" fill="#7A7A9E" font-weight="700" font-family="'PingFang SC','Microsoft YaHei',sans-serif">vs 整车销售 14.5%</text>
+
+    <!-- 底部说明 -->
+    <text x="410" y="300" text-anchor="middle" font-size="11" fill="#A0A0C0" font-family="'PingFang SC','Microsoft YaHei',sans-serif">* 按特斯拉 2025 年 10-K 折算(汇率7.0288)：汽车板块毛利 868亿/17.8%、租赁 57亿、碳积分 140亿、整车销售 671亿/14.5%。</text>
+    <text x="410" y="318" text-anchor="middle" font-size="11" fill="#A0A0C0" font-family="'PingFang SC','Microsoft YaHei',sans-serif">FSD 收入与用户系外部估算、公司未单列；裸车毛利为剔除 FSD 后的估算值,与实际存在偏差。</text>
+  </svg>
+
+  <div class="core-line"><span class="icon">💡</span><span class="text"><b>第一层验证：</b>剥到裸车硬件，毛利<b>还有 13%</b>——马斯克说"卖车可以不赚钱"，目前还没兑现完。每辆车还赚着毛利 <b>3.7 万元</b>。那什么时候能兑现？<b>我来帮你算这笔账。</b></span><span style="font-size:10px;color:#999;display:block;margin-top:4px">4,625 亿 ÷ 164 万辆 ≈ 28.2 万均价 × 13%</span></div>
+
+  <div class="page-bridge">等到哪天账算通了——汽车的利润就不需要了 ↓</div>
+</section>
+
+<!-- P3 造车赚的钱够不够花 -->
+<section class="page">
+  <div class="disc">视频为分析分享 · 不构成投资建议</div>
+  <span class="tier t3">账本 · 够花吗</span>
+  <div class="page-title sm">裸车赚 579 亿,<br>资本开支就要 599 亿</div>
+  <div style="font-size:13.5px;color:var(--sub);text-align:center;max-width:700px;margin:0 auto 10px">把裸车硬件毛利(≈579 亿)和公司一年的开销放在一起比——钱够不够,要看平衡。</div>
+
+  <svg viewBox="0 0 820 185" style="width:100%;max-width:820px;margin-bottom:8px" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="0" width="820" height="185" rx="12" fill="#FAFBFD" stroke="#E6E9F0" stroke-width="1"/>
+
+    <!-- 裸车毛利 bar -->
+    <text x="40" y="46" text-anchor="start" font-size="14" font-weight="800" fill="#0C447C" font-family="'PingFang SC','Microsoft YaHei',sans-serif">裸车硬件毛利</text>
+    <rect x="220" y="28" width="232" height="28" rx="6" fill="#A8C8E8"/>
+    <text x="336" y="47" text-anchor="middle" font-size="13" font-weight="800" fill="#0C447C" font-family="'PingFang SC','Microsoft YaHei',sans-serif">≈ 579 亿 · 毛利率 ≈ 13%</text>
+
+    <!-- 资本开支 -->
+    <text x="40" y="93" text-anchor="start" font-size="14" font-weight="800" fill="#1A1A2E" font-family="'PingFang SC','Microsoft YaHei',sans-serif">资本开支</text>
+    <rect x="220" y="75" width="240" height="28" rx="6" fill="#2C2C4A"/>
+    <text x="340" y="94" text-anchor="middle" font-size="13" font-weight="800" fill="#FFF" font-family="'PingFang SC','Microsoft YaHei',sans-serif">599 亿</text>
+    <text x="468" y="94" text-anchor="start" font-size="11" fill="#7A7A9E" font-family="'PingFang SC','Microsoft YaHei',sans-serif">10-K: $8,527M · 建厂+AI</text>
+
+    <!-- 销管+研发费用 -->
+    <text x="40" y="140" text-anchor="start" font-size="14" font-weight="800" fill="#1A1A2E" font-family="'PingFang SC','Microsoft YaHei',sans-serif">销管费用 + 研发费用</text>
+    <rect x="220" y="122" width="345" height="28" rx="6" fill="#1A1A2E"/>
+    <text x="392" y="141" text-anchor="middle" font-size="13" font-weight="800" fill="#FFF" font-family="'PingFang SC','Microsoft YaHei',sans-serif">861 亿</text>
+    <text x="574" y="141" text-anchor="start" font-size="11" fill="#7A7A9E" font-family="'PingFang SC','Microsoft YaHei',sans-serif">10-K: $6,411M(R&D) + $5,834M(SG&amp;A)</text>
+
+    <!-- 分隔线 -->
+    <line x1="220" y1="152" x2="220" y2="172" stroke="#E74C3C" stroke-width="2" stroke-dasharray="3,2"/>
+    <text x="198" y="180" text-anchor="end" font-size="11" fill="#E74C3C" font-weight="700" font-family="'PingFang SC','Microsoft YaHei',sans-serif">579 亿勉强覆盖资本开支 599 亿</text>
+    <text x="410" y="185" text-anchor="middle" font-size="10" fill="#C0C0D0" font-family="'PingFang SC','Microsoft YaHei',sans-serif">汽车板块数据直接取自 Tesla 2025 10-K；毛利率根据收入及成本计算 · 汇率 7.0288</text>
+  </svg>
+
+  <div class="core-line" style="background:#fff5f5;border-left-color:var(--warn)"><span class="icon">🧮</span><span class="text" style="color:#8b0000"><b>算一笔账：</b>裸车硬件毛利 579 亿——勉强覆盖<b>资本开支(599 亿)</b>。但<b>销管费用 + 研发费用共 861 亿</b>靠谁来平衡？</span></div>
+  <div class="page-bridge">现在靠:FSD + 碳积分 + 能源 + 车后 ↓</div>
+</section>
+
+<!-- P4 今天 · 利润三支柱 -->
+<section class="page">
+  <div class="disc">视频为分析分享 · 不构成投资建议</div>
+  <span class="tier t1">今天 · 靠什么平衡</span>
+  <div class="page-title sm">造车赚的 579 亿,<br>还不够平衡这些开支</div>
+  <div style="font-size:13.5px;color:var(--sub);text-align:center;max-width:700px;margin:0 auto 10px">裸车毛利579亿勉强覆盖资本开支599亿——但销管+研发费用共861亿靠谁来平衡？这几块高毛利业务,能补多少？</div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:840px;margin:0 auto">
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 16px;text-align:left">
+      <div style="font-size:28px;margin-bottom:4px">🧠</div>
+      <div style="font-size:16px;font-weight:800;color:var(--text);margin-bottom:6px">FSD 自动驾驶</div>
+      <div style="font-size:13px;color:var(--sub);line-height:1.7">
+        110 万付费用户 · $99/月<br>
+        <b style="color:var(--tsla)">毛利贡献 ≈ 92 亿</b> · 毛利率 ≈ 100%<br>
+        <span style="color:#999;font-size:11px">→ 每增 30 万用户 ≈ <b style="color:var(--tsla)">+25 亿</b>（$99×12×7.03）</span>
+      </div>
+      <div style="font-size:11px;color:#999;margin-top:6px;line-height:1.5;border-top:1px solid var(--border);padding-top:6px">
+        缺口 296 亿，只需再多 ≈ 12 组（360 万用户）<br>中国若获批：200万+保有量待释放
+      </div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 16px;text-align:left">
+      <div style="font-size:28px;margin-bottom:4px">🌍</div>
+      <div style="font-size:16px;font-weight:800;color:var(--text);margin-bottom:6px">碳积分</div>
+      <div style="font-size:13px;color:var(--sub);line-height:1.7">
+        零成本纯利<br>
+        <b style="color:var(--ok)">毛利贡献 ≈ 140 亿</b> · 毛利率 ≈ 100%
+      </div>
+      <div style="font-size:11px;color:#999;margin-top:6px;line-height:1.5;border-top:1px solid var(--border);padding-top:6px">
+        靠政策吃饭 · 规则变它就消失
+      </div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 16px;text-align:left">
+      <div style="font-size:28px;margin-bottom:4px">⚡</div>
+      <div style="font-size:16px;font-weight:800;color:var(--text);margin-bottom:6px">能源存储</div>
+      <div style="font-size:13px;color:var(--sub);line-height:1.7">
+        Megapack + Powerwall<br>
+        <b style="color:var(--ok)">毛利贡献 ≈ 268 亿</b> · 毛利率 29.8%
+      </div>
+      <div style="font-size:11px;color:#999;margin-top:6px;line-height:1.5;border-top:1px solid var(--border);padding-top:6px">
+        毛利是造车两倍 · 闷声发财
+      </div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 16px;text-align:left">
+      <div style="font-size:28px;margin-bottom:4px">🔧</div>
+      <div style="font-size:16px;font-weight:800;color:var(--text);margin-bottom:6px">车后市场</div>
+      <div style="font-size:13px;color:var(--sub);line-height:1.7">
+        超充 + 保险 + 维护 + 二手<br>
+        <b style="color:var(--tsla)">毛利贡献 ≈ 65 亿</b> · 毛利率 7.4%
+      </div>
+      <div style="font-size:11px;color:#999;margin-top:6px;line-height:1.5;border-top:1px solid var(--border);padding-top:6px">
+        车主生态闭环 · 持续现金流
+      </div>
+    </div>
+  </div>
+
+  <!-- 四块合计 vs 运营费用 -->
+  <div style="max-width:840px;margin:14px auto 0;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px">
+    <div style="display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap">
+      <div style="text-align:center">
+        <div style="font-size:11px;color:var(--sub);margin-bottom:4px">四块非车毛利合计</div>
+        <div style="font-size:32px;font-weight:900;color:#2C2C4A">≈ 565 亿</div>
+      </div>
+      <div style="font-size:28px;color:#C0C0D0">vs</div>
+      <div style="text-align:center">
+        <div style="font-size:11px;color:var(--sub);margin-bottom:4px">销管 + 研发费用 共</div>
+        <div style="font-size:32px;font-weight:900;color:#E74C3C">861 亿</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="core-line" style="margin-top:14px;background:#fff5f5;border-left-color:var(--warn)"><span class="icon">🔑</span><span class="text" style="color:#8b0000"><b>现在非车毛利只占总利润的近一半</b>——565亿 vs 861亿，差约300亿。但这个缺口不是死的：FSD在涨、能源在涨，<b>有一天会达到一个平衡</b>——非车毛利覆盖掉销管+研发费用。</span></div>
+  <div class="page-bridge">这对其他车企意味着什么？↓</div>
+</section>
+
+<!-- P6 降维打击 -->
+<section class="page">
+  <div class="disc">视频为分析分享 · 不构成投资建议</div>
+  <span class="tier t3">换个角度 · 竞争格局</span>
+  <div class="page-title sm">特斯拉的降维打击,<br>其他车企扛得住吗？</div>
+  <div style="font-size:13.5px;color:var(--sub);text-align:center;max-width:700px;margin:0 auto 10px">任何一个纯靠卖车赚钱的车企，如果非汽车业务的利润撑不住公司开销，面对特斯拉就是不对称竞争，压力是<b>结构性</b>的。</div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:840px;margin:0 auto">
+    <div style="background:var(--card);border:2px solid var(--tsla);border-radius:14px;padding:20px 18px;text-align:left">
+      <div style="font-size:15px;font-weight:900;color:var(--tsla);margin-bottom:10px">特斯拉 · 三层利润结构</div>
+      <div style="font-size:12.5px;color:var(--sub);line-height:1.8">
+        ① 造车毛利 579 亿（13%）<br>
+        ② 非车高毛利 ≈ 565 亿<br>
+        &nbsp;&nbsp;&nbsp;FSD 92 + 碳积分 140 + 能源 268 + 车后 65<br>
+        ③ 一旦②覆盖销管+研发费用 → ①不再需要养公司<br>
+        <span style="display:inline-block;margin-top:8px;background:#E8F4FD;color:var(--tsla);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700">软件养公司 · 车抢份额</span>
+      </div>
+    </div>
+    <div style="background:var(--card);border:2px solid #E74C3C;border-radius:14px;padding:20px 18px;text-align:left">
+      <div style="font-size:15px;font-weight:900;color:#E74C3C;margin-bottom:10px">传统车企 · 单一利润结构</div>
+      <div style="font-size:12.5px;color:var(--sub);line-height:1.8">
+        ① 造车毛利 = 全部利润来源<br>
+        ② 没有高毛利软件/碳积分/能源<br>
+        ③ 研发 + 资本开支 → 只能靠卖车毛利硬扛<br>
+        <span style="display:inline-block;margin-top:8px;background:#FFF0F0;color:#E74C3C;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700">卖一辆赚一辆 · 降价就亏</span>
+      </div>
+    </div>
+  </div>
+
+  <svg viewBox="0 0 820 160" style="width:100%;max-width:820px;margin:16px auto 0" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="0" width="820" height="160" rx="12" fill="#FAFBFD" stroke="#E6E9F0" stroke-width="1"/>
+    
+    <!-- 特斯拉 -->
+    <text x="200" y="30" text-anchor="middle" font-size="14" font-weight="900" fill="var(--tsla)" font-family="'PingFang SC','Microsoft YaHei',sans-serif">特斯拉 · 利润来源</text>
+    <rect x="40" y="48" width="230" height="22" rx="5" fill="#A8C8E8"/>
+    <text x="155" y="63" text-anchor="middle" font-size="11" font-weight="700" fill="#0C447C" font-family="'PingFang SC','Microsoft YaHei',sans-serif">汽车毛利 579亿</text>
+    <rect x="40" y="76" width="230" height="22" rx="5" fill="#2C2C4A"/>
+    <text x="155" y="91" text-anchor="middle" font-size="11" font-weight="700" fill="#FFF" font-family="'PingFang SC','Microsoft YaHei',sans-serif">非车高毛利 565亿</text>
+    <text x="155" y="130" text-anchor="middle" font-size="18" font-weight="900" fill="var(--tsla)" font-family="'PingFang SC','Microsoft YaHei',sans-serif">合计 1,144 亿</text>
+
+    <!-- 分隔 -->
+    <line x1="310" y1="40" x2="310" y2="140" stroke="#E6E9F0" stroke-width="1"/>
+
+    <!-- 传统车企 -->
+    <text x="550" y="30" text-anchor="middle" font-size="14" font-weight="900" fill="#E74C3C" font-family="'PingFang SC','Microsoft YaHei',sans-serif">传统车企 · 利润来源</text>
+    <rect x="400" y="48" width="300" height="22" rx="5" fill="#C0C4D0"/>
+    <text x="550" y="63" text-anchor="middle" font-size="11" font-weight="700" fill="#5A5A7E" font-family="'PingFang SC','Microsoft YaHei',sans-serif">汽车毛利（全部来源）</text>
+    <rect x="400" y="76" width="300" height="22" rx="5" fill="#F0F0F0" stroke="#E0E0E0" stroke-width="1"/>
+    <text x="550" y="91" text-anchor="middle" font-size="11" fill="#C0C0D0" font-family="'PingFang SC','Microsoft YaHei',sans-serif">无可释放的非车利润</text>
+    <text x="550" y="130" text-anchor="middle" font-size="18" font-weight="900" fill="#E74C3C" font-family="'PingFang SC','Microsoft YaHei',sans-serif">全靠卖车一条腿</text>
+  </svg>
+
+  <div class="core-line" style="margin-top:14px;background:#fff5f5;border-left-color:var(--warn)"><span class="icon">⚔️</span><span class="text" style="color:#8b0000"><b>降维打击的本质：</b>纯靠卖车赚钱的车企，卖车毛利就是全部利润来源。研发、建厂、渠道，每一分钱都靠卖车毛利硬扛。而特斯拉有软件+碳积分+能源三层利润撑着，一旦非车毛利覆盖全部开销——<b>卖车就不需要赚钱，纯粹抢份额。</b>这不是产品竞争，是商业模式代差。<b>只要你的非车业务撑不住公司，面对这种对手，压力就是结构性的。</b></span></div>
+
+  <div class="page-bridge">所以,马斯克说的是真的吗？↓</div>
+</section>
+
+<!-- P7 结论 -->
+<section class="page">
+  <div class="disc">视频为分析分享 · 不构成投资建议</div>
+  <div class="page-tag">结论</div>
+  <div class="variant">
+    <div class="lab">账本拆完,验证结论</div>
+    <div class="big">马斯克说卖车可以不赚钱——<br><em>还真不是吹牛</em></div>
+    <div class="sm">裸车硬件毛利还有约 13%,但造车赚的 579 亿要填资本开支 599 亿,销管+研发费用 861 亿还得靠其他业务来平衡。<br>特斯拉真正赚的是:<b>FSD 软件订阅 + 碳积分 + 能源存储 + 车后市场</b>——四块高毛利业务在补这个缺口。<br>一旦哪天这四块能覆盖销管+研发费用,<b>它的车就敢不赚钱卖——那才是真正的价格战。</b></div>
+  </div>
+  <div class="core-line" style="margin-top:14px;background:#fff5f5;border-left-color:var(--warn)"><span class="icon">⚠️</span><span class="text" style="color:#8b0000"><b>当然,也别只看光环:</b>碳积分在缩水(看政策脸色)、汽车毛利在往下走——<b>故事讲得好,不等于一定兑现。</b></span></div>
+  <div class="core-line" style="margin-top:10px;background:#f0fff5;border-left-color:var(--ok)"><span class="icon">🎯</span><span class="text" style="color:#0a4a2a"><b>我们不怕吹牛,怕就怕有些人把吹过的牛都实现了。</b><br>下个视频,详细讲一讲,重新认识一下特斯拉。</span></div>
+  <div class="annot">数据来源：特斯拉 2025 年 10-K（直接数据）及根据 10-K 数据计算。直接取自 10-K：整车销售收入 $65,821M、汽车租赁收入 $1,712M、汽车租赁成本 $899M、碳积分收入 $1,993M、能源收入 $12,771M、服务及其他收入 $12,530M、R&amp;D $6,411M、SG&amp;A $5,834M、资本开支 $8,527M。10-K 直接披露：整车销售毛利率 14.5%。根据 10-K 数据计算：汽车板块总毛利率 ≈17.8%、租赁毛利率 ≈47.5%、剥租赁后毛利率 ≈17%、剥 FSD 后裸车毛利率 ≈13%。FSD 收入系外部估算约 $1,307M（约 92 亿）。汇率 7.0288（2025-12-31）。本内容仅作教育研究用途，不构成任何投资建议。</div>
+  <div class="page-bridge">拆解上市公司 · 有二财经</div>
+</section>
+
+</body>
+</html>

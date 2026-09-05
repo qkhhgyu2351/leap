@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>整车上市公司 DPO 账期排名 · 2026 中期</title>
+<style>
+  :root{
+    --bg:#F4F1EB; --card:#FFFFFF; --ink:#252A29; --muted:#5F5E5A;
+    --over:#993C1D; --under:#0F6E56; --line:#A32D2D; --border:rgba(0,0,0,.12);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.6;padding:32px 20px;}
+  .wrap{max-width:920px;margin:0 auto;}
+  h1{font-size:22px;font-weight:700;margin:0 0 4px;}
+  .sub{color:var(--muted);font-size:13px;margin-bottom:24px;}
+  .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;}
+  .metric{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;}
+  .metric .k{font-size:12px;color:var(--muted);}
+  .metric .v{font-size:24px;font-weight:700;margin-top:4px;}
+  .metric .v.s{font-size:20px;}
+  .box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:24px;}
+  .box h2{font-size:15px;margin:0 0 10px;}
+  .box p{font-size:13px;margin:6px 0;color:var(--ink);}
+  .box code{background:#F0ECE4;padding:1px 6px;border-radius:5px;font-size:12px;}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th,td{padding:9px 10px;text-align:right;border-bottom:1px solid var(--border);}
+  th{color:var(--muted);font-weight:600;font-size:12px;}
+  td.name,th.name{text-align:left;}
+  .tag{padding:2px 8px;border-radius:6px;font-size:12px;font-weight:600;}
+  .tag.over{background:#FCEBEB;color:var(--over);}
+  .tag.under{background:#E1F5EE;color:var(--under);}
+  canvas{max-width:100%;}
+  .note{font-size:12px;color:var(--muted);margin-top:8px;}
+  .legend{display:flex;flex-wrap:wrap;gap:18px;font-size:12px;color:var(--muted);margin:8px 2px;}
+  .legend span{display:flex;align-items:center;gap:6px;}
+  .sw{width:12px;height:12px;border-radius:2px;display:inline-block;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>整车上市公司应付账款周转天数（DPO）排名</h1>
+  <div class="sub">2026 年中期报告口径 · 19 家全部披露（蔚来 9/1 已披露，本次补入） · 数据来源：各公司 2026 半年报 / 中期业绩公告 PDF 原始数据</div>
+
+  <div class="cards">
+    <div class="metric"><div class="k">排名首位（占上游最狠）</div><div class="v">零跑 255.3 天</div></div>
+    <div class="metric"><div class="k">末位</div><div class="v">特斯拉 68.0 天</div></div>
+    <div class="metric"><div class="k">超 144 天阈值</div><div class="v">15 / 19</div></div>
+    <div class="metric"><div class="k">比亚迪（归母口径对照）</div><div class="v s">149.9 天 · 第 15</div></div>
+  </div>
+
+  <div class="box">
+    <h2>方法论</h2>
+    <p><b>DPO 公式：</b><code>应付合计(期末) × 365 ÷ (营业成本 H1 × 2)</code></p>
+    <p><b>应付合计</b> = 应付账款 + 应付票据（合并计算，未单列中小企业账期）。</p>
+    <p><b>阈值 144 天</b> = 60 天中小企业账期承诺 × 2.4。注：60 天账期承诺仅适用于大型企业对中小企业的付款（《保障中小企业款项支付条例》修订版，2025-06-01 施行），并非对所有供应商；各公司亦不单独披露对中小企业的付款账期，故 DPO 总额为唯一可量化指标。</p>
+    <p>比率与单位无关（千元 / 百万元 / 元 / 美元百万口径下比值一致），仅相对规模影响天数。</p>
+  </div>
+
+  <div class="box">
+    <h2>DPO 账期排名（天，降序）</h2>
+    <div style="position:relative;width:100%;height:800px;">
+      <canvas id="dpoChart" role="img" aria-label="2026年中期整车上市公司DPO账期排名横向柱状图"></canvas>
+    </div>
+    <div class="legend">
+      <span><span class="sw" style="background:var(--over);"></span>超阈值（&gt;144 天，占上游最狠）</span>
+      <span><span class="sw" style="background:var(--under);"></span>未超阈值（≤144 天）</span>
+      <span><span class="sw" style="background:var(--line);height:0;border-left:2px dashed var(--line);"></span>144 天 = 60 天账期承诺 × 2.4</span>
+    </div>
+  </div>
+
+  <div class="box">
+    <h2>完整排名表</h2>
+    <table>
+      <thead>
+        <tr><th class="name">排名</th><th class="name">公司</th><th>应付合计(期末) 亿</th><th>营业成本 H1 亿</th><th>DPO(天)</th><th>超 144 天</th><th>备注</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="name">1</td><td class="name">零跑汽车</td><td>470.80</td><td>336.61</td><td>255.3</td><td><span class="tag over">是</span></td><td></td></tr>
+        <tr><td class="name">2</td><td class="name">赛力斯</td><td>579.23</td><td>440.97</td><td>239.7</td><td><span class="tag over">是</span></td><td></td></tr>
+        <tr><td class="name">3</td><td class="name">蔚来</td><td>603.85</td><td>469.04</td><td>235.0</td><td><span class="tag over">是</span></td><td>9/1 披露；美方准则单一科目「應付貿易款項及應付票據」已含票据</td></tr>
+        <tr><td class="name">4</td><td class="name">奇瑞汽车</td><td>1456.68</td><td>1202.36</td><td>221.1</td><td><span class="tag over">是</span></td><td></td></tr>
+        <tr><td class="name">5</td><td class="name">北汽蓝谷</td><td>129.77</td><td>111.09</td><td>213.2</td><td><span class="tag over">是</span></td><td>本会话已更正文件（原误收艾迪药业 688488）</td></tr>
+        <tr><td class="name">6</td><td class="name">小鹏汽车</td><td>297.15</td><td>260.11</td><td>208.5</td><td><span class="tag over">是</span></td><td></td></tr>
+        <tr><td class="name">7</td><td class="name">江淮汽车</td><td>215.82</td><td>196.64</td><td>200.3</td><td><span class="tag over">是</span></td><td></td></tr>
+        <tr><td class="name">8</td><td class="name">长安汽车</td><td>612.91</td><td>561.17</td><td>199.3</td><td><span class="tag over">是</span></td><td></td></tr>
+        <tr><td class="name">9</td><td class="name">上汽集团</td><td>2796.44</td><td>2604.13</td><td>196.0</td><td><span class="tag over">是</span></td><td></td></tr>
+        <tr><td class="name">10</td><td class="name">长城汽车</td><td>810.70</td><td>833.42</td><td>177.5</td><td><span class="tag over">是</span></td><td></td></tr>
+        <tr><td class="name">11</td><td class="name">岚图汽车</td><td>138.16</td><td>149.44</td><td>168.7</td><td><span class="tag over">是</span></td><td></td></tr>
+        <tr><td class="name">12</td><td class="name">理想汽车</td><td>405.79</td><td>447.87</td><td>165.4</td><td><span class="tag over">是</span></td><td></td></tr>
+        <tr><td class="name">13</td><td class="name">吉利汽车</td><td>1227.46</td><td>1424.47</td><td>157.3</td><td><span class="tag over">是</span></td><td></td></tr>
+        <tr><td class="name">14</td><td class="name">广汽集团</td><td>384.22</td><td>466.34</td><td>150.4</td><td><span class="tag over">是</span></td><td></td></tr>
+        <tr><td class="name">15</td><td class="name">比亚迪</td><td>2297.69</td><td>2798.27</td><td>149.9</td><td><span class="tag over">是</span></td><td></td></tr>
+        <tr><td class="name">16</td><td class="name">小米汽车</td><td>1183.28</td><td>1646.44</td><td>131.2</td><td><span class="tag under">否</span></td><td>报表无单独应付票据科目，应付口径完整</td></tr>
+        <tr><td class="name">17</td><td class="name">江铃汽车</td><td>113.98</td><td>170.07</td><td>122.3</td><td><span class="tag under">否</span></td><td></td></tr>
+        <tr><td class="name">18</td><td class="name">北京汽车</td><td>339.35</td><td>519.16</td><td>119.3</td><td><span class="tag under">否</span></td><td></td></tr>
+        <tr><td class="name">19</td><td class="name">特斯拉</td><td>153.24</td><td>411.52</td><td>68.0</td><td><span class="tag under">否</span></td><td>美元口径，仅比率可比</td></tr>
+      </tbody>
+    </table>
+    <p class="note">应付合计单位：亿元人民币（特斯拉为美元百万折算比率，仅比值可比）。蔚来（9866.HK / NIO）已于 2026-09-01 披露，本次补入，19 家全部到齐。</p>
+  </div>
+
+  <div class="box">
+    <h2>口径与风险提示</h2>
+    <p>1. <b>小米汽车</b>：经核验 2026 半年报资产负债表无单独应付票据科目，DPO 按貿易應付款項（1183.28 亿，应付口径全额）计算，口径完整，不存在偏低。</p>
+    <p>2. <b>特斯拉</b>：原币为美元，DPO 仅作比率比较，绝对数值不可与其他人民币口径直接加总。</p>
+    <p>3. <b>北汽蓝谷</b>：本会话发现原下载文件误为江苏艾迪药业（688488），已通过公告 ID 1225527313 重新下载正确 600733 半年报（139 页）并覆盖、镜像、字节比对。</p>
+    <p>4. DPO 采用期末应付合计（非平均余额），对季节性较强的公司会放大波动；H1 营业成本 ×2 年化存在口径近似。</p>
+    <p>5. 60 天账期承诺仅约束大型企业对中小企业的付款，不等于全部供应商账期；各家不单独披露对中小企业付款账期，故本表不区分。</p>
+    <p>6. <b>2026-08-30 文件身份核验</b>：已对 18 份 H1 报告逐份打开封面页，核对公司名 + 股票代码（上汽 600104 / 广汽 601238 / 长安 000625 / 北汽蓝谷 600733 / 江淮 600418 / 赛力斯 601127 / 长城 601633 / 小鹏 XPeng 9868 / 岚图 VOYAH 等），确认无错公司混入。唯一历史错件（北汽蓝谷曾误收艾迪药业 688488）已于本会话更正。注意：本核验覆盖「文件身份 + DPO 所用关键数（应付合计、营业成本）」，非全科目逐页审计。</p>
+    <p>7. <b>2026-08-30 数值核验</b>：DPO 网页已与 19 家财报文件夹 18 份 H1 原始 PDF 逐项比对（应付账款 / 应付票据 / 营业成本三科目，取数位置详见《DPO账期排名验证报告_2026H1.md》），18 家 DPO 重算误差均 ≤0.1 天、排名与超阈值判定无误；本次修正两处显示值：广汽应付合计 384.23→384.22、赛力斯 579.24→579.23（均不影响 DPO），并更新小米口径说明。</p>
+    <p>8. <b>2026-09-01 蔚来补入（19 家到齐）</b>：来源为蔚来集团 2026 年第二季度業績公告（港交所披露易，2026-09-01；该公告按《上市规则》第 13.48(1) 条作为截至 2026-06-30 止六个月的中期报告）。身份核验：封面「蔚來集團（紐交所：NIO；港交所：9866；新交所：NIO）」，期间「截至 2026 年 6 月 30 日止六個月」。取数位置：
+      <br>· p13 未經審計簡明合併資產負債表「應付貿易款項及應付票據」2026-06-30 = 人民幣 60,385,478 千元（2025-12-31 = 53,309,727 千元，+13.27%）；
+      <br>· p17 未經審計簡明合併綜合虧損表「銷售成本總額」H1 = 46,903,889 千元（上年 28,226,317 千元）。
+      <br>→ DPO = 603.85 × 365 ÷ (469.04 × 2) = <b>235.0 天，排第 3</b>。
+      <br><b>口径说明</b>：蔚来以美国准则（U.S. GAAP）为主要报表，附 IFRS 调节表；其负债端为单一科目「應付貿易款項及應付票據」（Accounts and notes payable），已包含应付票据，与本项目「应付账款 + 应付票据」口径一致，不存在漏项。全篇另有「應付關聯方款項」即期 5.02 亿 + 非即期 11.90 亿，属关联方往来，按本项目统一口径不计入。</p>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const labels = ["零跑汽车","赛力斯","蔚来","奇瑞汽车","北汽蓝谷","小鹏汽车","江淮汽车","长安汽车","上汽集团","长城汽车","岚图汽车","理想汽车","吉利汽车","广汽集团","比亚迪","小米汽车","江铃汽车","北京汽车","特斯拉"].reverse();
+const values = [255.3,239.7,235.0,221.1,213.2,208.5,200.3,199.3,196.0,177.5,168.7,165.4,157.3,150.4,149.9,131.2,122.3,119.3,68.0].reverse();
+const flags  = ["over","over","over","over","over","over","over","over","over","over","over","over","over","over","over","under","under","under","under"].reverse();
+const thresholdLine = {
+  id:'thresholdLine',
+  afterDatasetsDraw(chart){
+    const {ctx, chartArea, scales} = chart;
+    const x = scales.x.getPixelForValue(144);
+    ctx.save(); ctx.strokeStyle='#A32D2D'; ctx.setLineDash([5,4]); ctx.lineWidth=1.5;
+    ctx.beginPath(); ctx.moveTo(x, chartArea.top); ctx.lineTo(x, chartArea.bottom); ctx.stroke();
+    ctx.setLineDash([]); ctx.fillStyle='#A32D2D'; ctx.font='12px sans-serif';
+    ctx.fillText('144天', x+4, chartArea.top+12); ctx.restore();
+  }
+};
+new Chart(document.getElementById('dpoChart'), {
+  type:'bar',
+  data:{ labels, datasets:[{ label:'DPO(天)', data:values,
+    backgroundColor: labels.map((_,i)=> flags[i]==='over' ? '#993C1D' : '#0F6E56'),
+    borderRadius:3, barThickness:20 }]},
+  options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false,
+    layout:{padding:{left:4,right:16}},
+    plugins:{ legend:{display:false}, tooltip:{callbacks:{label:(c)=>' DPO '+c.parsed.x+' 天'}} },
+    scales:{ x:{beginAtZero:true,max:280,title:{display:true,text:'应付账款周转天数 (天)',color:'#252A29',font:{size:12}},ticks:{color:'#252A29',font:{size:12}},grid:{color:'rgba(0,0,0,.08)'}},
+      y:{ticks:{color:'#252A29',font:{size:12}},grid:{display:false}} } },
+  plugins:[thresholdLine]
+});
+</script>
+</body>
+</html>

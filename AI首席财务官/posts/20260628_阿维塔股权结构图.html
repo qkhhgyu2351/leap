@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>阿维塔股权结构图（根据招股说明书）</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: #ffffff;
+            color: #333;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #1a5490;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            color: #1a5490;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header .subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .header .source {
+            font-size: 14px;
+            color: #999;
+            font-style: italic;
+        }
+        
+        .chart-section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            color: #1a5490;
+            margin-bottom: 20px;
+            padding-left: 10px;
+            border-left: 4px solid #1a5490;
+            font-weight: 600;
+        }
+        
+        .bar-chart {
+            margin-bottom: 30px;
+        }
+        
+        .bar-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 8px 0;
+        }
+        
+        .bar-label {
+            width: 200px;
+            text-align: right;
+            padding-right: 15px;
+            font-size: 14px;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .bar-track {
+            flex: 1;
+            height: 32px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #1a5490, #2d7edb);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            transition: width 0.3s ease;
+        }
+        
+        .bar-fill.controlling {
+            background: linear-gradient(90deg, #c0392b, #e74c3c);
+        }
+        
+        .bar-fill.strategic {
+            background: linear-gradient(90deg, #2980b9, #3498db);
+        }
+        
+        .bar-value {
+            margin-left: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            min-width: 60px;
+        }
+        
+        .pie-chart {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 40px 0;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .pie-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+        
+        .pie-chart svg {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .pie-legend {
+            margin-left: 40px;
+            list-style: none;
+        }
+        
+        .pie-legend li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            border-radius: 3px;
+        }
+        
+        .legend-label {
+            flex: 1;
+            color: #333;
+        }
+        
+        .legend-value {
+            font-weight: 600;
+            color: #1a5490;
+            margin-left: 10px;
+        }
+        
+        .info-box {
+            background: #f8f9fa;
+            border-left: 4px solid #1a5490;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+        }
+        
+        .info-box h3 {
+            color: #1a5490;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .info-box p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+        
+        .timeline {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .timeline h3 {
+            color: #1a5490;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .timeline-item {
+            display: flex;
+            margin-bottom: 15px;
+            padding-left: 20px;
+            border-left: 2px solid #1a5490;
+            padding-bottom: 15px;
+        }
+        
+        .timeline-item:last-child {
+            border-left: 2px solid transparent;
+        }
+        
+        .timeline-date {
+            font-weight: 600;
+            color: #1a5490;
+            min-width: 100px;
+            padding-right: 20px;
+        }
+        
+        .timeline-content {
+            flex: 1;
+            color: #555;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #999;
+            font-size: 13px;
+        }
+        
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            color: #856404;
+        }
+        
+        .note strong {
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>阿维塔科技股权结构图</h1>
+            <p class="subtitle">基于招股说明书（C轮融资完成后）</p>
+            <p class="source">数据来源：阿维塔港股IPO招股书 第102页</p>
+        </div>
+        
+        <div class="info-box">
+            <h3>📊 核心数据</h3>
+            <p><strong>总股本：</strong>3,065,146,675 股</p>
+            <p><strong>控股股东：</strong>长安汽车（40.99%）</p>
+            <p><strong>战略股东：</strong>宁德时代（9.17%）</p>
+            <p><strong>其他股东：</strong>36家机构股东</p>
+        </div>
+        
+        <div class="chart-section">
+            <h2 class="section-title">主要股东持股比例（前10名）</h2>
+            <div class="bar-chart">
+                <div class="bar-item">
+                    <div class="bar-label">长安汽车</div>
+                    <div class="bar-track">
+                        <div class="bar-fill controlling" style="width: 82%;">40.99%</div>
+                    </div>
+                    <div class="bar-value">40.99%</div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label">宁德时代（CATL）</div>
+                    <div class="bar-track">
+                        <div class="bar-fill strategic" style="width: 18.34%;">9.17%</div>
+                    </div>
+                    <div class="bar-value">9.17%</div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label">重庆安渝</div>
+                    <div class="bar-track">
+                        <div class="bar-fill" style="width: 17.62%; background: linear-gradient(90deg, #16a085, #1abc9c);">8.81%</div>
+                    </div>
+                    <div class="bar-value">8.81%</div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label">成安PE</div>
+                    <div class="bar-track">
+                        <div class="bar-fill" style="width: 14.54%; background: linear-gradient(90deg, #8e44ad, #9b59b6);">7.27%</div>
+                    </div>
+                    <div class="bar-value">7.27%</div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label">SIAMC</div>
+                    <div class="bar-track">
+                        <div class="bar-fill" style="width: 12.68%; background: linear-gradient(90deg, #d35400, #e67e22);">6.34%</div>
+                    </div>
+                    <div class="bar-value">6.34%</div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label">交银投资（BOCOM FAI）</div>
+                    <div class="bar-track">
+                        <div class="bar-fill" style="width: 6.68%; background: linear-gradient(90deg, #27ae60, #2ecc71);">3.34%</div>
+                    </div>
+                    <div class="bar-value">3.34%</div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label">绿色基金（Green Fund）</div>
+                    <div class="bar-track">
+                        <div class="bar-fill" style="width: 5.8%; background: linear-gradient(90deg, #f39c12, #f1c40f);">2.90%</div>
+                    </div>
+                    <div class="bar-value">2.90%</div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label">闽东时代（Mindong Era）</div>
+                    <div class="bar-track">
+                        <div class="bar-fill" style="width: 3.68%; background: linear-gradient(90deg, #e74c3c, #c0392b);">1.84%</div>
+                    </div>
+                    <div class="bar-value">1.84%</div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label">杭州产业投资</div>
+                    <div class="bar-track">
+                        <div class="bar-fill" style="width: 3.14%; background: linear-gradient(90deg, #3498db, #2980b9);">1.57%</div>
+                    </div>
+                    <div class="bar-value">1.57%</div>
+                </div>
+                <div class="bar-item">
+                    <div class="bar-label">巨力展业</div>
+                    <div class="bar-track">
+                        <div class="bar-fill" style="width: 2.78%; background: linear-gradient(90deg, #95a5a6, #7f8c8d);">1.39%</div>
+                    </div>
+                    <div class="bar-value">1.39%</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="note">
+            <strong>⚠️ 说明：</strong>长安汽车通过直接持股（40.99%）和间接持股（长安创新 0.57%）合计控制约41.56%的股权，为控股股东。宁德时代为第二大股东，但未派驻董事，无董事会席位。
+        </div>
+        
+        <div class="chart-section">
+            <h2 class="section-title">股权结构演变（关键节点）</h2>
+            <div class="timeline">
+                <h3>📅 历史沿革</h3>
+                <div class="timeline-item">
+                    <div class="timeline-date">2018年7月</div>
+                    <div class="timeline-content"><strong>公司成立</strong><br>长安汽车 50% + 蔚来汽车 50%</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2020年7月</div>
+                    <div class="timeline-content"><strong>蔚来退出</strong><br>蔚来以1元人民币转让全部股权，长安汽车持股升至95.38%</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2021年5月</div>
+                    <div class="timeline-content"><strong>第一次增资</strong><br>注册资本从2.02亿增至2.59亿，引入新股东</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2022年3月</div>
+                    <div class="timeline-content"><strong>战略轮融资</strong><br>宁德时代入驻（23.99%），长安汽车稀释至39.02%</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2023年</div>
+                    <div class="timeline-content"><strong>B轮融资</strong><br>长安汽车持股回升至40.99%，宁德时代稀释至9.17%</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2025年</div>
+                    <div class="timeline-content"><strong>C轮融资完成</strong><br>形成当前股权结构，准备港股IPO</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chart-section">
+            <h2 class="section-title">治理结构</h2>
+            <div class="info-box">
+                <h3>🏛️ 董事会构成</h3>
+                <p><strong>执行董事（3名）：</strong>陈卓（总裁）、王辉（非执行董事）、其他</p>
+                <p><strong>非执行董事（3名）：</strong>来自长安汽车、宁德时代等股东</p>
+                <p><strong>独立非执行董事（3名）：</strong>杨新民等，保持独立性</p>
+                <p style="margin-top: 15px;"><strong>⚠️ 关键问题：</strong>所有核心管理均来自长安汽车，管理层稳定性差（3年换3任CEO）</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>数据来源：阿维塔科技港股IPO招股说明书（申请版本，2026年6月）</p>
+            <p>制作：有二财经（何斌）| 数据截至C轮融资完成后</p>
+        </div>
+    </div>
+</body>
+</html>

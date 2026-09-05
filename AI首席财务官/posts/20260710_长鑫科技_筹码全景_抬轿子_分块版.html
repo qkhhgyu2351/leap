@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>长鑫IPO筹码全景 · 分块</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #eef1f5;
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    color: #1f2933;
+    line-height: 1.5;
+    padding: 48px 0 64px;
+  }
+  .tile {
+    width: 1080px; height: 1920px;
+    background: #fff;
+    border-radius: 32px;
+    margin: 0 auto 56px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 10px 36px rgba(0,0,0,.10);
+    display: flex;
+    flex-direction: column;
+  }
+  .tile:last-child { margin-bottom: 0; }
+
+  /* header */
+  .thead {
+    height: 280px;
+    padding: 0 64px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .thead .idx { font-size: 28px; font-weight: 800; letter-spacing: 2px; opacity: .95; }
+  .thead .ttl { font-size: 64px; font-weight: 900; letter-spacing: 1px; margin-top: 10px; line-height: 1.2; }
+  .thead .tag { font-size: 28px; font-weight: 600; opacity: .92; margin-top: 10px; }
+
+  .gold { background: linear-gradient(135deg,#b8860b,#d4a017); }
+  .blue { background: linear-gradient(135deg,#2c6fb0,#3f8fd0); }
+  .red  { background: linear-gradient(135deg,#c0392b,#e0503f); }
+  .green{ background: linear-gradient(135deg,#1f7a1f,#2a9d2a); }
+  .dark { background: linear-gradient(135deg,#374252,#4a5a6a); }
+
+  .tbody {
+    flex: 1;
+    padding: 64px 64px 72px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .bignum { display: flex; align-items: baseline; gap: 18px; }
+  .bignum .n { font-size: 132px; font-weight: 900; color: #c0392b; line-height: 1; }
+  .bignum .u { font-size: 40px; font-weight: 700; color: #888; }
+  .subnum { font-size: 34px; color: #555; font-weight: 700; margin-top: 10px; }
+  .subnum b { color: #1f2933; }
+
+  .kv { display: flex; gap: 24px 56px; flex-wrap: wrap; margin-top: 8px; }
+  .kv .item { font-size: 32px; }
+  .kv .k { color: #999; font-weight: 600; }
+  .kv .v { color: #1f2933; font-weight: 800; }
+
+  /* stacked row (strategic) */
+  .subs { margin-top: 8px; }
+  .subrow {
+    display: flex; align-items: flex-start; gap: 20px; padding: 24px 0;
+    border-bottom: 1px dashed #e8e8e8; font-size: 32px;
+  }
+  .subrow:last-child { border-bottom: none; }
+  .chip {
+    flex: 0 0 auto; padding: 10px 22px; border-radius: 20px; font-size: 26px; font-weight: 800;
+    background: #fdf6e3; color: #8a6d1b;
+  }
+  .chip.l12,.chip.l18 { background: #eaf3fb; color: #2c6fb0; }
+  .chip.l24,.chip.l36 { background: #fdeceb; color: #c0392b; }
+  .subrow .nm { font-weight: 800; flex: 0 0 auto; min-width: 140px; }
+  .subrow .nt { color: #777; font-size: 28px; line-height: 1.5; }
+
+  /* bars */
+  .barblk { margin-top: 8px; }
+  .barrow { margin: 28px 0; }
+  .barrow .lab { font-size: 32px; font-weight: 800; margin-bottom: 12px; display: flex; justify-content: space-between; }
+  .barrow .lab .amt { color: #c0392b; }
+  .track { height: 64px; background: #f0f2f5; border-radius: 14px; overflow: hidden; }
+  .fill { height: 100%; border-radius: 14px; display: flex; align-items: center; padding: 0 18px; color: #fff; font-size: 28px; font-weight: 800; white-space: nowrap; }
+  .fill.r { background: linear-gradient(90deg,#c0392b,#e0503f); }
+  .fill.g { background: linear-gradient(90deg,#1f7a1f,#2a9d2a); }
+  .fill.b { background: linear-gradient(90deg,#2c6fb0,#3f8fd0); }
+  .fill.y { background: linear-gradient(90deg,#b8860b,#d4a017); }
+
+  /* mini stat cards */
+  .ministat { display: flex; gap: 22px; margin-top: 16px; }
+  .ministat .c {
+    flex: 1; background: #f8f9fb; border-radius: 16px; padding: 26px; text-align: center;
+    border: 1px solid #ebedf0;
+  }
+  .ministat .c .cv { font-size: 38px; font-weight: 900; color: #c0392b; }
+  .ministat .c .cl { font-size: 26px; color: #777; margin-top: 8px; }
+
+  /* judge box */
+  .judge {
+    background: #fdf6e3; border: 2px dashed #b8860b; border-radius: 18px;
+    padding: 32px; font-size: 32px; font-weight: 700; color: #6b561a; line-height: 1.6;
+  }
+  .judge.blue { background: #eef5fb; border-color: #2c6fb0; color: #1f4e7a; }
+  .judge.red  { background: #fdeeee; border-color: #c0392b; color: #8a2b1f; }
+  .judge.green{ background: #eef8ee; border-color: #1f7a1f; color: #1f5a1f; }
+  .disclaimer { font-size: 24px; color: #1f5a1f; font-weight: 600; margin-top: 14px; }
+
+  /* cover tile */
+  .cover .tbody { justify-content: flex-start; gap: 52px; }
+  .cover .title { font-size: 96px; font-weight: 900; color: #1f2933; letter-spacing: 2px; line-height: 1.15; margin-top: 8px; }
+  .cover .sub { font-size: 38px; color: #555; margin-top: 8px; line-height: 1.45; }
+  .cover .thesis { font-size: 34px; color: #333; font-weight: 700; background: #fdf6e3; padding: 24px 30px; border-radius: 16px; border: 1px dashed #b8860b; color: #6b561a; }
+  .cover .quad { display: flex; flex-wrap: wrap; gap: 28px; }
+  .cover .q {
+    width: calc(50% - 14px); background: #f8f9fb; border: 1px solid #ebedf0;
+    border-radius: 20px; padding: 34px;
+  }
+  .cover .q .qv { font-size: 54px; font-weight: 900; color: #c0392b; }
+  .cover .q .ql { font-size: 28px; color: #666; margin-top: 8px; line-height: 1.4; }
+  .cover .three { display: flex; border-radius: 18px; overflow: hidden; }
+  .cover .three .c { flex: 1; text-align: center; padding: 34px 10px; color: #fff; font-weight: 800; font-size: 30px; }
+  .cover .three .c small { display: block; font-size: 24px; opacity: .9; font-weight: 600; margin-top: 8px; }
+  .cover .foot { color: #999; font-size: 26px; margin-top: 20px; }
+
+  /* synthesis */
+  .synthesis .bignum .n { color: #1f7a1f; }
+</style>
+</head>
+<body>
+
+  <!-- ===== TILE 1 : 封面 ===== -->
+  <div class="tile cover">
+    <div class="thead dark">
+      <div class="idx">长鑫科技 · IPO 拆解</div>
+      <div class="ttl">谁在给长鑫抬轿子</div>
+    </div>
+    <div class="tbody">
+      <div>
+        <div class="title">长鑫 IPO<br>筹码全景</div>
+        <div class="sub">三类玩家各拿多少、谁能跑、谁被锁</div>
+      </div>
+      <div class="thesis">核心判断：筹码集中度不高，真正想长拿的资金被锁死；首日流通盘以散户散筹为主，波动会被放大。</div>
+      <div class="quad">
+        <div class="q"><div class="qv">76.91 亿</div><div class="ql">发行新股（绿鞋全额）</div></div>
+        <div class="q"><div class="qv">8.66 元</div><div class="ql">发行价</div></div>
+        <div class="q"><div class="qv">579 亿</div><div class="ql">绿鞋前募资</div></div>
+        <div class="q"><div class="qv">45.03 亿</div><div class="ql">首日可流通（58.5%）</div></div>
+      </div>
+      <div class="three">
+        <div class="c" style="background:#b8860b;">战略配售<small>16.67亿 · 全锁</small></div>
+        <div class="c" style="background:#2c6fb0;">网下机构<small>21.73亿 · 七成锁</small></div>
+        <div class="c" style="background:#c0392b;">网上散户<small>38.51亿 · 全流通</small></div>
+      </div>
+      <div class="foot">来源：7/19 网下配售及网上中签结果公告 · 有二财经</div>
+    </div>
+  </div>
+
+  <!-- ===== TILE 2 : 战略配售 ===== -->
+  <div class="tile">
+    <div class="thead gold">
+      <div class="idx">① 战略配售</div>
+      <div class="ttl">压舱石 · 真抬轿</div>
+      <div class="tag">16.67 亿股 · 全锁 12~36 月 · 首日 0 流通</div>
+    </div>
+    <div class="tbody">
+      <div>
+        <div class="bignum"><span class="n">16.67</span><span class="u">亿股</span></div>
+        <div class="subnum">占发行总量 <b>21.67%</b> · 约 <b>144 亿</b> · 拿货最便宜</div>
+      </div>
+      <div class="subs">
+        <div class="subrow"><span class="chip l12">锁 12 月</span><span class="nm">国家队</span><span class="nt">社保+养老约 30 组合，约 86 亿</span></div>
+        <div class="subrow"><span class="chip l18">锁 18~36 月</span><span class="nm">产业资本</span><span class="nt">美团/阿里/中兴/奇瑞/蔚来等 14 家，约 22 亿</span></div>
+        <div class="subrow"><span class="chip l36">锁 36 月</span><span class="nm">员工资管</span><span class="nt">共赢 66/67/68/69 号，约 16 亿</span></div>
+        <div class="subrow"><span class="chip l24">锁 24 月</span><span class="nm">保荐人跟投</span><span class="nt">中金财富+中信建投，各 10 亿</span></div>
+      </div>
+      <div class="ministat">
+        <div class="c"><div class="cv">86 亿</div><div class="cl">国家队</div></div>
+        <div class="c"><div class="cv">22 亿</div><div class="cl">产业资本</div></div>
+        <div class="c"><div class="cv">16 亿</div><div class="cl">员工资管</div></div>
+        <div class="c"><div class="cv">20 亿</div><div class="cl">保荐人跟投</div></div>
+      </div>
+      <div class="judge">拿货最便宜、锁得最久，上市跌也跑不掉——他们是"轿子"的压舱石，不是坐轿的。</div>
+    </div>
+  </div>
+
+  <!-- ===== TILE 3 : 网下机构 ===== -->
+  <div class="tile">
+    <div class="thead blue">
+      <div class="idx">② 网下配售机构</div>
+      <div class="ttl">专业玩家</div>
+      <div class="tag">21.73 亿股 · 285 家机构 / 10,907 个配售对象</div>
+    </div>
+    <div class="tbody">
+      <div>
+        <div class="bignum"><span class="n">21.73</span><span class="u">亿股</span></div>
+        <div class="subnum">占发行总量 <b>28.25%</b> · 专业资金拿了大头</div>
+      </div>
+      <div class="barblk">
+        <div class="barrow">
+          <div class="lab"><span>无限售（首日可跑）</span><span class="amt">6.52 亿股 · 30%</span></div>
+          <div class="track"><div class="fill g" style="width:30%;">机构首日流通来源</div></div>
+        </div>
+        <div class="barrow">
+          <div class="lab"><span>限售（锁 6 个月）</span><span class="amt">15.21 亿股 · 70%</span></div>
+          <div class="track"><div class="fill b" style="width:70%;">锁半年</div></div>
+        </div>
+      </div>
+      <div class="ministat">
+        <div class="c"><div class="cv">285 家</div><div class="cl">网下投资者</div></div>
+        <div class="c"><div class="cv">10,907 个</div><div class="cl">配售对象</div></div>
+      </div>
+      <div class="judge blue">专业资金拿了大头，但七成被锁半年；只有 6.52 亿（零头）首日能动，是机构层面的"首日流通来源"。</div>
+    </div>
+  </div>
+
+  <!-- ===== TILE 4 : 网上散户 ===== -->
+  <div class="tile">
+    <div class="thead red">
+      <div class="idx">③ 网上打新散户</div>
+      <div class="ttl">散筹</div>
+      <div class="tag">38.51 亿股 · 100% 首日流通</div>
+    </div>
+    <div class="tbody">
+      <div>
+        <div class="bignum"><span class="n">38.51</span><span class="u">亿股</span></div>
+        <div class="subnum">占发行总量 <b>50.07%</b> · 体量最大的筹码池</div>
+      </div>
+      <div class="kv">
+        <div class="item"><span class="k">申报户数</span><br><span class="v">942.88 万户</span></div>
+        <div class="item"><span class="k">中签号码</span><br><span class="v">770.22 万个</span></div>
+        <div class="item"><span class="k">每号</span><br><span class="v">500 股</span></div>
+      </div>
+      <div class="ministat">
+        <div class="c"><div class="cv">~1 个</div><div class="cl">户均中签号</div></div>
+        <div class="c"><div class="cv">~500 股</div><div class="cl">户均股数</div></div>
+        <div class="c"><div class="cv">~4,330 元</div><div class="cl">户均金额</div></div>
+      </div>
+      <div class="judge red">770 万是"中签号码数"，不是账户数（账户数不披露、一人可中多号）。但量级摆在这：38.51 亿股全流通，是首日最大的筹码池。</div>
+    </div>
+  </div>
+
+  <!-- ===== TILE 5 : 首日流通盘 + 观点 ===== -->
+  <div class="tile synthesis">
+    <div class="thead green">
+      <div class="idx">④ 上市首日流通盘</div>
+      <div class="ttl">45.03 亿股</div>
+      <div class="tag">≈ 390 亿（按发行价 8.66 元）</div>
+    </div>
+    <div class="tbody">
+      <div>
+        <div class="bignum"><span class="n">45.03</span><span class="u">亿股</span></div>
+        <div class="subnum">占发行总量 <b>58.5%</b> · 首日可流通</div>
+      </div>
+      <div class="barblk">
+        <div class="barrow">
+          <div class="lab"><span>可流通</span><span class="amt">45.03 亿 · 58.5%</span></div>
+          <div class="track"><div class="fill g" style="width:58.5%;">网上 38.51 + 网下无限售 6.52</div></div>
+        </div>
+        <div class="barrow">
+          <div class="lab"><span>锁死</span><span class="amt">31.88 亿 · 41.5%</span></div>
+          <div class="track"><div class="fill r" style="width:41.5%;">战配 16.67 + 网下限售 15.21</div></div>
+        </div>
+      </div>
+      <div class="ministat">
+        <div class="c"><div class="cv">38.51 亿</div><div class="cl">散户贡献流通</div></div>
+        <div class="c"><div class="cv">6.52 亿</div><div class="cl">网下零头流通</div></div>
+        <div class="c"><div class="cv">31.88 亿</div><div class="cl">各类锁仓</div></div>
+      </div>
+      <div class="judge green">
+        轿子由散筹+机构零头抬，想长拿的 31.88 亿动不了；首日 45 亿流通盘以散筹为主、筹码太散 → 波动大。<br>
+        <span class="disclaimer">免责：数据源于 7/19 公告，解读非投资建议，不荐股不预测。</span>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

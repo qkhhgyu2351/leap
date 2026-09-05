@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>整车上市公司 · 品牌全景</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background: #f5f5f5;
+  padding: 40px 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.container {
+  width: 1000px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 40px 48px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+.title {
+  font-size: 42px;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-align: center;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+.subtitle {
+  font-size: 15px;
+  color: #888;
+  text-align: center;
+  margin-bottom: 24px;
+}
+.subtitle .legend-box {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  background: #e8f0fe;
+  border: 1px solid #c5d8f8;
+  border-radius: 3px;
+  vertical-align: middle;
+  margin: 0 4px;
+}
+
+/* Tab navigation */
+.tab-nav {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 32px;
+  border-bottom: 2px solid #eee;
+}
+.tab-btn {
+  padding: 12px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #888;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  transition: none;
+  margin-bottom: -2px;
+}
+.tab-btn.active {
+  color: #1a1a1a;
+  border-bottom-color: #1a1a1a;
+}
+
+/* Pages */
+.page { display: none; }
+.page.active { display: block; }
+
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+}
+
+.brand-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+.brand-table thead th {
+  background: #1a1a1a;
+  color: #fff;
+  font-weight: 600;
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 15px;
+}
+.brand-table thead th:nth-child(1) { width: 150px; }
+.brand-table thead th:nth-child(2) { width: 160px; }
+.brand-table thead th:nth-child(3) { }
+.brand-table tbody td {
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+  vertical-align: top;
+  line-height: 1.7;
+}
+.brand-table tbody tr:last-child td {
+  border-bottom: none;
+}
+.brand-table tbody tr:nth-child(even) {
+  background: #fafafa;
+}
+
+.company-name {
+  font-weight: 700;
+  font-size: 16px;
+  color: #1a1a1a;
+}
+.company-nature {
+  font-size: 14px;
+  color: #555;
+}
+.tag-central {
+  display: inline-block;
+  background: #e8f0fe;
+  color: #1a73e8;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-top: 4px;
+}
+.tag-list {
+  display: inline-block;
+  background: #f0f0f0;
+  color: #666;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-top: 4px;
+}
+
+.brands-cell {
+  font-size: 14px;
+  color: #333;
+}
+.brand-item {
+  display: inline-block;
+  padding: 3px 10px;
+  margin: 2px 4px 2px 0;
+  border-radius: 6px;
+  font-size: 13px;
+  background: #f0f0f0;
+  color: #333;
+}
+.brand-item.huawei {
+  background: #e8f0fe;
+  color: #1a73e8;
+  border: 1px solid #c5d8f8;
+}
+.price-tag {
+  font-size: 12px;
+  color: #888;
+  margin-left: 4px;
+}
+
+.source-note {
+  text-align: center;
+  font-size: 12px;
+  color: #aaa;
+  margin-top: 24px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1 class="title">整车上市公司 · 品牌全景</h1>
+  <p class="subtitle">
+    <span class="legend-box"></span>华为合作品牌用背景标注
+    <span style="margin:0 12px;">·</span>
+    数据来源：各公司官网、年报及公开信息
+  </p>
+
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="showPage(1, this)">国企（9家）</button>
+    <button class="tab-btn" onclick="showPage(2, this)">新势力（6家）</button>
+    <button class="tab-btn" onclick="showPage(3, this)">民企（4家）</button>
+  </div>
+
+  <!-- ===== Page 1: 国企 ===== -->
+  <div class="page active" id="page1">
+    <h2 class="page-title">9大国有车企 · 品牌全景</h2>
+    <table class="brand-table">
+      <thead>
+        <tr>
+          <th>车企</th>
+          <th>实际控制人</th>
+          <th>旗下品牌</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="company-name">上汽集团</div>
+          </td>
+          <td class="company-nature">上海市国资委</td>
+          <td class="brands-cell">
+            <span class="brand-item">智己IM<span class="price-tag">30-50万</span></span>
+            <span class="brand-item">飞凡<span class="price-tag">20-30万</span></span>
+            <span class="brand-item huawei">尚界<span class="price-tag">15-25万</span></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="company-name">广汽集团</div>
+          </td>
+          <td class="company-nature">广州市国资委</td>
+          <td class="brands-cell">
+            <span class="brand-item">埃安Aion<span class="price-tag">15-25万</span></span>
+            <span class="brand-item">昊铂Hyptec<span class="price-tag">30-50万</span></span>
+            <span class="brand-item">启境<span class="price-tag">华为乾崑合作</span></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="company-name">长安汽车</div>
+            <span class="tag-central">央企</span>
+          </td>
+          <td class="company-nature">国务院国资委</td>
+          <td class="brands-cell">
+            <span class="brand-item">启源Nevo<span class="price-tag">10-15万</span></span>
+            <span class="brand-item">深蓝Deepal<span class="price-tag">15-25万</span></span>
+            <span class="brand-item">阿维塔AVATR<span class="price-tag">25-70万</span></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="company-name">江淮汽车</div>
+          </td>
+          <td class="company-nature">安徽省国资委</td>
+          <td class="brands-cell">
+            <span class="brand-item">思皓Sehol<span class="price-tag">10-20万</span></span>
+            <span class="brand-item">江淮钇为<span class="price-tag">8-15万</span></span>
+            <span class="brand-item huawei">尊界<span class="price-tag">80-100万+</span></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="company-name">北汽蓝谷</div>
+          </td>
+          <td class="company-nature">北京市国资委</td>
+          <td class="brands-cell">
+            <span class="brand-item">极狐Arcfox<span class="price-tag">20-35万</span></span>
+            <span class="brand-item huawei">享界<span class="price-tag">30-50万+</span></span>
+            <span class="brand-item">BEIJING<span class="price-tag">10-20万</span></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="company-name">江铃汽车</div>
+          </td>
+          <td class="company-nature">国务院国资委 + 南昌市国资委</td>
+          <td class="brands-cell">
+            <span class="brand-item">JMEV江铃新能源<span class="price-tag">8-15万</span></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="company-name">岚图汽车</div>
+            <span class="tag-central">央企</span>
+          </td>
+          <td class="company-nature">国务院国资委</td>
+          <td class="brands-cell">
+            <span class="brand-item">岚图Voyah<span class="price-tag">30-50万</span></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="company-name">奇瑞汽车</div>
+          </td>
+          <td class="company-nature">芜湖市国资委</td>
+          <td class="brands-cell">
+            <span class="brand-item">风云<span class="price-tag">8-15万</span></span>
+            <span class="brand-item">iCAR<span class="price-tag">10-20万</span></span>
+            <span class="brand-item huawei">智界<span class="price-tag">25-35万</span></span>
+            <span class="brand-item">纵横</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="company-name">北京汽车</div>
+          </td>
+          <td class="company-nature">北京市国资委</td>
+          <td class="brands-cell">
+            <span class="brand-item">北京现代<span class="price-tag">合资</span></span>
+            <span class="brand-item">北京奔驰<span class="price-tag">合资·高端</span></span>
+            <span class="brand-item">BEIJING北京<span class="price-tag">10-20万</span></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===== Page 2: 新势力 ===== -->
+  <div class="page" id="page2">
+    <h2 class="page-title">6大新势力 · 品牌全景</h2>
+    <table class="brand-table">
+      <thead>
+        <tr>
+          <th>车企</th>
+          <th>创始人/控制人</th>
+          <th>旗下品牌</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="company-name">蔚来NIO</div>
+            <span class="tag-list">美股+H</span>
+          </td>
+          <td class="company-nature">李斌</td>
+          <td class="brands-cell">
+            <span class="brand-item">蔚来NIO<span class="price-tag">30-50万</span></span>
+            <span class="brand-item">乐道ONVO<span class="price-tag">15-25万</span></span>
+            <span class="brand-item">萤火虫firefly<span class="price-tag">10-15万</span></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="company-name">小鹏XPeng</div>
+            <span class="tag-list">美股+H</span>
+          </td>
+          <td class="company-nature">何小鹏</td>
+          <td class="brands-cell">
+            <span class="brand-item">小鹏XPeng<span class="price-tag">15-40万</span></span>
+            <span class="brand-item">MONA<span class="price-tag">10-15万</span></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="company-name">理想Li Auto</div>
+            <span class="tag-list">美股+H</span>
+          </td>
+          <td class="company-nature">李想</td>
+          <td class="brands-cell">
+            <span class="brand-item">理想Li Auto<span class="price-tag">25-50万</span></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="company-name">零跑Leapmotor</div>
+            <span class="tag-list">H股</span>
+          </td>
+          <td class="company-nature">朱江明</td>
+          <td class="brands-cell">
+            <span class="brand-item">零跑Leapmotor<span class="price-tag">8-20万</span></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="company-name">小米Xiaomi</div>
+            <span class="tag-list">H股</span>
+          </td>
+          <td class="company-nature">雷军</td>
+          <td class="brands-cell">
+            <span class="brand-item">小米Xiaomi<span class="price-tag">20-30万</span></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="company-name">特斯拉Tesla</div>
+            <span class="tag-list">美股</span>
+          </td>
+          <td class="company-nature">公众公司（马斯克系最大股东）</td>
+          <td class="brands-cell">
+            <span class="brand-item">Model 3/Y<span class="price-tag">25-40万</span></span>
+            <span class="brand-item">Model S/X<span class="price-tag">70-100万+</span></span>
+            <span class="brand-item">Cybertruck<span class="price-tag">进口</span></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===== Page 3: 民企 ===== -->
+  <div class="page" id="page3">
+    <h2 class="page-title">4大民企 · 新能源品牌</h2>
+    <table class="brand-table">
+      <thead>
+        <tr>
+          <th>车企</th>
+          <th>创始人/控制人</th>
+          <th>旗下品牌</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="company-name">比亚迪BYD</div>
+            <span class="tag-list">A+H</span>
+          </td>
+          <td class="company-nature">王传福</td>
+          <td class="brands-cell">
+            <span class="brand-item">比亚迪（王朝+海洋）<span class="price-tag">7-30万</span></span>
+            <span class="brand-item">腾势Denza<span class="price-tag">30-50万</span></span>
+            <span class="brand-item">方程豹<span class="price-tag">25-40万</span></span>
+            <span class="brand-item">仰望<span class="price-tag">80-100万+</span></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="company-name">长城汽车</div>
+            <span class="tag-list">A+H</span>
+          </td>
+          <td class="company-nature">魏建军</td>
+          <td class="brands-cell">
+            <span class="brand-item">欧拉ORA<span class="price-tag">10-15万</span></span>
+            <span class="brand-item">魏牌WEY<span class="price-tag">15-30万</span></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="company-name">吉利汽车</div>
+            <span class="tag-list">H股</span>
+          </td>
+          <td class="company-nature">李书福</td>
+          <td class="brands-cell">
+            <span class="brand-item">银河Galaxy<span class="price-tag">10-20万</span></span>
+            <span class="brand-item">极氪Zeekr<span class="price-tag">20-50万</span></span>
+            <span class="brand-item">领克Lynk&amp;Co<span class="price-tag">15-30万</span></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="company-name">赛力斯</div>
+            <span class="tag-list">A股</span>
+          </td>
+          <td class="company-nature">张兴海</td>
+          <td class="brands-cell">
+            <span class="brand-item huawei">问界AITO<span class="price-tag">25-50万</span></span>
+            <span class="brand-item">蓝电<span class="price-tag">10-15万</span></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="source-note">数据来源：各公司官网、年报及公开信息 · 2026年7月核实</p>
+</div>
+
+<script>
+function showPage(n, btn) {
+  document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.getElementById('page' + n).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>

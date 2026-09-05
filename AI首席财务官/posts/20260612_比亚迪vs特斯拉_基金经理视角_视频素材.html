@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>比亚迪 vs 特斯拉 · 基金经理视角</title>
+<style>
+:root{
+  --bg:#f7f8fc;--card:#fff;--border:#e6e9f0;--text:#1a1a2e;--sub:#7a7a9e;
+  --byd:#e85d3a;--byd-l:#fef0ec;--tsla:#2d7dd2;--tsla-l:#edf4fc;
+  --gold:#c5963a;--warn:#e74c3c;--ok:#1f9d6b;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.page{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:56px 36px;position:relative;overflow:hidden}
+.page-tag{font-size:13px;color:var(--gold);text-transform:uppercase;letter-spacing:3px;margin-bottom:14px;font-weight:700}
+.knife{display:inline-block;font-size:12px;color:#fff;background:var(--gold);border-radius:20px;padding:4px 14px;letter-spacing:1px;margin-bottom:14px;font-weight:700}
+.page-title{font-size:38px;font-weight:800;text-align:center;max-width:880px;margin-bottom:10px;line-height:1.3;letter-spacing:-.5px}
+.page-title.sm{font-size:30px}
+.page-subtitle{font-size:17px;color:var(--sub);text-align:center;max-width:720px;margin-bottom:34px}
+.core-line{display:flex;align-items:flex-start;gap:14px;max-width:840px;margin:0 auto 32px;padding:16px 20px;background:#fffbf0;border-left:4px solid var(--gold);border-radius:0 8px 8px 0}
+.core-line .icon{font-size:22px;flex-shrink:0}
+.core-line .text{font-size:17px;font-weight:700;color:#5c4010;line-height:1.5}
+.page-bridge{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);font-size:15px;color:var(--gold);font-weight:600;text-align:center;border:1px dashed var(--gold);padding:8px 22px;border-radius:20px;background:rgba(255,255,255,.9);white-space:nowrap}
+
+.card-row{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;max-width:980px;margin:0 auto}
+.data-card{background:var(--card);border-radius:14px;padding:26px 30px;min-width:220px;flex:1;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.04);border:1px solid var(--border)}
+.data-card .label{font-size:13px;color:var(--sub);margin-bottom:8px}
+.data-card .value{font-size:34px;font-weight:800;margin-bottom:4px}
+.data-card .note{font-size:12px;color:var(--sub)}
+.data-card.byd{border-top:3px solid var(--byd)} .data-card.tsla{border-top:3px solid var(--tsla)}
+
+.dual-row{display:flex;gap:22px;max-width:980px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+.dual-col{flex:1;min-width:360px;background:var(--card);border-radius:14px;padding:26px;box-shadow:0 2px 12px rgba(0,0,0,.04);border:1px solid var(--border)}
+.dual-col.byd{border-left:4px solid var(--byd)} .dual-col.tsla{border-left:4px solid var(--tsla)}
+.dual-col h3{font-size:20px;margin-bottom:4px} .dual-col .subhead{font-size:13px;color:var(--sub);margin-bottom:16px}
+.kpi-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:15px}
+.kpi-row:last-child{border-bottom:none}
+.kpi-row .kpi-label{color:var(--sub)} .kpi-row .kpi-val{font-weight:700}
+
+/* asset-type big cards */
+.asset{flex:1;min-width:360px;border-radius:16px;padding:28px;color:#fff}
+.asset.byd{background:linear-gradient(150deg,#e85d3a,#c23e1f)} .asset.tsla{background:linear-gradient(150deg,#2d7dd2,#16508f)}
+.asset .h{font-size:13px;opacity:.85;letter-spacing:1px;font-weight:600}
+.asset .big{font-size:24px;font-weight:800;margin:4px 0 14px;line-height:1.35}
+.asset .li{font-size:14px;padding:6px 0;border-top:1px solid rgba(255,255,255,.22);opacity:.95}
+
+.insight-box{max-width:840px;margin:30px auto 0;background:var(--card);border-radius:14px;padding:20px 26px;font-size:15px;border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.03)}
+.insight-box .q{color:var(--gold);font-weight:700;margin-bottom:8px}
+.insight-box .a{color:var(--text);line-height:1.7}
+.insight-box .a strong{color:var(--text)}
+
+.data-table{max-width:880px;margin:0 auto;width:100%;border-collapse:collapse;font-size:14px}
+.data-table th{background:#f0f2f8;padding:10px 14px;text-align:left;font-size:13px;color:var(--sub);font-weight:600}
+.data-table td{padding:10px 14px;border-bottom:1px solid var(--border)}
+.data-table tr:last-child td{border-bottom:none}
+.data-table .num{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+
+/* bear/bull */
+.bear-grid{display:flex;gap:22px;max-width:980px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+.bear-col{flex:1;min-width:360px;background:var(--card);border-radius:14px;padding:24px;border:1px solid var(--border);box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.bear-col h3{font-size:19px;margin-bottom:14px}
+.bear-col .bp{display:flex;gap:10px;font-size:14.5px;padding:8px 0;border-bottom:1px solid var(--border);color:#444}
+.bear-col .bp:last-child{border:none}
+.bear-col .bp .x{color:var(--warn);font-weight:800;flex-shrink:0}
+
+.factor{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.factor .f{font-size:13px;border-radius:20px;padding:6px 13px;font-weight:600}
+.factor .f.b{background:var(--byd-l);color:var(--byd)} .factor .f.t{background:var(--tsla-l);color:var(--tsla)}
+
+.variant{max-width:880px;margin:0 auto;background:linear-gradient(135deg,#1a1a2e,#2c2c4a);color:#fff;border-radius:18px;padding:34px 32px;text-align:center}
+.variant .lab{font-size:13px;letter-spacing:2px;color:var(--gold);font-weight:700;margin-bottom:12px}
+.variant .big{font-size:26px;font-weight:800;line-height:1.5}
+.variant .big em{color:var(--gold);font-style:normal}
+.variant .sm{font-size:15px;opacity:.85;margin-top:16px;line-height:1.7}
+
+.annot{font-size:12px;color:var(--sub);margin-top:14px;text-align:center;max-width:840px;margin-left:auto;margin-right:auto;line-height:1.6}
+@media(max-width:768px){.page-title{font-size:26px}.page-title.sm{font-size:22px}.dual-row,.bear-grid,.card-row{flex-direction:column}.dual-col,.asset,.bear-col,.data-card{min-width:auto}.page{padding:48px 20px}.page-bridge{white-space:normal;width:86%}}
+</style>
+</head>
+<body>
+
+<!-- P1 reframe hook -->
+<section class="page">
+  <div class="page-tag">基金经理视角 · 开场</div>
+  <div class="page-title">如果你是基金经理，<br>你根本不会"这样"比这两家</div>
+  <div class="page-subtitle">普通人把财务指标一列，比谁毛利率高、谁 ROE 高。<br>但一个真正的 PM，第一反应是——<strong>拒绝这种比较</strong>。</div>
+  <div class="core-line">
+    <span class="icon">🎯</span>
+    <span class="text">因为他知道：比亚迪和特斯拉，根本不是同一类资产，不能塞进同一个估值框架里比。</span>
+  </div>
+  <div class="page-bridge">那他会怎么比？先把"它们是什么"说清楚 ↓</div>
+</section>
+
+<!-- P2 asset type -->
+<section class="page">
+  <div class="page-tag">大前提 · 它们是两种资产</div>
+  <div class="page-title sm">一个卖"确定的现金流"，<br>一个卖"不确定的期权"</div>
+  <div class="dual-row" style="margin-top:8px">
+    <div class="asset byd">
+      <div class="h">比亚迪</div>
+      <div class="big">一台现在就赚钱的<br>制造业效率机器</div>
+      <div class="li">Alpha 来源：垂直整合 · 规模 · 成本曲线下移 · 全球扩张</div>
+      <div class="li">估值锚：制造业 / 周期成长</div>
+      <div class="li">久期：短 → 对利率不敏感，对中国需求·价格战·关税敏感</div>
+    </div>
+    <div class="asset tsla">
+      <div class="h">特斯拉</div>
+      <div class="big">一个押注未来的<br>期权 / 叙事资产</div>
+      <div class="li">市值不在卖车：FSD · Optimus · Robotaxi · AI · 储能</div>
+      <div class="li">估值锚：科技成长 / 远期期权</div>
+      <div class="li">久期：超长 → 对利率·风险偏好·叙事极度敏感</div>
+    </div>
+  </div>
+  <div class="insight-box">
+    <div class="q">🔍 一句话定调</div>
+    <div class="a">PE 372 倍说明：市场<strong>根本没在给特斯拉的汽车业务定价</strong>，而是在给"它可能成为一个 AI + 机器人平台"定价。所以你不是在比两家车企——你是在比<strong>一个确定的现金流，和一个不确定的远期期权</strong>。</div>
+  </div>
+  <div class="page-bridge">定下基调，再看比较里的"坑" ↓</div>
+</section>
+
+<!-- P3 traps -->
+<section class="page">
+  <div class="page-tag">对比的陷阱</div>
+  <div class="page-title sm">先记住：抠绝对数字没意义，<br>看趋势和结构才对</div>
+  <div class="dual-row" style="max-width:900px">
+    <div class="dual-col">
+      <div class="kpi-row"><span class="kpi-label">📐 会计准则</span><span class="kpi-val">CAS vs GAAP</span></div>
+      <div class="kpi-row"><span class="kpi-label">📦 合并范围</span><span class="kpi-val">含手机代工 vs 含能源</span></div>
+      <div class="kpi-row"><span class="kpi-label">📈 发展阶段</span><span class="kpi-val">扩张期 vs 稳定期</span></div>
+    </div>
+    <div class="dual-col">
+      <div class="kpi-row"><span class="kpi-label">🏛️ 估值体系</span><span class="kpi-val">A/H 股 vs 纳斯达克</span></div>
+      <div class="kpi-row"><span class="kpi-label">💱 货币</span><span class="kpi-val">人民币 vs 美元</span></div>
+      <div class="kpi-row"><span class="kpi-label">🧩 赚钱逻辑</span><span class="kpi-val">硬件 vs 软件/AI</span></div>
+    </div>
+  </div>
+  <div class="core-line" style="margin-top:28px"><span class="icon">⚠️</span><span class="text">PE 差 12 倍，不是公司差 12 倍；同一笔业务两套准则能算出不同利润。带着这些坑，往下看。</span></div>
+  <div class="page-bridge">坑记住了 → 先看表面，再下刀 ↓</div>
+</section>
+
+<!-- P4 surface (FIXED) -->
+<section class="page">
+  <div class="page-tag">BYD 002594 vs TSLA · 2025年报</div>
+  <div class="page-title">表面上，两家<br>净利率几乎一模一样</div>
+  <div class="core-line">
+    <span class="icon">📊</span>
+    <span class="text">净利率 4.06% vs 4.00% ｜ 毛利率 17.75% vs 18.03%<br>看着像双胞胎——但底下的生意，天差地别</span>
+  </div>
+  <div class="card-row">
+    <div class="data-card byd"><div class="label">比亚迪 2025</div><div class="value" style="color:var(--byd)">8,040亿</div><div class="note">营收 · 460万辆 · 净利≈326亿</div></div>
+    <div class="data-card tsla"><div class="label">特斯拉 2025</div><div class="value" style="color:var(--tsla)">6,458亿</div><div class="note">营收(折RMB) · 164万辆 · 净利≈260亿</div></div>
+  </div>
+  <div class="insight-box">
+    <div class="q">🔍 注意：一样的是"净利率"，不是"净利润"</div>
+    <div class="a">两家<strong>净利率</strong>几乎相同（4.06% vs 4.00%），但因营收规模不同，<strong>净利润绝对值差约 25%</strong>（约 326 亿 vs 260 亿）。真正值得追问的是——同样的薄利润率，是用<strong>完全不同的生意</strong>做出来的。下面六刀，刀刀切这个"不同"。</div>
+  </div>
+  <div class="page-bridge">第一刀：这两个"差不多"的毛利率，都被化了妆 ↓</div>
+</section>
+
+<!-- P5 刀一 盈利质量 -->
+<section class="page">
+  <span class="knife">第一刀 · 盈利质量</span>
+  <div class="page-title sm">剥掉会计噪音：<br>毛利率被"化妆"过</div>
+  <div class="dual-row">
+    <div class="dual-col byd">
+      <h3 style="color:var(--byd)">比亚迪</h3>
+      <div class="subhead">合并范围：汽车 + 手机 + 电池</div>
+      <div class="kpi-row"><span class="kpi-label">汽车毛利率</span><span class="kpi-val" style="color:var(--byd)">20.49%</span></div>
+      <div class="kpi-row"><span class="kpi-label">手机代工毛利率</span><span class="kpi-val" style="color:var(--warn)">≈5.99%</span></div>
+      <div class="kpi-row"><span class="kpi-label">→ 合并毛利率被拉低</span><span class="kpi-val">17.75%</span></div>
+      <div class="kpi-row"><span class="kpi-label">单车均价 / 单车毛利</span><span class="kpi-val">14.1万 / 2.89万</span></div>
+    </div>
+    <div class="dual-col tsla">
+      <h3 style="color:var(--tsla)">特斯拉</h3>
+      <div class="subhead">合并范围：汽车 + 能源 + 服务</div>
+      <div class="kpi-row"><span class="kpi-label">汽车毛利率(GAAP)</span><span class="kpi-val">17.8%</span></div>
+      <div class="kpi-row"><span class="kpi-label">剔除零成本碳积分后</span><span class="kpi-val" style="color:var(--warn)">≈15.3%</span></div>
+      <div class="kpi-row"><span class="kpi-label">能源毛利率(抬高合并)</span><span class="kpi-val" style="color:var(--tsla)">29.8%</span></div>
+      <div class="kpi-row"><span class="kpi-label">单车均价 / 单车毛利</span><span class="kpi-val">28.9万 / 5.15万</span></div>
+    </div>
+  </div>
+  <div class="insight-box">
+    <div class="q">🔍 PM 只看"还原后的真实差距"</div>
+    <div class="a">合并口径 17.75% vs 18.03%，"差不多"是假象。还原到<strong>汽车主业</strong>：比亚迪 20.49% vs 特斯拉 17.8%；再剔掉特斯拉那笔近零成本的碳积分（约 $19.9 亿），特斯拉只剩 <strong>≈15.3%</strong>——真实差距从 2.7 个点拉大到 <strong>5.1 个点</strong>。<strong>而且方向相反：</strong>比亚迪毛利在价格战中守住，特斯拉从 2022 年近 30% 一路滑到 15.3%。斜率，比快照更致命。</div>
+  </div>
+  <div class="page-bridge">第二刀：别看历史 ROE，看"新投的每一块钱回报" ↓</div>
+</section>
+
+<!-- P6 刀二 增量ROIC -->
+<section class="page">
+  <span class="knife">第二刀 · 增量回报</span>
+  <div class="page-title sm">不看历史 ROE，<br>看"新砸下去的钱"赚不赚</div>
+  <div class="card-row">
+    <div class="data-card byd"><div class="label">比亚迪 2025 资本开支</div><div class="value" style="color:var(--byd);font-size:30px">1,568亿</div><div class="note">泰国/巴西/匈牙利/印尼建厂+滚装船</div></div>
+    <div class="data-card byd"><div class="label">经营现金流覆盖 Capex</div><div class="value" style="color:var(--warn);font-size:30px">37.7%</div><div class="note">591亿 ÷ 1,568亿</div></div>
+    <div class="data-card tsla"><div class="label">特斯拉 2025 资本开支</div><div class="value" style="color:var(--tsla);font-size:30px">581亿</div><div class="note">工厂高峰已过，钱转投 AI/FSD</div></div>
+  </div>
+  <div class="insight-box">
+    <div class="q">🔍 PM 真正担心的两个问题</div>
+    <div class="a"><strong>对比亚迪：</strong>一年砸 1568 亿建厂，经营现金流只能覆盖 38%，差额靠融资补。要问的不是"ROE 多高"，而是——<strong>这些新厂的回报率是多少？会不会扩张过头变产能过剩？</strong>这是它最大的变量。<br><strong>对特斯拉：</strong>Capex 降下来了，但钱转投 FSD / Optimus / AI 算力（研发同比 +41%）——<strong>这些投入的回报极不确定，是在为"期权"续费。</strong><br>历史 ROE 好看没用，决定未来的是<strong>下一块钱投出去赚不赚</strong>。</div>
+  </div>
+  <div class="page-bridge">第三刀：负债率差 30 个点，到底是不是风险？ ↓</div>
+</section>
+
+<!-- P7 刀三 资产负债表+杠杆 -->
+<section class="page">
+  <span class="knife">第三刀 · 资产负债表压力测试</span>
+  <div class="page-title sm">负债率 70.75% vs 39.87%<br>但 ROE 的高，几乎全靠杠杆</div>
+  <table class="data-table" style="max-width:840px">
+    <tr><th>项目</th><th style="color:var(--byd)">比亚迪</th><th style="color:var(--tsla)">特斯拉</th><th>PM 解读</th></tr>
+    <tr><td>资产负债率</td><td class="num" style="color:var(--byd)">70.75%</td><td class="num" style="color:var(--tsla)">39.87%</td><td>差 30.9 个点，但大头不是"欠银行"</td></tr>
+    <tr style="background:#fef9f5"><td><strong>应付账款</strong></td><td class="num"><strong>2,092亿</strong></td><td class="num">911亿</td><td>占款=无息融资，是议价能力</td></tr>
+    <tr style="background:#f5f8fe"><td><strong>有息负债</strong></td><td class="num"><strong>1,245亿</strong></td><td class="num">570亿</td><td>仅占负债差距 1/4，才是真债务</td></tr>
+    <tr><td>现金 / 短期投资</td><td class="num">754亿</td><td class="num" style="color:var(--tsla)">3,001亿</td><td>特斯拉净现金，财务"干净"</td></tr>
+    <tr><td>ROE</td><td class="num" style="color:var(--byd)">12.61%</td><td class="num">4.62%</td><td>4.06%×0.91×<strong>3.42</strong> vs 4.00%×0.69×<strong>1.67</strong></td></tr>
+  </table>
+  <div class="insight-box">
+    <div class="q">🔍 ROE 高 2.7 倍 ≠ 经营效率高 2.7 倍</div>
+    <div class="a">杜邦拆开：净利率势均力敌，周转率比亚迪略胜，<strong>差距几乎全在权益乘数（3.42 vs 1.67）</strong>——比亚迪用应付账款 + 合同负债（约 2,607 亿零成本经营负债）撬动资产。若把杠杆降到特斯拉水平，ROE 约降到 6.2%。<br><strong>压力测试结论：</strong>论估值便宜、盈利实在，PM 偏比亚迪；论熊市/流动性收紧下的抗冲击力，特斯拉净现金的资产负债表更稳。<strong>买谁，取决于你押的是什么环境。</strong></div>
+  </div>
+  <div class="page-bridge">第四刀：两家都有护城河，但"性质"完全不同 ↓</div>
+</section>
+
+<!-- P8 刀四 护城河 -->
+<section class="page">
+  <span class="knife">第四刀 · 护城河的性质</span>
+  <div class="page-title sm">成本护城河 vs 软件护城河<br>一个会被追赶，一个可能不兑现</div>
+  <div class="dual-row">
+    <div class="dual-col byd">
+      <h3 style="color:var(--byd)">比亚迪 · 成本护城河</h3>
+      <div class="kpi-row"><span class="kpi-label">来源</span><span class="kpi-val">垂直整合 / 规模</span></div>
+      <div class="kpi-row"><span class="kpi-label">强度</span><span class="kpi-val">现实、可兑现</span></div>
+      <div class="kpi-row"><span class="kpi-label">软肋</span><span class="kpi-val" style="color:var(--warn)">可被中国同行追赶</span></div>
+      <div class="kpi-row"><span class="kpi-label">信号</span><span class="kpi-val" style="color:var(--warn)">价格战=护城河正被侵蚀</span></div>
+    </div>
+    <div class="dual-col tsla">
+      <h3 style="color:var(--tsla)">特斯拉 · 软件护城河</h3>
+      <div class="kpi-row"><span class="kpi-label">来源</span><span class="kpi-val">FSD / 数据 / 网络效应</span></div>
+      <div class="kpi-row"><span class="kpi-label">强度</span><span class="kpi-val" style="color:var(--tsla)">更高、更持久</span></div>
+      <div class="kpi-row"><span class="kpi-label">软肋</span><span class="kpi-val" style="color:var(--warn)">可能永远不兑现</span></div>
+      <div class="kpi-row"><span class="kpi-label">信号</span><span class="kpi-val">FSD 落地进度=兑现与否</span></div>
+    </div>
+  </div>
+  <div class="core-line" style="margin-top:26px"><span class="icon">🏰</span><span class="text">你信"看得见、但会被追上"的成本优势，还是信"看不见、但一旦成真就赢家通吃"的软件网络？——你信哪种护城河，决定你买哪个。</span></div>
+  <div class="page-bridge">第五刀：它们在你的组合里，是什么"风险暴露"？ ↓</div>
+</section>
+
+<!-- P9 刀五 因子暴露 -->
+<section class="page">
+  <span class="knife">第五刀 · 因子暴露与组合角色</span>
+  <div class="page-title sm">散户"二选一"，<br>PM 看的是它给组合加了什么风险</div>
+  <div class="dual-row">
+    <div class="dual-col byd">
+      <h3 style="color:var(--byd)">买比亚迪 = 买入这些暴露</h3>
+      <div class="factor">
+        <span class="f b">中国 beta</span><span class="f b">制造 / 出口</span><span class="f b">价格战</span>
+        <span class="f b">补贴退坡</span><span class="f b">地缘：1260H 清单</span><span class="f b">欧美关税</span>
+      </div>
+      <p style="font-size:13.5px;color:var(--sub);margin-top:14px;line-height:1.6">本质是一张"中国高端制造全球化"的多头牌，最大尾部风险来自地缘与贸易壁垒。</p>
+    </div>
+    <div class="dual-col tsla">
+      <h3 style="color:var(--tsla)">买特斯拉 = 买入这些暴露</h3>
+      <div class="factor">
+        <span class="f t">美股科技 beta</span><span class="f t">久期 / 利率</span><span class="f t">AI 主题</span>
+        <span class="f t">马斯克 key-man</span><span class="f t">叙事波动</span><span class="f t">估值均值回归</span>
+      </div>
+      <p style="font-size:13.5px;color:var(--sub);margin-top:14px;line-height:1.6">本质是一张"长久期科技期权"，对利率上行和叙事降温极度敏感，押的是一个人和一个未来。</p>
+    </div>
+  </div>
+  <div class="insight-box">
+    <div class="q">🔍 PM 的真实操作</div>
+    <div class="a">他不会孤立地"选一个好的"，而是问：<strong>我的组合现在缺哪种暴露？</strong>两者风险来源几乎不重叠——可能两个都配来对冲，也可能因为已经超配中国/科技而都不碰。<strong>"买谁"是组合问题，不是公司问题。</strong></div>
+  </div>
+  <div class="page-bridge">第六刀：买之前，先把"我会怎么亏钱"写下来 ↓</div>
+</section>
+
+<!-- P10 刀六 空头 -->
+<section class="page">
+  <span class="knife">第六刀 · 先写空头报告</span>
+  <div class="page-title sm">顶级交易员买之前，<br>先问"我会怎么在这单上亏钱"</div>
+  <div class="bear-grid">
+    <div class="bear-col">
+      <h3 style="color:var(--byd)">做空比亚迪的逻辑</h3>
+      <div class="bp"><span class="x">✕</span>价格战持续，汽车毛利被吃回去</div>
+      <div class="bp"><span class="x">✕</span>海外扩张踩坑、新厂产能利用率不足</div>
+      <div class="bp"><span class="x">✕</span>欧美关税 / 1260H 制裁升级，出海受阻</div>
+      <div class="bp"><span class="x">✕</span>监管整顿账期，2092 亿占款优势削弱</div>
+    </div>
+    <div class="bear-col">
+      <h3 style="color:var(--tsla)">做空特斯拉的逻辑</h3>
+      <div class="bp"><span class="x">✕</span>FSD / Robotaxi 又一次跳票</div>
+      <div class="bp"><span class="x">✕</span>汽车业务毛利持续下滑、销量见顶</div>
+      <div class="bp"><span class="x">✕</span>372 倍 PE 在叙事降温时均值回归</div>
+      <div class="bp"><span class="x">✕</span>马斯克分心 / key-man 风险兑现</div>
+    </div>
+  </div>
+  <div class="core-line" style="margin-top:26px"><span class="icon">🔻</span><span class="text">看懂一家公司，先看懂做空它的人在想什么。多头讲故事，空头讲账本——两边都听完，判断才站得住。</span></div>
+  <div class="page-bridge">六刀切完 → 回到那个真正的元问题 ↓</div>
+</section>
+
+<!-- P11 variant perception 结语 -->
+<section class="page">
+  <div class="page-tag">元问题 · 这才是 PM 和所有人的分水岭</div>
+  <div class="page-title sm">他从不问"哪家更好"</div>
+  <div class="card-row" style="margin-bottom:26px;max-width:900px">
+    <div class="data-card tsla"><div class="label">市场给特斯拉定价的是</div><div class="value" style="color:var(--tsla);font-size:26px">一个期权</div><div class="note">PE 372 · PB 18 · 市值是比亚迪 12 倍</div></div>
+    <div class="data-card byd"><div class="label">市场给比亚迪定价的是</div><div class="value" style="color:var(--byd);font-size:26px">一个制造业</div><div class="note">A股 PE 30 / H股 PE 25 · PB 3.6</div></div>
+  </div>
+  <div class="variant">
+    <div class="lab">他只问一个问题</div>
+    <div class="big">"市场在每家身上，定价了<em>什么预期</em>？<br>我和市场的<em>分歧</em>在哪？"</div>
+    <div class="sm">投资赚的从来不是"好公司"的钱，是"<strong>市场把预期定错了</strong>"的钱。<br>比亚迪被当成"普通制造业"，是不是低估了它的全球化与技术？<br>特斯拉 372 倍里隐含的 FSD 成功概率，是高于还是低于真实概率？</div>
+  </div>
+  <div class="core-line" style="margin-top:28px;max-width:840px"><span class="icon">💡</span><span class="text">这就是那句话的全部分量——<strong>好公司 ≠ 好股票</strong>。一个 PM 一辈子，都在赚这个"预期差"。</span></div>
+  <div class="annot" style="margin-top:24px">
+    数据来源：比亚迪 2025 年报、特斯拉 2025 10-K、westock-data 金融数据接口；美元兑人民币 6.8109（2026.6.12 中间价）。<br>
+    净利率口径一致（4.06% / 4.00%），净利润绝对值因营收规模不同而有差异（约 326亿 / 260亿）。本内容仅作教育研究用途，不构成任何投资建议。
+  </div>
+  <div class="page-bridge">拆解上市公司 · 有二财经</div>
+</section>
+
+</body>
+</html>

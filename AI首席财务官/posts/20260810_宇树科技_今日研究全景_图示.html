@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>宇树科技 · 今日研究全景 2026-08-10</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background:#f5f7fa;
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    color:#222;
+    display:flex; justify-content:center;
+    padding:28px 16px;
+  }
+  .page {
+    width:1080px;
+    background:#ffffff;
+    border:1px solid #e3e8ef;
+    border-radius:18px;
+    padding:40px 44px 32px;
+    box-shadow:0 4px 20px rgba(0,0,0,0.04);
+  }
+  .head { border-bottom:3px solid #b8860b; padding-bottom:18px; margin-bottom:26px; }
+  .head h1 { font-size:38px; font-weight:800; letter-spacing:1px; }
+  .head .sub { margin-top:10px; font-size:17px; color:#8a94a6; font-weight:500; }
+  .head .sub b { color:#b8860b; }
+  .head .date-badge {
+    display:inline-block; margin-top:12px; padding:4px 14px;
+    background:#b8860b; color:#fff; font-size:14px; font-weight:700;
+    border-radius:20px; letter-spacing:1px;
+  }
+
+  .topic {
+    border:1px solid #e3e8ef; border-radius:14px; margin-bottom:22px; overflow:hidden;
+  }
+  .topic .tbar {
+    display:flex; align-items:center; gap:12px;
+    padding:14px 22px; background:#fafbfc; border-bottom:1px solid #e3e8ef;
+  }
+  .topic .tnum {
+    width:34px; height:34px; border-radius:10px; background:#b8860b; color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-size:17px; font-weight:800; flex-shrink:0;
+  }
+  .topic .ttitle { font-size:20px; font-weight:800; }
+  .topic .tsub { font-size:13px; color:#8a94a6; margin-left:auto; text-align:right; }
+  .topic .tbody { padding:22px 26px; }
+
+  .nums { display:flex; gap:14px; flex-wrap:wrap; }
+  .num-box {
+    flex:1; min-width:180px; background:#fafbfc; border:1px solid #e3e8ef;
+    border-radius:12px; padding:16px 18px; text-align:center;
+  }
+  .num-box .lab { font-size:13px; color:#5b6675; font-weight:600; }
+  .num-box .big { font-size:30px; font-weight:800; margin-top:6px; color:#b8860b; font-variant-numeric:tabular-nums; }
+  .num-box .big.alert { color:#c0392b; }
+  .num-box .small { font-size:12px; color:#8a94a6; margin-top:5px; line-height:1.5; }
+
+  .kw { font-size:15px; color:#5b6675; line-height:1.75; margin-top:14px; }
+  .kw b { color:#1a1a1a; }
+  .kw .hl { color:#b8860b; font-weight:700; }
+
+  table.cmp { width:100%; border-collapse:collapse; margin-top:14px; font-size:14px; }
+  table.cmp th {
+    background:#b8860b; color:#fff; padding:10px 12px; font-weight:700; text-align:center;
+  }
+  table.cmp th:first-child { text-align:left; }
+  table.cmp td { border:1px solid #e3e8ef; padding:10px 12px; text-align:center; }
+  table.cmp td:first-child { text-align:left; font-weight:600; color:#5b6675; white-space:nowrap; }
+  table.cmp tr:nth-child(even) td { background:#fafbfc; }
+  table.cmp td b { color:#b8860b; font-variant-numeric:tabular-nums; }
+  table.cmp td.win b { color:#c0392b; }
+
+  .flowbar { display:flex; align-items:stretch; margin-top:16px; border-radius:12px; overflow:hidden; border:1px solid #e3e8ef; }
+  .fb-item { flex:1; padding:16px 10px; text-align:center; background:#fafbfc; border-right:1px dashed #d0d8e2; }
+  .fb-item:last-child { border-right:none; }
+  .fb-item.done { background:#f6f3e9; }
+  .fb-item.now { background:#fff8e6; }
+  .fb-item.next { background:#fafbfc; }
+  .fb-item .d { font-size:13px; font-weight:700; color:#1a1a1a; }
+  .fb-item .t { font-size:12px; color:#5b6675; margin-top:4px; line-height:1.45; }
+  .fb-item.now .d { color:#b8860b; }
+  .fb-item .badge { display:inline-block; margin-bottom:6px; padding:2px 10px; border-radius:10px; font-size:11px; font-weight:700; }
+  .fb-item.done .badge { background:#e8ecef; color:#5b6675; }
+  .fb-item.now .badge { background:#b8860b; color:#fff; }
+  .fb-item.next .badge { background:#eef0f3; color:#8a94a6; }
+
+  .checks { margin-top:14px; display:flex; flex-direction:column; gap:8px; }
+  .ck { display:flex; align-items:flex-start; gap:10px; font-size:14px; line-height:1.6; }
+  .ck .mark {
+    width:22px; height:22px; border-radius:50%; flex-shrink:0; margin-top:2px;
+    display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; color:#fff;
+  }
+  .ck.yes .mark { background:#2e7d32; }
+  .ck.no .mark { background:#c0392b; }
+  .ck .txt b { color:#1a1a1a; }
+  .ck .src { color:#8a94a6; font-size:13px; }
+
+  .vam-table { width:100%; border-collapse:collapse; margin-top:14px; font-size:14px; }
+  .vam-table th { background:#1a1a1a; color:#fff; padding:10px 12px; font-weight:700; }
+  .vam-table td { border:1px solid #e3e8ef; padding:10px 12px; text-align:center; }
+  .vam-table td:first-child { text-align:left; font-weight:600; }
+  .vam-table td.ok { color:#2e7d32; font-weight:700; }
+  .vam-table td.no { color:#c0392b; font-weight:700; }
+  .vam-table td.part { color:#b8860b; font-weight:700; }
+  .vam-table tr:nth-child(even) td { background:#fafbfc; }
+
+  .timeline { margin-top:14px; display:flex; flex-direction:column; gap:0; }
+  .tl-row { display:flex; align-items:flex-start; gap:14px; padding:8px 0; }
+  .tl-date { width:96px; flex-shrink:0; font-weight:800; color:#b8860b; font-size:14px; text-align:right; padding-top:2px; font-variant-numeric:tabular-nums; }
+  .tl-dot { width:12px; height:12px; border-radius:50%; background:#b8860b; margin-top:6px; flex-shrink:0; position:relative; }
+  .tl-row .tl-dot::after { content:""; position:absolute; top:12px; left:5px; width:2px; height:100%; background:#e3e8ef; }
+  .tl-row:last-child .tl-dot::after { display:none; }
+  .tl-txt { font-size:14px; line-height:1.6; color:#5b6675; }
+  .tl-txt b { color:#1a1a1a; }
+
+  .caveat {
+    margin-top:8px; background:#fff8e6; border:1px solid #f0d999; border-radius:10px;
+    padding:16px 20px; font-size:14px; line-height:1.75; color:#7a5c12;
+  }
+  .caveat b { color:#b8860b; }
+  .foot { margin-top:18px; font-size:13px; color:#9aa3b2; text-align:center; line-height:1.7; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- 头部 -->
+  <div class="head">
+    <h1>宇树科技 · 今日研究全景</h1>
+    <div class="sub">发行定价复盘 · 长鑫横评 · 申购热度 · 文章核验 · 对赌溯源 · <b>非价格预测 / 非投资建议</b></div>
+    <span class="date-badge">2026-08-10 · T 日申购 · 预计 8/19 上市</span>
+  </div>
+
+  <!-- ① 发行定价复盘 -->
+  <div class="topic">
+    <div class="tbar">
+      <div class="tnum">1</div>
+      <div class="ttitle">发行定价复盘</div>
+      <div class="tsub">发行公告（8/7）已披露口径</div>
+    </div>
+    <div class="tbody">
+      <div class="nums">
+        <div class="num-box">
+          <div class="lab">发行价</div>
+          <div class="big">150.80 元</div>
+          <div class="small">发行市值 ≈ 609.93 亿 · 募资总额 ≈ 61.0 亿</div>
+        </div>
+        <div class="num-box">
+          <div class="lab">计划锚价（拟募资÷股数）</div>
+          <div class="big">103.89 元</div>
+          <div class="small">42.02 亿 ÷ 4044.64 万股 —— 是「募投用资」不是募资总额</div>
+        </div>
+        <div class="num-box">
+          <div class="lab">超募</div>
+          <div class="big alert">18.97 亿（+45.1%）</div>
+          <div class="small">61.0 亿实际募资 − 42.02 亿拟募资；募资净额 59.17 亿、发行费用 1.82 亿</div>
+        </div>
+        <div class="num-box">
+          <div class="lab">发行价 vs 报价中枢</div>
+          <div class="big">152.39 元</div>
+          <div class="small">网下报价中位数 152.39 元，发行价仅低 1.05% —— 贴近机构预期</div>
+        </div>
+      </div>
+      <div class="kw">
+        <span class="hl">⚠️ 本次复盘最核心的纠偏：</span>8/4 框架推演把 <b>42.02 亿募投用资误当募资总额</b>，倒推出 104 元/420 亿的锚；真实口径下发行价 150.80 元、市值 609.93 亿。<b>42.02 亿是公司计划投入项目的钱，不是发行价×股数算出的总募资。</b>
+      </div>
+    </div>
+  </div>
+
+  <!-- ② 市盈率三口径 -->
+  <div class="topic">
+    <div class="tbar">
+      <div class="tnum">2</div>
+      <div class="ttitle">市盈率：三个口径一起看</div>
+      <div class="tsub">贵不贵，看 2026 利润接不接得住</div>
+    </div>
+    <div class="tbody">
+      <div class="nums">
+        <div class="num-box">
+          <div class="lab">发行市盈率（监管官方口径）</div>
+          <div class="big">219.23 倍</div>
+          <div class="small">按 2025 扣非前后孰低归母净利 2.78 亿（非扣非 5.91 亿）</div>
+        </div>
+        <div class="num-box">
+          <div class="lab">若按扣非净利</div>
+          <div class="big">≈ 103 倍</div>
+          <div class="small">609.93 亿 ÷ 5.91 亿 —— 更贴近经营真实盈利</div>
+        </div>
+        <div class="num-box">
+          <div class="lab">行业静态市盈率</div>
+          <div class="big">38.56 倍</div>
+          <div class="small">C34 通用设备制造业 —— 宇树显著溢价</div>
+        </div>
+      </div>
+      <div class="kw">
+        Q1 扣非 −52%、H1 预告扣非打平（2.36–2.83 亿，−6%~−22%）。<b>若全年利润上不去，高 PE 难站稳；若放量+费用率下降，溢价可维持。</b>
+      </div>
+    </div>
+  </div>
+
+  <!-- ④ 申购热度拆解 -->
+  <div class="topic">
+    <div class="tbar">
+      <div class="tnum">4</div>
+      <div class="ttitle">申购热度拆解 · 2,618.30 倍怎么来的</div>
+      <div class="tsub">发行公告口径</div>
+    </div>
+    <div class="tbody">
+      <div class="nums">
+        <div class="num-box">
+          <div class="lab">网下有效申购倍数</div>
+          <div class="big">2,618.30 倍</div>
+          <div class="small">= 有效申购 677.78 亿股 ÷ 回拨后网下初始规模 2588.61 万股</div>
+        </div>
+        <div class="num-box">
+          <div class="lab">网下有效申购资金量</div>
+          <div class="big">≈ 10.2 万亿</div>
+          <div class="small">677.78 亿股 × 150.80 元 —— 367 家机构、12,161 个配售对象</div>
+        </div>
+        <div class="num-box">
+          <div class="lab">报价区间</div>
+          <div class="big">15.20 – 154.88 元</div>
+          <div class="small">中位数 152.39 元 → 发行价 150.80 元（低 1.05%）</div>
+        </div>
+        <div class="num-box">
+          <div class="lab">回拨后发行结构</div>
+          <div class="big">20 / 56 / 24</div>
+          <div class="small">战配 20% · 网下 56% · 网上 24%（初始 20/64/16，网上超 100 倍触发回拨）</div>
+        </div>
+      </div>
+      <div class="kw">
+        热度为什么这么高？<b>三个原因：① 盘子小</b>（总募资 ≈61 亿，网下初始规模仅约 2588.61 万股 = 发行量 64%）；<b>② 稀缺性</b>（A 股第一家纯机器人上市公司）；<b>③ 战配占比低</b>（仅 20%，扣除战配后网下/网上可分配份额更高）。
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑤ 微信文章核验 -->
+  <div class="topic">
+    <div class="tbar">
+      <div class="tnum">5</div>
+      <div class="ttitle">《在申报前，把事做绝》一文核验</div>
+      <div class="tsub">7 个主张 vs 宇树公开文件</div>
+    </div>
+    <div class="tbody">
+      <div class="checks">
+        <div class="ck yes"><div class="mark">✓</div><div class="txt"><b>对赌终止时间线</b>：2025.9 终止协议 → 审计报告日（2025.10.15）前一日起自始无效 → 2026.1 补充协议终止其余权利。对上（上会稿 p76-77）</div></div>
+        <div class="ck yes"><div class="mark">✓</div><div class="txt"><b>董事变更与独董设立</b>：2025.7 秦诗春辞、2025.9 王其鑫/赵永政辞、3 名独董上任、取消监事会。对上（上会稿 p82）</div></div>
+        <div class="ck yes"><div class="mark">✓</div><div class="txt"><b>17 名员工期权与代持</b>：2017.9–2021.12 以 1 元/注册资本授予；控制权条线曾存在股份代持。对上（上会稿 p85 / 一轮回复 p221）</div></div>
+        <div class="ck yes"><div class="mark">✓</div><div class="txt"><b>估值 58 亿→120 亿一周翻倍</b>：申报前最近一次增资投前 120 亿，较一周前股权转让 58 亿。对上（一轮回复 问题10）</div></div>
+        <div class="ck yes"><div class="mark">✓</div><div class="txt"><b>财务与内控问题</b>：研发费用率 8%（职工薪酬占 58.67%）、Q1 扣非 −52%。对上（上会稿 p211 等）</div></div>
+        <div class="ck yes"><div class="mark">✓</div><div class="txt"><b>风险提示 6 条→7 条</b>：申报稿 6 条（技术突破第一）→ 上会稿 7 条（增速放缓第一、"领先优势减弱"）。逐字对上（申报稿 p19-21 vs 上会稿 p19-22）</div></div>
+        <div class="ck no"><div class="mark">✗</div><div class="txt"><b>对赌具体条款</b>：30 亿营收 / 3 亿扣非 / 120 亿市值 / 15% 年化回购 / 王兴兴连带责任 —— 公开文件查无出处，仅见于市场流传条款（见话题 6）</div></div>
+      </div>
+      <div class="kw" style="margin-top:12px;">
+        结论：<b>7 项主张 6 项与公开文件完全吻合</b>（含 6→7 条风险提示这种细节），1 项（对赌条款数字）无公开出处——文章整体可信度较高，但对赌数字引用需标注"市场流传"。
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑥ 对赌条款溯源 -->
+  <div class="topic">
+    <div class="tbar">
+      <div class="tnum">6</div>
+      <div class="ttitle">对赌条款溯源 · 30亿 / 3亿 / 120亿 / 15%</div>
+      <div class="tsub">全网查无一手出处 → "流传条款"</div>
+    </div>
+    <div class="tbody">
+      <table class="vam-table">
+        <tr><th>流传条款</th><th>公开文件可否验证</th><th>交叉验证对照</th></tr>
+        <tr>
+          <td>2026 营收 ≥ 30 亿</td>
+          <td class="no">无</td>
+          <td>2026H1 预告 10.52–11.28 亿（+35~45%）→ 全年 30 亿需 H2 同比翻倍，激进</td>
+        </tr>
+        <tr>
+          <td>2026 扣非 ≥ 3 亿</td>
+          <td class="no">无</td>
+          <td>2026H1 预告扣非 2.36–2.83 亿 → 全年 3 亿仅需 H2 0.2–0.6 亿，相对宽松</td>
+        </tr>
+        <tr>
+          <td>发行市值 ≥ 120 亿</td>
+          <td class="part">部分吻合</td>
+          <td>一轮回复 p221：C 轮投前估值即 120 亿 —— 条款锚定 C 轮估值，逻辑自洽</td>
+        </tr>
+        <tr>
+          <td>2026-12-31 前科创板上市</td>
+          <td class="part">间接印证</td>
+          <td>与 73 天过会、8/19 上市的极速节奏完美吻合 —— 条款即驱动力</td>
+        </tr>
+        <tr>
+          <td>年化 15% 回购 + 公司首要义务</td>
+          <td class="no">无</td>
+          <td>创投常见 8–20% 区间，15% 偏苛刻；5 年期 LPR 3.5% 的 4 倍以上</td>
+        </tr>
+        <tr>
+          <td>王兴兴个人连带责任</td>
+          <td class="no">无</td>
+          <td>创投对创始人普遍要求，与 A/B 股控制权结构（68.78% 表决权）匹配</td>
+        </tr>
+      </table>
+      <div class="kw" style="margin-top:14px;">
+        <b>溯源链：</b>最早信源 = 2026-03-22 新浪财经（受理后 2 天），表述为<b class="hl">"根据流传出的对赌协议条款"</b>；3/26 东方财富、6/1 过会日百家号群、8/10 微信文章均为同源转述，此后无新信源。
+      </div>
+      <div class="kw">
+        <b>为什么公开文件查不到？</b>招股书（上会稿 p76-77）只披露了权利类型（回购权/反稀释/领售等）与终止安排，未披露具体业绩指标——对赌终止后按《监管规则适用指引——发行类第 4 号》要求做"不得恢复的彻底终止"，具体数字无需披露，属合规正常处理。
+      </div>
+      <div class="kw" style="margin-top:10px; background:#fdf6f5; border:1px solid #e3c8c3; border-radius:10px; padding:14px 18px;">
+        <b style="color:#c0392b;">结论：可信度中等偏高，但性质是"流传信息"而非披露事实。</b>数字与公开信息高度自洽（120 亿 = C 轮投前估值、12/31 时点与极速 IPO 吻合），无法证实亦无法证伪；引用时应标注"据市场流传的对赌条款（未经公司及交易所确认）"。
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑦ 后续跟进 -->
+  <div class="topic">
+    <div class="tbar">
+      <div class="tnum">7</div>
+      <div class="ttitle">后续跟进时间线</div>
+      <div class="tsub">T 日 → 上市 → 上市后 1 周</div>
+    </div>
+    <div class="tbody">
+      <div class="flowbar">
+        <div class="fb-item now">
+          <span class="badge">今日</span>
+          <div class="d">8/10 · T 日</div>
+          <div class="t">网上/网下申购日</div>
+        </div>
+        <div class="fb-item next">
+          <span class="badge">T+1</span>
+          <div class="d">8/11 · 中签率公告</div>
+          <div class="t">网上中签率公布</div>
+        </div>
+        <div class="fb-item next">
+          <span class="badge">T+3</span>
+          <div class="d">8/13 · 配售结果</div>
+          <div class="t">网下配售 + 网上摇号结果</div>
+        </div>
+        <div class="fb-item next">
+          <span class="badge">T+4</span>
+          <div class="d">8/14 · 发行结果</div>
+          <div class="t">发行结果公告 + 招股书正式版</div>
+        </div>
+        <div class="fb-item next">
+          <span class="badge">上市前</span>
+          <div class="d">8/17-18 · 上市公告书</div>
+          <div class="t">上市公告书 + 公司章程</div>
+        </div>
+        <div class="fb-item next">
+          <span class="badge">挂牌</span>
+          <div class="d">8/19 · 上市日（估算）</div>
+          <div class="t">科创板敲钟，按长鑫 7 个交易日节奏</div>
+        </div>
+        <div class="fb-item next">
+          <span class="badge">观察期</span>
+          <div class="d">上市后 1 周</div>
+          <div class="t">首日行情 · 稳定股价措施 · 龙虎榜</div>
+        </div>
+      </div>
+      <div class="kw" style="margin-top:12px;">
+        所有公告按 <b>YYYYMMDD_宇树科技_名称.pdf</b> 归档至 官方公告文件/，直至上市后 1 周。
+      </div>
+    </div>
+  </div>
+
+  <div class="caveat">
+    <b>⚠️ 口径声明：</b>609.93 亿 = 发行市值 / 挂牌定价口径，<b>非上市后真实交易价格</b>；申购倍数等均采用发行公告已披露口径。对赌条款部分为市场流传信息，未经公司及交易所确认。<b>本页仅供研究复盘，不构成投资建议。</b>
+  </div>
+
+  <div class="foot">
+    数据来源：宇树科技招股说明书（申报稿/上会稿/注册稿）、第一轮问询回复（2026-01-08）、发行公告（2026-08-07）、长鑫科技发行公告（2026-07-15）等已披露文件；网络溯源见对赌条款部分<br>
+    本内容仅供学习研究，不构成投资建议。
+  </div>
+</div>
+</body>
+</html>

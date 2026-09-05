@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>长鑫科技 IPO 募资结构复盘</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #f5f7fa;
+    color: #2c3e50;
+    padding: 28px 16px;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; }
+  .card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 24px 26px;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border: 1px solid #eef1f5;
+  }
+  h1 { font-size: 24px; color: #1a2533; letter-spacing: .5px; }
+  .sub { color: #6b7785; font-size: 14px; margin-top: 6px; }
+  .factstrip {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px;
+  }
+  .fact {
+    flex: 1; min-width: 150px;
+    background: #fdfaf2;
+    border: 1px solid #f0e3c4;
+    border-radius: 10px; padding: 10px 12px;
+  }
+  .fact .k { font-size: 12px; color: #9a7b2e; }
+  .fact .v { font-size: 18px; font-weight: 700; color: #b8860b; }
+
+  .sec-title {
+    font-size: 16px; font-weight: 700; color: #1a2533;
+    margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+  }
+  .sec-title .num {
+    background: #c0392b; color: #fff; border-radius: 50%;
+    width: 24px; height: 24px; display: inline-flex;
+    align-items: center; justify-content: center; font-size: 13px; flex: none;
+  }
+
+  .stage { margin-bottom: 16px; }
+  .stage-label { font-size: 14px; font-weight: 600; margin-bottom: 6px; color: #34495e; }
+  .bar {
+    display: flex; height: 38px; border-radius: 8px; overflow: hidden;
+    font-size: 12.5px; color: #fff; font-weight: 600;
+  }
+  .seg { display: flex; align-items: center; justify-content: center; white-space: nowrap; }
+  .seg.strat { background: #b8860b; }
+  .seg.net   { background: #7f8c8d; }
+  .seg.online{ background: #c0392b; }
+  .stage-note { font-size: 12.5px; color: #7a8694; margin-top: 5px; }
+  .arrow { text-align: center; color: #b8860b; font-size: 18px; margin: 4px 0; }
+
+  .callout {
+    background: #fdecea; border: 1px solid #f5b7b1; border-radius: 10px;
+    padding: 12px 14px; font-size: 13.5px; color: #922b21; margin: 4px 0 16px;
+  }
+  .callout b { color: #c0392b; }
+
+  .enth { display: flex; gap: 12px; flex-wrap: wrap; }
+  .ecard {
+    flex: 1; min-width: 200px; border-radius: 10px; padding: 14px;
+    border: 1px solid #e8edf2;
+  }
+  .ecard.s { background: #fdfaf2; border-color: #f0e3c4; }
+  .ecard.n { background: #f4f6f7; border-color: #e1e6ea; }
+  .ecard.o { background: #fdecea; border-color: #f5b7b1; }
+  .ecard .h { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+  .ecard.s .h { color: #9a7b2e; }
+  .ecard.n .h { color: #5d6d7e; }
+  .ecard.o .h { color: #c0392b; }
+  .ecard .row { font-size: 12.5px; color: #44505c; margin: 3px 0; }
+  .ecard .big { font-size: 20px; font-weight: 800; }
+  .ecard.s .big { color: #b8860b; }
+  .ecard.n .big { color: #566573; }
+  .ecard.o .big { color: #c0392b; }
+  .total {
+    margin-top: 12px; background: #1a2533; color: #fff; border-radius: 10px;
+    padding: 12px 16px; font-size: 14px; text-align: center;
+  }
+  .total b { color: #f1c40f; font-size: 18px; }
+
+  .flowday { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
+  .dc { flex: 1; min-width: 160px; border-radius: 10px; padding: 12px; text-align: center; }
+  .dc.s { background: #fdfaf2; border: 1px solid #f0e3c4; }
+  .dc.n { background: #f4f6f7; border: 1px solid #e1e6ea; }
+  .dc.o { background: #fdecea; border: 1px solid #f5b7b1; }
+  .dc .t { font-size: 12px; color: #7a8694; }
+  .dc .v { font-size: 16px; font-weight: 800; margin: 4px 0; }
+  .dc.s .v { color: #b8860b; }
+  .dc.n .v { color: #566573; }
+  .dc.o .v { color: #c0392b; }
+  .dc .d { font-size: 11.5px; color: #8a96a3; }
+  .trend {
+    margin-top: 14px; background: #f4f6f7; border-left: 4px solid #b8860b;
+    padding: 12px 14px; font-size: 13px; color: #44505c; border-radius: 0 8px 8px 0;
+  }
+  .trend b { color: #c0392b; }
+
+  .disc {
+    font-size: 12px; color: #8a96a3; background: #fbfcfd;
+    border: 1px dashed #d5dbe1; border-radius: 10px; padding: 14px; line-height: 1.7;
+  }
+  .disc b { color: #6b7785; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="card">
+    <h1>长鑫科技 IPO 募资结构复盘</h1>
+    <div class="sub">从发行安排到最终结构，看清 600 亿筹码分到了谁手里 · 数据来源：7/16 网上发行申购情况及中签率公告</div>
+    <div class="factstrip">
+      <div class="fact"><div class="k">发行价</div><div class="v">8.66 元</div></div>
+      <div class="fact"><div class="k">募资（绿鞋前）</div><div class="v">579 亿</div></div>
+      <div class="fact"><div class="k">募资（绿鞋全额）</div><div class="v">666 亿</div></div>
+      <div class="fact"><div class="k">最终发行量</div><div class="v">76.91 亿股</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+  <div class="sec-title"><span class="num">1</span>四轮分配：战略认购不足 + 高倍数回拨 + 绿鞋，筹码层层流向网上</div>
+
+  <div class="stage">
+    <div class="stage-label">① 初始发行安排（绿鞋前，66.88 亿股）</div>
+    <div class="bar">
+      <div class="seg strat" style="width:50%">战略 50.0%</div>
+      <div class="seg net"   style="width:40%">网下 40.0%</div>
+      <div class="seg online" style="width:10%">网上 10.0%</div>
+    </div>
+    <div class="stage-note">战略配售初始占比就高达 50%（33.44 亿股）；剩余 50% 按「网下 40% / 网上 10%」分配。</div>
+  </div>
+
+  <div class="arrow">↓ 第一轮回拨：战略实际只认购 24.93%，差额 16.77 亿股几乎全转网上</div>
+
+  <div class="stage">
+    <div class="stage-label">② 战略回拨后（绿鞋前，66.88 亿股）</div>
+    <div class="bar">
+      <div class="seg strat" style="width:25%">战略 25%</div>
+      <div class="seg net"   style="width:40%">网下 40.0%</div>
+      <div class="seg online" style="width:35.1%">网上 35.1%</div>
+    </div>
+    <div class="stage-note">战略降至 16.67 亿股；网下不变；网上升至 23.46 亿股。</div>
+  </div>
+
+  <div class="arrow">↓ 第二轮回拨：网上申购 244 倍破 100 倍门槛，法定拨「扣除战配后发行量 10%」（5.02 亿股）从网下转网上</div>
+
+  <div class="stage">
+    <div class="stage-label">③ 网下回拨后（绿鞋前，66.88 亿股）</div>
+    <div class="bar">
+      <div class="seg strat" style="width:24.9%">战略 24.9%</div>
+      <div class="seg net"   style="width:32.5%">网下 32.5%</div>
+      <div class="seg online" style="width:42.6%">网上 42.6%</div>
+    </div>
+    <div class="stage-note">这就是你说的「42.6%」——绿鞋落地前的真实一档。网下降至 21.73 亿股，网上 28.48 亿股。</div>
+  </div>
+
+  <div class="arrow">↓ 第三轮：绿鞋（超额配售权）15% = 10.03 亿股，全部给网上</div>
+
+  <div class="stage">
+    <div class="stage-label">④ 最终上市结构（绿鞋全额后，76.91 亿股）</div>
+    <div class="bar">
+      <div class="seg strat" style="width:21.7%">战略 21.7%</div>
+      <div class="seg net"   style="width:28.3%">网下 28.3%</div>
+      <div class="seg online" style="width:50.1%">网上 50.1%</div>
+    </div>
+    <div class="stage-note">战略 16.67 亿股 · 网下 21.73 亿股 · 网上 38.51 亿股，合计 76.91 亿股。网上正好「占了一半左右」。</div>
+  </div>
+
+  <div class="callout">
+    ⚠️ <b>讲的时候分两档：</b>你原稿的「网上 42.6%」核对招股书是<b>绿鞋前、网下回拨后</b>的真实一档（28.48 亿 ÷ 66.88 亿）；
+    绿鞋再把 10.03 亿股（15%）全部给网上后，<b>最终上市结构 = 50.07%</b>（38.51 亿股）。
+    讲「最终 / 上市筹码」时用 <b>50.1%</b>；42.6% 是绿鞋落地前的上一档，别混为一谈。
+  </div>
+  </div>
+
+  <div class="card">
+    <div class="sec-title"><span class="num">2</span>认购热情：18 万亿意向资金抢筹，机构比散户更饥渴</div>
+    <div class="enth">
+      <div class="ecard s">
+        <div class="h">战略配售（锁定）</div>
+        <div class="row">出资方：国家队 / 产业资本 / 员工 4 个资管计划 / 2 家保荐机构</div>
+        <div class="big">144 亿</div>
+        <div class="row">实缴出资（16.67 亿股 × 8.66）</div>
+      </div>
+      <div class="ecard n">
+        <div class="h">网下机构</div>
+        <div class="row">申购倍数 <b>400+ 倍</b></div>
+        <div class="big">188 亿</div>
+        <div class="row">意向资金 ~11 万亿 → 实缴</div>
+        <div class="row">命中率仅 <b>0.17%</b></div>
+      </div>
+      <div class="ecard o">
+        <div class="h">网上打新（散户）</div>
+        <div class="row">申购户数 <b>943 万户</b> · 倍数 243.93 倍</div>
+        <div class="big">334 亿</div>
+        <div class="row">意向资金 ~7 万亿 → 实缴</div>
+        <div class="row">命中率 <b>0.47%</b></div>
+      </div>
+    </div>
+    <div class="total">网下意向 ~11 万亿 + 网上意向 ~7 万亿 = 合计 <b>约 18 万亿</b> 意向资金参与打新</div>
+  </div>
+
+  <div class="card">
+    <div class="sec-title"><span class="num">3</span>首日筹码与趋势：卖压几乎全来自网上散户</div>
+    <div class="flowday">
+      <div class="dc s"><div class="t">战略配售</div><div class="v">0 股</div><div class="d">首日 0 流通，锁定</div></div>
+      <div class="dc n"><div class="t">网下机构</div><div class="v">6.52 亿股</div><div class="d">仅 30% 首日流通<br>（70% 锁 6 个月）</div></div>
+      <div class="dc o"><div class="t">网上打新</div><div class="v">38.51 亿股</div><div class="d">100% 首日流通</div></div>
+    </div>
+    <div class="trend">
+      首日可交易流通盘约 <b>45.03 亿股</b>（按 8.66 元 ≈ 390 亿），其中 <b>85.5% 来自网上中签散户</b>。
+      战略配售与网下 70%（约 15.2 亿股）锁定，减持压力显著后置。机构网下命中率仅 0.17%、近 11 万亿意向资金却只实缴 188 亿，
+      说明机构资金极度渴求但获配极少——开盘后的筹码结构与供需，留给各位自己判断。
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="disc">
+      <b>免责声明：</b>以上分析来源于长鑫科技公开招股书及发行公告（7/9 招股意向书、7/15 发行公告、7/16 中签率公告），不构成投资建议。
+      本视频仅做发行结构与公开数据拆解，不预测股价涨跌，不推荐买入或卖出。投资者应基于自身判断独立决策，并注意新股上市波动风险。
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

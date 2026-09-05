@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>零跑汽车 · 2025年报拆解</title>
+<style>
+  :root {
+    --bg: #f6f7f4;
+    --card: #ffffff;
+    --ink: #243329;
+    --accent: #2d6a4f;
+    --line: #d9ddd2;
+    --sub: #6b756d;
+    --red: #c0392b;
+    --green: #1e8449;
+    --gold: #b9770e;
+    --blue: #21618c;
+    --page-h: 100vh;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.65;
+  }
+  .num { font-family: "Menlo", "SF Mono", monospace; }
+
+  .page {
+    min-height: var(--page-h); display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 56px 52px; border-bottom: 1px solid var(--line);
+    position: relative; background: var(--bg);
+  }
+  .page:last-child { border-bottom: none; }
+
+  .page-num {
+    position: absolute; top: 22px; right: 30px;
+    font-size: 14px; color: var(--sub); letter-spacing: 2px;
+  }
+  .page-tag {
+    display: inline-block; background: var(--accent); color: #fff;
+    font-size: 16px; letter-spacing: 4px; padding: 6px 22px; border-radius: 6px;
+    margin-bottom: 16px; font-weight: 700;
+  }
+  .page-title {
+    font-size: 48px; font-weight: 900; text-align: center;
+    margin-bottom: 12px; line-height: 1.35; letter-spacing: 1px;
+  }
+  .page-sub {
+    font-size: 21px; color: var(--sub); text-align: center; margin-bottom: 40px;
+  }
+  .page-sub strong { color: var(--accent); }
+
+  /* 核心句 */
+  .core-line {
+    width: 100%; max-width: 1000px;
+    border-left: 4px solid var(--accent);
+    background: linear-gradient(90deg, #edf7f0 0%, #fff 100%);
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-size: 1.15em; font-weight: 700; line-height: 1.7;
+  }
+
+  /* 数据卡片行 */
+  .card-row {
+    display: flex; gap: 16px; width: 100%; max-width: 1000px;
+    justify-content: center; flex-wrap: wrap;
+  }
+  .data-card {
+    flex: 1; min-width: 200px;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 22px 18px; text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .data-card .label { font-size: 15px; color: var(--sub); margin-bottom: 6px; font-weight: 600; }
+  .data-card .value { font-size: 36px; font-weight: 900; }
+  .data-card .note { font-size: 13.5px; color: var(--sub); margin-top: 6px; line-height: 1.5; }
+
+  /* KPI 表格 */
+  .kpi-table {
+    width: 100%; max-width: 1000px;
+    border-collapse: collapse; margin: 20px 0;
+    background: var(--card); border-radius: 12px; overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .kpi-table th {
+    background: var(--accent); color: #fff; font-size: 15px;
+    padding: 12px 16px; text-align: left; letter-spacing: 2px;
+  }
+  .kpi-table td {
+    padding: 12px 16px; border-bottom: 1px solid var(--line);
+    font-size: 16.5px;
+  }
+  .kpi-table tr:last-child td { border-bottom: none; }
+  .kpi-table .kpi-val { font-weight: 800; text-align: right; }
+  .kpi-table .pos { color: var(--green); }
+  .kpi-table .neg { color: var(--red); }
+
+  /* 洞察框 */
+  .insight-box {
+    width: 100%; max-width: 1000px;
+    background: #fdf6e3; border: 1px solid #e8dcc0;
+    border-radius: 12px; padding: 20px 24px; margin: 20px 0;
+  }
+  .insight-box .q { font-size: 18px; font-weight: 800; margin-bottom: 10px; color: var(--gold); }
+  .insight-box .a { font-size: 16px; line-height: 1.85; color: var(--ink); }
+
+  /* 对比行 */
+  .vs-strip {
+    display: flex; gap: 16px; width: 100%; max-width: 1000px;
+  }
+  .vs-cell {
+    flex: 1; background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 20px 16px; text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .vs-cell .v { font-size: 38px; font-weight: 900; }
+  .vs-cell .l { font-size: 15.5px; margin-top: 6px; font-weight: 600; }
+  .vs-cell .s { font-size: 13.5px; color: var(--sub); margin-top: 4px; line-height: 1.5; }
+
+  /* 转场句 */
+  .page-bridge {
+    margin-top: 36px; width: 100%; max-width: 1000px;
+    font-size: 19px; color: var(--ink); text-align: center;
+    background: #fdf6e3; border: 1px solid #e8dcc0; border-radius: 999px;
+    padding: 13px 30px;
+  }
+  .page-bridge b { color: var(--accent); }
+
+  .src {
+    font-size: 13.5px; color: #a0a89f; text-align: left;
+    margin-top: 14px; line-height: 1.8; width: 100%; max-width: 1000px;
+    border-top: 1px dashed var(--line); padding-top: 8px;
+  }
+
+  .hl-r { color: var(--red); font-weight: 800; }
+  .hl-g { color: var(--green); font-weight: 800; }
+  .hl-y { color: var(--gold); font-weight: 800; }
+  .hl-a { color: var(--accent); font-weight: 800; }
+</style>
+</head>
+<body>
+
+<!-- ============ P1 钩子：新势力最不起眼的那个，考了第一 ============ -->
+<section class="page">
+  <div class="page-num">1 / 7</div>
+  <div class="page-tag">2025 年 报</div>
+  <div class="page-title">新势力销量第一的公司<br>你可能从没刷到过它的热搜</div>
+  <div class="page-sub">2025年交付<strong>59.66万辆</strong>，新势力第一。第二名是理想。但零跑的发布会不刷屏，老板不上热搜</div>
+
+  <div class="card-row">
+    <div class="data-card">
+      <div class="label">全年交付</div>
+      <div class="value num" style="color:var(--accent)">596,555</div>
+      <div class="note">+103.1% · 新势力销量第一</div>
+    </div>
+    <div class="data-card">
+      <div class="label">全年营收</div>
+      <div class="value num" style="color:var(--accent)">647.3亿</div>
+      <div class="note">+101.3%</div>
+    </div>
+    <div class="data-card">
+      <div class="label">归母净利润</div>
+      <div class="value num" style="color:var(--green)">+5.38亿</div>
+      <div class="note">继理想之后第二家盈利的新势力</div>
+    </div>
+    <div class="data-card">
+      <div class="label">单车均价</div>
+      <div class="value num" style="color:var(--gold)">10.39万</div>
+      <div class="note">整车收入620.1亿 ÷ 59.66万台</div>
+    </div>
+  </div>
+
+  <div class="core-line">
+    卖均价10万块的车，怎么成为第二家盈利的新势力？便宜还能赚钱，才是真本事
+  </div>
+
+  <div class="page-bridge">2025年，它干成了全行业不信的一件事 → <b>了解它的赚钱方式</b></div>
+  <div class="src">来源：交付596,555台（+103.1%）、营收647.32亿（+101.3%）、净利5.38亿、整车及零部件收入620.1亿——零跑汽车2025年报（经审计）</div>
+</section>
+
+<!-- ============ P2 赚钱方式：三招抠出利润 ============ -->
+<section class="page">
+  <div class="page-num">2 / 7</div>
+  <div class="page-tag">赚 钱 方 式</div>
+  <div class="page-title">三招，从10万的车价里抠出利润</div>
+  <div class="page-sub">单车净利<strong>902元</strong>——差不多一部手机。但它真的赚到了</div>
+
+  <div class="core-line">
+    65%的整车成本来自自研零部件 → 省掉Tier1中间利润 → 14.5%的毛利率就是这么来的
+  </div>
+
+  <table class="kpi-table">
+    <tr><th>环节</th><th>零跑的做法</th><th class="kpi-val">2025数据</th></tr>
+    <tr>
+      <td><strong>造车成本</strong></td>
+      <td>八合一电驱、CTC电池底盘一体化——65%核心零部件自研自造</td>
+      <td class="kpi-val pos">毛利率14.5%<br><span style="font-size:13px;font-weight:400;">2024年才8.4%</span></td>
+    </tr>
+    <tr>
+      <td><strong>研发</strong></td>
+      <td>只投"今天能装上车的东西"——不做远期概念</td>
+      <td class="kpi-val num">42.9亿<br><span style="font-size:13px;font-weight:400;">单车约7,200元</span></td>
+    </tr>
+    <tr>
+      <td><strong>销售</strong></td>
+      <td>不重金铺直营店——靠性价比口碑走量</td>
+      <td class="kpi-val num">36.5亿<br><span style="font-size:13px;font-weight:400;">费率5.6%</span></td>
+    </tr>
+    <tr>
+      <td><strong>副产品</strong></td>
+      <td>碳积分交易——出口带来的收入</td>
+      <td class="kpi-val pos">27.2亿<br><span style="font-size:13px;font-weight:400;">+413%</span></td>
+    </tr>
+  </table>
+
+  <div class="insight-box">
+    <div class="q">同一道算术题：卖贵的反而不赚钱？</div>
+    <div class="a">
+    零跑单车净利902元，全年净赚5.38亿。对照：蔚来卖30多万的车，至今还在亏。<br>
+    创始人朱江明做了三十年电子制造——把造摄像头的成本逻辑搬进了造车。
+    </div>
+  </div>
+
+  <div class="page-bridge">国内这套打法通了。出口呢？<b>它走了一条没人走过的路</b> →</div>
+  <div class="src">来源：65%自研自造——公司2025年报及2026Q1公告原文；研发42.9亿（+47.9%）、销售36.5亿（+70.6%）、服务及其他27.2亿（+413.2%）——2025年报管理层讨论与分析</div>
+</section>
+
+<!-- ============ P3 反向合资 ============ -->
+<section class="page">
+  <div class="page-num">3 / 7</div>
+  <div class="page-tag">出 海 策 略</div>
+  <div class="page-title">不自己烧钱建海外渠道<br>让外国巨头掏钱替你卖</div>
+  <div class="page-sub">全行业独一份：<strong>反向合资</strong></div>
+
+  <div class="core-line">
+    2023年Stellantis投约15亿欧元入股约20% → 2024年成立"零跑国际"，外方出钱出渠道、中方出车出技术 → 四十年前老外来中国合资要技术，这次反过来了
+  </div>
+
+  <div class="vs-strip">
+    <div class="vs-cell">
+      <div class="v num" style="color:var(--accent);">+442%</div>
+      <div class="l">Q1出口增速</div>
+      <div class="s">40,901台，占总销量37.1%</div>
+    </div>
+    <div class="vs-cell">
+      <div class="v num" style="color:var(--accent);">+726.5%</div>
+      <div class="l">欧洲16国上牌增速</div>
+      <div class="s">2.33万台 · 意大利纯电销冠</div>
+    </div>
+    <div class="vs-cell">
+      <div class="v num" style="color:var(--blue);">约1,000家</div>
+      <div class="l">海外网点</div>
+      <div class="s">欧洲超850家 · 几乎没花自己的钱</div>
+    </div>
+  </div>
+
+  <div class="insight-box" style="margin-top:20px;">
+    <div class="q">关键逻辑</div>
+    <div class="a">
+    2025全年出口67,052台——新势力出口第一。2026年2月累计出口已破10万台。<br>
+    不烧钱建渠道＝不用为出口拖累利润，这在所有出海的新势力里是独一份。
+    </div>
+  </div>
+
+  <div class="page-bridge">国内赚钱、海外省钱，看起来很完美。但<b>一季报上出了问题</b> →</div>
+  <div class="src">来源：Stellantis投资约15亿欧元获约20%股权（2023-10公告）；Q1出口40,901台（+442%、占37.1%）、欧洲16国上牌2.33万台（+726.5%）、海外网点约1,000家——零跑2026Q1业绩公告</div>
+</section>
+
+<!-- ============ P4 Q1踩刹车 ============ -->
+<section class="page">
+  <div class="page-num">4 / 7</div>
+  <div class="page-tag">2026 年 一 季 报</div>
+  <div class="page-title">Q1利润重回亏损，钱在加速流出</div>
+  <div class="page-sub">收入在涨、销量在涨，<strong>利润却重新见红</strong></div>
+
+  <div class="core-line">
+    毛利率从15%掉到9.4%，经营现金流-66.1亿，单季现金净减72亿 —— 薄利模式最怕"量上去、利下来"
+  </div>
+
+  <table class="kpi-table">
+    <tr><th>指标</th><th>2026年Q1</th><th>对比</th></tr>
+    <tr>
+      <td>营收</td>
+      <td class="kpi-val num">108.2亿</td>
+      <td>+8.0%</td>
+    </tr>
+    <tr>
+      <td>销量</td>
+      <td class="kpi-val num">110,155台</td>
+      <td>+25.8%（量升价跌）</td>
+    </tr>
+    <tr>
+      <td>毛利率</td>
+      <td class="kpi-val neg">9.4%</td>
+      <td>同期14.9% / 上季15.0%</td>
+    </tr>
+    <tr>
+      <td>净利润</td>
+      <td class="kpi-val neg">-3.9亿</td>
+      <td>由盈转亏</td>
+    </tr>
+    <tr>
+      <td>经营现金流</td>
+      <td class="kpi-val neg">-66.1亿</td>
+      <td>2025全年为+126.2亿</td>
+    </tr>
+    <tr>
+      <td>在手资金</td>
+      <td class="kpi-val num">306.3亿</td>
+      <td>单季减72亿，仍较充裕</td>
+    </tr>
+  </table>
+
+  <div class="insight-box">
+    <div class="q">分清两类问题</div>
+    <div class="a">
+      <strong>现金流为负</strong>：公司公告原文解释——"账期节奏带来的到期应付款项加大"。2025全年现金流是+126.2亿，Q1是季节性低谷，可修复。<br>
+      <strong>毛利率掉5.5个点</strong>：低价车占比上升 + 战略合作业务减少。这是结构性问题，需要盯。
+    </div>
+  </div>
+
+  <div class="page-bridge">公司自己显然知道问题出在哪。4月以后<b>上了两个新变量</b> →</div>
+  <div class="src">来源：收入108.2亿（+8.0%）、毛利率9.4%（同期14.9%）及归因原文、净亏3.9亿、经营现金流-66.1亿、在手306.3亿——零跑2026Q1业绩公告</div>
+</section>
+
+<!-- ============ P5 新变量 ============ -->
+<section class="page">
+  <div class="page-num">5 / 7</div>
+  <div class="page-tag">新 变 量</div>
+  <div class="page-title">量再上台阶，价往上够</div>
+  <div class="page-sub">低价走量稳基本盘，第一次把车卖过<strong>20万</strong>——修毛利率</div>
+
+  <div class="vs-strip" style="margin-bottom:20px;">
+    <div class="vs-cell">
+      <div class="v num" style="color:var(--accent);">8.16万</div>
+      <div class="l">5月交付（+81%）</div>
+      <div class="s">新势力首个破8万</div>
+    </div>
+    <div class="vs-cell">
+      <div class="v num" style="color:var(--gold);">21.98万起</div>
+      <div class="l">旗舰D19 · 4月16日上市</div>
+      <div class="s">15天大定超15,000辆</div>
+    </div>
+    <div class="vs-cell">
+      <div class="v" style="color:var(--blue);">D99</div>
+      <div class="l">旗舰MPV</div>
+      <div class="s">6月预售 · 7月上市交付</div>
+    </div>
+  </div>
+
+  <div class="core-line">
+    走量底盘没松：A10（10万内首搭激光雷达）首月大定超4万；Lafa5车系3个月破2万 —— 低价基本盘牢固
+  </div>
+
+  <div class="insight-box">
+    <div class="q">还有个伏笔</div>
+    <div class="a">
+    2025年12月与中国一汽签了内资股认购协议——国家队入场。不仅是钱，更意味着供应链和渠道资源。
+    </div>
+  </div>
+
+  <div class="page-bridge">条件都齐了。最后看管理层的<b>军令状</b> →</div>
+  <div class="src">来源：5月81,569台——公司交付公告；D19上市15天大定1.5万+（21.98-26.98万）；A10首月大定4万+——零跑2026Q1业绩公告；一汽2025-12-28内资股认购协议</div>
+</section>
+
+<!-- ============ P6 军令状 ============ -->
+<section class="page">
+  <div class="page-num">6 / 7</div>
+  <div class="page-tag">2026 年 目 标</div>
+  <div class="page-title">100万辆 × 5,000元 = 50亿</div>
+  <div class="page-sub">管理层立的军令状，至今没改口：<strong>销量100万辆、净利润50亿</strong></div>
+
+  <div class="core-line">
+    2025年实际单车净利902元 → 2026年目标单车5,000元 → 一年之内翻5.5倍。销量端不难，利润端才是考点
+  </div>
+
+  <table class="kpi-table">
+    <tr><th>验证维度</th><th>当前进度</th><th>关键观察节点</th></tr>
+    <tr>
+      <td><strong>销量：100万辆</strong></td>
+      <td>1-5月已交付约26.3万台（26.3%）</td>
+      <td>5月已月销8万+，下半年月均9万+够得着</td>
+    </tr>
+    <tr>
+      <td><strong>利润：50亿</strong></td>
+      <td>Q1亏损3.9亿</td>
+      <td>看Q3（D19、D99大规模交付+出口旺季）</td>
+    </tr>
+    <tr>
+      <td><strong>毛利率修复</strong></td>
+      <td>Q1仅9.4%</td>
+      <td>看半年报毛利率是否回到13%+</td>
+    </tr>
+    <tr>
+      <td><strong>现金流</strong></td>
+      <td>在手306.3亿（Q1减72亿）</td>
+      <td>看Q2经营现金流是否回正</td>
+    </tr>
+  </table>
+
+  <div class="page-bridge">最后，记住三个关键数字 →</div>
+  <div class="src">来源：100万辆/50亿目标——2025年报业绩电话会，副总裁李腾飞"净利润目标维持50亿元不变"（每日经济新闻2026-03-17）；1-5月约26.3万台＝Q1 110,155＋4月71,387＋5月81,569</div>
+</section>
+
+<!-- ============ P7 总结 ============ -->
+<section class="page">
+  <div class="page-num">7 / 7</div>
+  <div class="page-tag">总 结</div>
+  <div class="page-title">零跑的三个核心数字</div>
+
+  <div class="card-row" style="margin-top:20px;">
+    <div class="data-card">
+      <div class="label">自研占比</div>
+      <div class="value num" style="color:var(--accent);">65%</div>
+      <div class="note">整车成本中自研零部件占比<br>便宜还能赚钱的根基</div>
+    </div>
+    <div class="data-card">
+      <div class="label">单车净利</div>
+      <div class="value num" style="color:var(--gold);">902元</div>
+      <div class="note">2025年实际水平<br>薄利模式的真相</div>
+    </div>
+    <div class="data-card">
+      <div class="label">目标单车净利</div>
+      <div class="value num" style="color:var(--blue);">5,000元</div>
+      <div class="note">2026年军令状要求<br>需翻5.5倍</div>
+    </div>
+  </div>
+
+  <div class="core-line" style="margin-top:28px;">
+    65%（根基）→ 902元（现状）→ 5,000元（目标）。这三个数之间的跨度，就是零跑2026年要交的答卷
+  </div>
+
+  <div class="insight-box">
+    <div class="q">三点判断</div>
+    <div class="a">
+    1. <strong>成本控制是真实力</strong>：65%自研 + 5.6%销售费率，别人复制不了<br>
+    2. <strong>反向合资是护城河</strong>：出口不烧钱、还赚碳积分，新势力独一份<br>
+    3. <strong>50亿军令状是压力测试</strong>：D19/D99能否拉均价、毛利率能否回15%，是2026年最关键的两个问题
+    </div>
+  </div>
+
+  <div class="src">
+    来源：零跑汽车2025年报（经审计）、2026Q1业绩公告、2026年4-6月交付公告<br>
+    本内容为公司公开信息分析，不构成投资建议
+  </div>
+</section>
+
+<!-- ==============================
+     补充：源于早期备份稿（v1问答式），合并保留的独有事实
+     ============================== -->
+<section class="page">
+  <div class="page-num">附</div>
+  <div class="page-tag">补 充 数 据</div>
+  <div class="page-title">备份稿独有事实（合并保留）</div>
+
+  <table class="kpi-table">
+    <tr><th>维度</th><th>备份稿独有事实</th></tr>
+    <tr><td><strong>创始人背景</strong></td><td>朱江明1993年与傅利泉共同创办大华股份（安防行业全球第二），2015年创立零跑——"造摄像头的人造车"的源头</td></tr>
+    <tr><td><strong>外方股东</strong></td><td>Stellantis 是标致、雪铁龙、Jeep 的母公司；零跑国际由外方出钱出渠道、中方出车出技术</td></tr>
+  </table>
+
+  <div class="src">本页整理自「零跑汽车产业版图_v1问答式_备份.html」，事实以公司公告/年报为准。</div>
+</section>
+
+</body>
+</html>

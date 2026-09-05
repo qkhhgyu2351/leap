@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>长鑫科技 IPO 全景图</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #f5f7fa;
+    color: #2c3e50;
+    line-height: 1.55;
+    padding: 24px 14px 48px;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; }
+
+  /* 顶部标题 */
+  .header {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 22px 26px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.05);
+    border-top: 5px solid #b8860b;
+    margin-bottom: 18px;
+  }
+  .header h1 { font-size: 25px; font-weight: 800; letter-spacing: 1px; }
+  .header .sub { font-size: 13px; color: #5a6c7d; margin-top: 6px; }
+  .header .date { font-size: 12px; color: #b8860b; font-weight: 700; margin-top: 4px; }
+
+  /* 核心数据条 */
+  .statbar {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 10px; margin-bottom: 18px;
+  }
+  .stat {
+    background: #fff; border-radius: 12px; padding: 14px 10px; text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,.05); border-bottom: 3px solid #c0392b;
+  }
+  .stat .v { font-size: 21px; font-weight: 800; color: #c0392b; }
+  .stat .l { font-size: 11px; color: #5a6c7d; margin-top: 3px; }
+  .stat .n { font-size: 10px; color: #95a5a6; margin-top: 1px; }
+
+  /* 卡片 */
+  .card {
+    background: #fff; border-radius: 14px; padding: 18px 22px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.05); margin-bottom: 16px;
+  }
+  .card h2 {
+    font-size: 17px; font-weight: 800; color: #2c3e50;
+    border-left: 5px solid #b8860b; padding-left: 10px; margin-bottom: 12px;
+  }
+  .card .judge {
+    background: #fdf6e3; border-left: 4px solid #b8860b;
+    padding: 10px 12px; border-radius: 0 8px 8px 0; font-size: 13px;
+    color: #6b5610; margin-top: 12px; font-weight: 600;
+  }
+
+  /* 表格 */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 4px; }
+  th, td { padding: 8px 10px; text-align: right; border-bottom: 1px solid #eef1f4; }
+  th { background: #f5f7fa; color: #5a6c7d; font-weight: 700; }
+  td:first-child, th:first-child { text-align: left; }
+  .hl { color: #c0392b; font-weight: 800; }
+  .gold { color: #b8860b; font-weight: 800; }
+
+  /* 两栏 */
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .mini {
+    background: #fafbfc; border-radius: 10px; padding: 12px 14px; border: 1px solid #eef1f4;
+  }
+  .mini .t { font-weight: 800; font-size: 14px; margin-bottom: 6px; }
+  .mini.p1 .t { color: #c0392b; }
+  .mini.p2 .t { color: #b8860b; }
+  .mini .row { display: flex; justify-content: space-between; font-size: 12.5px; padding: 3px 0; }
+  .mini .row span:last-child { font-weight: 700; }
+
+  /* 流程条 */
+  .flow { display: flex; align-items: stretch; gap: 0; margin-top: 6px; flex-wrap: wrap; }
+  .step {
+    flex: 1; min-width: 120px; background: #fafbfc; border: 1px solid #eef1f4;
+    border-radius: 10px; padding: 10px 12px; position: relative; margin: 4px;
+  }
+  .step .n { font-size: 11px; color: #b8860b; font-weight: 800; }
+  .step .d { font-size: 12.5px; margin-top: 3px; }
+  .step .v { font-size: 14px; font-weight: 800; color: #2c3e50; margin-top: 2px; }
+
+  /* 对比条 */
+  .barwrap { margin: 6px 0; }
+  .barlabel { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 3px; }
+  .bar { height: 18px; background: #eef1f4; border-radius: 9px; overflow: hidden; }
+  .bar > span { display: block; height: 100%; border-radius: 9px; }
+  .bar.cx > span { background: #c0392b; }
+  .bar.peer > span { background: #b8860b; }
+
+  .footer {
+    background: #fff; border-radius: 12px; padding: 14px 18px; font-size: 11px;
+    color: #95a5a6; line-height: 1.6; border: 1px dashed #d5dbe0; margin-top: 8px;
+  }
+  .tag { display: inline-block; background: #fdf6e3; color: #b8860b; font-size: 11px;
+    font-weight: 700; padding: 2px 8px; border-radius: 20px; margin-bottom: 8px; }
+
+  @media (max-width: 560px) {
+    .statbar { grid-template-columns: repeat(2, 1fr); }
+    .two { grid-template-columns: 1fr; }
+    table { font-size: 11.5px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- 标题 -->
+  <div class="header">
+    <h1>长鑫科技 IPO 全景图</h1>
+    <div class="sub">基于 7/9 招股意向书 · 7/15 发行公告 · 7/16 中签率公告（已披露数据推算）</div>
+    <div class="date">整理日期：2026-07-17 · 数据截至发行价（8.66元/股）</div>
+  </div>
+
+  <!-- 核心数据条 -->
+  <div class="statbar">
+    <div class="stat"><div class="v">8.66元</div><div class="l">发行价</div><div class="n">/股</div></div>
+    <div class="stat"><div class="v">579亿</div><div class="l">募资(绿鞋前)</div><div class="n">绿鞋后666亿</div></div>
+    <div class="stat"><div class="v">5,800亿</div><div class="l">发行市值</div><div class="n">绿鞋前总股本</div></div>
+    <div class="stat"><div class="v">0.47%</div><div class="l">网上中签率</div><div class="n">244倍申购</div></div>
+  </div>
+
+  <!-- 1. 打新结构 -->
+  <div class="card">
+    <h2>① 打新结构：钱从哪来、到哪去</h2>
+    <table>
+      <tr><th>渠道</th><th>股数</th><th>金额(×8.66)</th><th>占比</th></tr>
+      <tr><td>网上最终发行</td><td>38.51亿股</td><td class="hl">333.5亿</td><td>50.07%</td></tr>
+      <tr><td>网下最终发行</td><td>21.73亿股</td><td>188.2亿</td><td>28.25%</td></tr>
+      <tr><td>战略配售</td><td>16.67亿股</td><td>144.3亿</td><td>24.93%</td></tr>
+      <tr><td>合计(打新不含战略)</td><td class="gold">60.24亿股</td><td class="gold">521.7亿</td><td>78.3%</td></tr>
+    </table>
+    <div class="judge">网上硬拿了总发行量 50%（绿鞋+回拨推上去），所以首日流通异常高——长鑫不靠"筹码稀缺"炒溢价。</div>
+  </div>
+
+  <!-- 2. 首日流通盘 -->
+  <div class="card">
+    <h2>② 首日流通盘：45亿股 / 约390亿</h2>
+    <div class="flow">
+      <div class="step"><div class="n">网上</div><div class="v">38.51亿股</div><div class="d">100%首日流通</div></div>
+      <div class="step"><div class="n">网下</div><div class="v">6.52亿股</div><div class="d">仅30%流通(70%锁6月)</div></div>
+      <div class="step"><div class="n">战略</div><div class="v">0</div><div class="d">首日0流通(锁≥12月)</div></div>
+      <div class="step"><div class="n">合计</div><div class="v hl">45.03亿股</div><div class="d">≈390亿(按发行价)</div></div>
+    </div>
+    <div class="judge">390亿是"可交易筹码的票面价值"，不是成交额上限。真实首日成交额＝流通股×换手率×成交价，1000~2000亿完全可能（绿鞋托市盘也计入）。占发行后总股本约59~67%。</div>
+  </div>
+
+  <!-- 3. 绿鞋机制 -->
+  <div class="card">
+    <h2>③ 绿鞋机制：15%的稳价开关</h2>
+    <div class="two">
+      <div class="mini">
+        <div class="t">规模与动作</div>
+        <div class="row"><span>超额配售权</span><span>100.32亿股</span></div>
+        <div class="row"><span>来源</span><span>向战配"借股"</span></div>
+        <div class="row"><span>窗口</span><span>上市后30天</span></div>
+        <div class="row"><span>买回上限</span><span>≤8.66元</span></div>
+      </div>
+      <div class="mini">
+        <div class="t">两种结局</div>
+        <div class="row"><span>价弱(≤8.66)</span><span>买回归还·少行使</span></div>
+        <div class="row"><span>价强(>8.66)</span><span class="hl">全额行使</span></div>
+        <div class="row"><span>长鑫大概率</span><span class="hl">全额行使</span></div>
+        <div class="row"><span>期满总股本</span><span>769.13亿股</span></div>
+      </div>
+    </div>
+    <div class="judge">没买回的份额＝发行人按8.66照发（部分/全额行使）；买回的才算"没发出来"。券商买回价与8.66的价差是其稳价报酬，非基金、非发行人钱。首日流通盘已含绿鞋股份，勿重复叠加。</div>
+  </div>
+
+  <!-- 4. 两期员工持股计划 -->
+  <div class="card">
+    <h2>④ 两期员工持股计划：晚加入反而更便宜</h2>
+    <div class="two">
+      <div class="mini p1">
+        <div class="t">第一期（2021.9起）</div>
+        <div class="row"><span>认购价</span><span class="hl">1.05元/股</span></div>
+        <div class="row"><span>来源</span><span>真金白银增资</span></div>
+        <div class="row"><span>性质</span><span>员工掏钱进公司</span></div>
+      </div>
+      <div class="mini p2">
+        <div class="t">第二期（2023.6起）</div>
+        <div class="row"><span>认购价</span><span class="gold">0.108元/股</span></div>
+        <div class="row"><span>来源</span><span>资本公积转增</span></div>
+        <div class="row"><span>价差</span><span>≈第一期1/10</span></div>
+      </div>
+    </div>
+    <table style="margin-top:12px">
+      <tr><th>关键人物/事实</th><th>数据</th><th>说明</th></tr>
+      <tr><td>朱一明(第二期独得)</td><td class="hl">15.36亿股</td><td>成本0.108，毛值约133亿</td></tr>
+      <tr><td>锁定期</td><td>36个月</td><td>上市起算，朱另自愿不减持</td></tr>
+      <tr><td>覆盖人数(合肥集鑫)</td><td>4,912人</td><td>非朱员工人均账面≈620万</td></tr>
+      <tr><td>股份支付费用</td><td>≈6亿/年</td><td>公司逐年计提</td></tr>
+    </table>
+    <div class="judge">0.108不是员工从公司买的价——是公司把公积免费转成股本后，在平台内低价分出来的"纸上富贵"，锁3年、非变现。</div>
+  </div>
+
+  <!-- 5. 资本公积定向转增 -->
+  <div class="card">
+    <h2>⑤ 资本公积定向转增：只给两家、其他股东没摊</h2>
+    <div class="flow">
+      <div class="step"><div class="n">时间</div><div class="v">2023.3</div><div class="d">全体股东书面一致决议</div></div>
+      <div class="step"><div class="n">大基金二期</div><div class="v gold">4.96亿</div><div class="d">注册资本(无偿取得)</div></div>
+      <div class="step"><div class="n">合肥集鑫</div><div class="v gold">45.61亿</div><div class="d">=第二期ESOP总盘子</div></div>
+      <div class="step"><div class="n">其他股东</div><div class="v">0</div><div class="d">未参与转增</div></div>
+    </div>
+    <div class="judge">标准做法是同比例转增（人人按比例、持股不变）。长鑫打破"同比例"——只给两家发新股、不掏钱，靠其他股东放弃转增权实现。不参与的老股东持股比例被稀释，但每股净资产未变（公司净资产总额没动）。属已披露事实，中性描述，非利益输送指控。</div>
+  </div>
+
+  <!-- 6. 资产负债率预测 -->
+  <div class="card">
+    <h2>⑥ 资产负债率预测：6月底铁定跌破50%</h2>
+    <table>
+      <tr><th>时点/口径</th><th>资产</th><th>负债(不变)</th><th>D/A</th></tr>
+      <tr><td>2025年末</td><td>3,367.85亿</td><td>1,826.85亿</td><td>54.24%</td></tr>
+      <tr><td>2026-03-31(实际)</td><td>3,881.66亿</td><td>1,965.61亿</td><td class="hl">50.64%</td></tr>
+      <tr><td>仅加募资579亿</td><td>4,460.66亿</td><td>1,965.61亿</td><td>44.1%↓</td></tr>
+      <tr><td>含H1利润+募资(精确)<br>Q2=H1(660~750)−Q1(330.1)=329.9~419.9亿</td><td>4,790.6~4,880.6亿</td><td>1,965.61亿</td><td class="gold">40.3~41.0%↓</td></tr>
+    </table>
+    <div class="judge">H1预告净利润660~750亿（归母500~570亿）；Q1已实现330.1亿，故Q2=H1−Q1=329.9~419.9亿。利润进留存收益→权益↑→资产↑（负债不动）→负债率↓。比3月底50.64%降约10个点（至40.3~41.0%）。注：用total净利（非归母）；只能加Q2、不能加整年H1（Q1已含在3/31资产）；H1预告未经审计、招股书注明不构成盈利预测，本测算为推算/假设。</div>
+  </div>
+
+  <!-- 7. PB/PE对比 -->
+  <div class="card">
+    <h2>⑦ PB / PE 悖论：3~4万亿下"最贵"又"最便宜"</h2>
+
+    <div class="tag">读者自判：用公司自己预告的H1净利 + 6月底净资产，反推出PE、PB，再对照7家可比公司，贵不贵你自己掂量</div>
+    <div class="tag">市净率 PB 对比（分母:6月底归母净资产≈1,931亿）</div>
+    <div class="barwrap">
+      <div class="barlabel"><span>发行价 5,792亿</span><span class="hl">3.0x（官方5.06x@2025末）</span></div>
+      <div class="bar cx"><span style="width:14%"></span></div>
+      <div class="barlabel" style="margin-top:8px"><span>网传 3万亿</span><span class="hl">15.5x（超除美光外所有）</span></div>
+      <div class="bar cx"><span style="width:74%"></span></div>
+      <div class="barlabel" style="margin-top:8px"><span>网传 4万亿</span><span class="hl">20.7x（全同业最贵）</span></div>
+      <div class="bar cx"><span style="width:100%"></span></div>
+    </div>
+
+    <table style="margin-top:14px">
+      <tr><th>同业 PB</th><th>数值</th><th>同业扣非后PE</th><th>数值</th></tr>
+      <tr><td>三星电子</td><td class="gold">3.51x</td><td>三星电子</td><td>33.6x</td></tr>
+      <tr><td>SK海力士</td><td class="gold">10.91x</td><td>SK海力士</td><td>30.6x</td></tr>
+      <tr><td>美光</td><td class="gold">16.70x</td><td>美光</td><td>62.3x</td></tr>
+      <tr><td>南亚科技</td><td class="gold">8.56x</td><td>南亚科技</td><td>220.7x</td></tr>
+      <tr><td>台积电</td><td class="gold">11.68x</td><td>台积电</td><td>36.8x</td></tr>
+      <tr><td>中芯国际</td><td class="gold">9.28x</td><td>中芯国际</td><td>339.5x</td></tr>
+      <tr><td>华润微</td><td class="gold">4.49x</td><td>华润微</td><td>218.8x</td></tr>
+    </table>
+    <div class="small" style="margin-top:6px">以上7家均为《投资风险特别公告》可比公司表原文列出（数据截至T-3日2026-7-13，来源iFind、Bloomberg）；同业PE为2025年扣非后静态市盈率，PB为2025年末市净率，算术均值 PE 134.62x / PB 9.30x。</div>
+
+    <div class="small" style="margin-top:6px">半年报PE按<b>归母净利年化</b>（500~570亿×2＝1,000~1,140亿）测算；与⑥节算资产负债率用的<b>total净利</b>（660~750亿×2）口径不同——两处都没错，只是净利选归母还是合并口径。反推公式：PE＝假设市值÷年化净利，PB＝假设市值÷6月底归母净资产。</div>
+    <div class="barwrap" style="margin-top:14px">
+      <div class="barlabel"><span>半年报 PE · 3万亿(年化)</span><span class="hl">26~30x（低于三星/海力士）</span></div>
+      <div class="bar cx"><span style="width:46%"></span></div>
+      <div class="barlabel" style="margin-top:8px"><span>半年报 PE · 4万亿(年化)</span><span class="hl">35~40x（略高于二者）</span></div>
+      <div class="bar cx"><span style="width:60%"></span></div>
+    </div>
+
+    <div class="judge">同是3~4万亿：PB最贵(15~21x，超所有同业)、PE最便宜(年化26~40x，低于三星海力士)。矛盾根源＝H1几百亿利润是DRAM周期顶的价格给的。一旦价格回落，利润塌方→PE瞬间爆几十上百倍，PB的"便宜"也跟着消失。本测算是标尺，不是买卖建议。</div>
+  </div>
+
+  <!-- 免责声明 -->
+  <div class="footer">
+    <strong>免责声明：</strong>以上内容基于长鑫科技已披露的招股意向书、发行公告及中签率公告等公开信息整理，相关资产负债率、市净率、市盈率均为基于公开数据的<strong>推算/假设</strong>，不构成任何投资建议。其中2026年上半年业绩预告为未经审计的估计（招股书原文注明"不构成盈利预测"），实际中报可能漂移；股票上市后的真实市值由开盘价决定，本图发行价口径仅作静态参照，不预测实际价位。本人对任何公司不存在偏见，希望严谨的分析对投资者有意义。
+  </div>
+
+</div>
+</body>
+</html>

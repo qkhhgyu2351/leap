@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>赛力斯：从面包车厂到千亿车企</title>
+<style>
+  :root {
+    --bg: #f5f6fa;
+    --card: #ffffff;
+    --border: #e2e6ee;
+    --text: #1a1a2e;
+    --sub: #8888a0;
+    --navy: #1a3a5c;
+    --teal: #0d7b6e;
+    --red: #c0392b;
+    --green: #1e8449;
+    --gold: #b8860b;
+    --blue: #2471a3;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.65;
+  }
+  .num { font-family: "Menlo", "SF Mono", monospace; }
+
+  .page {
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 60px 44px; border-bottom: 1px solid var(--border);
+    position: relative; page-break-after: always; background: var(--bg);
+  }
+  .page:last-child { border-bottom: none; }
+
+  .page-number {
+    position: absolute; top: 24px; right: 32px;
+    font-size: 15px; color: #bbb;
+  }
+
+  .page-title {
+    font-size: 46px; font-weight: 800; text-align: center;
+    margin-bottom: 14px; letter-spacing: 1px; color: var(--text); line-height: 1.3;
+  }
+  .page-subtitle {
+    font-size: 20px; color: var(--sub); text-align: center; margin-bottom: 44px;
+  }
+  .page-note {
+    font-size: 15px; color: #999; text-align: center; margin-top: 28px;
+    border-top: 1px dashed var(--border); padding-top: 12px; width: 100%; max-width: 1020px;
+  }
+
+  /* ===== P1 Hook ===== */
+  .hook-quote {
+    font-size: 32px; font-style: italic; color: var(--sub); text-align: center;
+    max-width: 780px; line-height: 1.6; margin-bottom: 36px;
+  }
+  .hook-answer {
+    font-size: 52px; font-weight: 900; text-align: center; color: var(--navy);
+    line-height: 1.25; max-width: 900px;
+  }
+  .hook-highlight { color: var(--teal); }
+
+  /* ===== Timeline ===== */
+  .timeline { width: 100%; max-width: 960px; position: relative; }
+  .tl-row { display: flex; align-items: flex-start; margin-bottom: 28px; position: relative; }
+  .tl-year {
+    width: 120px; flex-shrink: 0; font-size: 18px; font-weight: 700; color: var(--teal);
+    padding-top: 2px; text-align: right; padding-right: 28px;
+  }
+  .tl-dot {
+    width: 14px; height: 14px; border-radius: 50%; background: var(--teal);
+    flex-shrink: 0; margin-top: 6px; position: relative; z-index: 1;
+  }
+  .tl-line {
+    position: absolute; left: 125px; top: 20px; width: 2px; height: calc(100% - 14px);
+    background: var(--border); z-index: 0;
+  }
+  .tl-content {
+    flex: 1; padding-left: 28px; font-size: 18px; line-height: 1.7;
+  }
+  .tl-content b { color: var(--navy); }
+
+  /* ===== Data Cards ===== */
+  .card-row {
+    display: flex; gap: 20px; width: 100%; max-width: 1080px;
+    flex-wrap: wrap; justify-content: center;
+  }
+  .data-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 28px; min-width: 200px; flex: 1;
+    text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .data-value {
+    font-size: 52px; font-weight: 800; letter-spacing: -1px;
+  }
+  .data-value.teal { color: var(--teal); }
+  .data-value.navy { color: var(--navy); }
+  .data-value.gold { color: var(--gold); }
+  .data-value.red { color: var(--red); }
+  .data-label { font-size: 16px; color: var(--sub); margin-top: 8px; }
+  .data-sub { font-size: 14px; color: #999; margin-top: 4px; }
+
+  /* ===== Product Cards ===== */
+  .product-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    width: 100%; max-width: 1020px; margin-bottom: 28px;
+  }
+  .product-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 24px 20px; text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .product-card.highlight { border-top: 4px solid var(--teal); }
+  .product-name { font-size: 24px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+  .product-price { font-size: 15px; color: var(--sub); margin-bottom: 12px; }
+  .product-stat { font-size: 17px; color: var(--text); line-height: 1.6; }
+  .product-stat b { color: var(--teal); }
+
+  /* ===== Split Comparison ===== */
+  .split-row { display: flex; gap: 20px; width: 100%; max-width: 1060px; }
+  .split-col {
+    flex: 1; background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .split-col.left { border-left: 4px solid var(--red); }
+  .split-col.right { border-left: 4px solid var(--teal); }
+  .split-title {
+    font-size: 22px; font-weight: 700; margin-bottom: 22px; text-align: center;
+  }
+  .split-title.left { color: var(--red); }
+  .split-title.right { color: var(--teal); }
+
+  .metric-row {
+    display: flex; justify-content: space-between;
+    padding: 10px 0; border-bottom: 1px dashed var(--border);
+    font-size: 17px; color: var(--text);
+  }
+  .metric-row:last-child { border-bottom: none; }
+  .metric-val { font-weight: 600; }
+
+  /* ===== KPI Table ===== */
+  .kpi-table {
+    width: 100%; max-width: 1020px; border-collapse: collapse;
+    background: var(--card); border-radius: 12px; overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .kpi-table th {
+    padding: 14px 18px; font-size: 15px; color: var(--sub); text-align: left;
+    border-bottom: 2px solid var(--border); background: #fafbfc; letter-spacing: 1px;
+  }
+  .kpi-table td {
+    padding: 16px 18px; font-size: 17px; border-bottom: 1px solid var(--border); color: var(--text);
+  }
+  .kpi-table tr:last-child td { border-bottom: none; }
+  .tag-up { color: var(--green); font-weight: 600; }
+  .tag-down { color: var(--red); font-weight: 600; }
+
+  /* ===== Insight Box ===== */
+  .insight-box {
+    background: linear-gradient(135deg, #f0f6f5, var(--card));
+    border: 1px solid var(--teal); border-radius: 16px; padding: 30px;
+    max-width: 900px; width: 100%; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .insight-title { font-size: 18px; color: var(--teal); font-weight: 700; margin-bottom: 14px; }
+  .insight-text { font-size: 22px; line-height: 1.8; color: #333; }
+  .hl-teal { color: var(--teal); font-weight: 700; }
+  .hl-navy { color: var(--navy); font-weight: 700; }
+  .hl-red { color: var(--red); font-weight: 700; }
+  .hl-gold { color: var(--gold); font-weight: 700; }
+
+  /* ===== Bar Chart ===== */
+  .bar-chart { width: 100%; max-width: 800px; margin: 0 auto; }
+  .bar-row { display: flex; align-items: center; margin-bottom: 18px; }
+  .bar-label {
+    width: 180px; font-size: 16px; text-align: right; padding-right: 14px;
+    flex-shrink: 0; line-height: 1.3; color: var(--text);
+  }
+  .bar-track {
+    flex: 1; height: 38px; background: #eef0f5; border-radius: 7px;
+    overflow: hidden; position: relative;
+  }
+  .bar-fill {
+    height: 100%; border-radius: 7px; display: flex; align-items: center;
+    padding-left: 14px; font-size: 16px; font-weight: 700; color: #fff;
+  }
+
+  /* ===== Source ===== */
+  .src {
+    font-size: 14px; color: #bbb; text-align: left;
+    margin-top: 12px; line-height: 1.8; width: 100%; max-width: 1020px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ==============================
+     P1 钩子：2021年，全行业不敢接
+     ============================== -->
+<div class="page">
+  <div class="page-number">1 / 8</div>
+  <div class="hook-quote">
+    "不能把灵魂交给华为。"
+  </div>
+  <div class="hook-answer">
+    2021年，<span class="hook-highlight">全行业</span>都在说这句话。<br>
+    只有一家重庆面包车厂，<span class="hook-highlight">接了</span>。
+  </div>
+  <div class="page-subtitle" style="margin-top:36px;">
+    五年后，这家厂变成了千亿车企。它叫赛力斯。
+  </div>
+  <div class="src">赛力斯前身：小康股份（601127.SH），主营东风小康面包车，创始人张兴海</div>
+</div>
+
+<!-- ==============================
+     P2 时间线：从面包车到千亿车企
+     ============================== -->
+<div class="page">
+  <div class="page-number">2 / 8</div>
+  <div class="page-title">从东风小康到千亿车企</div>
+  <div class="page-subtitle">五年，三次转身</div>
+
+  <div class="timeline">
+    <div class="tl-line"></div>
+    <div class="tl-row">
+      <div class="tl-year">2021年以前</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        小康股份，靠<b>东风小康面包车</b>起家。转型电动车的金康SF5，市场反响平平。<br>
+        一家年营收刚过百亿的小厂，在行业里排不上号。
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-year">2021年</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        华为找车企合作造车。上汽说"不能失去灵魂"，广汽说"不做供应商的附属品"。<br>
+        <b>赛力斯接了。</b>问界品牌诞生——很多人当时觉得这是"自暴自弃"。
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-year">2025年</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <b>第十万辆问界下线，只用了46个月</b>——新势力最快纪录。<br>
+        （理想用了58个月，蔚来91个月）
+      </div>
+    </div>
+  </div>
+
+  <div class="card-row" style="margin-top:20px;">
+    <div class="data-card">
+      <div class="data-value teal">1,650.5亿</div>
+      <div class="data-label">2025年营收</div>
+      <div class="data-sub">同比+13.7%</div>
+    </div>
+    <div class="data-card">
+      <div class="data-value navy">59.6亿</div>
+      <div class="data-label">归母净利润</div>
+      <div class="data-sub">连续两年盈利</div>
+    </div>
+    <div class="data-card">
+      <div class="data-value teal">47.23万</div>
+      <div class="data-label">新能源销量（辆）</div>
+      <div class="data-sub">问界系列超42万辆</div>
+    </div>
+    <div class="data-card">
+      <div class="data-value gold">46个月</div>
+      <div class="data-label">百万问界下线</div>
+      <div class="data-sub">新势力最快纪录</div>
+    </div>
+  </div>
+
+  <div class="page-note" style="margin-top:32px;text-align:left;">
+    股权结构（2026Q1）：小康控股+渝安汽车（创始人家族）约25% ｜ 东风汽车集团（央企）18.79%<br>
+    数据来源：2025年报（审计）⭐⭐⭐⭐⭐、公司产销公告、2026Q1季报
+  </div>
+</div>
+
+<!-- ==============================
+     P3 产品：它不是"华为的车"
+     ============================== -->
+<div class="page">
+  <div class="page-number">3 / 8</div>
+  <div class="page-title">它造的不是"华为的车"</div>
+  <div class="page-subtitle">问界M9、M8、M7——实打实的产品力说话</div>
+
+  <div class="product-grid">
+    <div class="product-card highlight">
+      <div class="product-name">问界 M9</div>
+      <div class="product-price">50万级全景智慧旗舰SUV</div>
+      <div class="product-stat">
+        <b>交付超11万辆</b><br>
+        50万级车型<br>
+        <b>连续两年销冠</b><br><br>
+        <span style="color:var(--sub);font-size:14px;">中国品牌在BBA腹地登顶，历史上没有过</span>
+      </div>
+    </div>
+    <div class="product-card highlight">
+      <div class="product-name">问界 M8</div>
+      <div class="product-price">40万级家庭旗舰SUV</div>
+      <div class="product-stat">
+        <b>交付超15万辆</b><br>
+        40万级<br>
+        <b>销量第一</b><br><br>
+        <span style="color:var(--sub);font-size:14px;">两个价位段同时登顶</span>
+      </div>
+    </div>
+    <div class="product-card highlight">
+      <div class="product-name">问界 M7</div>
+      <div class="product-price">25-30万级主力走量</div>
+      <div class="product-stat">
+        <b>累计交付>16万辆</b><br>
+        25-30万级<br>
+        <b>持续热销</b><br><br>
+        <span style="color:var(--sub);font-size:14px;">三款车覆盖25-50万全区间</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="insight-box" style="margin-top:20px;">
+    <div class="insight-title">💡 2026年新动作</div>
+    <div class="insight-text" style="font-size:20px;">
+      全新一代问界M9（5月27日上市）：<span class="hl-teal">24小时大定突破20,000辆</span>——旗舰统治力仍在。<br>
+      1-5月新能源销量 <span class="hl-teal">145,108辆</span>，同比+15.14%。
+    </div>
+  </div>
+
+  <div class="page-note" style="text-align:left;">
+    数据来源：公司销量公告、2025年报 | 新M9大定：证券时报2026-06-01 | 1-5月销量：公司公告
+  </div>
+</div>
+
+<!-- ==============================
+     P4 财务：这不是代工厂的账本
+     ============================== -->
+<div class="page">
+  <div class="page-number">4 / 8</div>
+  <div class="page-title">账本打开：这不是代工厂的财务</div>
+  <div class="page-subtitle">三项数据，看清生意的质地</div>
+
+  <div class="card-row" style="margin-bottom:28px;">
+    <div class="data-card">
+      <div class="data-value teal">28.8%</div>
+      <div class="data-label">新能源车毛利率</div>
+      <div class="data-sub">主流新势力多在15%-20%<br>赛力斯高出整整一截</div>
+    </div>
+    <div class="data-card">
+      <div class="data-value navy">289.1亿</div>
+      <div class="data-label">经营活动现金净流入</div>
+      <div class="data-sub">生意真的在产生现金<br>这不是账面游戏</div>
+    </div>
+    <div class="data-card">
+      <div class="data-value gold">3.6%</div>
+      <div class="data-label">净利率</div>
+      <div class="data-sub">59.6亿÷1650.5亿<br>毛利高、净利薄——钱花哪了？</div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <div class="insight-title">📊 单车视角</div>
+    <div class="insight-text">
+      一辆问界均价约<span class="hl-teal">35万</span>。<br>
+      其中向华为体系采购零部件+服务约<span class="hl-navy">13.6万/辆</span>（鸿蒙座舱、智驾系统、渠道服务）。<br>
+      赛力斯自己留下的单车净利约<span class="hl-gold">1.3万</span>。<br><br>
+      28.8%的毛利率说明：<span class="hl-teal">制造能力是真本事。</span>供应链、工厂这些重资产，都是自己扛的。<br>
+      3.6%的净利率说明：<span class="hl-navy">它正在把赚来的钱往外花。</span>往哪花？下一页。
+    </div>
+  </div>
+
+  <div class="page-note" style="text-align:left;">
+    数据来源：毛利率28.8%、经营现金流289.1亿——2025年报（审计）⭐⭐⭐⭐⭐ | 单车13.6万采购——港股招股书（2025H1采购200亿÷同期交付14.7万辆，测算）| 单车净利1.3万——59.6亿÷47.23万辆（测算）
+  </div>
+</div>
+
+<!-- ==============================
+     P5 265亿独立宣言
+     ============================== -->
+<div class="page">
+  <div class="page-number">5 / 8</div>
+  <div class="page-title">265亿，在为自己铺路</div>
+  <div class="page-subtitle">赚来的钱，一笔一笔花在了"买回主动权"上</div>
+
+  <table class="kpi-table" style="margin-bottom:24px;">
+    <tr>
+      <th style="width:260px;">动作</th>
+      <th style="width:110px;">金额</th>
+      <th>买回了什么</th>
+    </tr>
+    <tr>
+      <td>买断"问界"商标919项+外观专利44项<br><span style="color:var(--sub);font-size:14px;">2024年7月公告</span></td>
+      <td class="num"><b>25亿</b></td>
+      <td>品牌的名字——从华为名下变成自己的</td>
+    </tr>
+    <tr>
+      <td>入股华为车BU"引望"10%<br><span style="color:var(--sub);font-size:14px;">2024年8月公告，2025年完成交割</span></td>
+      <td class="num"><b>115亿</b></td>
+      <td>从"华为的客户"变成"华为车BU的股东"——坐到同一侧</td>
+    </tr>
+    <tr>
+      <td>2025年研发投入（同比+77.4%）</td>
+      <td class="num"><b>125.1亿</b></td>
+      <td>自己的技术班底——不是只做集成，是在建能力</td>
+    </tr>
+    <tr>
+      <td>港股IPO（2025年11月5日上市）<br><span style="color:var(--sub);font-size:14px;">约70%投向研发</span></td>
+      <td class="num"><b>140.16亿<br>港元</b></td>
+      <td>弹药库——为持续的研发投入备足粮草</td>
+    </tr>
+  </table>
+
+  <div class="insight-box">
+    <div class="insight-title">💡 这笔账的逻辑</div>
+    <div class="insight-text">
+      买商标，是防华为不带它玩。<br>
+      买引望股权，是确保华为继续带它玩。<br>
+      砸研发，是有一天<span class="hl-teal">不需要别人带也能玩</span>。<br><br>
+      三步棋花掉265亿——这不是摇摆，是被命运吓过一次的公司在<span class="hl-navy">买保险</span>。
+    </div>
+  </div>
+
+  <div class="page-note" style="text-align:left;">
+    数据来源：25亿商标收购——公司公告（南方都市报2024-07）| 115亿入股引望——公司公告（证券时报）| 研发125.1亿——2025年报（审计）| 港股募资140.16亿港元——上市公告及招股书（证券时报2025-11-05）
+  </div>
+</div>
+
+<!-- ==============================
+     P6 Q1 2026：利润去哪了
+     ============================== -->
+<div class="page">
+  <div class="page-number">6 / 8</div>
+  <div class="page-title">Q1 2026：利润去哪了</div>
+  <div class="page-subtitle">营收+34.5%，但扣非净利剩了1个亿——不是崩了，是主动花钱</div>
+
+  <table class="kpi-table" style="margin-bottom:28px;">
+    <tr>
+      <th style="width:160px;">指标</th>
+      <th style="width:180px;">2026年Q1</th>
+      <th>同比变化</th>
+      <th>说明</th>
+    </tr>
+    <tr>
+      <td>营业收入</td>
+      <td class="num">257.46亿</td>
+      <td><span class="tag-up">+34.46%</span></td>
+      <td>收入端没问题——增长强劲</td>
+    </tr>
+    <tr>
+      <td>归母净利润</td>
+      <td class="num">7.54亿</td>
+      <td><span class="tag-up">+0.89%</span></td>
+      <td>几乎持平——但其中6.5亿是政府补助等非经常收益</td>
+    </tr>
+    <tr>
+      <td>扣非净利润</td>
+      <td class="num">1.03亿</td>
+      <td><span class="tag-down">-73.87%</span></td>
+      <td>⚠️ 看起来吓人</td>
+    </tr>
+    <tr>
+      <td>研发费用（单季）</td>
+      <td class="num">17.94亿</td>
+      <td><span class="tag-down">+7.43亿</span></td>
+      <td>多花的研发费，几乎就是扣非少掉的利润</td>
+    </tr>
+    <tr>
+      <td>经营现金流</td>
+      <td class="num">-209.5亿</td>
+      <td>—</td>
+      <td>Q1季节性付款节奏（2025全年是+289亿）</td>
+    </tr>
+  </table>
+
+  <div class="insight-box">
+    <div class="insight-title">📊 拆解：扣非暴跌的根因</div>
+    <div class="insight-text">
+      研发单季多花了<span class="hl-red">7.4亿</span>，扣非同比少掉了<span class="hl-red">约2.9亿</span>。<br>
+      多花的研发几乎吞掉了少掉的利润。<br><br>
+      这不是经营恶化——是它自己选的。<span class="hl-teal">265亿赎身计划进入了付款期。</span>
+    </div>
+  </div>
+
+  <div class="page-note" style="text-align:left;">
+    数据来源：赛力斯2026年第一季度报告（未经审计）⭐⭐⭐⭐ | 非经常损益6.52亿（其中政府补助6.28亿）、经营现金流-209.5亿归因原文——季报附注
+  </div>
+</div>
+
+<!-- ==============================
+     P7 下一步看什么
+     ============================== -->
+<div class="page">
+  <div class="page-number">7 / 8</div>
+  <div class="page-title">下一步：三个问题等答案</div>
+  <div class="page-subtitle">未来12个月，赛力斯的叙事能不能继续成立</div>
+
+  <table class="kpi-table" style="margin-bottom:28px;">
+    <tr>
+      <th style="width:40px;"></th>
+      <th style="width:220px;">问题</th>
+      <th>看什么</th>
+    </tr>
+    <tr>
+      <td style="font-size:22px;text-align:center;">❶</td>
+      <td><b>扣非利润何时回正</b></td>
+      <td>每季扣非净利润——研发投入期结束后，自家技术能不能变成利润</td>
+    </tr>
+    <tr>
+      <td style="font-size:22px;text-align:center;">❷</td>
+      <td><b>125亿研发砸出了什么</b></td>
+      <td>新车型上自研系统（智驾、座舱）的搭载比例——"赎身"是否兑现的硬指标</td>
+    </tr>
+    <tr>
+      <td style="font-size:22px;text-align:center;">❸</td>
+      <td><b>"五界"分流，问界守不守得住</b></td>
+      <td>月销量趋势——全新M9的大定转交付，三季度是第一个观察窗口</td>
+    </tr>
+  </table>
+
+  <div style="font-size:18px; color:var(--sub); text-align:center; max-width:800px; margin-top:10px;">
+    港股上市拿到的140亿港元，约七成投向研发。<br>
+    这笔钱烧完之后，赛力斯能不能拿出一套不依赖华为的技术体系——<br>
+    是这个故事下一章的第一句话。
+  </div>
+
+  <div class="page-note" style="text-align:left;">
+    数据来源：公司公告、券商研报（东吴、开源）| 五界：问界、智界、享界、尊界、尚界——华为鸿蒙智行五个合作品牌
+  </div>
+</div>
+
+<!-- ==============================
+     P8 总结
+     ============================== -->
+<div class="page">
+  <div class="page-number">8 / 8</div>
+  <div class="page-title">看懂赛力斯，就看这三个数字</div>
+  <div class="page-subtitle">一场豪赌，现在到了兑现的下半场</div>
+
+  <div class="card-row" style="margin-bottom:36px;">
+    <div class="data-card">
+      <div class="data-value teal">28.8%</div>
+      <div class="data-label">新能源车毛利率</div>
+      <div class="data-sub">制造能力是真本事<br>代工厂没有这种利润</div>
+    </div>
+    <div class="data-card">
+      <div class="data-value navy">265亿</div>
+      <div class="data-label">赎身投入</div>
+      <div class="data-sub">买商标+买股权+砸研发<br>在花钱铺自己的路</div>
+    </div>
+    <div class="data-card">
+      <div class="data-value gold">46个月</div>
+      <div class="data-label">百万问界下线</div>
+      <div class="data-sub">新势力最快纪录<br>速度本身就是答案</div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <div class="insight-title">💡 赛力斯的故事</div>
+    <div class="insight-text">
+      2021年全行业都不敢接华为，它接了——不是因为它比别人聪明，是因为它<span class="hl-teal">没有退路</span>。<br><br>
+      五年后，1650亿营收、47万辆新能源、M9在BBA腹地封王。<br>
+      现在它正在花265亿<span class="hl-navy">买回自己的未来</span>——这是故事的下一章。<br><br>
+      是豪赌，不是童话。<span class="hl-gold">结果要看Q3之后。</span>
+    </div>
+  </div>
+
+  <div class="page-note" style="text-align:left;">
+    赎身投入265亿 = 25亿商标 + 115亿引望 + 125.1亿研发（测算合计，口径为公告金额简单加总）<br>
+    本内容为公司公开信息分析，不构成投资建议
+  </div>
+</div>
+
+<!-- ==============================
+     补充：源于早期备份稿（v1问答式），合并时保留的独有事实
+     ============================== -->
+<div class="page">
+  <div class="page-number">附</div>
+  <div class="page-title">补充数据（早期备份稿独有）</div>
+  <div class="page-subtitle">以下事实为备份稿独有、正式版未含，合并保留供上架前核对</div>
+
+  <div class="insight-box" style="margin-top:8px;">
+    <div class="insight-title">💡 行业地位与依赖结构</div>
+    <div class="insight-text">
+      <span class="hl-teal">全球第四家盈利的新能源车企</span>（行业通行说法，口径待核实：通常指特斯拉、比亚迪、理想之后）。<br>
+      问界占鸿蒙智行销量比例约 <span class="hl-navy">72%</span>（2025年数据，公开报道）——从绝对主力降为"五分之一"，华为光环正在被重新定价。<br>
+      港股上市后市值一度明显波动，反映资本市场对"华为依赖"的再评估。
+    </div>
+  </div>
+
+  <div class="page-note" style="text-align:left;">
+    本页内容整理自「赛力斯产业版图_v1问答式_备份.html」，事实以公司公告/年报为准，待进一步核对。
+  </div>
+</div>
+
+</body>
+</html>

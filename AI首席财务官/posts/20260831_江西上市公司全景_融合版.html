@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="../assets/brand/favicon.png">
+<title>江西 93 家 A 股上市公司全景 · 2026 · AI 首席财务官</title>
+<style>
+  :root{
+    --bg:#FAF8F4; --ink:#252A29; --muted:#8A8378;
+    --card:#FFFFFF; --line:#ECE7DF;
+    --t1:#B4654A; /* 赤陶 */
+    --t2:#315B6B; /* 青 */
+    --gold:#b8860b;
+    --red:#c0392b;
+    --track:#EFEAE2;
+    --soft:#fafbfc;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    line-height:1.6; padding:32px 16px; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:960px;margin:0 auto}
+
+  /* hero */
+  .hero{
+    background:var(--card); border:1px solid var(--line); border-radius:16px;
+    padding:28px 30px; margin-bottom:18px;
+  }
+  .hook{
+    font-size:15px; color:var(--muted); letter-spacing:.3px; margin-bottom:14px;
+  }
+  .hook b{color:var(--t1)}
+  h1{font-size:26px;font-weight:800;letter-spacing:-.5px;margin-bottom:6px}
+  .sub{font-size:13px;color:var(--muted);margin-bottom:20px}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .kpi{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px 12px;text-align:center}
+  .kpi .n{font-size:24px;font-weight:800;color:var(--t2)}
+  .kpi .l{font-size:12px;color:var(--muted);margin-top:4px}
+  @media(max-width:760px){.kpis{grid-template-columns:repeat(2,1fr)}}
+
+  /* cards */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 24px;
+  }
+  .card h2{font-size:16px;font-weight:800;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+  .card h2::before{content:"";width:4px;height:16px;background:var(--t1);border-radius:2px}
+  .full{grid-column:1/-1}
+
+  /* bar */
+  .bar-row{display:flex;align-items:center;gap:10px;margin-bottom:9px;font-size:13px}
+  .bar-row .name{width:64px;flex:none;color:var(--ink)}
+  .bar-row .track{flex:1;background:var(--track);border-radius:6px;height:14px;overflow:hidden}
+  .bar-row .fill{height:100%;background:var(--t2);border-radius:6px}
+  .bar-row .v{width:34px;flex:none;text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
+
+  /* donut */
+  .donut-wrap{display:flex;align-items:center;gap:22px}
+  .donut{
+    width:130px;height:130px;border-radius:50%;flex:none;
+    background:conic-gradient(var(--t1) 0 30.1%, var(--t2) 30.1% 100%);
+    position:relative;
+  }
+  .donut::after{
+    content:"";position:absolute;inset:24px;background:var(--card);border-radius:50%;
+  }
+  .donut-legend{font-size:13px}
+  .donut-legend div{margin-bottom:10px}
+  .dot{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:7px;vertical-align:middle}
+  .donut-legend b{font-size:18px;display:block;line-height:1.2}
+  .donut-legend span{color:var(--muted);font-size:12px}
+
+  /* tables */
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;font-size:12px;background:var(--soft)}
+  td .mc{font-variant-numeric:tabular-nums;color:var(--t2);font-weight:700}
+  .rank{color:var(--gold);font-weight:700;width:28px}
+  .code{font-family:ui-monospace,Menlo,monospace;color:var(--muted);font-size:12px}
+  .pill{font-size:11px;padding:1px 7px;border-radius:20px;background:var(--track);color:var(--muted)}
+  .pill.g{background:#EAF0EC;color:var(--t2)}
+  .tag{display:inline-block;background:#fdf6e3;color:#8a6d0b;border:1px solid #f0e2b8;border-radius:20px;padding:1px 9px;font-size:11.5px;margin:1px 2px}
+
+  /* industry map */
+  .ind{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:4px}
+  .ind .b{background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:11px 13px}
+  .ind .b b{color:var(--t1)}
+
+  /* picks / lines */
+  .lines{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:4px}
+  .line{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:16px}
+  .line .t{font-weight:800;font-size:14px;margin-bottom:6px;color:var(--t1)}
+  .line .d{font-size:12px;color:var(--muted);line-height:1.5}
+  .pick{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:6px}
+  .pick .p{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:13px 14px}
+  .pick .p .h{font-weight:700;color:var(--ink);margin-bottom:4px}
+  .pick .p .d{font-size:12px;color:var(--muted);line-height:1.5}
+
+  /* note */
+  .note{background:#fff8ec;border:1px solid #f3e3bf;border-radius:10px;padding:13px 15px;margin-top:6px}
+  .note h3{margin:0 0 8px;font-size:14px;color:var(--red)}
+  .note ul{margin:0;padding-left:18px}
+  .note li{margin:4px 0}
+
+  .caption{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.6}
+  .foot{font-size:11px;color:var(--muted);text-align:center;margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}
+
+  @media(max-width:760px){
+    .grid{grid-template-columns:1fr}
+    .lines,.pick,.ind{grid-template-columns:1fr}
+    .donut-wrap{flex-direction:column;align-items:flex-start}
+  }
+
+  /* 站点统一顶栏（与 AI首席财务官 其他内页一致） */
+  .topbar{position:sticky;top:0;z-index:20;height:64px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 clamp(20px,5vw,40px);background:rgba(247,247,244,.93);border-bottom:1px solid #d7dde1;backdrop-filter:blur(18px)}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+  .brand img{width:38px;height:38px;object-fit:contain}
+  .brand strong{font:600 16px/1 "Noto Serif SC",serif;color:#315B6B;letter-spacing:.01em}
+  .back{display:inline-flex;align-items:center;gap:6px;padding:8px 0;border-bottom:1px solid #315B6B;color:#315B6B;font-size:12px;text-decoration:none;transition:.18s}
+  .site-foot{max-width:960px;margin:28px auto 50px;padding:0 20px;font-size:12px;color:#8a949c;line-height:1.8;text-align:center}
+  .site-foot a{color:#315B6B;text-decoration:none;border-bottom:1px solid #315B6B}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../index.html"><img src="../assets/brand/aicfo-symbol.png" alt="AI 首席财务官"><strong>AI 首席财务官</strong></a>
+  <a class="back" href="../index.html">← 返回首页</a>
+</header>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hook">一个省 <b>93 家</b> A 股上市公司，总市值 <b>1.4 万亿</b>——还不到一个宁德时代。但里面藏着三家千亿巨头，和一片等着被整合的长尾版图。</div>
+    <h1>江西 93 家 A 股上市公司全景 · 2026</h1>
+    <div class="sub">数据口径：江西省委金融办 2026 Q1 通报 + CSRC 江西证监局名录（2026.1）+ A股基础信息表（截至 2026-07）· 含境内 A 股 93 家，境外/港股另列 24 家</div>
+    <div class="kpis">
+      <div class="kpi"><div class="n">93</div><div class="l">A 股上市公司</div></div>
+      <div class="kpi"><div class="n">1.40 万亿</div><div class="l">总市值</div></div>
+      <div class="kpi"><div class="n">71.3 亿</div><div class="l">市值中位数</div></div>
+      <div class="kpi"><div class="n">28 / 65</div><div class="l">国资 / 民营</div></div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2>按注册城市分布</h2>
+      <div class="bar-row"><span class="name">南昌</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="v">35</span></div>
+      <div class="bar-row"><span class="name">赣州</span><span class="track"><span class="fill" style="width:37%"></span></span><span class="v">13</span></div>
+      <div class="bar-row"><span class="name">上饶</span><span class="track"><span class="fill" style="width:26%"></span></span><span class="v">9</span></div>
+      <div class="bar-row"><span class="name">景德镇</span><span class="track"><span class="fill" style="width:17%"></span></span><span class="v">6</span></div>
+      <div class="bar-row"><span class="name">宜春</span><span class="track"><span class="fill" style="width:17%"></span></span><span class="v">6</span></div>
+      <div class="bar-row"><span class="name">吉安</span><span class="track"><span class="fill" style="width:17%"></span></span><span class="v">6</span></div>
+      <div class="bar-row"><span class="name">新余</span><span class="track"><span class="fill" style="width:14%"></span></span><span class="v">5</span></div>
+      <div class="bar-row"><span class="name">九江</span><span class="track"><span class="fill" style="width:11%"></span></span><span class="v">4</span></div>
+      <div class="bar-row"><span class="name">萍乡</span><span class="track"><span class="fill" style="width:9%"></span></span><span class="v">3</span></div>
+      <div class="bar-row"><span class="name">鹰潭</span><span class="track"><span class="fill" style="width:9%"></span></span><span class="v">3</span></div>
+      <div class="bar-row"><span class="name">抚州</span><span class="track"><span class="fill" style="width:9%"></span></span><span class="v">3</span></div>
+      <p class="caption">南昌+赣州+上饶三地合计占全省 61% 上市公司、52% 市值。全省 100 个区县中 59 个仍无上市公司。</p>
+    </div>
+
+    <div class="card">
+      <h2>实控人性质</h2>
+      <div class="donut-wrap">
+        <div class="donut"></div>
+        <div class="donut-legend">
+          <div><span class="dot" style="background:var(--t1)"></span><b>28 家</b><span>国资实控（30%）</span></div>
+          <div><span class="dot" style="background:var(--t2)"></span><b>65 家</b><span>民营 / 自然人（70%）</span></div>
+          <div style="margin-top:14px;font-size:12px;color:var(--muted)">国资多集中在南昌（14 家）、上饶（4 家）；赣州 13 家里仅 3 家国资。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2>行业 Top 5</h2>
+      <div class="bar-row"><span class="name">机械设备</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="v">12</span></div>
+      <div class="bar-row"><span class="name">基础化工</span><span class="track"><span class="fill" style="width:83%"></span></span><span class="v">10</span></div>
+      <div class="bar-row"><span class="name">电子</span><span class="track"><span class="fill" style="width:83%"></span></span><span class="v">10</span></div>
+      <div class="bar-row"><span class="name">医药生物</span><span class="track"><span class="fill" style="width:67%"></span></span><span class="v">8</span></div>
+      <div class="bar-row"><span class="name">有色金属</span><span class="track"><span class="fill" style="width:67%"></span></span><span class="v">8</span></div>
+      <p class="caption">其后：电力设备 6、国防军工 5、公用事业/传媒各 4。板块结构：上 36 · 深 54 · 北 3，沪深北全覆盖。</p>
+    </div>
+
+    <div class="card">
+      <h2>市值头部榜（前 6）</h2>
+      <table>
+        <tr><th>代码</th><th>简称</th><th>市值</th><th>行业</th><th>性质</th></tr>
+        <tr><td class="code">002460</td><td>赣锋锂业</td><td class="mc">1512 亿</td><td>有色</td><td><span class="pill">民营</span></td></tr>
+        <tr><td class="code">600362</td><td>江西铜业</td><td class="mc">1379 亿</td><td>有色</td><td><span class="pill g">国资</span></td></tr>
+        <tr><td class="code">603459</td><td>红板科技</td><td class="mc">796 亿</td><td>电子</td><td><span class="pill">民营</span></td></tr>
+        <tr><td class="code">688223</td><td>晶科能源</td><td class="mc">688 亿</td><td>电力设备</td><td><span class="pill">民营</span></td></tr>
+        <tr><td class="code">301696</td><td>三瑞智能</td><td class="mc">605 亿</td><td>军工</td><td><span class="pill">民营</span></td></tr>
+        <tr><td class="code">000831</td><td>中国稀土</td><td class="mc">547 亿</td><td>有色</td><td><span class="pill g">国资</span></td></tr>
+      </table>
+      <p class="caption">市值截至 2026-07，随行情波动。</p>
+    </div>
+  </div>
+
+  <div class="card full" style="margin-bottom:18px">
+    <h2>完整头部梯队（前 20，2026 年中估算 / 亿元）</h2>
+    <table>
+      <thead><tr><th>#</th><th>代码</th><th>简称</th><th>市值≈</th><th>行业</th><th>属地</th><th>性质</th></tr></thead>
+      <tbody>
+        <tr><td class="rank">1</td><td class="code">002460</td><td>赣锋锂业</td><td class="mc">1512</td><td><span class="tag">有色·锂</span></td><td>新余</td><td><span class="pill">民营</span></td></tr>
+        <tr><td class="rank">2</td><td class="code">600362</td><td>江西铜业</td><td class="mc">1379</td><td><span class="tag">有色·铜</span></td><td>南昌/鹰潭</td><td><span class="pill g">国资</span></td></tr>
+        <tr><td class="rank">3</td><td class="code">603459</td><td>红板科技</td><td class="mc">796</td><td><span class="tag">电子·PCB</span></td><td>吉安</td><td><span class="pill">民营</span></td></tr>
+        <tr><td class="rank">4</td><td class="code">688223</td><td>晶科能源</td><td class="mc">688</td><td><span class="tag">新能源·光伏</span></td><td>上饶</td><td><span class="pill">民营</span></td></tr>
+        <tr><td class="rank">5</td><td class="code">301696</td><td>三瑞智能</td><td class="mc">605</td><td><span class="tag">军工·逆变器</span></td><td>南昌</td><td><span class="pill">民营</span></td></tr>
+        <tr><td class="rank">6</td><td class="code">000831</td><td>中国稀土</td><td class="mc">547</td><td><span class="tag">有色·稀土</span></td><td>赣州</td><td><span class="pill g">国资</span></td></tr>
+        <tr><td class="rank">7</td><td class="code">301511</td><td>德福科技</td><td class="mc">684</td><td><span class="tag">电子·铜箔</span></td><td>九江</td><td><span class="pill">民营</span></td></tr>
+        <tr><td class="rank">8</td><td class="code">300748</td><td>金力永磁</td><td class="mc">402</td><td><span class="tag">有色·钕铁硼</span></td><td>赣州</td><td><span class="pill">民营</span></td></tr>
+        <tr><td class="rank">9</td><td class="code">002378</td><td>章源钨业</td><td class="mc">362</td><td><span class="tag">有色·钨</span></td><td>赣州</td><td><span class="pill">民营</span></td></tr>
+        <tr><td class="rank">10</td><td class="code">603773</td><td>沃格光电</td><td class="mc">307</td><td><span class="tag">电子·光电玻璃</span></td><td>吉安</td><td><span class="pill">民营</span></td></tr>
+        <tr><td class="rank">11</td><td class="code">002157</td><td>正邦科技</td><td class="mc">278</td><td><span class="tag">农业·生猪</span></td><td>南昌</td><td><span class="pill">民营</span></td></tr>
+        <tr><td class="rank">12</td><td class="code">600363</td><td>联创光电</td><td class="mc">265</td><td><span class="tag">电子·光电</span></td><td>南昌</td><td><span class="pill">民营</span></td></tr>
+        <tr><td class="rank">13</td><td class="code">605090</td><td>九丰能源</td><td class="mc">255</td><td><span class="tag">能源·LNG</span></td><td>吉安</td><td><span class="pill">民营</span></td></tr>
+        <tr><td class="rank">14</td><td class="code">600316</td><td>洪都航空</td><td class="mc">242</td><td><span class="tag">军工·航空</span></td><td>南昌</td><td><span class="pill g">国资</span></td></tr>
+        <tr><td class="rank">15</td><td class="code">603124</td><td>江南新材</td><td class="mc">220</td><td><span class="tag">金属新材料</span></td><td>南昌</td><td><span class="pill">民营</span></td></tr>
+        <tr><td class="rank">16</td><td class="code">002670</td><td>国盛证券</td><td class="mc">220</td><td><span class="tag">金融·证券</span></td><td>南昌</td><td><span class="pill g">国资</span></td></tr>
+        <tr><td class="rank">17</td><td class="code">002176</td><td>江特电机</td><td class="mc">220</td><td><span class="tag">有色·锂电</span></td><td>宜春</td><td><span class="pill">民营</span></td></tr>
+        <tr><td class="rank">18</td><td class="code">301219</td><td>腾远钴业</td><td class="mc">202</td><td><span class="tag">有色·钴镍</span></td><td>赣州</td><td><span class="pill">民营</span></td></tr>
+        <tr><td class="rank">19</td><td class="code">605399</td><td>晨光新材</td><td class="mc">百亿级</td><td><span class="tag">化工新材料</span></td><td>九江</td><td><span class="pill">民营</span></td></tr>
+        <tr><td class="rank">20</td><td class="code">688567</td><td>孚能科技</td><td class="mc">百亿级</td><td><span class="tag">电池</span></td><td>赣州</td><td><span class="pill">民营</span></td></tr>
+      </tbody>
+    </table>
+    <p class="caption">前 6 家市值采用 2026-07 公开数据；第 7–20 位为 2026 年中估算值，会随行情变动。完整 93 家官方名录以 CSRC 江西证监局 xlsx（2026.1）为准。</p>
+  </div>
+
+  <div class="card full" style="margin-bottom:18px">
+    <h2>各城市市值龙头 & 国资占比</h2>
+    <table>
+      <tr><th>城市</th><th>家数</th><th>龙头</th><th>市值</th><th>国资 / 民营</th></tr>
+      <tr><td>新余</td><td>5</td><td>赣锋锂业</td><td class="mc">1512 亿</td><td>2 / 3</td></tr>
+      <tr><td>鹰潭</td><td>3</td><td>江西铜业</td><td class="mc">1379 亿</td><td>1 / 2</td></tr>
+      <tr><td>吉安</td><td>6</td><td>红板科技</td><td class="mc">796 亿</td><td>0 / 6</td></tr>
+      <tr><td>上饶</td><td>9</td><td>晶科能源</td><td class="mc">688 亿</td><td>4 / 5</td></tr>
+      <tr><td>九江</td><td>4</td><td>德福科技</td><td class="mc">684 亿</td><td>0 / 4</td></tr>
+      <tr><td>南昌</td><td>35</td><td>三瑞智能</td><td class="mc">605 亿</td><td>14 / 21</td></tr>
+      <tr><td>赣州</td><td>13</td><td>中国稀土</td><td class="mc">547 亿</td><td>3 / 10</td></tr>
+      <tr><td>宜春</td><td>6</td><td>江特电机</td><td class="mc">220 亿</td><td>0 / 6</td></tr>
+    </table>
+    <p class="caption">长尾明显：最小宁新新材不足 10 亿；26 家民营市值＜50 亿，含多只 ST（*ST 海源、*ST 节能、*ST 新元、*ST 返利）。</p>
+  </div>
+
+  <div class="card full" style="margin-bottom:18px">
+    <h2>行业地图</h2>
+    <div class="ind">
+      <div class="b"><b>有色金属（压舱石）</b><br>铜·锂·稀土·钨·钴镍——江西铜业、赣锋锂业、中国稀土、章源钨业、金力永磁、腾远钴业。市值大但利润率薄，周期一跌就吃土。</div>
+      <div class="b"><b>新能源（增长极）</b><br>光伏（晶科能源）、锂电（赣锋、江特、孚能）、逆变器（三瑞智能）、储能。</div>
+      <div class="b"><b>电子信息</b><br>PCB（红板科技）、铜箔（德福科技）、光电（联创光电、沃格光电、凤凰光学）、半导体材料。</div>
+      <div class="b"><b>军工</b><br>洪都航空（教练机/无人机）、国科军工（弹药）— 南昌军工底色。</div>
+      <div class="b"><b>医药消费</b><br>博雅生物（血制品）、仁和药业、三鑫医疗、煌上煌、甘源食品、国光连锁、阳光乳业。</div>
+      <div class="b"><b>其他</b><br>中文传媒/慈文传媒（传媒）、洪城环境/赣能（公用）、方大特钢/新钢（钢铁）、国盛证券（金融）、江铃汽车（整车）。</div>
+    </div>
+  </div>
+
+  <div class="card full" style="margin-bottom:18px">
+    <h2>江西特征 · 为什么"最能赚钱的省，却最不赚钱"</h2>
+    <div class="note">
+      <h3>为什么"最能赚钱的省，却最不赚钱"？</h3>
+      <ul>
+        <li><b>增收不增利</b>：平均毛利率 <b>8.03%</b>、净利率 <b>1.04%</b>，双双全国垫底——资源品（铜/锂/稀土）走量不走利，周期一跌就吃土。</li>
+        <li><b>机构不待见</b>：机构持股比例 <b>39.98%</b> 全国最低，说明主流资金对江西板块配置意愿弱。</li>
+        <li><b>营收大、利润薄</b>：江西铜业年营收数千亿，净利率却极低；赣锋锂业受锂价周期剧烈摆动。</li>
+        <li><b>结构偏上游</b>：有色+新能源材料占市值大头，下游品牌/消费端偏弱，产业链"头重脚轻"。</li>
+        <li><b>区域失衡</b>：59 个区县零上市公司，南昌一城独大。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card full" style="margin-bottom:18px">
+    <h2>值得重点关注的标的</h2>
+    <div class="pick">
+      <div class="p"><div class="h">江铃汽车 000550</div><div class="d">江西最早上市公司（1993）。整车代表，可延伸至财报与现金流分析。</div></div>
+      <div class="p"><div class="h">赣锋锂业 002460</div><div class="d">"锂价周期如何吃掉利润"的绝佳样本——周期股财务分析模板。</div></div>
+      <div class="p"><div class="h">中国稀土 000831</div><div class="d">稀土战略资源+价格波动，政策与业绩双主线，故事性强。</div></div>
+      <div class="p"><div class="h">江西铜业 600362</div><div class="d">营收巨无霸、净利率垫底的典型，可讲"规模不敌利润"的反差。</div></div>
+      <div class="p"><div class="h">德福科技 / 红板科技</div><div class="d">近年新上市、高市值电子材料股，次新+高关注，适合讲江西"电子信息突围"。</div></div>
+      <div class="p"><div class="h">洪都航空 600316</div><div class="d">军工稀缺标的，南昌航空城名片，财报透明度低但题材稳。</div></div>
+    </div>
+  </div>
+
+  <div class="card full">
+    <h2>三个观察视角</h2>
+    <div class="lines">
+      <div class="line"><div class="t">① 国资接盘</div><div class="d">全江西仅联创电子一例（寿县国资）。可对比 28 家国资股「自家人为何接不住」。</div></div>
+      <div class="line"><div class="t">② 民企困境/易主</div><div class="d">江特=牛散逆袭；正邦重整、慈文/国旅联合壳化；26 家低市值民营待整合。</div></div>
+      <div class="line"><div class="t">③ 区域产业带</div><div class="d">南昌军工传媒、赣州有色稀土、宜春锂电、上饶光伏——一条市一个产业链。</div></div>
+    </div>
+  </div>
+
+  <div class="foot">本概览基于公开财报、监管通报及和君咨询《江西省上市公司发展报告 2026》整理，数据时点截至 2026-07，仅供参考，不构成任何投资建议。</div>
+
+</div>
+<footer class="site-foot"><a href="../index.html">← 返回 AI 首席财务官首页</a></footer>
+</body>
+</html>

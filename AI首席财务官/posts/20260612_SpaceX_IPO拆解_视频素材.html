@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SpaceX上市 · 史上最大IPO拆解</title>
+<style>
+  :root {
+    --bg: #f5f6fa;
+    --card: #ffffff;
+    --ink: #1a1f33;
+    --accent: #2c3e6b;     /* 深空蓝 */
+    --line: #dde1ea;
+    --sub: #7d8295;
+    --red: #c0392b;
+    --green: #1e8449;
+    --gold: #b9770e;
+    --page-h: 100vh;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.65;
+  }
+  .num { font-family: "Menlo", "SF Mono", monospace; }
+
+  .page {
+    min-height: var(--page-h); display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 56px 52px; border-bottom: 1px solid var(--line);
+    position: relative; background: var(--bg);
+  }
+  .page:last-child { border-bottom: none; }
+  .avatar-space { position: absolute; top: 0; left: 0; width: 300px; height: 180px; }
+
+  .page-num {
+    position: absolute; top: 22px; right: 30px;
+    font-size: 14px; color: var(--sub); letter-spacing: 2px;
+  }
+  .page-tag {
+    display: inline-block; background: var(--accent); color: #fff;
+    font-size: 16px; letter-spacing: 4px; padding: 6px 22px; border-radius: 6px;
+    margin-bottom: 16px; font-weight: 700;
+  }
+  .page-title {
+    font-size: 48px; font-weight: 900; text-align: center;
+    margin-bottom: 12px; line-height: 1.35; letter-spacing: 1px;
+  }
+  .page-sub {
+    font-size: 21px; color: var(--sub); text-align: center; margin-bottom: 40px;
+  }
+  .page-sub strong { color: var(--accent); }
+
+  .core-line {
+    width: 100%; max-width: 1000px;
+    border-left: 4px solid var(--accent);
+    background: linear-gradient(90deg, #eef1f8 0%, #fff 100%);
+    padding: 16px 22px;
+    margin: 22px 0;
+    font-size: 1.15em; font-weight: 700; line-height: 1.7;
+  }
+
+  .card-row {
+    display: flex; gap: 16px; width: 100%; max-width: 1000px;
+    justify-content: center; flex-wrap: wrap;
+  }
+  .data-card {
+    flex: 1; min-width: 200px;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 22px 18px; text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .data-card .label { font-size: 15px; color: var(--sub); margin-bottom: 6px; font-weight: 600; }
+  .data-card .value { font-size: 36px; font-weight: 900; }
+  .data-card .note { font-size: 13.5px; color: var(--sub); margin-top: 6px; line-height: 1.5; }
+
+  .kpi-table {
+    width: 100%; max-width: 1000px;
+    border-collapse: collapse; margin: 18px 0;
+    background: var(--card); border-radius: 12px; overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .kpi-table th {
+    background: var(--accent); color: #fff; font-size: 15px;
+    padding: 12px 16px; text-align: left; letter-spacing: 2px;
+  }
+  .kpi-table td {
+    padding: 12px 16px; border-bottom: 1px solid var(--line);
+    font-size: 16.5px;
+  }
+  .kpi-table tr:last-child td { border-bottom: none; }
+  .kpi-table .kpi-val { font-weight: 800; text-align: right; }
+  .kpi-table .pos { color: var(--green); }
+  .kpi-table .neg { color: var(--red); }
+
+  .insight-box {
+    width: 100%; max-width: 1000px;
+    background: #fdf6e3; border: 1px solid #e8dcc0;
+    border-radius: 12px; padding: 20px 24px; margin: 18px 0;
+  }
+  .insight-box .q { font-size: 18px; font-weight: 800; margin-bottom: 10px; color: var(--gold); }
+  .insight-box .a { font-size: 16.5px; line-height: 1.85; color: var(--ink); }
+
+  .vs-strip { display: flex; gap: 16px; width: 100%; max-width: 1000px; }
+  .vs-cell {
+    flex: 1; background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 20px 16px; text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .vs-cell .v { font-size: 36px; font-weight: 900; }
+  .vs-cell .l { font-size: 15.5px; margin-top: 6px; font-weight: 600; }
+  .vs-cell .s { font-size: 13.5px; color: var(--sub); margin-top: 4px; line-height: 1.5; }
+
+  .page-bridge {
+    margin-top: 34px; width: 100%; max-width: 1000px;
+    font-size: 19px; color: var(--ink); text-align: center;
+    background: #fdf6e3; border: 1px solid #e8dcc0; border-radius: 999px;
+    padding: 13px 30px;
+  }
+  .page-bridge b { color: var(--accent); }
+
+  .src {
+    font-size: 13.5px; color: #a4a8b3; text-align: left;
+    margin-top: 14px; line-height: 1.8; width: 100%; max-width: 1000px;
+    border-top: 1px dashed var(--line); padding-top: 8px;
+  }
+
+  .hl-r { color: var(--red); font-weight: 800; }
+  .hl-g { color: var(--green); font-weight: 800; }
+  .hl-y { color: var(--gold); font-weight: 800; }
+  .hl-a { color: var(--accent); font-weight: 800; }
+</style>
+</head>
+<body>
+
+<!-- ============ P1 钩子 ============ -->
+<section class="page">
+  <div class="avatar-space"></div>
+  <div class="page-num">1 / 8</div>
+  <div class="page-tag">2026.6.12 · 挂 牌 首 日 复 盘</div>
+  <div class="page-title">一家去年亏49亿美元的公司<br>完成了人类史上最大的IPO</div>
+  <div class="page-sub">纳斯达克代码SPCX，发行价135美元——<strong>认购超4倍，散户下单超1000亿美元，首日收盘涨到160</strong></div>
+
+  <div class="card-row">
+    <div class="data-card">
+      <div class="label">募资额</div>
+      <div class="value num" style="color:var(--accent)">750亿$</div>
+      <div class="note">史上最大IPO<br>是上个纪录（沙特阿美294亿）的2.5倍</div>
+    </div>
+    <div class="data-card">
+      <div class="label">首日收盘</div>
+      <div class="value num" style="color:var(--gold)">160$/股</div>
+      <div class="note">较发行价+18.5%<br>收盘市值约2.07万亿美元（测算）</div>
+    </div>
+    <div class="data-card">
+      <div class="label">2025年净利润</div>
+      <div class="value num" style="color:var(--red)">-49.4亿$</div>
+      <div class="note">今年一季度又亏42.8亿<br>三年里两年亏损</div>
+    </div>
+  </div>
+
+  <div class="core-line">
+    一边是三年两亏的利润表，一边是抢破头的认购单——这期不下结论，把账本摊开，你自己对照着看
+  </div>
+
+  <div class="page-bridge">先看第一个问题：这到底是家干什么的公司 → <b>翻招股书</b></div>
+  <div class="src">来源：财务数据——SpaceX S-1/A招股书原文（2025年营收186.74亿美元、净亏49.37亿；2026Q1营收46.94亿、净亏42.76亿，已对原文复核）；发行价135美元、募资约750亿、目标估值约1.75万亿、散户订单超1000亿——上市当日公开报道（路透/彭博等，经同花顺深度专题汇编）；首日收盘160美元——6月12日收盘行情；收盘市值约2.07万亿＝按发行估值反推总股本约129.6亿股×160美元（测算）</div>
+</section>
+
+<!-- ============ P2 这是家什么公司 ============ -->
+<section class="page">
+  <div class="avatar-space"></div>
+  <div class="page-num">2 / 8</div>
+  <div class="page-tag">招 股 书 · 业 务 拼 图</div>
+  <div class="page-title">它早就不只是个发火箭的</div>
+  <div class="page-sub">今年2月吞下马斯克的AI公司xAI后，招股书里是<strong>三块业务</strong>：火箭＋卫星＋AI</div>
+
+  <table class="kpi-table">
+    <tr><th>板块</th><th>干什么</th><th class="kpi-val">角色</th></tr>
+    <tr>
+      <td><strong>航天发射</strong></td>
+      <td>猎鹰9/重型猎鹰/星舰——全球商业发射的绝对垄断者，2025年发射165次</td>
+      <td class="kpi-val">入口与门面</td>
+    </tr>
+    <tr>
+      <td><strong>网络连接（Starlink）</strong></td>
+      <td>近地轨道卫星互联网，向全球卖上网套餐</td>
+      <td class="kpi-val pos">唯一的现金牛</td>
+    </tr>
+    <tr>
+      <td><strong>AI（原xAI）</strong></td>
+      <td>Grok大模型＋全球最大AI训练集群＋轨道AI算力构想</td>
+      <td class="kpi-val neg">吞金兽</td>
+    </tr>
+  </table>
+
+  <div class="vs-strip">
+    <div class="vs-cell"><div class="v num" style="color:var(--accent)">103.9亿$</div><div class="l">2023年营收</div><div class="s">还在亏46亿</div></div>
+    <div class="vs-cell"><div class="v num" style="color:var(--accent)">140.2亿$</div><div class="l">2024年营收 +35%</div><div class="s">短暂盈利7.9亿</div></div>
+    <div class="vs-cell"><div class="v num" style="color:var(--accent)">186.7亿$</div><div class="l">2025年营收 +33%</div><div class="s">吞下xAI后重回亏损</div></div>
+  </div>
+
+  <div class="core-line">
+    收入年年涨三成，利润忽盈忽亏——问题出在哪？把三块业务的账分开算，一目了然
+  </div>
+
+  <div class="page-bridge">下一页是全片最重要的一张表 → <b>分部利润表</b></div>
+  <div class="src">来源：营收10,387/14,015/18,674百万美元（2023-2025）、净利-4,628/+791/-4,937百万美元、2026年2月以2,500亿美元估值收购xAI并于5月并入——SpaceX S-1/A招股书（已对原文复核）；165次发射（2025年猎鹰系列）——招股书及公开报道</div>
+</section>
+
+<!-- ============ P3 账本真相 ============ -->
+<section class="page">
+  <div class="avatar-space"></div>
+  <div class="page-num">3 / 8</div>
+  <div class="page-tag">账 本 真 相</div>
+  <div class="page-title">真正赚钱的，是卖网络套餐的</div>
+  <div class="page-sub">把2025年的账拆开：火箭不赚钱，AI巨亏，<strong>全靠Starlink一根柱子撑着</strong></div>
+
+  <table class="kpi-table">
+    <tr><th>2025年分部</th><th class="kpi-val">收入</th><th class="kpi-val">运营利润</th><th>一句话</th></tr>
+    <tr>
+      <td><strong>网络连接（Starlink）</strong></td>
+      <td class="kpi-val num">113.9亿$</td>
+      <td class="kpi-val pos num">+44.2亿$</td>
+      <td>占总营收61%，利润同比+120%——真正的印钞机</td>
+    </tr>
+    <tr>
+      <td><strong>航天发射</strong></td>
+      <td class="kpi-val num">—</td>
+      <td class="kpi-val neg num">-6.6亿$</td>
+      <td>名气最大，账上微亏——星舰研发在烧钱</td>
+    </tr>
+    <tr>
+      <td><strong>AI（原xAI）</strong></td>
+      <td class="kpi-val num">32.0亿$</td>
+      <td class="kpi-val neg num">-63.6亿$</td>
+      <td>收入32亿，亏掉63.6亿——吃掉Starlink全部利润还不够</td>
+    </tr>
+  </table>
+
+  <div class="vs-strip" style="margin-top:6px;">
+    <div class="vs-cell"><div class="v num" style="color:var(--red)">77.2亿$</div><div class="l">2026Q1 AI资本开支</div><div class="s">一个季度，超过火箭（10.5亿）＋卫星（13.3亿）之和的3倍</div></div>
+    <div class="vs-cell"><div class="v num" style="color:var(--gold)">127.3亿$</div><div class="l">2025全年AI资本开支</div><div class="s">还要建"全球最大芯片厂"Terafab</div></div>
+    <div class="vs-cell"><div class="v num" style="color:var(--accent)">158.5亿$</div><div class="l">账上现金（2026.3）</div><div class="s">照Q1的烧法，撑不了几个季度</div></div>
+  </div>
+
+  <div class="insight-box">
+    <div class="q">🔍 750亿美元募资，会花到哪？</div>
+    <div class="a">
+    账本给出的结构是：<strong>火箭是入口，Starlink是奶牛，AI是投入黑洞</strong>——
+    奶牛一年挤出44亿，AI一年运营亏63亿、资本开支再花127亿，缺口明摆着。
+    市场的主流解读（彭博等多家报道均持此观点）：<span class="hl-r">此时IPO的核心动机之一，是为AI算力竞赛补充弹药</span>。这个判断对不对，看募资投向的后续披露。
+    </div>
+  </div>
+
+  <div class="page-bridge">那它凭什么值1.75万亿？先看它的真本事 → <b>可复用火箭的经济学</b></div>
+  <div class="src">来源：分部数据全部对S-1/A原文复核——Connectivity收入$11,387M/运营利润$4,423M（+120.4%）；AI收入$3,201M/运营亏损$(6,355)M；Q1'26资本开支Space $1,052M/Connectivity $1,332M/AI $7,723M；2025年AI资本开支$12,727M；现金$15,852M（2026.3）。发射分部运营亏损约-6.6亿为据总分部数据倒算（测算）</div>
+</section>
+
+<!-- ============ P4 真本事 ============ -->
+<section class="page">
+  <div class="avatar-space"></div>
+  <div class="page-num">4 / 8</div>
+  <div class="page-tag">真 本 事</div>
+  <div class="page-title">它把火箭从"消耗品"<br>做成了"出租车"</div>
+  <div class="page-sub">全球第一个回收复用轨道级火箭的公司——<strong>这是估值故事里最硬的一块</strong></div>
+
+  <table class="kpi-table">
+    <tr><th>一笔成本账</th><th class="kpi-val">金额</th><th>说明</th></tr>
+    <tr>
+      <td>造一枚全新猎鹰9</td>
+      <td class="kpi-val num">约4,500万$</td>
+      <td>一级3,000万＋二级1,000万＋整流罩500万</td>
+    </tr>
+    <tr>
+      <td>复用一次的增量成本</td>
+      <td class="kpi-val pos num">约1,500万$</td>
+      <td>新二级＋推进剂＋测控＋翻修——省了约65%</td>
+    </tr>
+    <tr>
+      <td>对外报价</td>
+      <td class="kpi-val num">6,200-6,700万$</td>
+      <td>别人发一次保本，它发一次赚差价</td>
+    </tr>
+  </table>
+
+  <div class="vs-strip">
+    <div class="vs-cell"><div class="v num" style="color:var(--green)">600+次</div><div class="l">猎鹰9累计复用发射</div><div class="s">单枚火箭最高复用34次</div></div>
+    <div class="vs-cell"><div class="v num" style="color:var(--green)">~$2,700/kg</div><div class="l">入轨成本</div><div class="s">历史平均$18,500/kg——降了85%（NASA口径）</div></div>
+    <div class="vs-cell"><div class="v num" style="color:var(--gold)">100-150吨</div><div class="l">星舰运力（在研）</div><div class="s">完全复用＋不锈钢箭体，目标再降一个数量级</div></div>
+  </div>
+
+  <div class="insight-box">
+    <div class="q">🔍 用企业经营的话翻译一遍</div>
+    <div class="a">
+    传统发射像每次出门买辆新车，开完报废；SpaceX把发射做成了<strong>出租车队</strong>——车队越大、跑得越勤，单程成本越低。
+    发射便宜了，它自己就是最大客户：Starlink几千颗卫星，全靠自家火箭白菜价送上天。<span class="hl-a">左手降本，右手喂自己的卫星生意——这才是飞轮</span>。
+    </div>
+  </div>
+
+  <div class="page-bridge">本事是真的。但1.75万亿的估值，仍然是另一回事 → <b>算估值这笔账</b></div>
+  <div class="src">来源：复用600+次、单枚34次、新造约4,500万/复用约1,500万、报价6,200-6,700万美元——招股书及行业公开资料（经同花顺深度专题汇编）；$2,700 vs $18,500/kg——招股书援引NASA；星舰参数——招股书</div>
+</section>
+
+<!-- ============ P5 估值之谜 ============ -->
+<section class="page">
+  <div class="avatar-space"></div>
+  <div class="page-num">5 / 8</div>
+  <div class="page-tag">估 值 之 谜</div>
+  <div class="page-title">93倍市销率，<br>市场在为什么付钱？</div>
+  <div class="page-sub">发行价对应<strong>约93倍PS</strong>（纳指100平均的约15倍）；首日涨完，收盘口径已到<strong>约111倍</strong>（测算）</div>
+
+  <div class="vs-strip" style="margin-bottom:18px;">
+    <div class="vs-cell">
+      <div class="v num" style="color:var(--sub)">$460亿</div>
+      <div class="l">2020年一级市场估值</div>
+      <div class="s">六年涨了约38倍</div>
+    </div>
+    <div class="vs-cell">
+      <div class="v num" style="color:var(--gold)">$1.75万亿</div>
+      <div class="l">2026年IPO目标估值</div>
+      <div class="s">全球市值前十</div>
+    </div>
+  </div>
+
+  <table class="kpi-table">
+    <tr><th>两种定价逻辑</th><th>沙特阿美（2019）</th><th>SpaceX（2026）</th></tr>
+    <tr>
+      <td>定价依据</td>
+      <td>已探明储量的现金流折现——<strong>存量资产</strong></td>
+      <td>技术垄断×发射频次×AI远期想象——<strong>增长期权</strong></td>
+    </tr>
+    <tr>
+      <td>能不能算清楚</td>
+      <td class="pos">能，可计量可预测</td>
+      <td class="neg">不能，一半靠信仰</td>
+    </tr>
+    <tr>
+      <td>市场给它找的参照</td>
+      <td>埃克森美孚们</td>
+      <td>"英伟达＋亚马逊AWS＋波音"的混合体——哪类都不像</td>
+    </tr>
+  </table>
+
+  <div class="insight-box">
+    <div class="q">🔍 估值里最飘的那一块：太空AI算力</div>
+    <div class="a">
+    招股书计划<strong>最早2028年</strong>部署轨道AI计算卫星——太空里太阳能不要钱、真空天然散热。听起来性感，
+    但<span class="hl-r">技术可行性和商业模式都没有验证</span>，连招股书自己都把它列进风险因素。
+    记住一个原则：<strong>期权可以值钱，但期权不该按确定性收益定价</strong>。
+    </div>
+  </div>
+
+  <div class="page-bridge">凭什么讲完了，该讲坑了 → <b>三个风险，一个比一个硬</b></div>
+  <div class="src">来源：PS≈93倍＝目标估值1.75万亿÷2025营收186.74亿（测算）；2020年估值460亿、估值框架类比——同花顺深度专题；轨道AI算力卫星最早2028年部署、风险因素——S-1/A招股书原文</div>
+</section>
+
+<!-- ============ P6 三个风险 ============ -->
+<section class="page">
+  <div class="avatar-space"></div>
+  <div class="page-num">6 / 8</div>
+  <div class="page-tag">风 险 三 连</div>
+  <div class="page-title">买它之前，三件事必须知道</div>
+
+  <table class="kpi-table" style="margin-top:14px;">
+    <tr><th style="width:160px;">风险</th><th>事实</th><th>人话版</th></tr>
+    <tr>
+      <td><strong>① 你没有话语权</strong></td>
+      <td class="num">马斯克IPO后持有约82.4%投票权</td>
+      <td>丹麦养老基金公开拒投，称治理结构"灾难性"——买了股票，重大决策与你无关</td>
+    </tr>
+    <tr>
+      <td><strong>② 烧钱没有上限</strong></td>
+      <td class="num">AI季度资本开支77亿$，还要建全球最大芯片厂Terafab</td>
+      <td>这次募750亿，下次缺钱怎么办？增发摊薄是大概率剧本</td>
+    </tr>
+    <tr>
+      <td><strong>③ 规则为它让路</strong></td>
+      <td>纳斯达克把指数纳入等待期从3个月压到15个交易日；标普在磋商；被动资金料将自动买入约200亿$</td>
+      <td>指数基金被动接盘≠业绩验证——纽交所总裁都看不下去，公开批评规则"量身定制"</td>
+    </tr>
+  </table>
+
+  <div class="insight-box">
+    <div class="q">🔍 一个用来权衡的对照（不是结论）</div>
+    <div class="a">
+    一边：调整后EBITDA<span class="hl-g">+65.8亿美元</span>——火箭和卫星的主业造血是真的；
+    另一边：93倍PS远超任何按主业定价的公司——溢价部分对应的是AI叙事。
+    <strong>这两块各值多少钱，是这只股票最大的分歧点</strong>——机构吵的也是这个，没有标准答案。
+    </div>
+  </div>
+
+  <div class="page-bridge">最后说说，这事跟A股观众有什么关系 → <b>别踩的坑</b></div>
+  <div class="src">来源：82.4%投票权、机构拒投表态、纳斯达克/富时罗素规则修订、被动资金约200亿美元估算、NYSE批评——上市前后公开报道（经同花顺深度专题汇编，发布前请复核）；调整后EBITDA $6,584M——S-1/A原文（非GAAP指标）</div>
+</section>
+
+<!-- ============ P7 对A股观众说人话 ============ -->
+<section class="page">
+  <div class="avatar-space"></div>
+  <div class="page-num">7 / 8</div>
+  <div class="page-tag">对 A 股 观 众 说 人 话</div>
+  <div class="page-title">"SpaceX概念股"？<br>先听我一句劝</div>
+  <div class="page-sub">这两天满天飞的映射名单，先搞清楚三个事实</div>
+
+  <table class="kpi-table">
+    <tr><th>事实</th><th>说明</th></tr>
+    <tr>
+      <td><strong>① 没有可验证的供应商</strong></td>
+      <td>SpaceX以垂直整合著称、不公开供应商名单；A股没有任何一家公司能拿出公告证明给它供货——所有"概念股"都是能力联想，不是订单关系</td>
+    </tr>
+    <tr>
+      <td><strong>② 传导是情绪，不是业绩</strong></td>
+      <td>它涨跌带动A股商业航天板块，走的是情绪通道；那些公司的利润表，一分钱都不会因为SPCX的股价而变化</td>
+    </tr>
+    <tr>
+      <td><strong>③ 真正的影响在"锚"</strong></td>
+      <td>就像特斯拉为电动车定了价，SpaceX第一次给商业航天定了公开市场的价——中国的蓝箭、天兵们融资和上市会更顺。这是以年计的慢变量，不是这周的交易机会</td>
+    </tr>
+  </table>
+
+  <div class="core-line">
+    连专题原文自己都写了风险提示："传导机制是情绪性的，而非业绩性的"——参与之前，至少把这句话读三遍
+  </div>
+
+  <div class="page-bridge">收个尾，把这场史上最大IPO压缩成三个数字 → <b>总结</b></div>
+  <div class="src">来源：供应商不公开、A股无直接验证关系——同花顺深度专题亦明确声明"不存在可由公告验证的直接供货关系"；本页判断为作者观点</div>
+</section>
+
+<!-- ============ P8 首日之后盯什么 ============ -->
+<section class="page">
+  <div class="avatar-space"></div>
+  <div class="page-num">8 / 8</div>
+  <div class="page-tag">首 日 之 后</div>
+  <div class="page-title">160美元只是第一笔报价<br>接下来，看这四件事</div>
+  <div class="page-sub">结论不归我下，归时间下——这四个验证点，每个季度都会自动给出答案</div>
+
+  <table class="kpi-table" style="margin-top:10px;">
+    <tr><th style="width:200px;">验证点</th><th>现在的数</th><th>看什么</th></tr>
+    <tr>
+      <td><strong>① Starlink还能跑多快</strong></td>
+      <td class="num">收入+49.8%、利润+120.4%（2025）</td>
+      <td>整个估值的地基。增速一旦放缓，93倍PS第一个晃</td>
+    </tr>
+    <tr>
+      <td><strong>② AI的亏损和烧钱节奏</strong></td>
+      <td class="num">Q1运营亏24.7亿$、资本开支77.2亿$</td>
+      <td>账上现金158.5亿＋募资750亿，按这个烧法能撑多久；Terafab开工节点</td>
+    </tr>
+    <tr>
+      <td><strong>③ 星舰与轨道算力时间表</strong></td>
+      <td>招股书称最早2028年部署AI算力卫星</td>
+      <td>估值里最飘的部分能不能落地，看每次试飞和FAA审批</td>
+    </tr>
+    <tr>
+      <td><strong>④ 指数与筹码</strong></td>
+      <td class="num">标普纳入磋商中；被动资金料约200亿$</td>
+      <td>纳入是买力，解禁是卖压——两个时间点都查得到日历</td>
+    </tr>
+  </table>
+
+  <div class="core-line" style="margin-top:22px;">
+    今天能确定的就一句：火箭是真的，卫星是赚钱的，AI是烧钱的，160美元是市场投出来的第一票——后面每个季度，财报会接着投
+  </div>
+
+  <div class="src">
+    数据来源：SpaceX S-1/S-1A招股书原文（财务及分部数据已逐项复核，文件存于本地SpaceX文件夹）；上市定价、认购、指数规则——上市前后公开报道（路透/彭博等，经同花顺深度专题汇编整理）；首日收盘160美元——6月12日收盘行情<br>
+    本内容为公开信息分析，不构成投资建议 · 有二财经
+  </div>
+</section>
+
+</body>
+</html>
